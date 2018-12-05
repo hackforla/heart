@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap 4 Website Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function setMode(idDisable, otherDisable, clear, buttonCaption) {
+            $('.id').prop('disabled', idDisable);
+            $('.other').prop('disabled', otherDisable);
+            if (clear) $('.other').prop('value', '');
+            $('.saveButton').prop('value', buttonCaption);
+        }
+        function setActionMode(action) {
+            if (action == "Look up") setMode(false, true, true, 'Look up');
+            if (action == "Add") setMode(false, false, false, 'Add');
+            if (action == "Update") setMode(false, false, false, 'Update');
+            if (action == "Delete") setMode(false, true, false, 'Delete');
+        }
+        $(document).ready(function () {
+            setActionMode('@action');
+        })    
+    </script>
+    <style>
+        .fakeimg {
+            height: 200px;
+            background: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <h2>LA #Heart Infraction Dismissal Program</h2>
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Processing</a>
+    <form></form>
+    <form method="post">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <%>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:$('command').prop('value', '@');this.form.submit();">@</a>
+                </li>
+                <%>
+            </ul>
+        </div>
+</nav>
+
+<div class="container" style="margin-top:30px">
+  <div class="row">
+      <div class="col-sm-8">
+          <h3>@command</h3>
+          <p>
+              <h3><font color="red">@message</font></h3>
+		      <table cellpadding="8">
+                  <tr>
+                      <td><input type="radio" value="Look up" name="action" onClick="setActionMode('Look up');" @lookup id="Look up">Look up</td>
+                      <td><input type="radio" value="Add"     name="action" onClick="setActionMode('Add');"     @add id="Add">Add</td>
+                      <td><input type="radio" value="Update"  name="action" onClick="setActionMode('Update');"  @update id="Update">Update</td>
+                      <td><input type="radio" value="Delete"  name="action" onClick="setActionMode('Delete');"  @delete id="Delete">Delete</td>
+                  </tr>
+              </table>
+          </p>
+          <div>
+          <center>
+              <table cellpadding="4" bgcolor="lightgray">
+                  <tr><td colspan="2"><font size="1">&nbsp;</font></td></tr>
+                  <%>
+                  <tr><td align="right" nowrap>@caption:</td><td align="left"><input name="@name" size="@size" value="@value" @options></td></tr>
+                  <%>
+                  <tr><td colspan="2"><font size="1">&nbsp;</font></td></tr>
+              </table>
+              <input type="hidden" name="command" id="command" value="@command">
+              <br>
+              <input type="submit" value=" " class="saveButton" width="15">
+              <!--<input type="reset" value="Cancel">
+              <input type="submit" value="Back">-->
+          </center>
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>Code for America</p>
+</div>
+
+</body>
+</html>

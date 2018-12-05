@@ -1,0 +1,15 @@
+{
+  "name": "heart",
+  "version": "0.0.0",
+  "description": "sqlite test program",
+  "main": "heart.js",
+  "author": {
+    "name": "JDM"
+  },
+  "dependencies": {
+    "graceful-fs": "^4.1.15",
+    "minimatch": "^3.0.4",
+    "node-pre-gyp": "^0.12.0",
+    "sqlite": "^3.0.0"
+  }
+}
