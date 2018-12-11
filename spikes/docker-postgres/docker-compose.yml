@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  postgres:
+    build: ./postgres
+    image: heart_postgres
+    container_name: heart_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+
+  pgadmin:
+    build: ./pgadmin
+    image: heart_pgadmin
+    container_name: heart_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin@example.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin
+    ports:
+      - 8080:80
