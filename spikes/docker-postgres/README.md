@@ -6,7 +6,7 @@ Requires [Docker](https://www.docker.com/products/docker-desktop) and Docker Com
 
 ## Running Locally
 
-From your favorite Command Line Interface (e.g. `bash` or `powershell`), enter the command:
+Use your favorite Command Line Interface (e.g. `bash` or `powershell`) and change into the local directory where the [docker-compose.yml](docker-compose.yml) file lives. Enter the command:
 
 ```bash
 docker-compose up
@@ -26,15 +26,15 @@ docker-compose up [SERVICE]
 
 Where `[SERVICE]` is `postgres` or `pgadmin`.
 
-To shut everything down:
+To stop the service(s):
 
 ```bash
-docker-compose down
+docker-compose stop [SERVICE]
 ```
 
 ## Logging in to `pgadmin`
 
-The [docker-compose.yml][dc-file] file configures environment variables
+The [docker-compose.yml](docker-compose.yml) file configures environment variables
 for the `pgadmin` login credentials. The defaults are:
 
 ```console
@@ -46,7 +46,7 @@ See the [base Docker image](https://hub.docker.com/r/dpage/pgadmin4/) for more i
 
 ## Connecting to the `postgres` service
 
-The [docker-compose.yml][dc-file] file configures environment variables
+The [docker-compose.yml](docker-compose.yml) file configures environment variables
 for the `postgres` credentials as well. The defaults are:
 
 ```console
@@ -64,7 +64,7 @@ On the **General** tab, fill in whatever *Name* you want.
 
 On the **Connection** tab, fill in:
 
-  - *Hostname/address*: `postgres` (the name of the local service, as noted in [`docker-compose.yml`][dc-file])
+  - *Hostname/address*: `postgres` (the name of the local service, as noted in [docker-compose.yml](docker-compose.yml)
 
   - *Port*: `5432` (default)
 
@@ -92,4 +92,14 @@ postgresql://postgres:postgres@localhost:5432/postgres
 
 See the [base Docker image](https://hub.docker.com/_/postgres/) for more information and configuration options.
 
-[dc-file]: docker-compose.yml
+## Local Data Persistence
+
+If the services are started and stopped as outlined above, changes made within the `postgres` database server (e.g. creating tables, inserting data) and the `pgadmin` client (e.g. server connections, preferences) will persist between restarts.
+
+An alternative command stops and completely removes the services and any associated local storage. *This is **destructive***:
+
+```bash
+docker-compose down [SERVICE]
+```
+
+Where again, `[SERVICE]` can be either `postgres` or `pgadmin`, or blank to indicate both.
