@@ -3,7 +3,7 @@ env:
   # the same as your local machines. However, I have only tested it with 1.8.0+.
   # There should be a time in the future when this is not necessary - it is
   # explained in more detail below.
-  DOCKER_COMPOSE_VERSION: 1.8.0
+  DOCKER_COMPOSE_VERSION: 1.23.2
 
 before_install:
   # update is required to update the repositories to see the new packages for
