@@ -20,3 +20,6 @@ script:
   - cd ..
   - docker-compose up -d
   - docker ps
+  - cd app
+  - npm run lint
+  - npm test
