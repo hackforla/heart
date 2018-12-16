@@ -13,5 +13,6 @@ before_install:
 - sudo mv docker-compose /usr/local/bin
 
 script:
+  - cd spikes/main-app-boilerplate
   - docker-compose up
   - docker ps
