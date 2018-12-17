@@ -18,6 +18,7 @@ script:
   - cd spikes/main-app-boilerplate/app
   - npm install
   - cd ..
+  - docker-compose build
   - docker-compose up -d
   - docker ps
   - cd app

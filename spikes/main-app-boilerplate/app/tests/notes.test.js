@@ -1,11 +1,14 @@
-const expect = require('expect');
 const request = require('supertest');
 const app = require('../server/app');
 
 describe('GET /notes', () => {
-  test('It should respond with a 200', async () => {
-    const response = await request(app).get('/notes');
-    expect(response.statusCode).toBe(200);
+  test('It should respond with a 200', (done) => {
+    request(app)
+      .get('/notes')
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        done();
+      });
   });
 });
 
@@ -16,7 +19,9 @@ describe('POST /notes', () => {
       .send({
         note: 'newnote',
       })
-      .expect(200)
-      .end(done);
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        done();
+      });
   });
 });
