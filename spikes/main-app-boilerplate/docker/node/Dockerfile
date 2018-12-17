@@ -2,7 +2,7 @@ FROM node:10.14.2-alpine
 
 COPY . .
 
-WORKDIR /
+WORKDIR /code
 
 RUN npm install
 
