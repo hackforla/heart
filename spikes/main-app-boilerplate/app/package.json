@@ -6,14 +6,16 @@
   "scripts": {
     "start": "node ./server/index.js",
     "lint": "eslint server/**",
-    "test": "jest",
+    "test": "jest --verbose",
     "coverage": "jest --collectCoverageFrom=server/**.js --coverage server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "knex": "^0.16.2",
+    "pg": "^7.7.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -24,8 +26,8 @@
     "eslint-plugin-jest": "^22.1.2",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "expect": "^23.6.0",
     "jest": "^23.6.0",
-    "superagent": "^4.0.0",
     "supertest": "^3.3.0"
   }
 }
