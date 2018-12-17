@@ -8,6 +8,12 @@
 7. pgAdmin is available through localhost:8080 with user: pgadmin@example.com password: pgadmin
 
 
+### To run tests
+1. ensure you containers are up with docker-compose up
+2. docker exec -it heart_node npm test
+(This will work for now but it is slow so we are exploring other options)
+
+
 ### Small overview of what I did on this:
 1. express is serving up an index page
 2. setup linting using the airbnb style guide
