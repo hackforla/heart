@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./server/index.js",
     "lint": "eslint server/**",
-    "test": "jest --detectOpenHandles",
+    "test": "jest --detectOpenHandles --forceExit",
     "coverage": "jest --collectCoverageFrom=server/**.js --coverage server"
   },
   "author": "",
