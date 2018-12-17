@@ -1,12 +1,12 @@
 module.exports = (app, knex) => {
-  app.get('/notes', (req, res) => {
-    knex.select().table('notes')
+  app.get('/notes', async (req, res) => {
+    await knex.select().table('notes')
       .then(data => res.status(200).send(data))
       .catch(err => res.status(500).send(err));
   });
 
-  app.post('/notes', (req, res) => {
-    knex('notes').insert({ note: req.body.note })
+  app.post('/notes', async (req, res) => {
+    await knex('notes').insert({ note: req.body.note })
       .then(() => {
         res.status(200).send({ status: 'ok' });
       })
