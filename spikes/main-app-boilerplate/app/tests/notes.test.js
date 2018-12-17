@@ -1,5 +1,10 @@
 const request = require('supertest');
 const app = require('../server/app');
+const knex = require('../server/config/knex_config');
+
+afterAll(() => {
+  knex.destroy();
+});
 
 describe('GET /notes', () => {
   test('It should respond with a 200', (done) => {
