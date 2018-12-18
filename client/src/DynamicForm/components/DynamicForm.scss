@@ -1,4 +1,4 @@
-@import '../../styles/abstracts/_variables.scss';
+@import '../../styles/_variables.scss';
 
 /*
 ==========================
@@ -22,8 +22,10 @@ QUESTION
 .form-question {
     font-size: 16px;
     color: $dark-grey;
+    font-weight: 600;
     display: block;
     padding-bottom: 10px;
+    text-align: left;
 }
 /*
 ==========================
@@ -90,7 +92,7 @@ INPUT & TEXTAREA & DATE
     color: $dark-grey;
     padding: 5px;
     margin-top: 5px;
-    border: 1px solid $light-grey;
+    border: 1px solid $lighter-grey;
 }
 .form-date {
     padding: 8px;
@@ -408,82 +410,6 @@ background: white;
     background: white;
 }
 
-/*
-==========================
-CUSTOM BADGE QUESTION
-==========================
-*/
-.badge-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-areas: "a b c";
-    margin: 0 auto;
-    margin-left: -20px;
-    margin-top: -20px;
-    margin-bottom: -30px;
-}
-
-.badge {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    border: none;
-}
-.badge--1-container {
-    grid-area: a;
-}
-
-.badge--2-container {
-    grid-area: b;
-}
-
-.badge--3-container {
-    grid-area: c;
-}
-.badge--1, .badge--2, .badge--3 {
-    border: none;
-    border-radius: 20px;
-    display: block;
-    margin: 0 auto;
-    box-shadow: $box-shadow;
-}
-
-.badge--1 {
-    background-color: $badge-1;
-}
-
-.badge--1:hover {
-    background-color: $badge-1--hover;
-}
-
-.badge--2 {
-    background-color: $badge-2;
-}
-.badge--2:hover {
-    background-color: $badge-2--hover;
-}
-.badge--3 {
-    background-color: $badge-3;
-}
-.badge--3:hover {
-    background-color: $badge-3--hover;
-}
-
-.badge-title {
-    text-align: center;
-    font-size: 14px;
-    color: $med-grey;
-}
-
-.badge-subtext {
-    font-size: 10px;
-    text-align: center;
-    color: $grey;
-}
-
-.badge--chosen {
-    border: 2px solid $theme-green;
-}
 
 /*
 ==========================
@@ -511,27 +437,6 @@ BTN (3)
     letter-spacing: 1px;
 }
 
-.btn-3:hover {
-    background-color: $theme-green--light;
-    color: white;
-    border: none;
-}
-
-.btn-3--green {
-    background-color: $health-green;
-    color: white;
-    border: none;
-}
-.btn-3--yellow {
-    background-color: $health-yellow;
-    color: white;
-    border: none;
-}
-.btn-3--red {
-    background-color: $health-red;
-    color: white;
-    border: none;
-}
 /*
 ==========================
 TEAM & USER DROPDOWNS
@@ -562,7 +467,12 @@ TEAM & USER DROPDOWNS
 }
 
 .skill-subcategory--title {
-    @include portal-subcategory-small;
+    color: $lighter-grey;
+    font-size: 12px;
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 1.5px;
     text-align: center;
     color: $med-grey;
 }
