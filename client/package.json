@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "lodash": "^4.17.11",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "react-select": "^2.1.2",
+    "redux-form": "^8.0.4",
+    "validator": "^10.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
