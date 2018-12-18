@@ -6,12 +6,14 @@ import './IntakeForm.scss';
 class IntakeForm extends React.Component {
   render() {
     return (
-      <section className="intake-form-container">
-        <h1 className="intake-form-title">Intake Form</h1>
-        <DynamicFormContainer 
-          questions={IntakeFormQA}
-        />
-      </section>
+      <div className="intake-form-container">
+        <section className="intake-form">
+          <h1 className="intake-form-title">Intake Form</h1>
+          <DynamicFormContainer 
+            questions={IntakeFormQA}
+          />
+        </section>
+      </div>
     )
   }
 }
