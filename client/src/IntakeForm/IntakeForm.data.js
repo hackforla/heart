@@ -1,57 +1,80 @@
 const IntakeFormQA = [
   {
-    text: 'Clinic Attended',
-    input_type: 'text',
-    field_name: 'clinic_attended',
-    placeholder: 'location',
+    category_name: '',
+    category_contents: [
+      {
+        row: [
+          {
+            text: 'Clinic Attended',
+            input_type: 'text',
+            field_name: 'clinic_attended',
+            placeholder: 'location',
+          },
+          {
+            text: 'Clinic Date',
+            input_type: 'text',
+            field_name: 'clinic_date',
+            placeholder: 'date',
+          },
+        ]
+      }
+    ]
   },
   {
-    text: 'Clinic Date',
-    input_type: 'text',
-    field_name: 'clinic_date',
-    placeholder: 'date',
+    category_name: 'Personal Information',
+    category_contents: [
+      {
+        row: [
+          {
+            text: 'First Name',
+            input_type: 'text',
+            field_name: 'first_name',
+            placeholder: 'First Name',
+          },
+          {
+            text: 'Middle Name',
+            input_type: 'text',
+            field_name: 'middle_name',
+            placeholder: 'Middle Name',
+          },
+          {
+            text: 'Last Name',
+            input_type: 'text',
+            field_name: 'last_name',
+            placeholder: 'Last Name',
+          },
+        ],
+      },
+      {
+        text: 'Also known as',
+        input_type: 'text',
+        field_name: 'known_as',
+        placeholder: 'Other names they go by',
+      },
+      {
+        text: `Driver's License`,
+        input_type: 'text',
+        field_name: 'driver_license',
+        placeholder: 'License Number',
+      },
+      {
+        text: 'Date of Birth',
+        input_type: 'text',
+        field_name: 'date_of_birth',
+        placeholder: 'Month/Day/Year',
+      },
+    ],
   },
   {
-    text: 'First Name',
-    input_type: 'text',
-    field_name: 'first_name',
-    placeholder: 'First Name',
-  },
-  {
-    text: 'Middle Name',
-    input_type: 'text',
-    field_name: 'middle_name',
-    placeholder: 'Middle Name',
-  },
-  {
-    text: 'Last Name',
-    input_type: 'text',
-    field_name: 'last_name',
-    placeholder: 'Last Name',
-  },
-  {
-    text: 'Also known as',
-    input_type: 'text',
-    field_name: 'known_as',
-    placeholder: 'Other names they go by',
-  },
-  {
-    text: `Driver's License`,
-    input_type: 'text',
-    field_name: 'driver_license',
-    placeholder: 'License Number',
-  },
-  {
-    text: 'Date of Birth',
-    input_type: 'text',
-    field_name: 'date_of_birth',
-    placeholder: 'Month/Day/Year',
-  },
-  {
-    text: 'Contact Info',
-    input_type: 'text',
-    field_name: 'contact',
-    placeholder: 'Phone, Email or Mailing Address',
+    category_name: 'Contact Information',
+    category_contents: [
+      {
+        text: 'Email Address (optional)',
+        input_type: 'email',
+        field_name: 'email',
+        placeholder: 'email@emailaddress.com',
+      },
+    ]
   },
   {
     text: 'Age',
