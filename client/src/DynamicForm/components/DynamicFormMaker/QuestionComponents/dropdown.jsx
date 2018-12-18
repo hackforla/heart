@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 
 const dropdown = (
-  { field_name, input_type, options },
+  { field_name, input_type, options, placeholder },
   onFormChange,
   form_data,
 ) => {
@@ -15,6 +15,7 @@ const dropdown = (
   const label = option ? option.label : '';
   return (
     <Select
+      placeholder={placeholder}
       escapeClearsValue={true}
       isClearable={true}
       isSearchable={true}
