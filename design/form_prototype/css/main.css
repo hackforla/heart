@@ -4,19 +4,8 @@
    Author's custom styles
    ========================================================================== */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+h3 {
+  font-size: 1.25em;
+  font-weight: bold;
+  margin-left: 15px;
+}
