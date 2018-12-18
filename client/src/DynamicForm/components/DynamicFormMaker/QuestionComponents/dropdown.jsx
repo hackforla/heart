@@ -7,7 +7,7 @@ const dropdown = (
   form_data,
 ) => {
   // map to React-Select option format
-  const mappedOptions = options.map(({ text, value }) => ({ label: text, value }));
+  const mappedOptions = options.map(({ text, value }) => ({ label: text, value: value ? value : text }));
   const value = form_data[field_name];
   // React-Select wants {label, value} for value prop
   // have to find corresponding label for the chosen value to render properly
