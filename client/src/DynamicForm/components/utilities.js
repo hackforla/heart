@@ -38,7 +38,6 @@ const isFieldInvalid = (type, value, min, max) => {
     case "email": return !isEmail(value);
     case "url": return !isURL(value);
     case "radio": return isEmpty(value);
-    case "skill_setter": return !isSkillSetterValid(value);
     default: return !isValid(value, min, max);
   }
 }
