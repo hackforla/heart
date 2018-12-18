@@ -94,6 +94,10 @@ INPUT & TEXTAREA & DATE
     margin-top: 5px;
     border: 1px solid $lighter-grey;
     box-sizing: border-box;
+    &::placeholder {
+        color: $grey;
+        text-transform: capitalize;
+    }
 }
 .form-date {
     padding: 8px;
@@ -111,6 +115,10 @@ INPUT & TEXTAREA & DATE
     max-height: 50px;
     max-width: 100%;
     min-width: 100%;
+    &::placeholder {
+        color: $grey;
+        text-transform: capitalize;
+    }
 }
 /*
 ==========================
