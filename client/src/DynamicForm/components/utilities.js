@@ -22,17 +22,6 @@ const isValid = (value, min, max) => {
     : isTextValid(value, min, max);
 }
 
-const isSkillSetterValid = (skill_ids) => {
-  const copy = skill_ids.slice();
-  // removes the nulls at the end of the array
-  while (copy[copy.length - 1] === null) {
-    copy.pop()
-  }
-
-  // return valid if no-nulls
-  return copy.every(skill => skill !== null);
-}
-
 const isFieldInvalid = (type, value, min, max) => {
   switch (type) {
     case "email": return !isEmail(value);
