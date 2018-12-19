@@ -72,9 +72,11 @@ docker-compose up
 
 This downloads and builds the base Docker images (if needed), and starts all services.
 
-`pgadmin` can now be accessed from http://localhost:8080.
+`node` can now be accessed from http://localhost:3000. It serves the main-app.
 
-`postgres` service exposes the standard PostgreSQL port `5432`.
+`pgadmin` can now be accessed from http://localhost:8080. It's a GUI for browsing postgres.
+
+`postgres` service exposes the standard PostgreSQL port `5432`. It serves the main-app database.
 
 
 
