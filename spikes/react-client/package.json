@@ -9,7 +9,8 @@
     "react-scripts": "2.1.1",
     "react-select": "^2.1.2",
     "redux-form": "^8.0.4",
-    "validator": "^10.9.0"
+    "validator": "^10.9.0",
+    "node-sass": "^4.11.0",
   },
   "scripts": {
     "start": "react-scripts start",
