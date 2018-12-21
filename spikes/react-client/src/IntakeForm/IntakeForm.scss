@@ -8,7 +8,7 @@
 }
 
 .intake-form {
-  width: 800px;
+  width: 900px;
   margin: 0 auto;
   background-color: white;
   box-shadow: $box-shadow;
@@ -21,7 +21,7 @@
   text-transform: uppercase;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .intake-form {
     width: 80vw;
   }
