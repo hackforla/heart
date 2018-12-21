@@ -8,7 +8,7 @@
 }
 
 .intake-form {
-  width: 600px;
+  width: 800px;
   margin: 0 auto;
   background-color: white;
   box-shadow: $box-shadow;
@@ -17,4 +17,15 @@
 
 .intake-form-title {
   font-size: 30px;
+  padding: 30px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 800px) {
+  .intake-form {
+    width: 80vw;
+  }
+  .intake-form-title {
+    padding: 20px 0px;
+  }
 }

@@ -128,6 +128,7 @@ CATEGORY
 .form-QA--category {
     border-bottom: 1px solid $light-grey;
     margin-bottom: 10px;
+    padding-bottom: 20px;
 }
 .form-QA--category-header {
     font-size: 16px;
@@ -150,6 +151,11 @@ ROW QA
         display: inline-block;
     }
 }
+@media (max-width: 800px) {
+    .form-QA--row {
+        grid-auto-flow: row;
+    }
+  }
 
 /*
 ==========================
