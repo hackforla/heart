@@ -261,6 +261,7 @@ class DynamicFormContainer extends React.Component {
     const validateField = onValidate || isFieldInvalid;
     field_errors[name] = validateField(type, form_data[name], min, max);
 
+    console.log(field_errors)
     this.setState({ form_data, field_errors });
   }
 
@@ -277,7 +278,7 @@ class DynamicFormContainer extends React.Component {
 
   /**
    * renders Submit button
-   * - controlled by 'disabled' flag in state
+   * - controlled  by 'disabled' flag in state
    * - if disabled -> grey, click disabled, and 'Incomplete'
    * - if not disabled -> green, click enabled, and 'Submit'
    */
