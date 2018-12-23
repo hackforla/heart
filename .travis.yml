@@ -15,7 +15,7 @@ before_install:
 - sudo mv docker-compose /usr/local/bin
 
 script:
-  - cd spikes/main-app-boilerplate/app
+  - cd main-app/app
   - npm install
   - cd ..
   - docker-compose build
