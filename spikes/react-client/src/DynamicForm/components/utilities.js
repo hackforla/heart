@@ -22,7 +22,7 @@ const isValid = (value, min, max) => {
     : isTextValid(value, min, max);
 }
 
-const isFieldInvalid = (type, value, min, max) => {
+const isFieldInvalid = (type, value, min, max, optional) => {
   switch (type) {
     case "email": return !isEmail(value);
     case "url": return !isURL(value);

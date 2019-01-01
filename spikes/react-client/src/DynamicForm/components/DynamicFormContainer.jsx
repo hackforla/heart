@@ -107,7 +107,7 @@ class DynamicFormContainer extends React.Component {
     // console.log(this.state)
     return questions.reduce(
       (result, question) => {
-        const { input_type, field_name, min, max } = question;
+        const { input_type, field_name, min, max, optional } = question;
 
         if (field_name === undefined) { 
           // no field name (can be category or row)
@@ -120,7 +120,7 @@ class DynamicFormContainer extends React.Component {
             return { ...result, ...this._validateAllAnswers(form_data, category_contents) }
           }
         }
-        const field_error = validateField(input_type, form_data[field_name], min, max);
+        const field_error = validateField(input_type, form_data[field_name], min, max, optional);
         
         result.field_errors[field_name] = field_error;
         if (result.disabled !== field_error) result.disabled = field_error;
