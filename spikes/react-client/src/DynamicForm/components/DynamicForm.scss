@@ -151,7 +151,7 @@ ROW QA
         display: inline-block;
     }
 }
-@media (max-width: 800px) {
+@media (max-width: 700px) {
     .form-QA--row {
         grid-auto-flow: row;
     }
@@ -201,7 +201,7 @@ DROPDOWN w/ CHECKBOX
 }
 
 .search-input-box::placeholder {
-    color: $light-grey;
+    color: $grey;
 }
 
 .filter-dropdown-box {
