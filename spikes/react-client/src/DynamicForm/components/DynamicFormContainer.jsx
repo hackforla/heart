@@ -193,7 +193,7 @@ class DynamicFormContainer extends React.Component {
    * - injects 'hiddenData' values
    */
 
-  _getDefaultFormData = (questions, initialValue) => {
+  _getDefaultFormData = (questions) => {
     return questions.reduce(
       (
         form_data,
