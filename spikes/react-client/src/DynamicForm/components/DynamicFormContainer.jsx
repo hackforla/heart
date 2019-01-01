@@ -101,29 +101,36 @@ class DynamicFormContainer extends React.Component {
    *  'field_errors' object for individual field error tracking
    * 
    */
-  _validateAllAnswers(form_data, questions) {
+  _validateAllAnswers(form_data, questions, recursionIdx) {
     const { onValidate } = this.props;
     const validateField = onValidate || isFieldInvalid;
-    // console.log(this.state)
+    let currIdx = recursionIdx ? recursionIdx : 0;
+    // console.log({...questions, recursionLevel : currIdx})
     return questions.reduce(
       (result, question) => {
+        // console.log({...result, reduceIdx: idx, recursionLevel: currIdx});
         const { input_type, field_name, min, max, optional } = question;
 
         if (field_name === undefined) { 
           // no field name (can be category or row)
           // pass nested questions into _getDefaultFormData
           let { category_contents, row } = question;
+          let nestedValidationResults = {};
           if (row) {
-            return { ...result, ...this._validateAllAnswers(form_data, row) }
+            nestedValidationResults = this._validateAllAnswers(form_data, row, currIdx + 1);
           }
           if (category_contents) {
-            return { ...result, ...this._validateAllAnswers(form_data, category_contents) }
+            nestedValidationResults = this._validateAllAnswers(form_data, category_contents, currIdx + 1);
           }
+          // console.log({...result, ...nestedValidationResults, recursionLevel : currIdx});
+          let mergedFieldErrors = {...result.field_errors, ...nestedValidationResults.field_errors};
+          result.field_errors = mergedFieldErrors;
+          return result;
         }
         const field_error = validateField(input_type, form_data[field_name], min, max, optional);
-        
         result.field_errors[field_name] = field_error;
         if (result.disabled !== field_error) result.disabled = field_error;
+        // console.log({...result, reduceIdx: idx, recursionLevel: currIdx});
         return result;
       },
       { field_errors: {}, disabled: false },
