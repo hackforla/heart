@@ -73,6 +73,7 @@ const IntakeFormQA = [
         input_type: 'email',
         field_name: 'email',
         placeholder: 'email@emailaddress.com',
+        optional: true,
       },
     ]
   },
