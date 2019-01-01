@@ -7,12 +7,12 @@ const dynamicFormMaker = (
   onFormChange,
   customComponents,
 ) => questions.map(
-  (question) => {
-    return questionParser(question, form_data, onFormChange, customComponents)
+  (question, idx) => {
+    return questionParser(question, form_data, onFormChange, customComponents, idx)
   },
 );
 
-const questionParser = (object, form_data, onFormChange, customComponents) => {
+const questionParser = (object, form_data, onFormChange, customComponents, idx) => {
   let {
     category_contents,
     category_name,
@@ -20,22 +20,29 @@ const questionParser = (object, form_data, onFormChange, customComponents) => {
   } = object;
 
   if (object.category_contents && object.category_contents.length > 0) {
-    return categoryMaker(category_contents, form_data, onFormChange, category_name);
+    return categoryMaker({ category_contents, form_data, onFormChange, category_name, idx });
   }
 
   if (object.row && object.row.length > 0) {
-    return rowMaker(row, form_data, onFormChange, category_name);
+    return rowMaker({ row, form_data, onFormChange, category_name, idx });
   }
       
-  return questionMaker(object, form_data, onFormChange, customComponents)
+  return questionMaker(object, form_data, onFormChange, customComponents, idx)
 }
 
-const categoryMaker = (category_contents, form_data, onFormChange, category_name, customComponents) => {
+const categoryMaker = ({ 
+  category_contents, 
+  form_data, 
+  onFormChange, 
+  category_name, 
+  customComponents, 
+  idx 
+}) => {
   return (
-    <div className="form-QA--category">
+    <div key={'category=' + idx} className="form-QA--category">
       <div className="form-QA--category-header">{category_name}</div>
       {
-        category_contents.map((question, idx) => {
+        category_contents.map((question) => {
           return questionParser(question, form_data, onFormChange, customComponents)
         })
       }
@@ -43,16 +50,17 @@ const categoryMaker = (category_contents, form_data, onFormChange, category_name
   )
 }
 
-const rowMaker = (
-  row,
-  form_data,
-  onFormChange,
-  customComponents,
-) => {
+const rowMaker = ({
+    row,
+    form_data,
+    onFormChange,
+    customComponents,
+    idx
+}) => {
   return (
-    <div className="form-QA--row">
+    <div key={'row=' + idx} className="form-QA--row">
       {
-        row.map((question, idx) => {
+        row.map((question) => {
           return questionMaker(question, form_data, onFormChange, customComponents)
         })
       }
