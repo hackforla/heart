@@ -25,13 +25,13 @@ class DynamicFormContainer extends React.Component {
     form_data: {}, // { field_name: user response(s) }
     questions: [], // detailed in prop types
     disabled: true, // overall DF Container submit control
-    field_errors: {}, // individual field errors
+    field_errors: {}, // individual field errors,
   }
 
   componentDidMount() {
     const { initialData, purpose, questions } = this.props;
     const state = { questions };
-
+    
     const persistence = window.localStorage.getItem(purpose);
     if (persistence) {
       const persisted_state = this._getStateFromPersistence(state, persistence, initialData);
@@ -40,15 +40,20 @@ class DynamicFormContainer extends React.Component {
     
     // get initial default values
     state.form_data = this._getDefaultFormData(questions);
+
     // merge with initialData if available
     if (initialData) state.form_data = { ...state.form_data, ...initialData };
+
+    // remove undefined from from_data
+    let removeUndefined = delete this.state.form_data.undefined
+    this.setState({ form_data: removeUndefined })
 
     // validate all answers (defaults and any provided by initialData)
     // uses onValidate() or isFieldInvalid() on each question / form_data field value
     const { disabled, field_errors } = this._validateAllAnswers(state.form_data, questions);
     state.disabled = disabled;
     state.field_errors = field_errors;
-
+    
     return this.setState(state);
   }
 
@@ -84,8 +89,9 @@ class DynamicFormContainer extends React.Component {
     const persisted_data  = JSON.parse(persistence); // { disabled, field_errors, form_data }
     const state = { ...base_state, ...persisted_data };
     if (initialData) state.form_data = { ...state.form_data, ...initialData };
-
+    
     return state;
+    
   }
 
   /**
@@ -179,40 +185,106 @@ class DynamicFormContainer extends React.Component {
    * - handles single and multi-answer defaults
    * - injects 'hiddenData' values
    */
-  _getDefaultFormData = (questions) => questions.reduce(
-    (
-      form_data,
-      { field_name, input_type, options, },
-    ) => {
-      // creates an array for multiple answers
-      if (this._isMultiAnswer(input_type)) form_data[field_name] = [];
 
-      else if (input_type === 'dropdown') {
-        const first_option = options[0];
-        // options can be a single value or an object of text / value
-        // to support difference between user text and stored value
-        const value = first_option.value || first_option;
-        form_data[field_name] = value;
-      }
-      
-      else form_data[field_name] = '';
-
-      // insert hidden field values from hiddenData
-      // passed as hiddenData and / or queryString prop of <DynamicForm>
-      if (input_type === 'hidden') {
-        const { hiddenData } = this.props;
-        if (!hiddenData || !hiddenData[field_name]) {
-          console.error(`Missing hiddenData for: ${field_name}`);
-          return form_data;
+  _getDefaultFormData = (questions, initialValue) => {
+    questions.reduce(
+      (
+        form_data,
+        { field_name, input_type, options } ,
+        idx
+      ) => {
+        if (field_name === undefined) { 
+          // no field name (can be category or row)
+          // pass nested questions into _getDefaultFormData
+          let { category_contents, row } = questions[idx];
+          if (row) {
+            this._getDefaultFormData(row, this.state.form_data)
+          }
+          if (category_contents) {
+            this._getDefaultFormData(category_contents, this.state.form_data)
+          }
         }
 
-        const hiddenValue = hiddenData[field_name];
-        form_data[field_name] = hiddenValue;
-      }
-      return form_data;
-    },
-    {},
-  );
+        // creates an array for multiple answers
+        if (this._isMultiAnswer(input_type)) form_data[field_name] = [];
+  
+        else if (input_type === 'dropdown') {
+          const first_option = options[0];
+          // options can be a single value or an object of text / value
+          // to support difference between user text and stored value
+          const value = first_option.value || first_option;
+          form_data[field_name] = value;
+        }
+  
+        else form_data[field_name] = '';
+
+        // insert hidden field values from hiddenData
+        // passed as hiddenData and / or queryString prop of <DynamicForm>
+        if (input_type === 'hidden') {
+          const { hiddenData } = this.props;
+          if (!hiddenData || !hiddenData[field_name]) {
+            console.error(`Missing hiddenData for: ${field_name}`);
+            return form_data;
+          }
+  
+          const hiddenValue = hiddenData[field_name];
+          form_data[field_name] = hiddenValue;
+        }
+        this.setState({ form_data })
+        return form_data;
+      },
+      initialValue ? initialValue : this.state.form_data,
+    );
+  }
+  // _getDefaultFormData = (questions) => questions.reduce(
+  //   (
+  //     form_data,
+  //     { field_name, input_type, options },
+  //     idx
+  //   ) => {
+
+  //     // creates an array for multiple answers
+  //     if (this._isMultiAnswer(input_type)) form_data[field_name] = [];
+
+  //     else if (input_type === 'dropdown') {
+  //       const first_option = options[0];
+  //       // options can be a single value or an object of text / value
+  //       // to support difference between user text and stored value
+  //       const value = first_option.value || first_option;
+  //       form_data[field_name] = value;
+  //     }
+      
+  //     else if (!field_name) { 
+  //       // no field name (can be category or row)
+  //       // pass nested questions into function again
+  //       let { category_contents, row } = questions[idx];
+  //       if (row) {
+  //         return this._getDefaultFormData(row, form_data)
+  //       }
+  //       if (category_contents) {
+  //         return this._getDefaultFormData(category_contents, form_data)
+  //       }
+  //     }
+
+  //     else form_data[field_name] = '';
+
+  //     // insert hidden field values from hiddenData
+  //     // passed as hiddenData and / or queryString prop of <DynamicForm>
+  //     if (input_type === 'hidden') {
+  //       const { hiddenData } = this.props;
+  //       if (!hiddenData || !hiddenData[field_name]) {
+  //         console.error(`Missing hiddenData for: ${field_name}`);
+  //         return form_data;
+  //       }
+
+  //       const hiddenValue = hiddenData[field_name];
+  //       form_data[field_name] = hiddenValue;
+  //     }
+  //     delete form_data.undefined;
+  //     return form_data;
+  //   },
+  //   {},
+  // );
 
   /**
    * toggles values in multi-answer arrays
