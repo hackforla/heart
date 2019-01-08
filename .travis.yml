@@ -26,4 +26,4 @@ script:
   - docker ps
   - cd api
   - npm run lint
-  - docker exec -it heart_node npm test
+  - docker exec -it heart_node_api npm test
