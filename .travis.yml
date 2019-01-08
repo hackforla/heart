@@ -15,7 +15,10 @@ before_install:
 - sudo mv docker-compose /usr/local/bin
 
 script:
-  - cd main-app/app
+  - cd main-app/api
+  - npm install
+  - cd ..
+  - cd client
   - npm install
   - cd ..
   - docker-compose build
