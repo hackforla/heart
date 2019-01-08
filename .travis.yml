@@ -24,6 +24,6 @@ script:
   - docker-compose build
   - docker-compose up -d
   - docker ps
-  - cd app
+  - cd api
   - npm run lint
   - docker exec -it heart_node npm test
