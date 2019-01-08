@@ -9,6 +9,6 @@ app.use(express.static(path.join(__dirname, '../node_modules')));
 app.use(express.static(path.join(__dirname, '../client')));
 
 app.get('/', (req, res) => res.status(200).render('index'));
-require('./routes/notes')(app);
+require('./routes/participants')(app);
 
 module.exports = app;
