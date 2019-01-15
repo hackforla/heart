@@ -1,3 +1,3 @@
 const app = require('./app');
 // TODO PUT PORT IN ENV VARIABLE
-app.listen(3000);
+app.listen(4000);

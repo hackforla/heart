@@ -25,13 +25,24 @@ services:
     ports:
       - 8080:80
 
-  node:
-    build: ./docker/node
-    image: heart_node
-    container_name: heart_node
+  node-api:
+    build: ./docker/node-api
+    image: heart_node_api
+    container_name: heart_node_api
     depends_on:
       - "postgres"
     volumes:
-      - ./app:/code
+      - ./api:/code
+    ports:
+      - 4000:4000
+
+  node-client:
+    build: ./docker/node-client
+    image: heart_node_client
+    container_name: heart_node_client
+    depends_on:
+      - "node-api"
+    volumes:
+      - ./client:/code
     ports:
       - 3000:3000
