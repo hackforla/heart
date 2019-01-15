@@ -1,26 +1,34 @@
+CREATE TABLE users(
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR(20),
+  last_name VARCHAR(20),
+  email VARCHAR(50),
+  password VARCHAR(50)
+);
+
 CREATE TABLE participants(
   id SERIAL PRIMARY KEY,
-  first_name VARCHAR(255),
-  middle_name VARCHAR(255),
-  last_name VARCHAR(255),
-  aka VARCHAR(255) ARRAY,
-  status VARCHAR(100),
+  first_name VARCHAR(20),
+  middle_name VARCHAR(20),
+  last_name VARCHAR(20),
+  aka VARCHAR(20) ARRAY,
+  status VARCHAR(20),
   dob DATE,
   phone VARCHAR(10),
-  email VARCHAR(255),
-  address VARCHAR(255),
+  email VARCHAR(50),
+  address VARCHAR(50),
   age VARCHAR(3),
   ethnicity VARCHAR(20),
   race VARCHAR(20),
   gender VARCHAR(20),
-  income_source VARCHAR(255),
-  income_range VARCHAR(255),
+  income_source VARCHAR(50),
+  income_range VARCHAR(20),
   family_status VARCHAR(20),
-  housing_status VARCHAR(255),
+  housing_status VARCHAR(20),
   chronic_homeless BOOLEAN,
-  veteran_status VARCHAR(255),
+  veteran_status VARCHAR(20),
   urgent BOOLEAN,
-  services VARCHAR(255) [],
+  services VARCHAR(20) [],
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
  );
 
@@ -29,7 +37,7 @@ CREATE TABLE participants(
    citation_number VARCHAR(50),
    court_code VARCHAR(50),
    violation_number VARCHAR(50),
-   citation_status VARCHAR(255),
+   citation_status VARCHAR(20),
    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
    participant_id INTEGER,
    FOREIGN KEY (participant_id) REFERENCES participants (id)
