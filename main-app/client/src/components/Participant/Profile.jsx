@@ -7,6 +7,8 @@ class ParticipantProfile extends React.Component {
     super(props);
     this.state = {
       user: null,
+      error: null,
+      loading: true,
     }
   }
   componentDidMount() {
@@ -15,19 +17,25 @@ class ParticipantProfile extends React.Component {
       method: 'get',
       url: `${API_ENDPOINT}/participants/${id}`,
     })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    .then(res => {
+      console.log(res);
+      let { data } = res;
+      this.setState({ user: data, loading: false })
+    })
+    .catch(err => {
+      console.error(err);
+      let { message } = err;
+      this.setState({ error: message, loading: false });
+      return err;
+    })
   }
   render() {
-    let { user } = this.state;
+    let { user, loading, error } = this.state;
     return (
-      <div className='user-profile--container'>
-        { user && user }
-      </div>
+        <div className='user-profile--container'>
+          { loading && <div id='loader'><i className='fas fa-spinner'></i></div> }
+          { user && user }
+        </div>
     )
   }
 }
