@@ -1,2 +1,67 @@
 @import '../../styles/shared.scss';
 
+/*
+==========================
+USER CARD
+==========================
+*/
+.user-card--container {
+  max-width: $max-width;
+  width: 80vw;
+  background-color: $palest-grey;
+  padding: 20px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-gap: 20px;
+  grid-template-areas: "image name name name"
+              "image info info info";
+  justify-items: start;
+  align-items: center;
+
+  color: $darker-grey;
+}
+/*
+==========================
+AVATAR
+==========================
+*/
+.user-card--avatar {
+  grid-area: image;
+  object-fit: contain;
+  width: 80%;
+  height: auto;
+  border-radius: 50%;
+}
+/*
+==========================
+NAME ROW
+==========================
+*/
+.user-card-name--container {
+  grid-area: name;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
+  justify-items: start;
+  grid-gap: 15px;
+}
+
+.user-card-name {
+  font-size: 30px;
+  text-transform: capitalize;
+}
+.user-card-aka {
+  font-size: 22px;
+  text-transform: capitalize;
+}
+/*
+==========================
+INFO ROW
+==========================
+*/
+.user-card-info--container {
+  grid-area: info;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
