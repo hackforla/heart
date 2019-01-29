@@ -18,9 +18,10 @@ class ParticipantProfile extends React.Component {
       url: `${API_ENDPOINT}/participants/${id}`,
     })
     .then(res => {
-      console.log(res);
       let { data } = res;
-      this.setState({ user: data, loading: false })
+      console.log(data[0]);
+      this.setState({ user: data[0], loading: false });
+      return data[0];
     })
     .catch(err => {
       console.error(err);
