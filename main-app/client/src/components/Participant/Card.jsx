@@ -44,7 +44,7 @@ const Card = ({ user }) => {
             return (
               <div key={idx} className='user-card-info-unit'>
                 <div className='user-card-info--value'>{info.value}</div>
-                <div className='user-card-info--value'>{info.label}</div>
+                <div className='user-card-info--label'>{info.label}</div>
               </div>
             )
           })

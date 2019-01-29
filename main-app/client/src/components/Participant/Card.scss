@@ -70,4 +70,20 @@ INFO ROW
   grid-template-columns: repeat(4, 1fr);
   justify-items: start;
   align-items: end;
+  grid-gap: 20px;
+}
+
+.user-card-info--label,
+.user-card-info--value {
+  text-align: left;
+}
+
+.user-card-info--label {
+  text-transform: capitalize;
+}
+
+.user-card-info--value {
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 18px;
 }
