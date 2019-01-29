@@ -41,19 +41,23 @@ NAME ROW
 .user-card-name--container {
   grid-area: name;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   align-items: end;
   justify-items: start;
   grid-gap: 15px;
 }
 
+.user-card-name,
+.user-card-aka {
+  text-transform: capitalize;
+  display: inline-block;
+}
 .user-card-name {
   font-size: 30px;
-  text-transform: capitalize;
 }
 .user-card-aka {
   font-size: 22px;
-  text-transform: capitalize;
+  margin-left: 10px;
 }
 /*
 ==========================

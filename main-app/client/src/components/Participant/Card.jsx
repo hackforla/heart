@@ -33,8 +33,10 @@ const Card = ({ user }) => {
         src={require('../../assets/blank-image.png')}
       />
       <div className='user-card-name--container'>
-        <div className='user-card-name'>{`${firstNameText} ${lastNameText}`}</div>
-        { aka && <div className='user-card-aka'>AKA {akaText}</div>}
+        <div className='user-card-name'>
+          {`${firstNameText} ${lastNameText}`}
+          { aka && <div className='user-card-aka'>AKA {akaText}</div>}
+        </div>
       </div>
       <div className='user-card-info--container'>
         {
