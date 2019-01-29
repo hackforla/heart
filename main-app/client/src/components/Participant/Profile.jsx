@@ -1,5 +1,8 @@
 import React from 'react';
 import { API_ENDPOINT } from './../../get_uri';
+import Card from './Card';
+import Loader from '../UI/Loader';
+import Error from '../UI/Error';
 const axios = require('axios');
 
 class ParticipantProfile extends React.Component {
@@ -34,8 +37,9 @@ class ParticipantProfile extends React.Component {
     let { user, loading, error } = this.state;
     return (
         <div className='user-profile--container'>
-          { loading && <div id='loader'><i className='fas fa-spinner'></i></div> }
-          { user && user }
+          { loading && <Loader /> }
+          { error && <Error error={error} /> }
+          { user && <Card user={user} /> }
         </div>
     )
   }
