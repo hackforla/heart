@@ -1,5 +1,8 @@
 import React from 'react';
 import { API_ENDPOINT } from './../../get_uri';
+import Card from './Card';
+import Loader from '../UI/Loader';
+import Error from '../UI/Error';
 const axios = require('axios');
 
 class ParticipantProfile extends React.Component {
@@ -18,9 +21,10 @@ class ParticipantProfile extends React.Component {
       url: `${API_ENDPOINT}/participants/${id}`,
     })
     .then(res => {
-      console.log(res);
       let { data } = res;
-      this.setState({ user: data, loading: false })
+      console.log(data[0]);
+      this.setState({ user: data[0], loading: false });
+      return data[0];
     })
     .catch(err => {
       console.error(err);
@@ -33,8 +37,9 @@ class ParticipantProfile extends React.Component {
     let { user, loading, error } = this.state;
     return (
         <div className='user-profile--container'>
-          { loading && <div id='loader'><i className='fas fa-spinner'></i></div> }
-          { user && user }
+          { loading && <Loader /> }
+          { error && <Error error={error} /> }
+          { user && <Card user={user} /> }
         </div>
     )
   }
