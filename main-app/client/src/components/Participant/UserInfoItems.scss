@@ -8,7 +8,7 @@ INFO ROW
 .user-card-info--container {
   grid-area: info;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: column;
   justify-items: start;
   align-items: end;
   grid-gap: 20px;
@@ -21,13 +21,14 @@ INFO ROW
 
 .user-card-info--label {
   text-transform: capitalize;
-  color: $grey;
+  color: $med-grey;
 }
 
 .user-card-info--value {
   text-transform: capitalize;
   font-weight: 700;
   font-size: 18px;
+  @include editableInput;
 }
 
 /*
@@ -36,12 +37,6 @@ MEDIA QUERIES
 ==========================
 */
 @media (max-width: 850px) {
-  .user-card-info--container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
   .user-card-info--container {
     grid-template-columns: 1fr;
   }
