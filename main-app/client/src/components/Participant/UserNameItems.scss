@@ -20,7 +20,7 @@ NAME ROW
 .user-card-name--container {
   grid-area: name;
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   align-items: end;
   justify-items: start;
   grid-gap: 15px;
@@ -29,10 +29,16 @@ NAME ROW
 .user-card-name,
 .user-card-aka {
   text-transform: capitalize;
-  display: inline-block;
 }
 .user-card-name {
+  width: auto;
   font-size: 30px;
+  border: none;
+  border-bottom: 1px solid $grey;
+  &:disabled {
+    border: none;
+    background-color: white;
+  }
 }
 .user-card-aka {
   font-size: 22px;
