@@ -12,6 +12,7 @@ CREATE TABLE participants(
   middle_name VARCHAR(20),
   last_name VARCHAR(20),
   aka VARCHAR(20) ARRAY,
+  dl VARCHAR(20),
   status VARCHAR(20),
   dob DATE,
   phone VARCHAR(10),
@@ -29,7 +30,8 @@ CREATE TABLE participants(
   veteran_status VARCHAR(20),
   urgent BOOLEAN,
   services VARCHAR(20) [],
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
  );
 
  CREATE TABLE citations(
@@ -39,6 +41,28 @@ CREATE TABLE participants(
    violation_number VARCHAR(50),
    citation_status VARCHAR(20),
    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
    participant_id INTEGER,
    FOREIGN KEY (participant_id) REFERENCES participants (id)
  );
+
+-- Trigger function to update updated_at timestamp
+CREATE OR REPLACE FUNCTION trigger_set_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- update updated_at on participants table
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON participants
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+-- update updated_at on citations table
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON citations
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
