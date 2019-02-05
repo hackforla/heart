@@ -13,6 +13,7 @@ CREATE TABLE participants(
   last_name VARCHAR(20),
   aka VARCHAR(20) ARRAY,
   dl VARCHAR(20),
+  clinic VARCHAR(50),
   status VARCHAR(20),
   dob DATE,
   phone VARCHAR(10),
