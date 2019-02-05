@@ -1,57 +1,48 @@
 import React from 'react';
 import './Card.scss';
-import dateFormatter from '../../utilities/dateFormatter';
+import UserInfoItems from './UserInfoItems';
+import UserNameItems from './UserNameItems';
 
-const Card = ({ user }) => {
-  let { first_name, last_name, aka, dob, email, phone, created_at  } = user;
-  let firstNameText = first_name ? first_name : 'N/A';
-  let lastNameText = last_name ? last_name : 'N/A';
-  let akaText = aka && aka.join(', ');
-  let dobText = dob ? dateFormatter(Date.parse(dob)) : 'N/A';
-  let emailText = email ? email : 'N/A';
-  let phoneText = phone ? phone : 'N/A';
-
-  let infoArray = [
-    {
-      label: 'Date of Birth',
-      value: dobText,
-    },
-    {
-      label: 'Phone Number',
-      value: phoneText,
-    },
-    {
-      label: 'Email Address',
-      value: emailText,
-    },
-  ]
-  return (
-    <div className='user-card--container'>
-      <img 
-        className='user-card--avatar' 
-        alt='user-avatar' 
-        src={require('../../assets/blank-image.png')}
-      />
-      <div className='user-card-name--container'>
-        <div className='user-card-name'>
-          {`${firstNameText} ${lastNameText}`}
-          { aka && <div className='user-card-aka'>aka {akaText}</div>}
-        </div>
-      </div>
-      <div className='user-card-info--container'>
-        {
-          infoArray.map((info, idx) => {
-            return (
-              <div key={idx} className='user-card-info-unit'>
-                <div className='user-card-info--value'>{info.value}</div>
-                <div className='user-card-info--label'>{info.label}</div>
-              </div>
-            )
-          })
-        }
-      </div>
-    </div>
-  )
+class Card extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editing: false,
+      btnText: 'Edit',
+    };
+  }
+  toggleEditView = () => {
+    let { editing } = this.state;
+    this.setState({
+      editing: !editing,
+      btnText: !editing ? 'Save' : 'Edit',
+    })
+  }
+  render() {
+    let { editing, btnText } = this.state;
+    let { user } = this.props;
+    return (
+      <>
+        <button 
+          type='button' 
+          onClick={() => this.toggleEditView()} 
+          className={`user-card--edit-btn edit-btn-${!editing ? 'edit' : 'save'}`}
+        >
+          {btnText}
+        </button>
+        <UserNameItems
+          user={user}
+          editHandler={this.editHandler}
+          editing={editing}
+        />
+        <UserInfoItems 
+          user={user} 
+          editHandler={this.editHandler} 
+          editng={editing}
+        />
+      </>
+    )
+  }
 }
 
 export default Card;
