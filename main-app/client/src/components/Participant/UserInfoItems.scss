@@ -38,6 +38,6 @@ MEDIA QUERIES
 */
 @media (max-width: 850px) {
   .user-card-info--container {
-    grid-template-columns: 1fr;
+    grid-auto-flow: row;
   }
 }

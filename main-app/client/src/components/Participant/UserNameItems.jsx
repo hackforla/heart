@@ -22,22 +22,39 @@ const UserNameItems = ({ user, editing, editHandler }) => {
     },
   ]
   
-  const renderItems = () => {
-    return nameArray.map((info, idx) => {
-      return (
-        <input 
-          key={idx}
-          className='user-card-name' 
-          disabled={!editing} 
-          value={info.value}
-          name={info.name}
-          onChange={(e) => {editHandler(e)}}
-        />
-      )
-    });
+  let renderedNameArray = [
+    {
+      value: () => { return `${firstNameText} ${lastNameText}` },
+    },
+    {
+      value: akaText,
+    },
+  ]
+  
+  const renderItems = (editing) => {
+    if (editing) {
+      return nameArray.map((info, idx) => {
+        return (
+          <input 
+            key={idx}
+            className='user-card-name' 
+            disabled={!editing} 
+            value={info.value}
+            name={info.name}
+            onChange={(e) => {editHandler(e)}}
+          />
+        )
+      });
+    } else {
+      return renderedNameArray.map((info, idx) => {
+        return (
+          <div className='user-card-name'>{info.value}</div>
+        )
+      })
+    }
   }
   return (
-    <div className='user-card--container'>
+    <>
       <img 
         className='user-card--avatar' 
         alt='user-avatar' 
@@ -46,7 +63,7 @@ const UserNameItems = ({ user, editing, editHandler }) => {
       <div className='user-card-name--container'>
         {renderItems()}
       </div>
-    </div>
+    </>
   )
 }
 
