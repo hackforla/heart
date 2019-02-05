@@ -38,3 +38,23 @@ $z-header: 14;
 $z-middle: 10;
 $z-default: 1;
 $z-below: -1;
+/*
+==========================
+EDITABLE TEXT FIELDS
+==========================
+*/
+
+@mixin editableInput--disabled {
+  border: none;
+  background-color: white;
+}
+
+@mixin editableInput {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid $lighter-grey;
+  padding-bottom: 5px;
+  &:disabled {
+    @include editableInput--disabled;
+  }
+}
