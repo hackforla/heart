@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import UserProfile from './components/UserProfile';
+import ParticipantProfile from './components/Participant/Profile';
 import './App.css';
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route path='/user/:1/' component={UserProfile} />
+            <Route path='/participants/:id/' component={ParticipantProfile} />
           </Switch>
         </BrowserRouter>
       </div>
