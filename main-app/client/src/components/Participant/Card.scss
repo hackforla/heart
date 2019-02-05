@@ -8,7 +8,7 @@ USER CARD
 .user-card--container {
   max-width: $max-width;
   width: 80vw;
-  background-color: $palest-grey;
+  border: 1px solid $light-grey;
   padding: 20px;
   margin: 0 auto;
   display: grid;
@@ -32,6 +32,7 @@ AVATAR
   width: 80%;
   height: auto;
   border-radius: 50%;
+  box-shadow: $box-shadow;
 }
 /*
 ==========================
@@ -80,10 +81,42 @@ INFO ROW
 
 .user-card-info--label {
   text-transform: capitalize;
+  color: $grey;
 }
 
 .user-card-info--value {
   text-transform: capitalize;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 18px;
+}
+
+/*
+==========================
+MEDIA QUERIES
+==========================
+*/
+@media (max-width: 850px) {
+  .user-card-info--container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .user-card--container {
+    grid-template-columns: 1fr;
+    grid-template-areas: "image" "name" "info";
+    justify-items: start;
+  }
+  .user-card-info--container {
+    grid-template-columns: 1fr;
+  }
+
+  .user-card-name--container,
+  .user-card--avatar {
+    justify-self: center;
+  }
+  .user-card-name,
+  .user-card-aka {
+    display: block;
+  } 
 }
