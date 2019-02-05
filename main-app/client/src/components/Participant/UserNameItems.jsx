@@ -1,4 +1,5 @@
 import React from 'react';
+import './UserNameItems.scss';
 
 const UserNameItems = ({ user, editing, editHandler }) => {
   const { first_name, last_name, aka } = user;

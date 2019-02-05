@@ -1,5 +1,6 @@
 import React from 'react';
 import dateFormatter from '../../utilities/dateFormatter';
+import './UserInfoItems.scss';
 
 const UserInfoItems = ({ user, editing, editHandler}) => {
   let { dob, email, phone, created_at  } = user;
