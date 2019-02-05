@@ -20,7 +20,7 @@ NAME ROW
 .user-card-name--container {
   grid-area: name;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: column;
   align-items: end;
   justify-items: start;
   grid-gap: 15px;
@@ -31,14 +31,8 @@ NAME ROW
   text-transform: capitalize;
 }
 .user-card-name {
-  width: auto;
   font-size: 30px;
-  border: none;
-  border-bottom: 1px solid $grey;
-  &:disabled {
-    border: none;
-    background-color: white;
-  }
+  @include editableInput;
 }
 .user-card-aka {
   font-size: 22px;
