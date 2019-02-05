@@ -30,16 +30,18 @@ class Card extends React.Component {
         >
           {btnText}
         </button>
-        <UserNameItems
-          user={user}
-          editHandler={this.editHandler}
-          editing={editing}
-        />
-        <UserInfoItems 
-          user={user} 
-          editHandler={this.editHandler} 
-          editng={editing}
-        />
+        <div className='user-card--container'>
+          <UserNameItems
+            user={user}
+            editHandler={this.editHandler}
+            editing={editing}
+          />
+          <UserInfoItems 
+            user={user} 
+            editHandler={this.editHandler} 
+            editing={editing}
+          />
+        </div>
       </>
     )
   }
