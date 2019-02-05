@@ -17,12 +17,12 @@ const Card = ({ user }) => {
       value: dobText,
     },
     {
-      label: 'Email Address',
-      value: emailText,
-    },
-    {
       label: 'Phone Number',
       value: phoneText,
+    },
+    {
+      label: 'Email Address',
+      value: emailText,
     },
   ]
   return (
@@ -35,7 +35,7 @@ const Card = ({ user }) => {
       <div className='user-card-name--container'>
         <div className='user-card-name'>
           {`${firstNameText} ${lastNameText}`}
-          { aka && <div className='user-card-aka'>AKA {akaText}</div>}
+          { aka && <div className='user-card-aka'>aka {akaText}</div>}
         </div>
       </div>
       <div className='user-card-info--container'>
