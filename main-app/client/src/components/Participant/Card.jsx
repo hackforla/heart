@@ -3,7 +3,7 @@ import './Card.scss';
 import dateFormatter from '../../utilities/dateFormatter';
 
 const Card = ({ user }) => {
-  let { first_name, last_name, aka, dob, email, phone } = user;
+  let { first_name, last_name, aka, dob, email, phone, created_at  } = user;
   let firstNameText = first_name ? first_name : 'N/A';
   let lastNameText = last_name ? last_name : 'N/A';
   let akaText = aka && aka.join(', ');
