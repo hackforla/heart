@@ -12,5 +12,6 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 app.get('/', (req, res) => res.status(200).render('index'));
 require('./routes/participants')(app);
+require('./routes/citations')(app);
 
 module.exports = app;
