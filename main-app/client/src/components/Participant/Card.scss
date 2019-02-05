@@ -21,102 +21,16 @@ USER CARD
 
   color: $darker-grey;
 }
-/*
-==========================
-AVATAR
-==========================
-*/
-.user-card--avatar {
-  grid-area: image;
-  object-fit: contain;
-  width: 80%;
-  height: auto;
-  border-radius: 50%;
-  box-shadow: $box-shadow;
-}
-/*
-==========================
-NAME ROW
-==========================
-*/
-.user-card-name--container {
-  grid-area: name;
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  align-items: end;
-  justify-items: start;
-  grid-gap: 15px;
-}
-
-.user-card-name,
-.user-card-aka {
-  text-transform: capitalize;
-  display: inline-block;
-}
-.user-card-name {
-  font-size: 30px;
-}
-.user-card-aka {
-  font-size: 22px;
-  margin-left: 10px;
-}
-/*
-==========================
-INFO ROW
-==========================
-*/
-.user-card-info--container {
-  grid-area: info;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-items: start;
-  align-items: end;
-  grid-gap: 20px;
-}
-
-.user-card-info--label,
-.user-card-info--value {
-  text-align: left;
-}
-
-.user-card-info--label {
-  text-transform: capitalize;
-  color: $grey;
-}
-
-.user-card-info--value {
-  text-transform: capitalize;
-  font-weight: 700;
-  font-size: 18px;
-}
 
 /*
 ==========================
 MEDIA QUERIES
 ==========================
 */
-@media (max-width: 850px) {
-  .user-card-info--container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 600px) {
   .user-card--container {
     grid-template-columns: 1fr;
     grid-template-areas: "image" "name" "info";
     justify-items: start;
   }
-  .user-card-info--container {
-    grid-template-columns: 1fr;
-  }
-
-  .user-card-name--container,
-  .user-card--avatar {
-    justify-self: center;
-  }
-  .user-card-name,
-  .user-card-aka {
-    display: block;
-  } 
 }

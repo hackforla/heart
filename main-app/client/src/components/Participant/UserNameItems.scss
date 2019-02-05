@@ -1,0 +1,56 @@
+@import '../../styles/shared.scss';
+/*
+==========================
+AVATAR
+==========================
+*/
+.user-card--avatar {
+  grid-area: image;
+  object-fit: contain;
+  width: 80%;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: $box-shadow;
+}
+/*
+==========================
+NAME ROW
+==========================
+*/
+.user-card-name--container {
+  grid-area: name;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  align-items: end;
+  justify-items: start;
+  grid-gap: 15px;
+}
+
+.user-card-name,
+.user-card-aka {
+  text-transform: capitalize;
+  display: inline-block;
+}
+.user-card-name {
+  font-size: 30px;
+}
+.user-card-aka {
+  font-size: 22px;
+  margin-left: 10px;
+}
+/*
+==========================
+MEDIA QUERIES
+==========================
+*/
+
+@media (max-width: 600px) {
+  .user-card-name--container,
+  .user-card--avatar {
+    justify-self: center;
+  }
+  .user-card-name,
+  .user-card-aka {
+    display: block;
+  } 
+}
