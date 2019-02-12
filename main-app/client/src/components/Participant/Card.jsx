@@ -23,14 +23,14 @@ class Card extends React.Component {
     let { user } = this.props;
     return (
       <>
-        <button 
-          type='button' 
-          onClick={() => this.toggleEditView()} 
-          className={`user-card--edit-btn edit-btn-${!editing ? 'edit' : 'save'}`}
-        >
-          {btnText}
-        </button>
         <div className='user-card--container'>
+          <button 
+            type='button' 
+            onClick={() => this.toggleEditView()} 
+            className={`user-card--edit-btn edit-btn-${!editing ? 'edit' : 'save'}`}
+          >
+            {btnText}
+          </button>
           <UserNameItems
             user={user}
             editHandler={this.editHandler}
