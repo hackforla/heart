@@ -9,6 +9,7 @@ class Card extends React.Component {
     this.state = {
       editing: false,
       btnText: 'Edit',
+      localUserInfo: {},
     };
   }
   toggleEditView = () => {
@@ -16,10 +17,16 @@ class Card extends React.Component {
     this.setState({
       editing: !editing,
       btnText: !editing ? 'Save' : 'Edit',
-    })
+    });
+  }
+  editHandler = (e) => {
+    let { name, value } = e.currentTarget;
+    let { localUserInfo } = this.state;
+    localUserInfo[name] = value;
+    this.setState({ localUserInfo: localUserInfo }, () => { console.log(this.state.localUserInfo) })
   }
   render() {
-    let { editing, btnText } = this.state;
+    let { editing, btnText, localUserInfo } = this.state;
     let { user } = this.props;
     return (
       <>
@@ -33,11 +40,13 @@ class Card extends React.Component {
           </button>
           <UserNameItems
             user={user}
+            localUserInfo={localUserInfo}
             editHandler={this.editHandler}
             editing={editing}
           />
           <UserInfoItems 
             user={user} 
+            localUserInfo={localUserInfo}
             editHandler={this.editHandler} 
             editing={editing}
           />
