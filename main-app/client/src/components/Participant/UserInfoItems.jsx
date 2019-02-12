@@ -3,16 +3,28 @@ import dateFormatter from '../../utilities/dateFormatter';
 import './UserInfoItems.scss';
 
 const UserInfoItems = ({ user, editing, editHandler}) => {
-  let { dob, email, phone, created_at  } = user;
+  let { dob, email, phone, created_at, clinic, dl  } = user;
   let dobText = dob ? dateFormatter(Date.parse(dob)) : 'N/A';
   let emailText = email ? email : 'N/A';
   let phoneText = phone ? phone : 'N/A';
+  let clinicText = clinic ? clinic : 'N/A';
+  let dlText = dl ? dl : 'N/A';
     
   let infoArray = [
+    {
+      label: 'Clinic Attended',
+      value: clinicText,
+      name: 'clinic',
+    },
     {
       label: 'Date of Birth',
       value: dobText,
       name: 'dob',
+    },
+    {
+      label: 'Driver License',
+      value: dlText,
+      name: 'dl',
     },
     {
       label: 'Phone Number',

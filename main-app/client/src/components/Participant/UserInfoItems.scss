@@ -8,7 +8,8 @@ INFO ROW
 .user-card-info--container {
   grid-area: info;
   display: grid;
-  grid-auto-flow: column;
+  grid-template-columns: repeat(3, 1fr);
+  // grid-auto-flow: column;
   justify-items: start;
   align-items: end;
   grid-gap: 20px;
