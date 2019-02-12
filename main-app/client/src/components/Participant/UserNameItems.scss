@@ -63,3 +63,14 @@ MEDIA QUERIES
     display: block;
   } 
 }
+
+@media (max-width: 500px) {
+  .user-card-name--container,
+  .user-card--avatar {
+    grid-auto-flow: row;
+  }
+  .user-card-name,
+  .user-card-aka {
+    display: block;
+  } 
+}
