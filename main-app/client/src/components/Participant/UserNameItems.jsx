@@ -27,11 +27,12 @@ const UserNameItems = ({ user, editing, editHandler }) => {
       value: () => { return `${firstNameText} ${lastNameText}` },
     },
     {
-      value: akaText,
+      value: () => { return akaText },
     },
   ]
   
   const renderItems = (editing) => {
+    console.log(editing)
     if (editing) {
       return nameArray.map((info, idx) => {
         return (
@@ -39,20 +40,25 @@ const UserNameItems = ({ user, editing, editHandler }) => {
             key={idx}
             className='user-card-name' 
             disabled={!editing} 
-            value={info.value}
+            value={info.value || info.value()}
             name={info.name}
             onChange={(e) => {editHandler(e)}}
           />
         )
       });
-    } else {
-      return renderedNameArray.map((info, idx) => {
-        // need to fix this. 
-        return (
-          <div className='user-card-name'>{info.value}</div>
-        )
-      })
-    }
+    } 
+    
+    return (
+      <>
+        <div className='user-card-name name-finalized'>
+          {renderedNameArray[0].value()}
+        </div>
+        <div className='user-card-name name--aka'>AKA</div>
+        <div className='user-card-name name-finalized'>
+          {renderedNameArray[1].value()}
+        </div>
+      </>
+    )
   }
   return (
     <>
@@ -62,7 +68,7 @@ const UserNameItems = ({ user, editing, editHandler }) => {
         src={require('../../assets/blank-image.png')}
       />
       <div className='user-card-name--container'>
-        {renderItems()}
+        {renderItems(editing)}
       </div>
     </>
   )
