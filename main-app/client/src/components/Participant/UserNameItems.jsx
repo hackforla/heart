@@ -47,6 +47,7 @@ const UserNameItems = ({ user, editing, editHandler }) => {
       });
     } else {
       return renderedNameArray.map((info, idx) => {
+        // need to fix this. 
         return (
           <div className='user-card-name'>{info.value}</div>
         )
