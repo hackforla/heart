@@ -32,7 +32,6 @@ const UserNameItems = ({ user, editing, editHandler }) => {
   ]
   
   const renderItems = (editing) => {
-    console.log(editing)
     if (editing) {
       return nameArray.map((info, idx) => {
         return (
