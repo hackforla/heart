@@ -47,6 +47,7 @@ EDITABLE TEXT FIELDS
 @mixin editableInput--disabled {
   border: none;
   background-color: white;
+  color: $darker-grey;
 }
 
 @mixin editableInput {
@@ -54,6 +55,7 @@ EDITABLE TEXT FIELDS
   border: none;
   border-bottom: 1px solid $lighter-grey;
   padding-bottom: 5px;
+  color: $darker-grey;
   &:disabled {
     @include editableInput--disabled;
   }
