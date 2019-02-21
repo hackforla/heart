@@ -12,7 +12,7 @@ const UserNameItems = ({
   const { first_name, last_name, aka } = localUserInfo;
   let firstNameText = first_name ? first_name : 'N/A';
   let lastNameText = last_name ? last_name : 'N/A';
-  let akaText = aka ? aka.join(', ') : 'N/A';
+  let akaText = aka ? aka : 'N/A';
 
   let nameArray = [
     {
