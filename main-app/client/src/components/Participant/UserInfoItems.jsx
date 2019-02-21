@@ -3,7 +3,7 @@ import dateFormatter from '../../utilities/dateFormatter';
 import './UserInfoItems.scss';
 
 const UserInfoItems = ({ user, editing, editHandler, localUserInfo }) => {
-  let { dob, email, phone, created_at, clinic, dl  } = localUserInfo;
+  let { dob, email, phone, clinic, dl  } = localUserInfo;
   let dobText = dob ? dateFormatter(Date.parse(dob)) : 'N/A';
   let emailText = email ? email : 'N/A';
   let phoneText = phone ? phone : 'N/A';
