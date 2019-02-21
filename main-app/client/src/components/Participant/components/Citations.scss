@@ -30,14 +30,18 @@
     border: none;
     border-bottom: $underline-dotted;
     padding-left: 0px;
+    width: 100px;
   }
   .form-QA--row {
-    grid-gap: 30px;
+    grid-gap: 20px;
     background-color: $palest-grey;
     padding: 20px;
     width: calc(100% + 20px);
     margin-left: -30px;
     margin-top: -30px;
     margin-bottom: 30px;
+  }
+  .react-dropdown {
+
   }
 }
