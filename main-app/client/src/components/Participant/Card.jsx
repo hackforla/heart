@@ -74,16 +74,11 @@ class Card extends React.Component {
     let { editing, btnText, localUserInfo } = this.state;
     return (
       <div className='user-card--container'>
-        <button 
-          type='button' 
-          onClick={() => this.toggleEditMode()} 
-          className={`user-card--edit-btn edit-btn-${!editing ? 'edit' : 'save'}`}
-        >
-          {btnText}
-        </button>
         <UserNameItems
           localUserInfo={localUserInfo}
           editHandler={this.editHandler}
+          toggleEditMode={this.toggleEditMode}
+          btnText={btnText}
           editing={editing}
         />
         <UserInfoItems 

@@ -8,7 +8,7 @@ NAME ROW
 .user-card-name--container {
   grid-area: name;
   display: grid;
-  grid-template-columns: fit-content(300px) fit-content(300px) fit-content(300px) 1fr;
+  grid-template-columns: fit-content(300px) fit-content(300px) fit-content(300px) 1fr 1fr;
   align-items: end;
   justify-items: start;
   grid-gap: 15px;
@@ -34,6 +34,20 @@ NAME ROW
 .user-card-aka {
   font-size: 22px;
   margin-left: 8px;
+}
+.user-card--edit-btn {
+  border: none;
+  background-color: white;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  justify-self: end;
+  align-self: start;
+  &:hover {
+    color: $theme-color;
+    text-decoration: underline;
+    padding-bottom: 10px;
+  }
 }
 /*
 ==========================

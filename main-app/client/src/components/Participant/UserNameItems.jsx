@@ -1,7 +1,14 @@
 import React from 'react';
 import './UserNameItems.scss';
 
-const UserNameItems = ({ user, localUserInfo, editing, editHandler }) => {
+const UserNameItems = ({ 
+  user, 
+  toggleEditMode, 
+  btnText, 
+  localUserInfo, 
+  editing, 
+  editHandler 
+}) => {
   const { first_name, last_name, aka } = localUserInfo;
   let firstNameText = first_name ? first_name : 'N/A';
   let lastNameText = last_name ? last_name : 'N/A';
@@ -68,6 +75,13 @@ const UserNameItems = ({ user, localUserInfo, editing, editHandler }) => {
         src={require('../../assets/blank-image.png')}
       />
       {renderItems(editing)}
+      <button 
+          type='button' 
+          onClick={() => toggleEditMode()} 
+          className={`user-card--edit-btn edit-btn-${!editing ? 'edit' : 'save'}`}
+        >
+          {btnText}
+      </button>
     </div>
   )
 }
