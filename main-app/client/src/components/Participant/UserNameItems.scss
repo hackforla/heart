@@ -43,6 +43,7 @@ NAME ROW
   text-transform: uppercase;
   justify-self: end;
   align-self: start;
+  cursor: pointer;
   &:hover {
     color: $theme-color;
     text-decoration: underline;
