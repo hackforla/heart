@@ -21,10 +21,10 @@ class ParticipantProfile extends React.Component {
     axios({
       method: 'get',
       url: `${API_ENDPOINT}/participants/${id}`,
+      timeout: 2000,
     })
     .then(res => {
       let { data } = res;
-      console.log(data[0]);
       this.setState({ user: data[0], loading: false });
       return data[0];
     })
