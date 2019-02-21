@@ -8,8 +8,7 @@ INFO ROW
 .user-card-info--container {
   grid-area: info;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  // grid-auto-flow: column;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   justify-items: start;
   align-items: end;
   grid-gap: 20px;
@@ -22,13 +21,14 @@ INFO ROW
 
 .user-card-info--label {
   text-transform: capitalize;
+  font-size: 13px;
   color: $med-grey;
 }
 
 .user-card-info--value {
   text-transform: capitalize;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   @include editableInput;
 }
 
