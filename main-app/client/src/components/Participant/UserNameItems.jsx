@@ -54,23 +54,21 @@ const UserNameItems = ({ user, localUserInfo, editing, editHandler }) => {
           {renderedNameArray[0].value()}
         </div>
         <div className='user-card-name name--aka'>AKA</div>
-        <div className='user-card-name name-finalized'>
+        <div className='user-card-name name--aka'>
           {renderedNameArray[1].value()}
         </div>
       </>
     )
   }
   return (
-    <>
+    <div className='user-card-name--container'>
       <img 
         className='user-card--avatar' 
         alt='user-avatar' 
         src={require('../../assets/blank-image.png')}
       />
-      <div className='user-card-name--container'>
-        {renderItems(editing)}
-      </div>
-    </>
+      {renderItems(editing)}
+    </div>
   )
 }
 
