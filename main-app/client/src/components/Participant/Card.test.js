@@ -29,7 +29,23 @@ it('does not save user input in non-Edit Mode', () => {
   expect(input).toHaveLength(0)
 })
 
+it('changeInFormState is true when there is a change', () => {
+  const wrapper = mount(<Card />);
+  wrapper.setState({ editing: true });
+  const input = wrapper.find('#input-first_name');
+  input.instance().value = 'test';
+  input.simulate('change');
+  expect(wrapper.state().changeInFormState).toEqual(true)
+})
+
+it('changeInFormState is false when there is no change', () => {
+  const wrapper = mount(<Card />);
+  wrapper.setState({ editing: true });
+  expect(wrapper.state().changeInFormState).toEqual(false)
+})
+
 it('save does NOT trigger an API call if there is NO change in state', () => {
+  
 })
 
 // hitting save triggers an API call when there is a change
@@ -41,6 +57,3 @@ it('save does NOT trigger an API call if there is NO change in state', () => {
 // localStorage -- asking to save later.
 
 // on new api call, resets the error message
-
-
-// 
