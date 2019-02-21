@@ -6,22 +6,23 @@ USER CARD
 ==========================
 */
 .user-card--container {
+  box-sizing: border-box;
   max-width: $max-width;
   width: 80vw;
   border: 1px solid $light-grey;
   border-top: 6px solid $theme-color;
-  padding: 20px;
+  padding: 40px;
   margin: 20px auto;
   border-radius: 5px;
   box-shadow: $box-shadow;
   background-color: white;
 
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr;
   grid-gap: 20px;
-  grid-template-areas: "image name name name"
-              "image info info info";
-  justify-items: start;
+  grid-template-areas: "name"
+              "info";
+  justify-items: stretch;
   align-items: center;
 
   color: $darker-grey;
