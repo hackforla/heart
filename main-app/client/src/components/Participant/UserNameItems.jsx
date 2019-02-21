@@ -37,6 +37,7 @@ const UserNameItems = ({ user, localUserInfo, editing, editHandler }) => {
         return (
           <input 
             key={idx}
+            id={`input-${info.name}`}
             className='user-card-name' 
             disabled={!editing} 
             value={info.value || info.value()}
