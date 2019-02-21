@@ -2,11 +2,6 @@ import axios from 'axios';
 import { API_ENDPOINT } from './../../get_uri';
 
 const getParticipant = (id, successFn, errorFn) => {
-  // return axios({
-  //   method: 'get',
-  //   url: `${API_ENDPOINT}/participants/${id}`,
-  //   timeout: 2000,
-  // })
   return axios.get(`${API_ENDPOINT}/participants/${id}`, {
     timeout: 3000,
   })
