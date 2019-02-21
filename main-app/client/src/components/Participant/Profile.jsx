@@ -40,7 +40,7 @@ class ParticipantProfile extends React.Component {
           { loading && <Loader /> }
           { error && <Error error={error} /> }
           <a href={'/participants'} className='user-profile--nav'>Back to Index</a>
-          { user && <Card user={user} /> }
+          <Card user={user} />
         </div>
     )
   }
