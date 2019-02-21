@@ -1,8 +1,8 @@
 import React from 'react';
 import './UserNameItems.scss';
 
-const UserNameItems = ({ user, editing, editHandler }) => {
-  const { first_name, last_name, aka } = user;
+const UserNameItems = ({ user, localUserInfo, editing, editHandler }) => {
+  const { first_name, last_name, aka } = localUserInfo;
   let firstNameText = first_name ? first_name : 'N/A';
   let lastNameText = last_name ? last_name : 'N/A';
   let akaText = aka ? aka.join(', ') : 'N/A';
