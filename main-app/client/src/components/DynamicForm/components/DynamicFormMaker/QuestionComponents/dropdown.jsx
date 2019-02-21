@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 
 const dropdown = (
-  { field_name, input_type, options, placeholder },
+  { field_name, input_type, options, placeholder, isMulti, customStyles },
   onFormChange,
   form_data,
 ) => {
@@ -15,6 +15,7 @@ const dropdown = (
   const label = option ? option.label : '';
   return (
     <Select
+      styles={customStyles}
       placeholder={placeholder}
       escapeClearsValue={true}
       isClearable={true}
@@ -22,6 +23,8 @@ const dropdown = (
       name={field_name}
       options={mappedOptions}
       value={{ label, value }}
+      classNamePrefix='react-dropdown'
+      isMulti={isMulti}
       onChange={
         (target) => {
           // React-Select handles event targets internally

@@ -376,6 +376,7 @@ const questionShape = {
   minlength: PropTypes.number, // min length or number of choices
   maxlength: PropTypes.number, // max length or number of choices
   placeholder: PropTypes.string, // placeholder text
+  isMulti: PropTypes.bool, // multiple option for dropdown
 };
 
 DynamicFormContainer.propTypes = {
