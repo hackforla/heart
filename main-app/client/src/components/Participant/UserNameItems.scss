@@ -8,7 +8,7 @@ NAME ROW
 .user-card-name--container {
   grid-area: name;
   display: grid;
-  grid-template-columns: fit-content(300px) fit-content(300px) fit-content(300px) 1fr 1fr;
+  grid-template-columns: fit-content(50px) fit-content(500px) fit-content(300px) 1fr fit-content(30px);
   align-items: end;
   justify-items: start;
   grid-gap: 15px;
