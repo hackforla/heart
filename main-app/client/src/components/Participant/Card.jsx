@@ -12,6 +12,9 @@ class Card extends React.Component {
       localUserInfo: {},
     };
   }
+  componentDidMount() {
+    this.initializeFormState();
+  }
   toggleEditView = () => {
     let { editing } = this.state;
     this.setState({
@@ -23,35 +26,49 @@ class Card extends React.Component {
     let { name, value } = e.currentTarget;
     let { localUserInfo } = this.state;
     localUserInfo[name] = value;
-    this.setState({ localUserInfo: localUserInfo }, () => { console.log(this.state.localUserInfo) })
+    this.setState({ localUserInfo: localUserInfo });
+  }
+  initializeFormState = () => {
+    const { user } = this.props;
+    let { localUserInfo } = this.state;
+    const fields = [
+      'first_name', 
+      'last_name', 
+      'aka', 
+      'dob', 
+      'email', 
+      'phone', 
+      'created_at', 
+      'clinic', 
+      'dl'
+    ];
+    fields.forEach(field => {
+      localUserInfo[field] = user[field];
+    })
+    this.setState({ localUserInfo });
   }
   render() {
     let { editing, btnText, localUserInfo } = this.state;
-    let { user } = this.props;
     return (
-      <>
-        <div className='user-card--container'>
-          <button 
-            type='button' 
-            onClick={() => this.toggleEditView()} 
-            className={`user-card--edit-btn edit-btn-${!editing ? 'edit' : 'save'}`}
-          >
-            {btnText}
-          </button>
-          <UserNameItems
-            user={user}
-            localUserInfo={localUserInfo}
-            editHandler={this.editHandler}
-            editing={editing}
-          />
-          <UserInfoItems 
-            user={user} 
-            localUserInfo={localUserInfo}
-            editHandler={this.editHandler} 
-            editing={editing}
-          />
-        </div>
-      </>
+      <div className='user-card--container'>
+        <button 
+          type='button' 
+          onClick={() => this.toggleEditView()} 
+          className={`user-card--edit-btn edit-btn-${!editing ? 'edit' : 'save'}`}
+        >
+          {btnText}
+        </button>
+        <UserNameItems
+          localUserInfo={localUserInfo}
+          editHandler={this.editHandler}
+          editing={editing}
+        />
+        <UserInfoItems 
+          localUserInfo={localUserInfo}
+          editHandler={this.editHandler} 
+          editing={editing}
+        />
+      </div>
     )
   }
 }
