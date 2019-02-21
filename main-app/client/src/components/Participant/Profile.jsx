@@ -1,8 +1,10 @@
 import React from 'react';
 import { API_ENDPOINT } from './../../get_uri';
+import { Link } from 'react-router-dom';
 import Card from './Card';
 import Loader from '../UI/Loader';
 import Error from '../UI/Error';
+import './Profile.scss';
 const axios = require('axios');
 
 class ParticipantProfile extends React.Component {
@@ -39,6 +41,7 @@ class ParticipantProfile extends React.Component {
         <div className='user-profile--container'>
           { loading && <Loader /> }
           { error && <Error error={error} /> }
+          <Link to={'/participants'} className='user-profile--nav'>Back to Index</Link>
           { user && <Card user={user} /> }
         </div>
     )
