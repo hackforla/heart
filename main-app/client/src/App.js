@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className="App">
           <Switch>
-            <Route path='/participants/:id/' component={ParticipantProfile} />
+            <Route exact={true} path='/participants/:id/' component={ParticipantProfile} />
             <Route path='/participants' component={ParticipantProfile} />
           </Switch>
       </div>
