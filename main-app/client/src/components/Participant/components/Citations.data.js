@@ -1,3 +1,30 @@
+const violationStyles = {
+  control: styles => ({ 
+    ...styles, 
+    border: 'none',
+    borderBottom: '1px solid #7f7f7f',
+    borderRadius: '0px',
+  }),
+  option: (provided, state) => ({
+    ...provided,
+  }),
+}
+
+const courtStyles = {
+  control: styles => ({ 
+    ...styles, 
+    border: 'none',
+    backgroundColor: 'transparent',
+    borderBottom: '3px dotted #adadad',
+    borderRadius: '0px',
+    padding: '6px',
+    paddingLeft: '0px',
+  }),
+  option: (provided, state) => ({
+    ...provided,
+  }),
+}
+
 const CitationsQA = [
   {
     row: [
@@ -12,6 +39,7 @@ const CitationsQA = [
         input_type: 'dropdown',
         field_name: 'court_code',
         placeholder: 'Court',
+        customStyles: courtStyles,
         options: [
           { text: 'SM' },
         ]
@@ -21,6 +49,7 @@ const CitationsQA = [
         input_type: 'dropdown',
         field_name: 'status',
         placeholder: 'Status',
+        customStyles: courtStyles,
         options: [
           { text: 'Not Sent' },
         ]
@@ -32,6 +61,8 @@ const CitationsQA = [
     input_type: 'dropdown',
     field_name: 'violations',
     placeholder: 'Ex.PC 123.4',
+    isMulti: true,
+    customStyles: violationStyles,
     options: [
       { text: '640(b)(1)' },
       { text: '800.1' },
@@ -39,7 +70,6 @@ const CitationsQA = [
       { text: '800.3' },
     ]
   },
-
 ]
 
 export default CitationsQA;
