@@ -37,7 +37,12 @@ SIZING & STYLING
 */
 $max-width: 1180px;
 $button-border-radius: 20px;
-
+$underline-dotted: 3px dotted $grey;
+@mixin section-title {
+  font-size: 20px;
+  color: $dark-grey;
+  margin-bottom: 10px;
+}
 /*
 ==========================
 Z-INDEXES
@@ -49,6 +54,7 @@ $z-header: 14;
 $z-middle: 10;
 $z-default: 1;
 $z-below: -1;
+
 /*
 ==========================
 EDITABLE TEXT FIELDS

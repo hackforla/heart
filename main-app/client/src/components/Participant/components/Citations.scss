@@ -5,17 +5,15 @@
 }
 
 .citations-title {
-  font-size: 20px;
-  color: $dark-grey;
-  margin-bottom: 10px;
+  @include section-title;
 }
 
 .citations-form {
-  // form styling changes
   box-shadow: $box-shadow;
   background-color: white;
   padding: 30px;
-  
+
+  // form styling changes
   .form-question {
     color: $med-grey;
     font-weight: 500;
@@ -24,12 +22,13 @@
   }
   .form-answer,
   .form-input {
-    font-size: 16px;
+    font-size: 18px;
+    color: $darker-grey;
   }
   .form-input {
     background-color: transparent;
     border: none;
-    border-bottom: 3px dotted $grey;
+    border-bottom: $underline-dotted;
     padding-left: 0px;
   }
   .form-QA--row {
