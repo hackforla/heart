@@ -13,7 +13,9 @@ class Card extends React.Component {
     };
   }
   componentDidMount() {
-    this.initializeFormState();
+    if (this.props.user) {
+      this.initializeFormState();
+    }
   }
   toggleEditView = () => {
     let { editing } = this.state;
