@@ -3,9 +3,6 @@
 COLORS
 ==========================
 */
-$theme-color: #15cf89;
-$theme-color--hover: rgb(25, 184, 123);
-
 $darker-grey: #4f4f4f;
 $dark-grey: #7f7f7f;
 $med-grey: rgb(158, 158, 158);
@@ -15,8 +12,16 @@ $light-grey: #e6e6e6;
 $pale-grey: #efefef;
 $palest-grey: #f8f8f8;
 
+$blue: #558DCA;
+$blue-hover: rgb(79, 133, 192);
+$blue-palest: #F3F7FC;
+
 $attention-red: #f37070;
 $attention-red--light: #efb0b0;
+
+$theme-color: $blue;
+$theme-color--hover: $blue-hover;
+$theme-color--background: $blue-palest;
 
 $box-shadow: 0px 3px 6px $light-grey;
 $box-shadow-dark: 0px 3px 6px $dark-grey;
