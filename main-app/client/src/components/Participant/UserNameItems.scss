@@ -1,17 +1,5 @@
 @import '../../styles/shared.scss';
-/*
-==========================
-AVATAR
-==========================
-*/
-.user-card--avatar {
-  grid-area: image;
-  object-fit: contain;
-  width: 80%;
-  height: auto;
-  border-radius: 50%;
-  box-shadow: $box-shadow;
-}
+
 /*
 ==========================
 NAME ROW
@@ -20,7 +8,7 @@ NAME ROW
 .user-card-name--container {
   grid-area: name;
   display: grid;
-  grid-auto-flow: column;
+  grid-template-columns: fit-content(300px) fit-content(300px) fit-content(300px) 1fr;
   align-items: end;
   justify-items: start;
   grid-gap: 15px;
@@ -38,14 +26,26 @@ NAME ROW
   border-bottom: none;
   font-size: 16px;
   line-height: 28px;
-  color: $dark-grey;
+  font-weight: 600;
 }
 .name-finalized {
   border-bottom: none;
 }
 .user-card-aka {
   font-size: 22px;
-  margin-left: 10px;
+  margin-left: 8px;
+}
+/*
+==========================
+AVATAR
+==========================
+*/
+.user-card--avatar {
+  object-fit: contain;
+  width: 60px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: $box-shadow;
 }
 /*
 ==========================
