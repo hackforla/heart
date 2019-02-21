@@ -2,6 +2,7 @@ import React from 'react';
 import './Card.scss';
 import UserInfoItems from './UserInfoItems';
 import UserNameItems from './UserNameItems';
+import updateParticipant from './updateParticipant.api';
 
 class Card extends React.Component {
   constructor(props) {
@@ -10,28 +11,48 @@ class Card extends React.Component {
       editing: false,
       btnText: 'Edit',
       localUserInfo: {},
+      changeInFormState: false,
+      error: null,
+      loading: false,
     };
   }
   componentDidMount() {
-    if (this.props.user) {
-      this.initializeFormState();
+    let { user } = this.props;
+    if (user) {
+      this.initializeFormState(user);
     }
   }
-  toggleEditView = () => {
-    let { editing } = this.state;
+  toggleEditMode = () => {
+    let { editing, localUserInfo, changeInFormState } = this.state;
+    let { id } = this.props.user;
+    if (editing && changeInFormState) {
+      this.postFormData(id, localUserInfo);
+    }
     this.setState({
       editing: !editing,
       btnText: !editing ? 'Save' : 'Edit',
+      changeInFormState: false,
     });
+  }
+  onSuccess = (data) => {
+    this.initializeFormState(data);
+    this.setState({ loading: false })
+  }
+  onError = (errorMessage) => {
+    this.setState({ error: errorMessage, loading: false });
+  }
+  postFormData = (id, formData) => {
+    this.setState({ loading: true, error: null });
+    // currently API call is erroring out
+    return updateParticipant({ id, data: formData });
   }
   editHandler = (e) => {
     let { name, value } = e.currentTarget;
     let { localUserInfo } = this.state;
     localUserInfo[name] = value;
-    this.setState({ localUserInfo: localUserInfo });
+    this.setState({ localUserInfo: localUserInfo, changeInFormState: true });
   }
-  initializeFormState = () => {
-    const { user } = this.props;
+  initializeFormState = (initialData) => {
     let { localUserInfo } = this.state;
     const fields = [
       'first_name', 
@@ -45,7 +66,7 @@ class Card extends React.Component {
       'dl'
     ];
     fields.forEach(field => {
-      localUserInfo[field] = user[field];
+      localUserInfo[field] = initialData[field];
     })
     this.setState({ localUserInfo });
   }
@@ -55,7 +76,7 @@ class Card extends React.Component {
       <div className='user-card--container'>
         <button 
           type='button' 
-          onClick={() => this.toggleEditView()} 
+          onClick={() => this.toggleEditMode()} 
           className={`user-card--edit-btn edit-btn-${!editing ? 'edit' : 'save'}`}
         >
           {btnText}
