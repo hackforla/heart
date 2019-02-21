@@ -1,9 +1,9 @@
 import React from 'react';
-import Card from './Card';
+import Card from './components/Card';
 import Loader from '../UI/Loader';
 import Error from '../UI/Error';
 import './Profile.scss';
-import getParticipant from './getParticipant.api';
+import getParticipant from './API/getParticipant.api';
 
 class ParticipantProfile extends React.Component {
   constructor(props) {

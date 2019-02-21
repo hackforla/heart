@@ -1,8 +1,8 @@
 import React from 'react';
 import './Card.scss';
 import UserInfoItems from './UserInfoItems';
-import UserNameItems from '../UserNameItems';
-import updateParticipant from './updateParticipant.api';
+import UserNameItems from './UserNameItems';
+import updateParticipant from '../API/updateParticipant.api';
 
 class Card extends React.Component {
   constructor(props) {

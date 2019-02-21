@@ -72,7 +72,7 @@ const UserNameItems = ({
       <img 
         className='user-card--avatar' 
         alt='user-avatar' 
-        src={require('../../assets/blank-image.png')}
+        src={require('../../../assets/blank-image.png')}
       />
       {renderItems(editing)}
       <button 
