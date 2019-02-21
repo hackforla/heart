@@ -1,6 +1,6 @@
 import * as React from 'react';
 import IntakeFormQA from './IntakeForm.data';
-import DynamicFormContainer from 'components/DynamicForm/components/DynamicFormContainer';
+import { DynamicFormContainer } from 'components/DynamicForm';
 import './IntakeForm.scss';
 
 class IntakeForm extends React.Component {
