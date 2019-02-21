@@ -6,27 +6,29 @@ import axios from 'axios';
 
 jest.mock('axios');
 
-// initializes form data in state correctly
-
+// togglingBtn changes edit mode
 it('saves user input correctly in state in Edit Mode', () => {
   const wrapper = mount(<Card />);
-  // set edit mode to true
-  // const input = wrapper.find('#query-input');
-  // input.instance().value = 'test';
-  // input.instance().name = 'input';
-  // input.simulate('change');
-  // expect(wrapper.state().input).toEqual('test')
+  wrapper.instance().toggleEditView();
+  expect(wrapper.state().editing).toEqual(true)
+  wrapper.instance().toggleEditView();
+  expect(wrapper.state().editing).toEqual(false)
 })
 
-it('does not save user input in non-Edit Mode', () => {
+// initializes form data in state correctly
+it('saves user input correctly in state in Edit Mode', () => {
   const wrapper = mount(<Card />);
-  // set edit mode to false
-  // const input = wrapper.find('#query-input');
-  // input.instance().value = 'test';
-  // input.instance().name = 'input';
-  // input.simulate('change');
-  // expect(wrapper.state().input).toEqual('test')
+  wrapper.setState({ editing: true });
+  const input = wrapper.find('#input-first_name');
+  input.instance().value = 'test';
+  input.simulate('change');
+  expect(wrapper.state().localUserInfo).toMatchObject({ first_name: 'test' })
 })
+
+
+// does not save user input in non-Edit Mode
+
+
 
 // hitting save triggers an API call when there is a change
 
