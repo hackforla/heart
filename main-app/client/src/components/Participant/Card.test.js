@@ -1,22 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Card from './Card';
-import { shallow, mount } from 'enzyme';
-import axios from 'axios';
+import { mount } from 'enzyme';
 
 jest.mock('axios');
 
-// togglingBtn changes edit mode
-it('saves user input correctly in state in Edit Mode', () => {
+it('clicking edit button toggles edit mode', () => {
   const wrapper = mount(<Card />);
-  wrapper.instance().toggleEditView();
+  const button = wrapper.find('.user-card--edit-btn');
+  button.simulate('click');
   expect(wrapper.state().editing).toEqual(true)
-  wrapper.instance().toggleEditView();
+  button.simulate('click');
   expect(wrapper.state().editing).toEqual(false)
 })
 
-// initializes form data in state correctly
-it('saves user input correctly in state in Edit Mode', () => {
+it('saves user input correctly in state while in Edit Mode', () => {
   const wrapper = mount(<Card />);
   wrapper.setState({ editing: true });
   const input = wrapper.find('#input-first_name');
@@ -25,10 +22,15 @@ it('saves user input correctly in state in Edit Mode', () => {
   expect(wrapper.state().localUserInfo).toMatchObject({ first_name: 'test' })
 })
 
+it('does not save user input in non-Edit Mode', () => {
+  const wrapper = mount(<Card />);
+  wrapper.setState({ editing: false });
+  const input = wrapper.find('#input-first_name');
+  expect(input).toHaveLength(0)
+})
 
-// does not save user input in non-Edit Mode
-
-
+it('save does NOT trigger an API call if there is NO change in state', () => {
+})
 
 // hitting save triggers an API call when there is a change
 
@@ -40,6 +42,5 @@ it('saves user input correctly in state in Edit Mode', () => {
 
 // on new api call, resets the error message
 
-// hitting save does NOT trigger an API call if there is NO change
 
 // 
