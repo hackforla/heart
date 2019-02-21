@@ -9,8 +9,13 @@ USER CARD
   max-width: $max-width;
   width: 80vw;
   border: 1px solid $light-grey;
+  border-top: 6px solid $theme-color;
   padding: 20px;
-  margin: 0 auto;
+  margin: 20px auto;
+  border-radius: 5px;
+  box-shadow: $box-shadow;
+  background-color: white;
+
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-gap: 20px;
