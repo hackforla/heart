@@ -1,14 +1,12 @@
 import axios from 'axios';
-import { API_ENDPOINT } from '../../get_uri';
+import { API_ENDPOINT } from '../../../get_uri';
 
-const updateParticipant = ({ id, data }, successFn, errorFn) => {
-  return axios.put(`${API_ENDPOINT}/participants/${id}`, {
-    data,
-    timeout: 5000,
+const getParticipant = (id, successFn, errorFn) => {
+  return axios.get(`${API_ENDPOINT}/participants/${id}`, {
+    timeout: 3000,
   })
   .then(res => {
     let { data } = res;
-    console.log(data);
     successFn(data[0]);
     return res;
   })
@@ -23,4 +21,4 @@ const updateParticipant = ({ id, data }, successFn, errorFn) => {
   })
 }
 
-export default updateParticipant;
+export default getParticipant;

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.scss';
 import UserInfoItems from './UserInfoItems';
-import UserNameItems from './UserNameItems';
+import UserNameItems from '../UserNameItems';
 import updateParticipant from './updateParticipant.api';
 
 class Card extends React.Component {

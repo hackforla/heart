@@ -1,5 +1,5 @@
 import React from 'react';
-import dateFormatter from '../../utilities/dateFormatter';
+import dateFormatter from '../../../utilities/dateFormatter';
 import './UserInfoItems.scss';
 
 const UserInfoItems = ({ user, editing, editHandler, localUserInfo }) => {
