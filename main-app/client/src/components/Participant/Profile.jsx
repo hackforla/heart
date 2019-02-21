@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Card from './Card';
 import Loader from '../UI/Loader';
 import Error from '../UI/Error';
@@ -41,6 +40,7 @@ class ParticipantProfile extends React.Component {
           { error && <Error error={error} /> }
           <a href={'/participants'} className='user-profile--nav'>Back to Index</a>
           <Card user={user} />
+          
         </div>
     )
   }
