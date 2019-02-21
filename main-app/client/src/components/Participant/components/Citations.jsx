@@ -7,7 +7,9 @@ class Citations extends React.Component {
     return (
       <section className='citations-container'>
         <div className='citations-title'>Citations</div>
-        <DynamicFormContainer questions={CitationsQA} />
+        <div className='citations-form'>
+          <DynamicFormContainer questions={CitationsQA} />
+        </div>
       </section>
     )
   }
