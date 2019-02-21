@@ -31,6 +31,9 @@ class ParticipantProfile extends React.Component {
     .catch(err => {
       console.error(err);
       let { message } = err;
+      if (err.code === 'ECONNABORTED') {
+        message = 'The request took too long - please try again later.';
+      }
       this.setState({ error: message, loading: false });
       return err;
     })
