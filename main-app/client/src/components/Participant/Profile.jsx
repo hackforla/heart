@@ -3,7 +3,7 @@ import Card from './components/Card';
 import Loader from '../UI/Loader';
 import Error from '../UI/Error';
 import './Profile.scss';
-import getParticipant from './API/getParticipant.api';
+import getParticipant from 'api/getParticipant.api';
 
 class ParticipantProfile extends React.Component {
   constructor(props) {

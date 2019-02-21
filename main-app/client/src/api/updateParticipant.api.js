@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_ENDPOINT } from '../../../get_uri';
+import { API_ENDPOINT } from 'get_uri';
 
 const updateParticipant = ({ id, data }, successFn, errorFn) => {
   return axios.put(`${API_ENDPOINT}/participants/${id}`, {

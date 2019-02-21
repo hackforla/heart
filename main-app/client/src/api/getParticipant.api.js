@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_ENDPOINT } from '../../../get_uri';
+import { API_ENDPOINT } from 'get_uri';
 
 const getParticipant = (id, successFn, errorFn) => {
   return axios.get(`${API_ENDPOINT}/participants/${id}`, {
