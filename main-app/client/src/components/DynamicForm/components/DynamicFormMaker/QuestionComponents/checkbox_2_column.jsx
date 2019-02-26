@@ -6,6 +6,7 @@ export default (
   { field_name, options, minlength, maxlength },
   onFormChange,
   form_data,
+  editable
 ) => {
   // TODO: refactor to map over options directly
   const firstHalf = [];
@@ -33,6 +34,7 @@ export default (
                 form_data={form_data}
                 minlength={minlength}
                 maxlength={maxlength}
+                editable={editable}
               />
             ),
           )
@@ -51,6 +53,7 @@ export default (
                 form_data={form_data}
                 minlength={minlength}
                 maxlength={maxlength}
+                editable={editable}
               />
             ),
           )

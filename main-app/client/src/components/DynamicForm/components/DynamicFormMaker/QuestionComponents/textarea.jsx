@@ -4,6 +4,7 @@ export default (
   { field_name, minlength, maxlength, placeholder },
   onFormChange,
   form_data,
+  editable,
 ) => (
   <textarea
     type="text"
@@ -13,6 +14,7 @@ export default (
     minLength={minlength}
     maxLength={maxlength}
     placeholder={placeholder}
+    disabled={!editable}
     onChange={
       ({ currentTarget }) => onFormChange(
         { currentTarget, min: minlength, max: maxlength }

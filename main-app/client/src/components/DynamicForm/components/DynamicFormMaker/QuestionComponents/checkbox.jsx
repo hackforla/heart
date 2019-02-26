@@ -9,6 +9,7 @@ const CheckboxComponent = (
     form_data,
     minlength,
     maxlength,
+    editable
   },
 ) => {
   const value = form_data[field_name];
@@ -22,6 +23,7 @@ const CheckboxComponent = (
           value={answer.value || answer}
           id={field_name + '_' + index}
           checked={value.indexOf(answer.value || answer) !== -1} // is answer in answers array
+          disabled={!editable}
           onChange={
             ({ currentTarget }) => onFormChange(
               { currentTarget, min: minlength, max: maxlength },
@@ -41,6 +43,7 @@ export default (
   { field_name, options, minlength, maxlength },
   onFormChange,
   form_data,
+  editable,
 ) => options.map(
   (answer, index) => (
     <CheckboxComponent
@@ -52,6 +55,7 @@ export default (
       form_data={form_data}
       minlength={minlength}
       maxlength={maxlength}
+      editable={editable}
     />
   ),
 );

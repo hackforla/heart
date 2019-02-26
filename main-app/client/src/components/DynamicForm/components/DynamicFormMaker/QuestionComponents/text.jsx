@@ -5,6 +5,7 @@ export default (
   { input_type, field_name, minlength, maxlength, placeholder },
   onFormChange,
   form_data,
+  editable
 ) => (
   <input 
     type={input_type}
@@ -14,6 +15,7 @@ export default (
     minLength={minlength}
     maxLength={maxlength}
     placeholder={placeholder}
+    disabled={!editable}
     onChange={
       ({ currentTarget }) => onFormChange(
         { currentTarget, min: minlength, max: maxlength }
