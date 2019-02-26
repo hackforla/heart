@@ -48,7 +48,6 @@ class Card extends React.Component {
   }
   postFormData = (id, formData) => {
     this.setState({ loading: true, error: null });
-    console.log(formData);
     return updateParticipant({ id, data: formData }, this.onSuccess, this.onError);
   }
   editHandler = (e) => {
