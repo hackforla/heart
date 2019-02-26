@@ -55,13 +55,7 @@ class Card extends React.Component {
     let { localUserInfo } = this.state;
 
     if (name === 'aka') {
-      if (value.includes(',')) {
-        let akaArray = value.split(',');
-        value = akaArray;
-      }
-      else {
-        value = [value];
-      }
+      value = value.includes(',') ? value.split(',') : [value]
     }
 
     localUserInfo[name] = value;
