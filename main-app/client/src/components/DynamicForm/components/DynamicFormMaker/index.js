@@ -9,7 +9,7 @@ const dynamicFormMaker = (
   editable,
 ) => questions.map(
   (question, idx) => {
-    return questionParser({ question, form_data, onFormChange, customComponents, idx, editable })
+    return questionParser({ object: question, form_data, onFormChange, customComponents, idx, editable })
   },
 );
 
