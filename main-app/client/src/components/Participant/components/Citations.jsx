@@ -8,7 +8,7 @@ class Citations extends React.Component {
       <section className='citations-container'>
         <div className='citations-title'>Citations</div>
         <div className='citations-form'>
-          <DynamicFormContainer questions={CitationsQA} />
+          <DynamicFormContainer questions={CitationsQA} editable={true} />
         </div>
       </section>
     )

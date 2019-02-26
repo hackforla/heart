@@ -48,12 +48,22 @@ class Card extends React.Component {
   }
   postFormData = (id, formData) => {
     this.setState({ loading: true, error: null });
-    // currently API call is erroring out
-    return updateParticipant({ id, data: formData });
+    return updateParticipant({ id, data: formData }, this.onSuccess, this.onError);
   }
   editHandler = (e) => {
     let { name, value } = e.currentTarget;
     let { localUserInfo } = this.state;
+
+    if (name === 'aka') {
+      if (value.includes(',')) {
+        let akaArray = value.split(',');
+        value = akaArray;
+      }
+      else {
+        value = [value];
+      }
+    }
+
     localUserInfo[name] = value;
     this.setState({ localUserInfo: localUserInfo, changeInFormState: true });
   }

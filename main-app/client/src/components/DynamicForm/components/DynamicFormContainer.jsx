@@ -19,6 +19,7 @@ import { isFieldInvalid, isEmpty } from "./utilities";
  * @prop {func} onValidate callback for field level control of 'disabled' flag. expects boolean return
  * @prop {func} onInputChange observation-only handler with args (field_name, value, form_data)
  * @prop {func} customComponents custom input_type components (merged with defaults, precedence to custom components)
+ * @prop {bool} editable controls whether form is editable or non-editable
  */
 class DynamicFormContainer extends React.Component {
   state = {
@@ -26,10 +27,11 @@ class DynamicFormContainer extends React.Component {
     questions: [], // detailed in prop types
     disabled: true, // overall DF Container submit control
     field_errors: {}, // individual field errors,
+    editable: true,
   }
 
   componentDidMount() {
-    const { initialData, purpose, questions } = this.props;
+    const { initialData, purpose, questions, editable } = this.props;
     const state = { questions };
     
     const persistence = window.localStorage.getItem(purpose);
@@ -49,6 +51,11 @@ class DynamicFormContainer extends React.Component {
     const { disabled, field_errors } = this._validateAllAnswers(state.form_data, questions);
     state.disabled = disabled;
     state.field_errors = field_errors;
+
+    // checks if the form should NOT be editable
+    if (!editable) {
+      state.editable = editable;
+    }
     
     return this.setState(state);
   }
@@ -105,10 +112,8 @@ class DynamicFormContainer extends React.Component {
     const { onValidate } = this.props;
     const validateField = onValidate || isFieldInvalid;
     let currIdx = recursionIdx ? recursionIdx : 0;
-    // console.log({...questions, recursionLevel : currIdx})
     return questions.reduce(
       (result, question) => {
-        // console.log({...result, reduceIdx: idx, recursionLevel: currIdx});
         const { input_type, field_name, min, max, optional } = question;
 
         if (field_name === undefined) { 
@@ -173,7 +178,14 @@ class DynamicFormContainer extends React.Component {
   _hasEmptyAnswers = (form_data) => {
     return Object.keys(form_data)
       .some(field_name => {
+        console.log(form_data)
         const value = form_data[field_name];
+
+        // if form_data is optional, return false
+        // and continue looping
+        if (form_data.optional) {
+          return false;
+        }
         /*
           if non-numeric returns if value is empty
           - if value is empty (true) then the loop breaks -> disabled true
@@ -311,7 +323,16 @@ class DynamicFormContainer extends React.Component {
     this.state.form_data,
     this._handleInputChange,
     this.props.customComponents,
+    this.state.editable,
   );
+
+  toggleEdit = () => {
+    let { editable, form_data } = this.state;
+    if (editable) {
+      this.props.onSubmit(form_data);
+    }
+    this.setState({ editable: !this.state.editable });
+  }
 
   /**
    * renders Submit button
@@ -342,11 +363,31 @@ class DynamicFormContainer extends React.Component {
     );
   };
 
+  renderEdit = () => {
+    const { editable, disabled } = this.state;
+
+    return (
+        <input
+          className={editable ? "form-btn--edit" : "form-btn--save" }
+          type="submit"
+          value={editable ? "Save" : "Edit"}
+          disabled={disabled}
+          onClick={
+            (e) => {
+              e.preventDefault();
+              this.toggleEdit();
+            }
+          }
+        />
+    );
+  }
+
   render() {
+    let renderBtn = this.state.editable ? this.renderEdit() : this.renderSubmit();
     return (
       <form>
         {this.renderInputs()}
-        {this.renderSubmit()}
+        {renderBtn}
       </form>
     );
   }
@@ -389,6 +430,7 @@ DynamicFormContainer.propTypes = {
   onSubmit: PropTypes.func, // optional handler for form submission
   onValidate: PropTypes.func, // optional handler for field validation
   onInputChange: PropTypes.func, // optional observation-only handler for viewing form data on change
+  editable: PropTypes.bool,
 };
 
 export default DynamicFormContainer;

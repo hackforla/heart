@@ -33,6 +33,7 @@ const CitationsQA = [
         input_type: 'text',
         field_name: 'citation_no',
         placeholder: 'C11111',
+        optional: true,
       },
       {
         text: 'Court Code',
@@ -42,7 +43,8 @@ const CitationsQA = [
         customStyles: courtStyles,
         options: [
           { text: 'SM' },
-        ]
+        ],
+        optional: true,
       },
       {
         text: 'Status',
@@ -52,7 +54,8 @@ const CitationsQA = [
         customStyles: courtStyles,
         options: [
           { text: 'Not Sent' },
-        ]
+        ],
+        optional: true,
       },
     ]
   },
@@ -68,7 +71,8 @@ const CitationsQA = [
       { text: '800.1' },
       { text: '800.2' },
       { text: '800.3' },
-    ]
+    ],
+    optional: true,
   },
 ]
 

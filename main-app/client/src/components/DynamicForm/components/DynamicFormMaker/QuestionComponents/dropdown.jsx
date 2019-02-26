@@ -5,6 +5,7 @@ const dropdown = (
   { field_name, input_type, options, placeholder, isMulti, customStyles },
   onFormChange,
   form_data,
+  editable,
 ) => {
   // map to React-Select option format
   const mappedOptions = options.map(({ text, value }) => ({ label: text, value: value ? value : text }));
@@ -25,6 +26,7 @@ const dropdown = (
       value={{ label, value }}
       classNamePrefix='react-dropdown'
       isMulti={isMulti}
+      isDisabled={!editable}
       onChange={
         (target) => {
           // React-Select handles event targets internally
