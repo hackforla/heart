@@ -112,10 +112,8 @@ class DynamicFormContainer extends React.Component {
     const { onValidate } = this.props;
     const validateField = onValidate || isFieldInvalid;
     let currIdx = recursionIdx ? recursionIdx : 0;
-    // console.log({...questions, recursionLevel : currIdx})
     return questions.reduce(
       (result, question) => {
-        // console.log({...result, reduceIdx: idx, recursionLevel: currIdx});
         const { input_type, field_name, min, max, optional } = question;
 
         if (field_name === undefined) { 
@@ -372,7 +370,7 @@ class DynamicFormContainer extends React.Component {
         <input
           className={editable ? "form-btn--edit" : "form-btn--save" }
           type="submit"
-          value={editable ? "Edit" : "Save"}
+          value={editable ? "Save" : "Edit"}
           disabled={disabled}
           onClick={
             (e) => {
