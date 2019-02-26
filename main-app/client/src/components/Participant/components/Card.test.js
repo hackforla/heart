@@ -57,3 +57,5 @@ it('save does NOT trigger an API call if there is NO change in state', () => {
 // localStorage -- asking to save later.
 
 // on new api call, resets the error message
+
+// aka is saved correctly (split into array when ',' is found), other wise, single string in an array
