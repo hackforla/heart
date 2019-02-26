@@ -1,0 +1,603 @@
+@import '../../../styles/_shared.scss';
+
+/*
+==========================
+DYNAMIC FORM
+==========================
+*/
+.dynamic-form {
+    display: flex;
+    padding-top: 20px;
+    justify-content: center;
+}
+
+.form-QA {
+    margin-bottom: 20px;
+}
+/*
+==========================
+QUESTION
+==========================
+*/
+.form-question {
+    font-size: 16px;
+    color: $darker-grey;
+    font-weight: 600;
+    display: block;
+    padding-bottom: 10px;
+    text-align: left;
+}
+/*
+==========================
+QUESTION SUBTEXT
+==========================
+*/
+.form-subtext {
+    font-size: 12px;
+    color: $grey;
+    display: inline-block;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+/*
+==========================
+SUBMIT BUTTON
+==========================
+*/
+.form-btn {
+    @include system-button($theme-green, $theme-green--hover);
+    margin: 0 auto;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.form-btn--disabled {
+    @include system-button($lighter-grey, $lighter-grey);
+    margin: 0 auto;
+    margin-top: 20px;
+    cursor: disabled;
+    width: 200px;
+}
+.hline,
+.form-hline {
+    @include hline;
+}
+/*
+==========================
+ANSWER FONT
+==========================
+*/
+.form-answer {
+    font-size: 13.5px;
+    color: $dark-grey;
+    margin-left: -10px;
+    padding-left: 10px;
+}
+.form-checkbox-answer {
+    font-size: 13.5px;
+    color: $dark-grey;
+    width: fit-content;
+    margin-left: -10px;
+    padding-left: 10px;
+}
+/*
+==========================
+INPUT & TEXTAREA & DATE
+==========================
+*/
+.form-input,
+.form-date {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    color: $dark-grey;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid $lighter-grey;
+    box-sizing: border-box;
+    &::placeholder {
+        color: $grey;
+        text-transform: capitalize;
+    }
+}
+.form-date {
+    padding: 8px;
+}
+
+.form-text-area {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    color: $dark-grey;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid $light-grey;
+    min-height: 50px;
+    max-height: 50px;
+    max-width: 100%;
+    min-width: 100%;
+    &::placeholder {
+        color: $grey;
+        text-transform: capitalize;
+    }
+}
+/*
+==========================
+CATEGORY
+==========================
+*/
+.form-QA--category {
+    border-bottom: 1px solid $light-grey;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+}
+.form-QA--category-header {
+    font-size: 16px;
+    color: $grey;
+    font-weight: 600;
+    margin: 36px auto;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+/*
+==========================
+ROW QA
+==========================
+*/
+.form-QA--row {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 5px;
+    .form-QA {
+        display: inline-block;
+    }
+}
+@media (max-width: 700px) {
+    .form-QA--row {
+        grid-auto-flow: row;
+    }
+  }
+
+/*
+==========================
+ERROR TEXT
+==========================
+*/
+.errorText {
+    color: $attention-red--light;
+    position: relative;
+    margin-top: -20px;
+    display: inline-block;
+    // margin-left: 10px;
+    font-size: 12px;
+}
+/*
+==========================
+DROPDOWN
+==========================
+*/
+.form-dropdown {
+    width: 100%;
+    border: 1px solid $light-grey;
+    padding: 10px;
+    color: $dark-grey;
+    font-size: 13.5px;
+    margin-top: 5px;
+}
+.form-dropdown > option {
+    width: 418px !important;
+}
+/*
+==========================
+DROPDOWN w/ CHECKBOX
+==========================
+*/
+.search-input-box {
+    margin-bottom: 10px;
+    min-width: 180px;
+    border: none;
+    box-shadow: $box-shadow;
+    padding: 5px;
+    display: none;
+}
+
+.search-input-box::placeholder {
+    color: $grey;
+}
+
+.filter-dropdown-box {
+    background-color: white;
+    border: 1px solid $light-grey;
+    width: 420px;
+    display: none;
+    position: absolute;
+    box-shadow: $box-shadow;
+    z-index: 10;
+    max-height: 120px;
+    overflow: scroll;
+    overflow-x: hidden;
+    text-align: left;
+    padding: 10px;
+    color: $dark-grey;
+    font-size: 12px;
+    margin-left: -9px;
+}
+
+.filter-dropdown-hide {
+    display: none;
+}
+
+.filter-dropdown-btn-5, 
+.filter-dropdown-btn-101 {
+    min-width: 180px;
+    width: 100%;
+    color: $dark-grey;
+    font-size: 12px;
+    background-color: white;
+    border: 1px solid $light-grey;
+    padding: 7px;
+    display: block;
+}
+
+.filter-dropdown-btn-5:hover {
+    #dropdown_multiple-5 {
+        display: block;
+    }
+}
+
+.filter-dropdown-btn-101:hover {
+    #dropdown_multiple-101 {
+        display: block;
+    }
+}
+
+/*
+==========================
+CHECKBOX STYLING
+==========================
+*/
+
+.checkbox-container {
+display: block;
+position: relative;
+padding-left: 20px;
+margin-bottom: 10px;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+width: fit-content;
+height: min-content;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+position: absolute;
+opacity: 0;
+cursor: default;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+position: absolute;
+margin-left: 0px;
+top: 5px;
+left: 0;
+height: 14px;
+width: 14px;
+background-color: white;
+border: 1px solid $grey;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+background-color: $grey;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+background-color: $grey;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+content: '';
+position: absolute;
+display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+left: 4px;
+top: 1.5px;
+width: 4px;
+height: 7px;
+border: solid white;
+border-width: 0 2px 2px 0;
+-webkit-transform: rotate(45deg);
+-ms-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+/*
+==========================
+CHECKBOX STYLING (2 COLUMNS)
+==========================
+*/
+.checkbox-2-column-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "a b";
+}
+
+.checkbox-column-1 {
+    grid-area: a;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.checkbox-column-2 {
+    grid-area: b;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+}
+
+/*
+==========================
+RADIO STYLING
+==========================
+*/
+.radio-container {
+display: block;
+position: relative;
+padding-left: 20px;
+margin-bottom: 12px;
+cursor: default;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+width: fit-content;
+}
+
+/* Hide the browser's default radio button */
+.radio-container input {
+position: absolute;
+opacity: 0;
+cursor: default;
+}
+
+/* Create a custom radio button */
+.radio-checkmark {
+position: absolute;
+margin-left: 0px;
+top: 5px;
+left: 0;
+height: 14px;
+width: 14px;
+background-color: white;
+border-radius: 50%;
+border: 1px solid $grey;
+}
+
+.radio-checkmark--badge {
+    position: absolute;
+    margin-left: 110px;
+    margin-top: 100px;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid $grey;
+}
+
+.special-badge-input {
+    margin-top: 10px;
+}
+
+/* On mouse-over, add a grey background color */
+.radio-container:hover input ~ .radio-checkmark {
+background-color: $grey;
+}
+.radio-container:hover input ~ .radio-checkmark--badge {
+    background-color: $med-grey;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-container input:checked ~ .radio-checkmark {
+background-color: $grey;
+}
+.radio-container input:checked ~ .radio-checkmark--badge {
+    background-color: $grey;
+    // border: 1px solid $theme-green;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radio-checkmark:after {
+content: '';
+position: absolute;
+display: none;
+}
+.radio-checkmark--badge:after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-container input:checked ~ .radio-checkmark:after {
+display: block;
+}
+.radio-container input:checked ~ .radio-checkmark--badge:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-container .radio-checkmark:after {
+top: 2.5px;
+margin-left: 3px;
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: white;
+}
+
+.radio-container .radio-checkmark--badge:after {
+    margin-left: 3px;
+    margin-top: 3px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+}
+
+
+/*
+==========================
+BTN (3)
+==========================
+*/
+.btn-container--3 {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    margin: 0 auto;
+}
+.btn-3 {
+    background-color: white;
+    border: 1px solid $grey;
+    margin: 0 auto;
+    width: 90%;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 10px;
+    color: $grey;
+    box-shadow: $box-shadow;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/*
+==========================
+TEAM & USER DROPDOWNS
+==========================
+*/
+.form-answer-user {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 5px;
+    }
+
+.skill-setter {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 0px;
+    height: 600px;
+    grid-gap: 15px;
+}
+
+.skill-subcategory {
+    display: block;
+    font-size: 14px;
+    color: $dark-grey;
+    padding: 10px;
+    border-bottom: 1px solid $light-grey;
+}
+
+.skill-subcategory--title {
+    color: $lighter-grey;
+    font-size: 12px;
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    text-align: center;
+    color: $med-grey;
+}
+
+.skill-list {
+    width: 100%;
+    text-align: center;
+    padding: 3px;
+    border: 1px solid $light-grey;
+    box-shadow: $box-shadow;
+    background-color: white;
+    margin: 10px 0px;
+    &:hover, &:focus {
+        background-color: $theme-green;
+        color: white;
+    }
+    cursor: move;
+}
+
+.skill-list--chosen {
+    position: relative;
+    width: auto;
+    margin: 0 auto;
+    margin-left: 10%;
+    margin-top: -37%;
+    text-align: center;
+    padding: 3px;
+    box-shadow: $box-shadow;
+    background-color: $theme-green;
+    color: white;
+    height: 100%;
+    display: grid;
+    align-content: center;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+}
+
+.skill-list--dragging {
+    background-color: $theme-green;
+    color: white;
+}
+
+.skill-options {
+    grid-column: 1 / 2;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    // border: 1px solid $light-grey;
+    box-shadow: $box-shadow;
+    background-color: $palest-grey;
+}
+.skill-chosen {
+  grid-column: 2 / -1;
+  background-color: $palest-grey;
+  box-shadow: $box-shadow;
+}
+.chosen-skill-container {
+    border-bottom: 1px solid $light-grey;
+}
+.chosen-skill-container--is-over {
+    box-shadow: $box-shadow;
+    transform: scale(1.01);
+}
+
+.chosen-skill-number {
+    background-color: $light-grey;
+    width: 10%;
+    text-align: center;
+    border-bottom: 1px solid $lighter-grey;
+    color: $grey;
+    height: 100%;
+    display: grid;
+    align-content: center;
+}
+
+.skill-containers-empty {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    height: 100%;
+}
+

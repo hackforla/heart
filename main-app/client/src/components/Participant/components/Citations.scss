@@ -1,0 +1,47 @@
+@import 'styles/_shared.scss';
+
+.citations-container {
+  grid-area: citation;
+}
+
+.citations-title {
+  @include section-title;
+}
+
+.citations-form {
+  box-shadow: $box-shadow;
+  background-color: white;
+  padding: 30px;
+
+  // form styling changes
+  .form-question {
+    color: $med-grey;
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: capitalize;
+  }
+  .form-answer,
+  .form-input {
+    font-size: 18px;
+    color: $darker-grey;
+  }
+  .form-input {
+    background-color: transparent;
+    border: none;
+    border-bottom: $underline-dotted;
+    padding-left: 0px;
+    width: 100px;
+  }
+  .form-QA--row {
+    grid-gap: 20px;
+    background-color: $palest-grey;
+    padding: 20px;
+    width: calc(100% + 20px);
+    margin-left: -30px;
+    margin-top: -30px;
+    margin-bottom: 30px;
+  }
+  .react-dropdown {
+
+  }
+}

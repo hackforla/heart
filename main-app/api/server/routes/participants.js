@@ -16,8 +16,8 @@ module.exports = (app) => {
   app.put('/participants/:id', (req, res) => {
     knex('participants')
       .where('id', req.params.id)
-      .update(req.body)
-      .then(() => res.status(200).send())
+      .update(req.body.data, Object.keys(req.body.data))
+      .then(data => res.status(200).send({ data }))
       .catch(err => res.status(500).send(err));
   });
 

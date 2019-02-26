@@ -1,10 +1,10 @@
 import React from 'react';
-import { API_ENDPOINT } from './../../get_uri';
-import Card from './Card';
+import Card from './components/Card';
 import Loader from '../UI/Loader';
 import Error from '../UI/Error';
-const axios = require('axios');
-
+import './Profile.scss';
+import getParticipant from 'api/getParticipant.api';
+import Citations from './components/Citations';
 class ParticipantProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -15,23 +15,22 @@ class ParticipantProfile extends React.Component {
     }
   }
   componentDidMount() {
-    let { id } = this.props.match.params;
-    axios({
-      method: 'get',
-      url: `${API_ENDPOINT}/participants/${id}`,
-    })
-    .then(res => {
-      let { data } = res;
-      console.log(data[0]);
-      this.setState({ user: data[0], loading: false });
-      return data[0];
-    })
-    .catch(err => {
-      console.error(err);
-      let { message } = err;
-      this.setState({ error: message, loading: false });
-      return err;
-    })
+    if (this.props.match && this.props.match.params.id) {
+      let { id } = this.props.match.params;
+      return this.getParticipant(id);
+    } else {
+      this.onError('Please add a participant ID to the route.')
+    }
+  }
+  getParticipant = (id) => {
+    this.setState({ error: null, loading: true });
+    return getParticipant(id, this.onSuccess, this.onError);
+  }
+  onSuccess = (data) => {
+    this.setState({ user: data, loading: false })
+  }
+  onError = (errorMessage) => {
+    this.setState({ error: errorMessage, loading: false });
   }
   render() {
     let { user, loading, error } = this.state;
@@ -39,7 +38,11 @@ class ParticipantProfile extends React.Component {
         <div className='user-profile--container'>
           { loading && <Loader /> }
           { error && <Error error={error} /> }
-          { user && <Card user={user} /> }
+          <a href={'/participants'} className='user-profile--nav'>Back to Index</a>
+          <div className='user-profile--content-container'>
+            <Card user={user} />
+            <Citations />
+          </div>
         </div>
     )
   }

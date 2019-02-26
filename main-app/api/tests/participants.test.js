@@ -67,7 +67,7 @@ describe('PUT /participants', () => {
   test('It should respond with a 200', (done) => {
     request(app)
       .put('/participants/2')
-      .send({ first_name: 'Mitchellupdated' })
+      .send({ data: { first_name: 'Mitchellupdated' } })
       .then((response) => {
         expect(response.statusCode).toBe(200);
         done();
