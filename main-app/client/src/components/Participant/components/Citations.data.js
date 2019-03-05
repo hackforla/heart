@@ -7,6 +7,22 @@ const violationStyles = {
   }),
   option: (provided, state) => ({
     ...provided
+  }),
+  multiValue: (styles, { data }) => {
+    return {
+      ...styles,
+      color: "white",
+      backgroundColor: "rgb(66, 143, 226)"
+    };
+  },
+  multiValueLabel: (styles, { data }) => ({
+    ...styles,
+    color: "white",
+    backgroundColor: "rgb(66, 143, 226)"
+  }),
+  multiValueRemove: (styles, { data }) => ({
+    ...styles,
+    color: "red"
   })
 };
 
@@ -60,7 +76,7 @@ const CitationsQA = [
     input_type: "dropdown-multi",
     field_name: "violations",
     placeholder: "Ex.PC 123.4",
-    // isMulti: true,
+    isMulti: true,
     customStyles: violationStyles,
     options: [
       { text: "640(b)(1)" },
