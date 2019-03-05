@@ -25,9 +25,7 @@ const isValid = (value, min, max) => {
 const isFieldInvalid = (type, value, min, max, optional) => {
   console.log({ type, value, optional })
   if (optional) {
-    if (value === '') {
-      return false;
-    }
+    return false;
   }
   switch (type) {
     case "email": return !isEmail(value);
