@@ -15,9 +15,14 @@ const dropdown = (
   const value = form_data[field_name];
   // React-Select wants {label, value} for value prop
   // have to find corresponding label for the chosen value to render properly
-  const option = mappedOptions.find(el => el.value === value);
-  const label = option ? option.label : "";
-  console.log(value);
+  let option = mappedOptions.find(el => el.value === value);
+  let label = option ? option.label : "";
+  let isMultiValues = [];
+  if (isMulti) {
+    value.forEach(elem => {
+      isMultiValues.push({ label: elem, value: elem });
+    });
+  }
   return (
     <Select
       styles={customStyles}
@@ -27,22 +32,22 @@ const dropdown = (
       isSearchable={true}
       name={field_name}
       options={mappedOptions}
-      value={{ label, value }}
+      value={isMulti ? isMultiValues : { label, value }}
       classNamePrefix="react-dropdown"
       isMulti={isMulti}
       isDisabled={!editable}
       onChange={target => {
-        // React-Select handles event targets internally
-        // shape currentTarget from their format
-        let value;
-        if (!target || Array.isArray(target)) value = "";
-        else value = target.value;
+        let value = !target ? "" : target.value;
+        if (isMulti) {
+          value = target.map(elem => {
+            return elem.value;
+          });
+        }
         const currentTarget = {
           value,
           name: field_name,
           type: input_type
         };
-
         return onFormChange({ currentTarget });
       }}
     />

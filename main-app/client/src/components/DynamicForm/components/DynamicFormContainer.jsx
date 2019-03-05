@@ -346,7 +346,7 @@ class DynamicFormContainer extends React.Component {
     onInputChange && onInputChange(name, value, form_data);
 
     form_data[name] =
-      type === "checkbox" || type === "dropdown-multi"
+      type === "checkbox"
         ? this._toggleValueInArray(form_data[name], value, max)
         : (form_data[name] = value);
 
