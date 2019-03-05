@@ -282,6 +282,17 @@ class DynamicFormContainer extends React.Component {
     return clone;
   }
 
+  _searchForDataBy = (field_type, name, questions) => {
+    return questions.some((item) => {
+      if (item.row || item.category_contents) {
+        return this._searchForDataBy(field_type, name, item.row || item.category_contents);
+      }
+      if (item[field_type] === name) {
+        console.log(item);
+        return item;
+      }
+    });
+  }
   /**
    * updates 'form_data' in state
    * - calls onValidate(input_type, value, minlength, maxlength)
@@ -299,6 +310,10 @@ class DynamicFormContainer extends React.Component {
 
     const { onInputChange, onValidate } = this.props;
 
+    const QA_Object = this._searchForDataBy('field_name', name, this.props.questions);
+    console.log(QA_Object)
+    const optional = QA_Object.optional;
+
     // provides observational window into form data
     // no control over behavior at this time
     onInputChange && onInputChange(name, value, form_data);
@@ -308,7 +323,7 @@ class DynamicFormContainer extends React.Component {
       : form_data[name] = value;
     
     const validateField = onValidate || isFieldInvalid;
-    field_errors[name] = validateField(type, form_data[name], min, max);
+    field_errors[name] = validateField(type, form_data[name], min, max, optional);
 
     console.log(field_errors)
     this.setState({ form_data, field_errors });
