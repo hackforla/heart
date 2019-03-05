@@ -1,5 +1,5 @@
 import React from "react";
-import './DynamicForm.scss';
+import "./DynamicForm.scss";
 import PropTypes from "prop-types";
 import { isEqual } from "lodash";
 
@@ -10,9 +10,9 @@ import { isFieldInvalid, isEmpty } from "./utilities";
  * @prop {array} questions array of Question data objects for rendering
  * @prop {string} purpose Dynamic Form collection name (for form data persistence)
  * @prop {array} questions array of Dynamic Question objects
- * 
+ *
  * -- OPTIONAL --
- * @prop {object} initialData CAUTION: very delicate - must match expected shape EXACTLY. Provide initial form_data. 
+ * @prop {object} initialData CAUTION: very delicate - must match expected shape EXACTLY. Provide initial form_data.
  * @prop {object} hiddenData values for 'hidden' input types -> { field_name: value }
  * @prop {bool} persistence controls storing form data in LS onFormChange
  * @prop {func} onSubmit wrapper callback for handling submit behavior
@@ -27,19 +27,23 @@ class DynamicFormContainer extends React.Component {
     questions: [], // detailed in prop types
     disabled: true, // overall DF Container submit control
     field_errors: {}, // individual field errors,
-    editable: true,
-  }
+    editable: true
+  };
 
   componentDidMount() {
     const { initialData, purpose, questions, editable } = this.props;
     const state = { questions };
-    
+
     const persistence = window.localStorage.getItem(purpose);
     if (persistence) {
-      const persisted_state = this._getStateFromPersistence(state, persistence, initialData);
+      const persisted_state = this._getStateFromPersistence(
+        state,
+        persistence,
+        initialData
+      );
       return this.setState(persisted_state);
     }
-    
+
     // get initial default values
     state.form_data = this._getDefaultFormData(questions);
 
@@ -48,7 +52,10 @@ class DynamicFormContainer extends React.Component {
 
     // validate all answers (defaults and any provided by initialData)
     // uses onValidate() or isFieldInvalid() on each question / form_data field value
-    const { disabled, field_errors } = this._validateAllAnswers(state.form_data, questions);
+    const { disabled, field_errors } = this._validateAllAnswers(
+      state.form_data,
+      questions
+    );
     state.disabled = disabled;
     state.field_errors = field_errors;
 
@@ -56,7 +63,7 @@ class DynamicFormContainer extends React.Component {
     if (!editable) {
       state.editable = editable;
     }
-    
+
     return this.setState(state);
   }
 
@@ -68,45 +75,51 @@ class DynamicFormContainer extends React.Component {
 
     // persistence in LS
     if (persistence) {
-      const persistedData = JSON.stringify({ form_data, field_errors, disabled });
+      const persistedData = JSON.stringify({
+        form_data,
+        field_errors,
+        disabled
+      });
       localStorage.setItem(purpose, persistedData);
     }
 
     // update form_data when a new question set is introduced
     // handles cases where multiple question sets may be introduced by
     // the DF Wrapper managing the DF Container
-    if (!isEqual(questions, prevProps.questions)) { // only update if question set changes, performance of deep equal?
+    if (!isEqual(questions, prevProps.questions)) {
+      // only update if question set changes, performance of deep equal?
       const new_form_data = this._handleNewQuestions(questions, form_data);
       this.setState({ form_data: new_form_data, questions });
     }
 
     // field_errors: { field_name: boolean } -> true: should disable, false: valid
-    const should_disable = Object.values(field_errors).some(disabled => disabled === true);
-    if (this.state.disabled !== should_disable) { // only update if the two values differ
+    const should_disable = Object.values(field_errors).some(
+      disabled => disabled === true
+    );
+    if (this.state.disabled !== should_disable) {
+      // only update if the two values differ
       this.setState({ disabled: should_disable });
     }
   }
 
-
   _getStateFromPersistence = (base_state, persistence, initialData) => {
-    const persisted_data  = JSON.parse(persistence); // { disabled, field_errors, form_data }
+    const persisted_data = JSON.parse(persistence); // { disabled, field_errors, form_data }
     const state = { ...base_state, ...persisted_data };
     if (initialData) state.form_data = { ...state.form_data, ...initialData };
-    
+
     return state;
-    
-  }
+  };
 
   /**
    * Purpose: validates every answer in form_data
-   * 
+   *
    * iterates over Question set
    * calls the external onValidate() handler or default isFieldInvalid()
    *   use Question and form_data values to validate and update field_errors{}
    * returns
    *  'disabled' boolean (overall control of DF Container submit)
    *  'field_errors' object for individual field error tracking
-   * 
+   *
    */
   _validateAllAnswers(form_data, questions, recursionIdx) {
     const { onValidate } = this.props;
@@ -116,46 +129,63 @@ class DynamicFormContainer extends React.Component {
       (result, question) => {
         const { input_type, field_name, min, max, optional } = question;
 
-        if (field_name === undefined) { 
+        if (field_name === undefined) {
           // no field name (can be category or row)
           // pass nested questions into _getDefaultFormData
           let { category_contents, row } = question;
           let nestedValidationResults = {};
           if (row) {
-            nestedValidationResults = this._validateAllAnswers(form_data, row, currIdx + 1);
+            nestedValidationResults = this._validateAllAnswers(
+              form_data,
+              row,
+              currIdx + 1
+            );
           }
           if (category_contents) {
-            nestedValidationResults = this._validateAllAnswers(form_data, category_contents, currIdx + 1);
+            nestedValidationResults = this._validateAllAnswers(
+              form_data,
+              category_contents,
+              currIdx + 1
+            );
           }
           // console.log({...result, ...nestedValidationResults, recursionLevel : currIdx});
-          let mergedFieldErrors = {...result.field_errors, ...nestedValidationResults.field_errors};
+          let mergedFieldErrors = {
+            ...result.field_errors,
+            ...nestedValidationResults.field_errors
+          };
           result.field_errors = mergedFieldErrors;
           return result;
         }
-        const field_error = validateField(input_type, form_data[field_name], min, max, optional);
+        const field_error = validateField(
+          input_type,
+          form_data[field_name],
+          min,
+          max,
+          optional
+        );
         result.field_errors[field_name] = field_error;
         if (result.disabled !== field_error) result.disabled = field_error;
         // console.log({...result, reduceIdx: idx, recursionLevel: currIdx});
         return result;
       },
-      { field_errors: {}, disabled: false },
-    ); 
+      { field_errors: {}, disabled: false }
+    );
   }
 
   /**
    * Purpose: maintains state.form_data fields required for the current question set
-   * 
+   *
    * merges any existing responses from the previous question set if the same
    * fields exist in the new question set
-   * 
+   *
    * destroys any existing responses whose fields are not part of the new question set
    */
   _handleNewQuestions = (questions, form_data) => {
     const current_fields = Object.keys(form_data);
     const new_fields = questions.map(question => question.field_name);
 
-    const overlapping_fields = current_fields.filter(
-      field_name => new_fields.includes(field_name),
+    const overlapping_fields = current_fields.filter(field_name =>
+      new_fields.includes(field_name)
     );
 
     const new_questions_form_data = this._getDefaultFormData(questions);
@@ -165,103 +195,93 @@ class DynamicFormContainer extends React.Component {
         overlapping_data[field_name] = form_data[field_name];
         return overlapping_data;
       },
-      {},
+      {}
     );
 
     return { ...new_questions_form_data, ...overlapping_form_data };
-  }
+  };
 
   /**
    * Iterates over the form_data and checks for empty answers
    * used to control the 'disabled' flag
    */
-  _hasEmptyAnswers = (form_data) => {
-    return Object.keys(form_data)
-      .some(field_name => {
-        console.log(form_data)
-        const value = form_data[field_name];
+  _hasEmptyAnswers = form_data => {
+    return Object.keys(form_data).some(field_name => {
+      console.log(form_data);
+      const value = form_data[field_name];
 
-        // if form_data is optional, return false
-        // and continue looping
-        if (form_data.optional) {
-          return false;
-        }
-        /*
+      // if form_data is optional, return false
+      // and continue looping
+      if (form_data.optional) {
+        return false;
+      }
+      /*
           if non-numeric returns if value is empty
           - if value is empty (true) then the loop breaks -> disabled true
           if numeric value returns false to continue looping
           - any numeric value is consideed non-empty
         */
-        return typeof value !== 'number' && isEmpty(value);
-      });
-  }
+      return typeof value !== "number" && isEmpty(value);
+    });
+  };
 
-  _isMultiAnswer = (input_type) => {
+  _isMultiAnswer = input_type => {
     // add other multiple answer types here
-    return [
-      'checkbox',
-      'checkbox_2_column',
-      'skill_setter',
-    ].includes(input_type)
-  }
+    return ["checkbox", "dropdown-multi"].includes(input_type);
+  };
 
   /**
    * maps 'questions' to provide 'form_data' field defaults
-   * 
+   *
    * - handles single and multi-answer defaults
    * - injects 'hiddenData' values
    */
 
-  _getDefaultFormData = (questions) => {
+  _getDefaultFormData = questions => {
     return questions.reduce(
-      (
-        form_data,
-        { field_name, input_type, options } ,
-        idx
-      ) => {
-        if (field_name === undefined) { 
+      (form_data, { field_name, input_type, options }, idx) => {
+        if (field_name === undefined) {
           // no field name (can be category or row)
           // pass nested questions into _getDefaultFormData
           let { category_contents, row } = questions[idx];
           if (row) {
-            return { ...form_data, ...this._getDefaultFormData(row) }
+            return { ...form_data, ...this._getDefaultFormData(row) };
           }
           if (category_contents) {
-            return { ...form_data, ...this._getDefaultFormData(category_contents) }
+            return {
+              ...form_data,
+              ...this._getDefaultFormData(category_contents)
+            };
           }
         }
 
         // creates an array for multiple answers
         if (this._isMultiAnswer(input_type)) form_data[field_name] = [];
-  
-        else if (input_type === 'dropdown') {
+        else if (input_type === "dropdown") {
           const first_option = options[0];
           // options can be a single value or an object of text / value
           // to support difference between user text and stored value
           const value = first_option.value || first_option;
           form_data[field_name] = value;
-        }
-  
-        else form_data[field_name] = '';
+        } else form_data[field_name] = "";
 
         // insert hidden field values from hiddenData
         // passed as hiddenData and / or queryString prop of <DynamicForm>
-        if (input_type === 'hidden') {
+        if (input_type === "hidden") {
           const { hiddenData } = this.props;
           if (!hiddenData || !hiddenData[field_name]) {
             console.error(`Missing hiddenData for: ${field_name}`);
             return form_data;
           }
-  
+
           const hiddenValue = hiddenData[field_name];
           form_data[field_name] = hiddenValue;
         }
         return form_data;
       },
-      {},
+      {}
     );
-  }
-
+  };
 
   /**
    * toggles values in multi-answer arrays
@@ -280,19 +300,22 @@ class DynamicFormContainer extends React.Component {
     }
 
     return clone;
-  }
+  };
 
   _searchForDataBy = (field_type, name, questions) => {
-    return questions.some((item) => {
+    return questions.some(item => {
       if (item.row || item.category_contents) {
-        return this._searchForDataBy(field_type, name, item.row || item.category_contents);
+        return this._searchForDataBy(
+          field_type,
+          name,
+          item.row || item.category_contents
+        );
       }
       if (item[field_type] === name) {
-        console.log(item);
         return item;
       }
     });
-  }
+  };
   /**
    * updates 'form_data' in state
    * - calls onValidate(input_type, value, minlength, maxlength)
@@ -310,36 +333,47 @@ class DynamicFormContainer extends React.Component {
 
     const { onInputChange, onValidate } = this.props;
 
-    const QA_Object = this._searchForDataBy('field_name', name, this.props.questions);
-    console.log(QA_Object)
+    const QA_Object = this._searchForDataBy(
+      "field_name",
+      name,
+      this.props.questions
+    );
+
     const optional = QA_Object.optional;
 
     // provides observational window into form data
     // no control over behavior at this time
     onInputChange && onInputChange(name, value, form_data);
 
-    form_data[name] = type === 'checkbox'
-      ? this._toggleValueInArray(form_data[name], value, max)
-      : form_data[name] = value;
-    
-    const validateField = onValidate || isFieldInvalid;
-    field_errors[name] = validateField(type, form_data[name], min, max, optional);
+    form_data[name] =
+      type === "checkbox" || type === "dropdown-multi"
+        ? this._toggleValueInArray(form_data[name], value, max)
+        : (form_data[name] = value);
 
-    console.log(field_errors)
+    const validateField = onValidate || isFieldInvalid;
+    field_errors[name] = validateField(
+      type,
+      form_data[name],
+      min,
+      max,
+      optional
+    );
+
     this.setState({ form_data, field_errors });
-  }
+  };
 
   /**
    * calls DynamicFormMaker()
    * - creates form Question components for each 'question'
    */
-  renderInputs = () => dynamicFormMaker(
-    this.state.questions,
-    this.state.form_data,
-    this._handleInputChange,
-    this.props.customComponents,
-    this.state.editable,
-  );
+  renderInputs = () =>
+    dynamicFormMaker(
+      this.state.questions,
+      this.state.form_data,
+      this._handleInputChange,
+      this.props.customComponents,
+      this.state.editable
+    );
 
   toggleEdit = () => {
     let { editable, form_data } = this.state;
@@ -347,7 +381,7 @@ class DynamicFormContainer extends React.Component {
       this.props.onSubmit(form_data);
     }
     this.setState({ editable: !this.state.editable });
-  }
+  };
 
   /**
    * renders Submit button
@@ -367,12 +401,10 @@ class DynamicFormContainer extends React.Component {
           type="submit"
           value={disabled ? "Incomplete" : "Submit"}
           disabled={disabled}
-          onClick={
-            (e) => {
-              e.preventDefault();
-              onSubmit(form_data);
-            }
-          }
+          onClick={e => {
+            e.preventDefault();
+            onSubmit(form_data);
+          }}
         />
       </React.Fragment>
     );
@@ -382,23 +414,23 @@ class DynamicFormContainer extends React.Component {
     const { editable, disabled } = this.state;
 
     return (
-        <input
-          className={editable ? "form-btn--edit" : "form-btn--save" }
-          type="submit"
-          value={editable ? "Save" : "Edit"}
-          disabled={disabled}
-          onClick={
-            (e) => {
-              e.preventDefault();
-              this.toggleEdit();
-            }
-          }
-        />
+      <input
+        className={editable ? "form-btn--edit" : "form-btn--save"}
+        type="submit"
+        value={editable ? "Save" : "Edit"}
+        disabled={disabled}
+        onClick={e => {
+          e.preventDefault();
+          this.toggleEdit();
+        }}
+      />
     );
-  }
+  };
 
   render() {
-    let renderBtn = this.state.editable ? this.renderEdit() : this.renderSubmit();
+    let renderBtn = this.state.editable
+      ? this.renderEdit()
+      : this.renderSubmit();
     return (
       <form>
         {this.renderInputs()}
@@ -406,33 +438,35 @@ class DynamicFormContainer extends React.Component {
       </form>
     );
   }
-};
+}
 
 const questionShape = {
   id: PropTypes.string, // mongo oID of Dynamic Question
   text: PropTypes.string, // user facing text
-  subtext: PropTypes.oneOfType([ // user facing extra info
+  subtext: PropTypes.oneOfType([
+    // user facing extra info
     PropTypes.string, // text
-    PropTypes.element, // <a> link
+    PropTypes.element // <a> link
   ]),
   input_type: PropTypes.string, // html input type
   field_name: PropTypes.string, // form field name
-  options: PropTypes.arrayOf( // selection options
+  options: PropTypes.arrayOf(
+    // selection options
     PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
       PropTypes.object,
       // { text, value } option for different user facing text and stored value
-      PropTypes.shape({ 
+      PropTypes.shape({
         text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      }),
-    ]),
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      })
+    ])
   ),
   minlength: PropTypes.number, // min length or number of choices
   maxlength: PropTypes.number, // max length or number of choices
   placeholder: PropTypes.string, // placeholder text
-  isMulti: PropTypes.bool, // multiple option for dropdown
+  isMulti: PropTypes.bool // multiple option for dropdown
 };
 
 DynamicFormContainer.propTypes = {
@@ -445,7 +479,7 @@ DynamicFormContainer.propTypes = {
   onSubmit: PropTypes.func, // optional handler for form submission
   onValidate: PropTypes.func, // optional handler for field validation
   onInputChange: PropTypes.func, // optional observation-only handler for viewing form data on change
-  editable: PropTypes.bool,
+  editable: PropTypes.bool
 };
 
 export default DynamicFormContainer;
