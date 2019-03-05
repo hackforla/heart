@@ -8,6 +8,7 @@
     "enzyme-adapter-react-16": "^1.8.0",
     "lodash": "^4.17.11",
     "node-sass": "^4.11.0",
+    "papaparse": "^4.6.3",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
