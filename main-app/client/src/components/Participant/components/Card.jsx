@@ -59,7 +59,7 @@ class Card extends React.Component {
     }
 
     localUserInfo[name] = value;
-    this.setState({ localUserInfo: localUserInfo, changeInFormState: true });
+    this.setState({ localUserInfo, changeInFormState: true });
   }
   initializeFormState = (initialData) => {
     let { localUserInfo } = this.state;
