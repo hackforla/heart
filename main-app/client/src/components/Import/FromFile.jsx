@@ -13,22 +13,20 @@ class ImportFromFile extends React.Component {
     }
   }
   componentDidMount() {
-
-    let fileReader;
-
-    const handleFileRead = (e) => {
-      const content = fileReader.result;
-      console.log(content);
-      // … do something with the 'content' …
-    };
-
-    const handleFileChosen = (file) => {
-      fileReader = new FileReader();
-      fileReader.onloadend = handleFileRead;
-      fileReader.readAsText(file);
-    };
-
   }
+
+  // handleFileRead = () => {
+  //   console.log(`i have read`);
+  // };
+
+  handleFileChosen = (e) => {
+      console.log(`i have chosen`);
+      let fileReader = new FileReader();
+      // console.log(fileReader);
+      // fileReader.onloadend = handleFileRead;
+      // fileReader.readAsText(e);
+  };
+
   render() {
     let { file, loading, error } = this.state;
     return (
@@ -39,9 +37,8 @@ class ImportFromFile extends React.Component {
                id='file'
                className='input-file'
                accept='.csv'
-               onChange={e => handleFileChosen(e.target.files[0])}
              />
-        <input type="submit" onClick={e => console.log('process button')}/>
+        <input type="submit" onClick={e => this.handleFileChosen(e)}/>
       </div>
     )
   }
