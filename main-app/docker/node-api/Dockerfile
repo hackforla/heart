@@ -6,4 +6,4 @@ WORKDIR /code
 
 RUN npm install
 
-CMD ["npm", "start"]
+CMD ["npm", "debug"]
