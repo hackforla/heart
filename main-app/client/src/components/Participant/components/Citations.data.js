@@ -11,19 +11,9 @@ const violationStyles = {
   multiValue: (styles, { data }) => {
     return {
       ...styles,
-      color: "white",
-      backgroundColor: "rgb(66, 143, 226)"
+      display: "none"
     };
-  },
-  multiValueLabel: (styles, { data }) => ({
-    ...styles,
-    color: "white",
-    backgroundColor: "rgb(66, 143, 226)"
-  }),
-  multiValueRemove: (styles, { data }) => ({
-    ...styles,
-    color: "red"
-  })
+  }
 };
 
 const courtStyles = {
