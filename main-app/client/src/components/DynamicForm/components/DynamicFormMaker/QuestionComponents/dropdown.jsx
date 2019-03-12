@@ -53,8 +53,8 @@ const dropdown = (
         <div className="dropdown--multiple-container">
           {isMultiValues.map((value, idx) => {
             return (
-              <div key={idx} className="dropdown--multiple-labels">
-                {value.label}
+              <div key={idx} className="dropdown--multiple-value-container">
+                <div className="dropdown--multiple-labels">{value.label}</div>
                 <button
                   onClick={e => changeHandlerForMulti(e, value.label)}
                   className="dropdown--multiple-btn"
