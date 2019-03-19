@@ -37,7 +37,7 @@ const CitationsQA = [
       {
         text: "Citation No.",
         input_type: "text",
-        field_name: "citation_no",
+        field_name: "citation_number",
         placeholder: "C11111",
         optional: true
       },
@@ -90,7 +90,7 @@ const CitationsQA = [
       {
         text: "Status",
         input_type: "dropdown",
-        field_name: "status",
+        field_name: "citation_status",
         placeholder: "Status",
         customStyles: courtStyles,
         options: [{ text: "Not Sent" }, { text: "Sent" }],
