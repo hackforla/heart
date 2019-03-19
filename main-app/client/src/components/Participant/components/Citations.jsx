@@ -50,19 +50,51 @@ class Citations extends React.Component {
   };
   deleteCitation = citationId => {
     this.setState({ loading: true, error: null });
+    console.log(citationId);
+    return;
     return deleteCitation(
       { id: this.state.userId, citationId },
       this.onSuccess,
       this.onError
     );
   };
+  renderCitations = () => {
+    let { citations } = this.state;
+    let emptyForm = (
+      <DynamicFormContainer
+        key={0}
+        questions={CitationsQA}
+        editableMode={true}
+        onSubmit={this.postFormData}
+        onDelete={this.deleteCitation}
+      />
+    );
+
+    if (citations.length === 0) {
+      return emptyForm;
+    }
+
+    let multipleCitations = citations.map(citation => {
+      console.log(citation);
+      return (
+        <DynamicFormContainer
+          key={`${citation.participant_id}_${citation.id}`}
+          initialData={citation}
+          questions={CitationsQA}
+          editableMode={true}
+          onSubmit={this.postFormData}
+          onDelete={this.deleteCitation}
+        />
+      );
+    });
+    multipleCitations.push(emptyForm);
+    return multipleCitations;
+  };
   render() {
     return (
       <section className="citations-container">
         <div className="citations-title">Citations</div>
-        <div className="citations-form">
-          <DynamicFormContainer questions={CitationsQA} editableMode={true} />
-        </div>
+        <div className="citations-form">{this.renderCitations()}</div>
       </section>
     );
   }
