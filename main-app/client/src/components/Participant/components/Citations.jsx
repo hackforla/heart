@@ -61,13 +61,15 @@ class Citations extends React.Component {
   renderCitations = () => {
     let { citations } = this.state;
     let emptyForm = (
-      <DynamicFormContainer
-        key={0}
-        questions={CitationsQA}
-        editableMode={true}
-        onSubmit={this.postFormData}
-        onDelete={this.deleteCitation}
-      />
+      <div className="citations-form">
+        <DynamicFormContainer
+          key={0}
+          questions={CitationsQA}
+          editableMode={true}
+          onSubmit={this.postFormData}
+          onDelete={this.deleteCitation}
+        />
+      </div>
     );
 
     if (citations.length === 0) {
@@ -77,14 +79,16 @@ class Citations extends React.Component {
     let multipleCitations = citations.map(citation => {
       console.log(citation);
       return (
-        <DynamicFormContainer
-          key={`${citation.participant_id}_${citation.id}`}
-          initialData={citation}
-          questions={CitationsQA}
-          editableMode={true}
-          onSubmit={this.postFormData}
-          onDelete={this.deleteCitation}
-        />
+        <div className="citations-form">
+          <DynamicFormContainer
+            key={`${citation.participant_id}_${citation.id}`}
+            initialData={citation}
+            questions={CitationsQA}
+            editableMode={true}
+            onSubmit={this.postFormData}
+            onDelete={this.deleteCitation}
+          />
+        </div>
       );
     });
     multipleCitations.push(emptyForm);
@@ -94,7 +98,7 @@ class Citations extends React.Component {
     return (
       <section className="citations-container">
         <div className="citations-title">Citations</div>
-        <div className="citations-form">{this.renderCitations()}</div>
+        <div className="citations-form-container">{this.renderCitations()}</div>
       </section>
     );
   }
