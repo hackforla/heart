@@ -4,7 +4,21 @@ import PropTypes from "prop-types";
 import { isEqual } from "lodash";
 
 import { dynamicFormMaker } from "./DynamicFormMaker";
-import { isFieldInvalid, isEmpty } from "./utilities";
+import { isFieldInvalid } from "./utilities";
+import {
+  _validateAllAnswers,
+  _getDefaultFormData,
+  _handleNewQuestions,
+  _toggleValueInArray,
+  _searchForDataBy,
+  _getStateFromPersistence
+} from "./formMethods";
+import {
+  SubmitBtn,
+  EditableModeToggleBtn,
+  EditableModeControls
+} from "./DynamicFormMaker/FormBtns";
+
 // TODO: update DF repo new changes as of 11/6/18
 /**
  * @prop {array} questions array of Question data objects for rendering
@@ -27,16 +41,23 @@ class DynamicFormContainer extends React.Component {
     questions: [], // detailed in prop types
     disabled: true, // overall DF Container submit control
     field_errors: {}, // individual field errors,
-    editable: true
+    editable: true,
+    editableMode: false
   };
 
   componentDidMount() {
-    const { initialData, purpose, questions, editable } = this.props;
+    const {
+      initialData,
+      purpose,
+      questions,
+      editable,
+      editableMode
+    } = this.props;
     const state = { questions };
 
     const persistence = window.localStorage.getItem(purpose);
     if (persistence) {
-      const persisted_state = this._getStateFromPersistence(
+      const persisted_state = _getStateFromPersistence(
         state,
         persistence,
         initialData
@@ -45,27 +66,38 @@ class DynamicFormContainer extends React.Component {
     }
 
     // get initial default values
-    state.form_data = this._getDefaultFormData(questions);
+    state.form_data = _getDefaultFormData(questions);
 
     // merge with initialData if available
     if (initialData) state.form_data = { ...state.form_data, ...initialData };
 
     // validate all answers (defaults and any provided by initialData)
     // uses onValidate() or isFieldInvalid() on each question / form_data field value
-    const { disabled, field_errors } = this._validateAllAnswers(
+    const { disabled, field_errors } = _validateAllAnswers(
       state.form_data,
-      questions
+      questions,
+      0,
+      this.props.onValidate
     );
     state.disabled = disabled;
     state.field_errors = field_errors;
 
-    // checks if the form should NOT be editable
+    // // checks if the form should NOT be editable
     if (!editable) {
       state.editable = editable;
     }
 
+    if (editableMode) {
+      state.editableMode = editableMode;
+    }
+
     return this.setState(state);
   }
+
+  setInitialValues = questions => {
+    let form_data = _getDefaultFormData(questions);
+    this.setState({ form_data });
+  };
 
   componentDidUpdate(prevProps) {
     // when the form_data is updated from onFormChange
@@ -88,7 +120,7 @@ class DynamicFormContainer extends React.Component {
     // the DF Wrapper managing the DF Container
     if (!isEqual(questions, prevProps.questions)) {
       // only update if question set changes, performance of deep equal?
-      const new_form_data = this._handleNewQuestions(questions, form_data);
+      const new_form_data = _handleNewQuestions(questions, form_data);
       this.setState({ form_data: new_form_data, questions });
     }
 
@@ -102,220 +134,6 @@ class DynamicFormContainer extends React.Component {
     }
   }
 
-  _getStateFromPersistence = (base_state, persistence, initialData) => {
-    const persisted_data = JSON.parse(persistence); // { disabled, field_errors, form_data }
-    const state = { ...base_state, ...persisted_data };
-    if (initialData) state.form_data = { ...state.form_data, ...initialData };
-
-    return state;
-  };
-
-  /**
-   * Purpose: validates every answer in form_data
-   *
-   * iterates over Question set
-   * calls the external onValidate() handler or default isFieldInvalid()
-   *   use Question and form_data values to validate and update field_errors{}
-   * returns
-   *  'disabled' boolean (overall control of DF Container submit)
-   *  'field_errors' object for individual field error tracking
-   *
-   */
-  _validateAllAnswers(form_data, questions, recursionIdx) {
-    const { onValidate } = this.props;
-    const validateField = onValidate || isFieldInvalid;
-    let currIdx = recursionIdx ? recursionIdx : 0;
-    return questions.reduce(
-      (result, question) => {
-        const { input_type, field_name, min, max, optional } = question;
-
-        if (field_name === undefined) {
-          // no field name (can be category or row)
-          // pass nested questions into _getDefaultFormData
-          let { category_contents, row } = question;
-          let nestedValidationResults = {};
-          if (row) {
-            nestedValidationResults = this._validateAllAnswers(
-              form_data,
-              row,
-              currIdx + 1
-            );
-          }
-          if (category_contents) {
-            nestedValidationResults = this._validateAllAnswers(
-              form_data,
-              category_contents,
-              currIdx + 1
-            );
-          }
-          // console.log({...result, ...nestedValidationResults, recursionLevel : currIdx});
-          let mergedFieldErrors = {
-            ...result.field_errors,
-            ...nestedValidationResults.field_errors
-          };
-          result.field_errors = mergedFieldErrors;
-          return result;
-        }
-        const field_error = validateField(
-          input_type,
-          form_data[field_name],
-          min,
-          max,
-          optional
-        );
-        result.field_errors[field_name] = field_error;
-        if (result.disabled !== field_error) result.disabled = field_error;
-        // console.log({...result, reduceIdx: idx, recursionLevel: currIdx});
-        return result;
-      },
-      { field_errors: {}, disabled: false }
-    );
-  }
-
-  /**
-   * Purpose: maintains state.form_data fields required for the current question set
-   *
-   * merges any existing responses from the previous question set if the same
-   * fields exist in the new question set
-   *
-   * destroys any existing responses whose fields are not part of the new question set
-   */
-  _handleNewQuestions = (questions, form_data) => {
-    const current_fields = Object.keys(form_data);
-    const new_fields = questions.map(question => question.field_name);
-
-    const overlapping_fields = current_fields.filter(field_name =>
-      new_fields.includes(field_name)
-    );
-
-    const new_questions_form_data = this._getDefaultFormData(questions);
-
-    const overlapping_form_data = overlapping_fields.reduce(
-      (overlapping_data, field_name) => {
-        overlapping_data[field_name] = form_data[field_name];
-        return overlapping_data;
-      },
-      {}
-    );
-
-    return { ...new_questions_form_data, ...overlapping_form_data };
-  };
-
-  /**
-   * Iterates over the form_data and checks for empty answers
-   * used to control the 'disabled' flag
-   */
-  _hasEmptyAnswers = form_data => {
-    return Object.keys(form_data).some(field_name => {
-      console.log(form_data);
-      const value = form_data[field_name];
-
-      // if form_data is optional, return false
-      // and continue looping
-      if (form_data.optional) {
-        return false;
-      }
-      /*
-          if non-numeric returns if value is empty
-          - if value is empty (true) then the loop breaks -> disabled true
-          if numeric value returns false to continue looping
-          - any numeric value is consideed non-empty
-        */
-      return typeof value !== "number" && isEmpty(value);
-    });
-  };
-
-  _isMultiAnswer = input_type => {
-    // add other multiple answer types here
-    return ["checkbox", "dropdown-multi"].includes(input_type);
-  };
-
-  /**
-   * maps 'questions' to provide 'form_data' field defaults
-   *
-   * - handles single and multi-answer defaults
-   * - injects 'hiddenData' values
-   */
-
-  _getDefaultFormData = questions => {
-    return questions.reduce(
-      (form_data, { field_name, input_type, options }, idx) => {
-        if (field_name === undefined) {
-          // no field name (can be category or row)
-          // pass nested questions into _getDefaultFormData
-          let { category_contents, row } = questions[idx];
-          if (row) {
-            return { ...form_data, ...this._getDefaultFormData(row) };
-          }
-          if (category_contents) {
-            return {
-              ...form_data,
-              ...this._getDefaultFormData(category_contents)
-            };
-          }
-        }
-
-        // creates an array for multiple answers
-        if (this._isMultiAnswer(input_type)) form_data[field_name] = [];
-        else if (input_type === "dropdown") {
-          const first_option = options[0];
-          // options can be a single value or an object of text / value
-          // to support difference between user text and stored value
-          const value = first_option.value || first_option;
-          form_data[field_name] = value;
-        } else form_data[field_name] = "";
-
-        // insert hidden field values from hiddenData
-        // passed as hiddenData and / or queryString prop of <DynamicForm>
-        if (input_type === "hidden") {
-          const { hiddenData } = this.props;
-          if (!hiddenData || !hiddenData[field_name]) {
-            console.error(`Missing hiddenData for: ${field_name}`);
-            return form_data;
-          }
-
-          const hiddenValue = hiddenData[field_name];
-          form_data[field_name] = hiddenValue;
-        }
-        return form_data;
-      },
-      {}
-    );
-  };
-
-  /**
-   * toggles values in multi-answer arrays
-   * - limits based on maxChoices if defined
-   */
-  _toggleValueInArray = (array, value, maxChoices) => {
-    const clone = array.slice(0);
-    const index = clone.indexOf(value);
-
-    if (index !== -1) clone.splice(index, 1);
-    else {
-      // limit max selected choices if defined
-      if (maxChoices) array.length < maxChoices && clone.push(value);
-      // if undefined behave normally
-      else clone.push(value);
-    }
-
-    return clone;
-  };
-
-  _searchForDataBy = (field_type, name, questions) => {
-    return questions.some(item => {
-      if (item.row || item.category_contents) {
-        return this._searchForDataBy(
-          field_type,
-          name,
-          item.row || item.category_contents
-        );
-      }
-      if (item[field_type] === name) {
-        return item;
-      }
-    });
-  };
   /**
    * updates 'form_data' in state
    * - calls onValidate(input_type, value, minlength, maxlength)
@@ -333,7 +151,7 @@ class DynamicFormContainer extends React.Component {
 
     const { onInputChange, onValidate } = this.props;
 
-    const QA_Object = this._searchForDataBy(
+    const QA_Object = _searchForDataBy(
       "field_name",
       name,
       this.props.questions
@@ -347,7 +165,7 @@ class DynamicFormContainer extends React.Component {
 
     form_data[name] =
       type === "checkbox"
-        ? this._toggleValueInArray(form_data[name], value, max)
+        ? _toggleValueInArray(form_data[name], value, max)
         : (form_data[name] = value);
 
     const validateField = onValidate || isFieldInvalid;
@@ -383,59 +201,36 @@ class DynamicFormContainer extends React.Component {
     this.setState({ editable: !this.state.editable });
   };
 
-  /**
-   * renders Submit button
-   * - controlled  by 'disabled' flag in state
-   * - if disabled -> grey, click disabled, and 'Incomplete'
-   * - if not disabled -> green, click enabled, and 'Submit'
-   */
-  renderSubmit = () => {
-    const { form_data, disabled } = this.state;
-    const { onSubmit } = this.props;
-
-    return (
-      <React.Fragment>
-        <hr className="form-hline" />
-        <input
-          className={disabled ? "form-btn--disabled" : "form-btn"}
-          type="submit"
-          value={disabled ? "Incomplete" : "Submit"}
-          disabled={disabled}
-          onClick={e => {
-            e.preventDefault();
-            onSubmit(form_data);
-          }}
-        />
-      </React.Fragment>
-    );
-  };
-
-  renderEdit = () => {
-    const { editable, disabled } = this.state;
-
-    return (
-      <input
-        className={editable ? "form-btn--edit" : "form-btn--save"}
-        type="submit"
-        value={editable ? "Save" : "Edit"}
-        disabled={disabled}
-        onClick={e => {
-          e.preventDefault();
-          this.toggleEdit();
-        }}
-      />
-    );
+  cancelEdit = e => {
+    e.preventDefault();
+    this.setInitialValues(this.props.questions);
+    this.setState({ editable: false });
   };
 
   render() {
-    let renderBtn = this.state.editable
-      ? this.renderEdit()
-      : this.renderSubmit();
+    const { editable, editableMode, disabled, form_data } = this.state;
+
+    let btnType = !editableMode ? (
+      <SubmitBtn
+        form_data={form_data}
+        disabled={disabled}
+        onSubmit={this.props.onSubmit}
+      />
+    ) : (
+      <EditableModeControls
+        editable={editable}
+        disabled={disabled}
+        deleteItem={this.deleteItem}
+        toggleEdit={this.toggleEdit}
+        cancelEdit={this.cancelEdit}
+      />
+    );
+
     return (
-      <form>
+      <>
         {this.renderInputs()}
-        {renderBtn}
-      </form>
+        {btnType}
+      </>
     );
   }
 }
