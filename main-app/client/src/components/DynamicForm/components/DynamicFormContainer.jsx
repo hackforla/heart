@@ -26,6 +26,7 @@ import { SubmitBtn, EditableModeControls } from "./DynamicFormMaker/FormBtns";
  * @prop {object} hiddenData values for 'hidden' input types -> { field_name: value }
  * @prop {bool} persistence controls storing form data in LS onFormChange
  * @prop {func} onSubmit wrapper callback for handling submit behavior
+ * @prop {func} onDelete wrapper callback for handling deletion behavior
  * @prop {func} onValidate callback for field level control of 'disabled' flag. expects boolean return
  * @prop {func} onInputChange observation-only handler with args (field_name, value, form_data)
  * @prop {func} customComponents custom input_type components (merged with defaults, precedence to custom components)
@@ -66,6 +67,7 @@ class DynamicFormContainer extends React.Component {
 
     // merge with initialData if available
     if (initialData) state.form_data = { ...state.form_data, ...initialData };
+    console.log(state.form_data);
 
     // validate all answers (defaults and any provided by initialData)
     // uses onValidate() or isFieldInvalid() on each question / form_data field value
@@ -90,8 +92,11 @@ class DynamicFormContainer extends React.Component {
     return this.setState(state);
   }
 
-  setInitialValues = questions => {
+  setInitialValues = (questions, initialData) => {
     let form_data = _getDefaultFormData(questions);
+    if (initialData) {
+      form_data = { ...form_data, ...initialData };
+    }
     this.setState({ form_data });
   };
 
@@ -191,6 +196,7 @@ class DynamicFormContainer extends React.Component {
 
   toggleEdit = () => {
     let { editable, form_data } = this.state;
+    console.log(form_data);
     if (editable) {
       this.props.onSubmit(form_data);
     }
@@ -199,7 +205,7 @@ class DynamicFormContainer extends React.Component {
 
   cancelEdit = e => {
     e.preventDefault();
-    this.setInitialValues(this.props.questions);
+    this.setInitialValues(this.props.questions, this.props.initialData);
     this.setState({ editable: false });
   };
 
@@ -216,7 +222,7 @@ class DynamicFormContainer extends React.Component {
       <EditableModeControls
         editable={editable}
         disabled={disabled}
-        deleteItem={this.deleteItem}
+        deleteItem={this.props.onDelete}
         toggleEdit={this.toggleEdit}
         cancelEdit={this.cancelEdit}
       />
