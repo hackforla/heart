@@ -210,7 +210,7 @@ class DynamicFormContainer extends React.Component {
   render() {
     const { editable, editableMode, disabled, form_data } = this.state;
 
-    let btnType = !editableMode ? (
+    let renderSubmitBtn = !editableMode ? (
       <SubmitBtn
         form_data={form_data}
         disabled={disabled}
@@ -229,7 +229,7 @@ class DynamicFormContainer extends React.Component {
     return (
       <>
         {this.renderInputs()}
-        {btnType}
+        {renderSubmitBtn}
       </>
     );
   }
