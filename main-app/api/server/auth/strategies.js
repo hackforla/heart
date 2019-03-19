@@ -4,7 +4,7 @@ const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 const bcrypt = require('bcryptjs');
 const knex = require('../config/knex_config.js');
 
-const config = require('../config/auth_config');
+const config = require('../../config');
 
 const localStrategy = new LocalStrategy((username, password, callback) => {
   let user;

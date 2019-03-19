@@ -1,12 +1,12 @@
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-const config = require('../config/auth_config');
+const config = require('../../config');
 
 module.exports = (app) => {
   const createAuthToken = function authToken(user) {
     return jwt.sign({ user }, config.JWT_SECRET, {
-      subject: user.email,
+      subject: user.username,
       expiresIn: config.JWT_EXPIRY,
       algorithm: 'HS256',
     });
