@@ -464,17 +464,18 @@ DROPDOWN MULTIPLE
 .dropdown--multiple-container {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  text-align: center;
-  justify-items: span;
-  align-items: center;
+  // grid-template-columns: repeat(auto-fill, minmax(50px, fit-content(150px)));
+  // grid-auto-flow: column dense;
+  grid-template-columns: repeat(5, fit-content(150px));
+  justify-items: left;
   grid-gap: 10px;
   margin: 10px 0px;
 }
 
 .dropdown--multiple-value-container {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: fit-content(150px) 1fr;
+  width: 100%;
   align-items: span;
   font-weight: 600;
 }
@@ -482,14 +483,14 @@ DROPDOWN MULTIPLE
 .dropdown--multiple-labels {
   background-color: $light-grey;
   color: $darkest-grey;
-  padding: 6px;
+  padding: 5px 10px;
   border-radius: $border-radius 0px 0px $border-radius;
 }
 
 .dropdown--multiple-btn {
   background-color: $light-grey;
   color: $darkest-grey;
-  padding: 6px;
+  padding: 5px 10px;
   border-radius: 0px $border-radius $border-radius 0px;
   border: none;
   font-weight: 600;
