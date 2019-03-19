@@ -1,10 +1,9 @@
 import axios from "axios";
 import { API_ENDPOINT } from "get_uri";
 
-const updateCitation = ({ id, data, citationId }, successFn, errorFn) => {
+const deleteCitation = ({ id, citationId }, successFn, errorFn) => {
   return axios
-    .put(`${API_ENDPOINT}/participants/${id}/citations/${citationId}`, {
-      data,
+    .delete(`${API_ENDPOINT}/participants/${id}/citations/${citationId}`, {
       timeout: 5000
     })
     .then(res => {
@@ -25,4 +24,4 @@ const updateCitation = ({ id, data, citationId }, successFn, errorFn) => {
     });
 };
 
-export default updateCitation;
+export default deleteCitation;
