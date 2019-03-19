@@ -13,11 +13,7 @@ import {
   _searchForDataBy,
   _getStateFromPersistence
 } from "./formMethods";
-import {
-  SubmitBtn,
-  EditableModeToggleBtn,
-  EditableModeControls
-} from "./DynamicFormMaker/FormBtns";
+import { SubmitBtn, EditableModeControls } from "./DynamicFormMaker/FormBtns";
 
 // TODO: update DF repo new changes as of 11/6/18
 /**
