@@ -40,7 +40,7 @@ CREATE TABLE participants(
    id SERIAL PRIMARY KEY,
    citation_number VARCHAR(50),
    court_code VARCHAR(50),
-   violation_number VARCHAR(50),
+   violations VARCHAR(50) [],
    citation_status VARCHAR(20),
    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),

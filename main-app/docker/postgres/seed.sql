@@ -46,13 +46,13 @@ VALUES (
 INSERT INTO citations (
   citation_number,
   court_code,
-  violation_number,
+  violations,
   citation_status,
   participant_id
 ) VALUES (
   '1123-321',
   'CC 1234',
-  'VN 1234',
+  ARRAY['VN 1234'],
   'open',
   1
 );
@@ -60,13 +60,13 @@ INSERT INTO citations (
 INSERT INTO citations (
   citation_number,
   court_code,
-  violation_number,
+  violations,
   citation_status,
   participant_id
 ) VALUES (
   '1123-322',
   'CC 1235',
-  'VN 1235',
+  ARRAY['VN 1235'],
   'warrant',
   1
 );
