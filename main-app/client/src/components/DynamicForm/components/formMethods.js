@@ -46,25 +46,25 @@ export function _validateAllAnswers(
           );
         }
         let mergedFieldErrors = {
-          ...result.field_errors,
-          ...nestedValidationResults.field_errors
+          ...result.field_has_errors,
+          ...nestedValidationResults.field_has_errors
         };
-        result.field_errors = mergedFieldErrors;
+        result.field_has_errors = mergedFieldErrors;
         return result;
       }
 
       const field_error = optional
-        ? ValidationType.OPTIONAL
+        ? ValidationType.VALID
         : validateField(input_type, form_data[field_name], min, max, optional);
 
-      let { field_errors, disabled } = result;
-      field_errors[field_name] = field_error;
+      let { field_has_errors, disabled } = result;
+      field_has_errors[field_name] = field_error;
       if (disabled !== field_error) {
         disabled = field_error;
       }
       return result;
     },
-    { field_errors: {}, disabled: false }
+    { field_has_errors: {}, disabled: false }
   );
 }
 
@@ -218,7 +218,7 @@ export const _getStateFromPersistence = (
   persistence,
   initialData
 ) => {
-  const persisted_data = JSON.parse(persistence); // { disabled, field_errors, form_data }
+  const persisted_data = JSON.parse(persistence); // { disabled, field_has_errors, form_data }
   const state = { ...base_state, ...persisted_data };
   if (initialData) state.form_data = { ...state.form_data, ...initialData };
 

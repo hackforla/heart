@@ -1,4 +1,4 @@
 export const ValidationType = {
-  REQUIRED: true,
-  OPTIONAL: false
+  VALID: false, // no error types
+  INVALID: true // has error types
 };

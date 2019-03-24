@@ -37,7 +37,7 @@ class DynamicFormContainer extends React.Component {
     form_data: {}, // { field_name: user response(s) }
     questions: [], // detailed in prop types
     disabled: true, // overall DF Container submit control
-    field_errors: {}, // individual field errors,
+    field_has_errors: {}, // individual field errors,
     editable: true,
     editableMode: false
   };
@@ -71,14 +71,14 @@ class DynamicFormContainer extends React.Component {
 
     // validate all answers (defaults and any provided by initialData)
     // uses onValidate() or isFieldInvalid() on each question / form_data field value
-    const { disabled, field_errors } = _validateAllAnswers(
+    const { disabled, field_has_errors } = _validateAllAnswers(
       state.form_data,
       questions,
       0,
       this.props.onValidate
     );
     state.disabled = disabled;
-    state.field_errors = field_errors;
+    state.field_has_errors = field_has_errors;
 
     // // checks if the form should NOT be editable
     if (!editable) {
@@ -102,7 +102,7 @@ class DynamicFormContainer extends React.Component {
 
   componentDidUpdate(prevProps) {
     // when the form_data is updated from onFormChange
-    const { form_data, field_errors, disabled } = this.state;
+    const { form_data, field_has_errors, disabled } = this.state;
     // or it receives new questions (for multi-question sets)
     const { purpose, persistence, questions } = this.props;
 
@@ -110,7 +110,7 @@ class DynamicFormContainer extends React.Component {
     if (persistence) {
       const persistedData = JSON.stringify({
         form_data,
-        field_errors,
+        field_has_errors,
         disabled
       });
       localStorage.setItem(purpose, persistedData);
@@ -125,8 +125,8 @@ class DynamicFormContainer extends React.Component {
       this.setState({ form_data: new_form_data, questions });
     }
 
-    // field_errors: { field_name: boolean } -> true: should disable, false: valid
-    const should_disable = Object.values(field_errors).some(
+    // field_has_errors: { field_name: boolean } -> true: should disable, false: valid
+    const should_disable = Object.values(field_has_errors).some(
       disabled => disabled === true
     );
     if (this.state.disabled !== should_disable) {
@@ -148,7 +148,7 @@ class DynamicFormContainer extends React.Component {
     const { name, value, type } = currentTarget;
 
     const form_data = { ...this.state.form_data };
-    const field_errors = { ...this.state.field_errors };
+    const field_has_errors = { ...this.state.field_has_errors };
 
     const { onInputChange, onValidate } = this.props;
 
@@ -170,7 +170,7 @@ class DynamicFormContainer extends React.Component {
         : (form_data[name] = value);
 
     const validateField = onValidate || isFieldInvalid;
-    field_errors[name] = validateField(
+    field_has_errors[name] = validateField(
       type,
       form_data[name],
       min,
@@ -178,7 +178,7 @@ class DynamicFormContainer extends React.Component {
       optional
     );
 
-    this.setState({ form_data, field_errors });
+    this.setState({ form_data, field_has_errors });
   };
 
   /**
