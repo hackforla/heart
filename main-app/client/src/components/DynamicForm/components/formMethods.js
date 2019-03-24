@@ -126,22 +126,22 @@ export const _getDefaultFormData = questions => {
         const first_option = options[0];
         // options can be a single value or an object of text / value
         // to support difference between user text and stored value
-        const value = first_option.value || first_option;
+        const value = first_option.value || first_option.text || first_option;
         form_data[field_name] = value;
       } else form_data[field_name] = "";
 
       // insert hidden field values from hiddenData
       // passed as hiddenData and / or queryString prop of <DynamicForm>
-      // if (input_type === "hidden") {
-      //   const { hiddenData } = this.props;
-      //   if (!hiddenData || !hiddenData[field_name]) {
-      //     console.error(`Missing hiddenData for: ${field_name}`);
-      //     return form_data;
-      //   }
+      if (input_type === "hidden") {
+        const { hiddenData } = this.props;
+        if (!hiddenData || !hiddenData[field_name]) {
+          console.error(`Missing hiddenData for: ${field_name}`);
+          return form_data;
+        }
 
-      //   const hiddenValue = hiddenData[field_name];
-      //   form_data[field_name] = hiddenValue;
-      // }
+        const hiddenValue = hiddenData[field_name];
+        form_data[field_name] = hiddenValue;
+      }
       return form_data;
     },
     {}
