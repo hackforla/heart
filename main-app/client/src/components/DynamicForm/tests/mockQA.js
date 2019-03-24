@@ -8,7 +8,8 @@ export const question_set_1 = [
             text: "Clinic Attended",
             input_type: "text",
             field_name: "clinic_attended",
-            placeholder: "location"
+            placeholder: "location",
+            optional: true
           }
         ]
       }
@@ -31,7 +32,8 @@ export const question_set_1 = [
         text: "Also known as",
         input_type: "text",
         field_name: "known_as",
-        placeholder: "Other names they go by"
+        placeholder: "Other names they go by",
+        optional: true
       }
     ]
   },
@@ -42,8 +44,7 @@ export const question_set_1 = [
         text: "Email Address (optional)",
         input_type: "email",
         field_name: "email",
-        placeholder: "email@emailaddress.com",
-        optional: true
+        placeholder: "email@emailaddress.com"
       }
     ]
   },
@@ -64,6 +65,7 @@ export const question_set_1 = [
     input_type: "dropdown",
     field_name: "ethnicity",
     placeholder: "Choose Ethnicity",
+    optional: true,
     options: [
       { text: "Hispanic/Latino" },
       { text: "Not Hispanic/Latino" },
@@ -76,6 +78,7 @@ export const question_set_1 = [
     field_name: "violations",
     placeholder: "Ex.PC 123.4",
     isMulti: true,
+    optional: true,
     options: [
       { text: "VC 4000", description: "Registration Required" },
       { text: "VC 4152.5", description: "Foreign Vehicle Registration" },
