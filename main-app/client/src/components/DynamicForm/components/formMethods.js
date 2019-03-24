@@ -1,4 +1,5 @@
 import { isFieldInvalid, isEmpty } from "./utilities";
+import { ValidationType } from "./types";
 
 /**
  * Purpose: validates every answer in form_data
@@ -51,15 +52,16 @@ export function _validateAllAnswers(
         result.field_errors = mergedFieldErrors;
         return result;
       }
-      const field_error = validateField(
-        input_type,
-        form_data[field_name],
-        min,
-        max,
-        optional
-      );
-      result.field_errors[field_name] = field_error;
-      if (result.disabled !== field_error) result.disabled = field_error;
+
+      const field_error = optional
+        ? ValidationType.OPTIONAL
+        : validateField(input_type, form_data[field_name], min, max, optional);
+
+      let { field_errors, disabled } = result;
+      field_errors[field_name] = field_error;
+      if (disabled !== field_error) {
+        disabled = field_error;
+      }
       return result;
     },
     { field_errors: {}, disabled: false }
@@ -106,7 +108,7 @@ export const _getDefaultFormData = questions => {
   return questions.reduce(
     (form_data, { field_name, input_type, options }, idx) => {
       if (field_name === undefined) {
-        // no field name (can be category or row)
+        // no field name is category or row.
         // pass nested questions into _getDefaultFormData
         let { category_contents, row } = questions[idx];
         if (row) {

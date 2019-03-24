@@ -1,4 +1,4 @@
-export const VALIDATION_TYPE = {
+export const ValidationType = {
   REQUIRED: true,
   OPTIONAL: false
 };

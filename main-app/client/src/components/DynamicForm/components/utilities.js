@@ -1,5 +1,6 @@
 import { isEmail, isURL } from "validator";
 import { isEmpty, isNumber } from "lodash";
+import { ValidationType } from "./types";
 
 const areChoicesValid = (choices, min, max) => {
   const minChoices = min || 1;
@@ -24,7 +25,7 @@ const isValid = (value, min, max) => {
 
 const isFieldInvalid = (type, value, min, max, optional) => {
   if (optional) {
-    return false;
+    return ValidationType.OPTIONAL;
   }
   switch (type) {
     case "email":
