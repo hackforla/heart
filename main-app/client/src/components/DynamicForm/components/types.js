@@ -1,4 +1,4 @@
-export const ValidationType = {
-  VALID: false, // no error types
-  INVALID: true // has error types
+export const SubmitBtnState = {
+  DISABLED: 0,
+  ENABLED: 1
 };

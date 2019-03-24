@@ -1,6 +1,5 @@
 import { isEmail, isURL } from "validator";
 import { isEmpty, isNumber } from "lodash";
-import { ValidationType } from "./types";
 
 const areChoicesValid = (choices, min, max) => {
   const minChoices = min || 1;
@@ -23,20 +22,17 @@ const isValid = (value, min, max) => {
     : isTextValid(value, min, max);
 };
 
-const isFieldInvalid = (type, value, min, max, optional) => {
-  if (optional) {
-    return ValidationType.VALID;
-  }
+const isFieldValid = (type, value, min, max) => {
   switch (type) {
     case "email":
-      return !isEmail(value);
+      return isEmail(value);
     case "url":
-      return !isURL(value);
+      return isURL(value);
     case "radio":
       return isEmpty(value);
     default:
-      return !isValid(value, min, max);
+      return isValid(value, min, max);
   }
 };
 
-export { isEmpty, isFieldInvalid };
+export { isEmpty, isFieldValid };

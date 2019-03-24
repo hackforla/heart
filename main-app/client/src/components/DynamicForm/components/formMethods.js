@@ -1,24 +1,28 @@
-import { isFieldInvalid, isEmpty } from "./utilities";
-import { ValidationType } from "./types";
+import { isFieldValid } from "./validation";
+import { SubmitBtnState } from "./types";
 
-/**
- * Purpose: validates every answer in form_data
- *
- * iterates over Question set
- * calls the external onValidate() handler or default isFieldInvalid()
- *   use Question and form_data values to validate and update field_errors{}
- * returns
- *  'disabled' boolean (overall control of DF Container submit)
- *  'field_errors' object for individual field error tracking
- *
- */
+export function _isFormValid(fields_is_valid) {
+  for (let field_name in fields_is_valid) {
+    if (fields_is_valid[`${field_name}_is_valid`] === false) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export function _determineSubmitBtnState(fields_is_valid) {
+  return _isFormValid(fields_is_valid)
+    ? SubmitBtnState.ENABLED
+    : SubmitBtnState.DISABLED;
+}
+
 export function _validateAllAnswers(
   form_data,
   questions,
   recursionIdx,
   onValidate
 ) {
-  const validateField = onValidate || isFieldInvalid;
+  const validateField = onValidate || isFieldValid;
   let currIdx = recursionIdx ? recursionIdx : 0;
   return questions.reduce(
     (result, question) => {
@@ -46,63 +50,29 @@ export function _validateAllAnswers(
           );
         }
         let mergedFieldErrors = {
-          ...result.field_has_errors,
-          ...nestedValidationResults.field_has_errors
+          ...result.fields_is_valid,
+          ...nestedValidationResults.fields_is_valid
         };
-        result.field_has_errors = mergedFieldErrors;
+        result.fields_is_valid = mergedFieldErrors;
         return result;
       }
 
-      const field_error = optional
-        ? ValidationType.VALID
-        : validateField(input_type, form_data[field_name], min, max, optional);
+      const field_is_valid = optional
+        ? true
+        : validateField(input_type, form_data[field_name], min, max);
 
-      let { field_has_errors, disabled } = result;
-      field_has_errors[field_name] = field_error;
-      if (disabled !== field_error) {
-        disabled = field_error;
-      }
+      let { fields_is_valid } = result;
+      fields_is_valid[`${field_name}_is_valid`] = field_is_valid;
       return result;
     },
-    { field_has_errors: {}, disabled: false }
+    { fields_is_valid: {} }
   );
 }
-
-/**
- * Iterates over the form_data and checks for empty answers
- * used to control the 'disabled' flag
- */
-export const _hasEmptyAnswers = form_data => {
-  return Object.keys(form_data).some(field_name => {
-    console.log(form_data);
-    const value = form_data[field_name];
-
-    // if form_data is optional, return false
-    // and continue looping
-    if (form_data.optional) {
-      return false;
-    }
-    /*
-          if non-numeric returns if value is empty
-          - if value is empty (true) then the loop breaks -> disabled true
-          if numeric value returns false to continue looping
-          - any numeric value is consideed non-empty
-        */
-    return typeof value !== "number" && isEmpty(value);
-  });
-};
 
 export const _isMultiAnswer = input_type => {
   // add other multiple answer types here
   return ["checkbox", "dropdown-multi"].includes(input_type);
 };
-
-/**
- * maps 'questions' to provide 'form_data' field defaults
- *
- * - handles single and multi-answer defaults
- * - injects 'hiddenData' values
- */
 
 export const _getDefaultFormData = questions => {
   return questions.reduce(
@@ -218,7 +188,7 @@ export const _getStateFromPersistence = (
   persistence,
   initialData
 ) => {
-  const persisted_data = JSON.parse(persistence); // { disabled, field_has_errors, form_data }
+  const persisted_data = JSON.parse(persistence); // { disabled, fields_is_valid, form_data }
   const state = { ...base_state, ...persisted_data };
   if (initialData) state.form_data = { ...state.form_data, ...initialData };
 

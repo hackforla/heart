@@ -4,14 +4,15 @@ import PropTypes from "prop-types";
 import { isEqual } from "lodash";
 
 import { dynamicFormMaker } from "./DynamicFormMaker";
-import { isFieldInvalid } from "./utilities";
+import { isFieldValid } from "./validation";
 import {
   _validateAllAnswers,
   _getDefaultFormData,
   _handleNewQuestions,
   _toggleValueInArray,
   _searchForDataBy,
-  _getStateFromPersistence
+  _getStateFromPersistence,
+  _determineSubmitBtnState
 } from "./formMethods";
 import { SubmitBtn, EditableModeControls } from "./DynamicFormMaker/FormBtns";
 
@@ -27,17 +28,16 @@ import { SubmitBtn, EditableModeControls } from "./DynamicFormMaker/FormBtns";
  * @prop {bool} persistence controls storing form data in LS onFormChange
  * @prop {func} onSubmit wrapper callback for handling submit behavior
  * @prop {func} onDelete wrapper callback for handling deletion behavior
- * @prop {func} onValidate callback for field level control of 'disabled' flag. expects boolean return
+ * @prop {func} onValidate callback for whole form validation
  * @prop {func} onInputChange observation-only handler with args (field_name, value, form_data)
  * @prop {func} customComponents custom input_type components (merged with defaults, precedence to custom components)
  * @prop {bool} editable controls whether form is editable or non-editable
  */
 class DynamicFormContainer extends React.Component {
   state = {
-    form_data: {}, // { field_name: user response(s) }
-    questions: [], // detailed in prop types
-    disabled: true, // overall DF Container submit control
-    field_has_errors: {}, // individual field errors,
+    form_data: {},
+    questions: [],
+    fields_is_valid: {},
     editable: true,
     editableMode: false
   };
@@ -67,18 +67,16 @@ class DynamicFormContainer extends React.Component {
 
     // merge with initialData if available
     if (initialData) state.form_data = { ...state.form_data, ...initialData };
-    console.log(state.form_data);
 
     // validate all answers (defaults and any provided by initialData)
-    // uses onValidate() or isFieldInvalid() on each question / form_data field value
-    const { disabled, field_has_errors } = _validateAllAnswers(
+    // uses onValidate() or isFieldValid() on each question / form_data field value
+    const { fields_is_valid } = _validateAllAnswers(
       state.form_data,
       questions,
       0,
       this.props.onValidate
     );
-    state.disabled = disabled;
-    state.field_has_errors = field_has_errors;
+    state.fields_is_valid = fields_is_valid;
 
     // // checks if the form should NOT be editable
     if (!editable) {
@@ -102,7 +100,7 @@ class DynamicFormContainer extends React.Component {
 
   componentDidUpdate(prevProps) {
     // when the form_data is updated from onFormChange
-    const { form_data, field_has_errors, disabled } = this.state;
+    const { form_data, fields_is_valid } = this.state;
     // or it receives new questions (for multi-question sets)
     const { purpose, persistence, questions } = this.props;
 
@@ -110,8 +108,7 @@ class DynamicFormContainer extends React.Component {
     if (persistence) {
       const persistedData = JSON.stringify({
         form_data,
-        field_has_errors,
-        disabled
+        fields_is_valid
       });
       localStorage.setItem(purpose, persistedData);
     }
@@ -123,15 +120,6 @@ class DynamicFormContainer extends React.Component {
       // only update if question set changes, performance of deep equal?
       const new_form_data = _handleNewQuestions(questions, form_data);
       this.setState({ form_data: new_form_data, questions });
-    }
-
-    // field_has_errors: { field_name: boolean } -> true: should disable, false: valid
-    const should_disable = Object.values(field_has_errors).some(
-      disabled => disabled === true
-    );
-    if (this.state.disabled !== should_disable) {
-      // only update if the two values differ
-      this.setState({ disabled: should_disable });
     }
   }
 
@@ -148,7 +136,7 @@ class DynamicFormContainer extends React.Component {
     const { name, value, type } = currentTarget;
 
     const form_data = { ...this.state.form_data };
-    const field_has_errors = { ...this.state.field_has_errors };
+    const fields_is_valid = { ...this.state.fields_is_valid };
 
     const { onInputChange, onValidate } = this.props;
 
@@ -169,8 +157,8 @@ class DynamicFormContainer extends React.Component {
         ? _toggleValueInArray(form_data[name], value, max)
         : (form_data[name] = value);
 
-    const validateField = onValidate || isFieldInvalid;
-    field_has_errors[name] = validateField(
+    const validateField = onValidate || isFieldValid;
+    fields_is_valid[`${name}_is_valid`] = validateField(
       type,
       form_data[name],
       min,
@@ -178,7 +166,7 @@ class DynamicFormContainer extends React.Component {
       optional
     );
 
-    this.setState({ form_data, field_has_errors });
+    this.setState({ form_data, fields_is_valid });
   };
 
   /**
@@ -210,18 +198,19 @@ class DynamicFormContainer extends React.Component {
   };
 
   render() {
-    const { editable, editableMode, disabled, form_data } = this.state;
+    const { editable, editableMode, form_data, fields_is_valid } = this.state;
+    let submitBtnState = _determineSubmitBtnState(fields_is_valid);
 
     let renderSubmitBtn = !editableMode ? (
       <SubmitBtn
         form_data={form_data}
-        disabled={disabled}
+        disabled={submitBtnState}
         onSubmit={this.props.onSubmit}
       />
     ) : (
       <EditableModeControls
         editable={editable}
-        disabled={disabled}
+        disabled={submitBtnState}
         deleteItem={this.props.onDelete}
         toggleEdit={this.toggleEdit}
         cancelEdit={this.cancelEdit}

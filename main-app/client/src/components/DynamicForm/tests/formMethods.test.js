@@ -3,9 +3,8 @@ import {
   _validateAllAnswers
 } from "../components/formMethods";
 import { question_set_1 } from "./mockQA";
-import { ValidationType } from "../components/types";
 
-describe("Dynamic Form Methods", () => {
+describe("Dynamic Form Methods: Regular Mode", () => {
   let initialFormData, initialValidation;
   beforeEach(() => {
     initialFormData = {
@@ -19,13 +18,13 @@ describe("Dynamic Form Methods", () => {
     };
 
     initialValidation = {
-      clinic_attended: ValidationType.VALID,
-      first_name: ValidationType.INVALID,
-      known_as: ValidationType.VALID,
-      email: ValidationType.INVALID,
-      age: ValidationType.VALID,
-      ethnicity: ValidationType.VALID,
-      violations: ValidationType.VALID
+      clinic_attended_is_valid: true,
+      first_name_is_valid: false,
+      known_as_is_valid: true,
+      email_is_valid: false,
+      age_is_valid: true,
+      ethnicity_is_valid: true,
+      violations_is_valid: true
     };
   });
 
@@ -35,24 +34,31 @@ describe("Dynamic Form Methods", () => {
 
   it("Validates: On initial form, field errors are set to false and disabled state is true", () => {
     expect(_validateAllAnswers(initialFormData, question_set_1, 0)).toEqual({
-      field_has_errors: initialValidation,
-      disabled: false
+      fields_is_valid: initialValidation
     });
   });
 
   it("Validates: On input change, field errors are changed appropriately ", () => {
     initialFormData.clinic_attended = "testing"; // optional
     expect(_validateAllAnswers(initialFormData, question_set_1, 0)).toEqual({
-      field_has_errors: initialValidation,
-      disabled: false
+      fields_is_valid: initialValidation
     });
   });
+
   it("Validates: On input change, field errors are changed appropriately ", () => {
     initialFormData.first_name = "Frank"; // required
-    initialValidation.first_name = ValidationType.VALID;
+    initialValidation.first_name_is_valid = true;
     expect(_validateAllAnswers(initialFormData, question_set_1, 0)).toEqual({
-      field_has_errors: initialValidation,
-      disabled: false
+      fields_is_valid: initialValidation
+    });
+  });
+
+  it("Validates: On input change of all required fields, no errors and submit button is ok", () => {
+    initialFormData.first_name = "Frank"; // required
+    initialFormData.first_name = "Frank"; // required
+    initialValidation.first_name_is_valid = true;
+    expect(_validateAllAnswers(initialFormData, question_set_1, 0)).toEqual({
+      fields_is_valid: initialValidation
     });
   });
 });
