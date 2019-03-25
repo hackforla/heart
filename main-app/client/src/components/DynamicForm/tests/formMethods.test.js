@@ -1,7 +1,8 @@
 import {
   _getDefaultFormData,
   _validateAllAnswers,
-  _determineSubmitBtnState
+  _determineSubmitBtnState,
+  _toggleValueInArray
 } from "../utilities/formMethods";
 import { question_set_1 } from "./mockQA";
 import { SubmitBtnState } from "../utilities/types";
@@ -198,5 +199,32 @@ describe("Dynamic Form Validation Flow", () => {
     expect(_determineSubmitBtnState(initialValidation)).toEqual(
       SubmitBtnState.ENABLED
     );
+  });
+});
+
+describe("Dynamic Form Toggling Values in Array", () => {
+  let initialFormData;
+  beforeAll(() => {
+    initialFormData = {
+      clinic_attended: "",
+      first_name: "",
+      known_as: "",
+      email: "",
+      age: "18-24",
+      ethnicity: "Hispanic/Latino",
+      violations: [],
+      location: []
+    };
+  });
+  it("Adds value if not there", () => {
+    expect(
+      _toggleValueInArray(initialFormData.location, "San Francisco")
+    ).toEqual(["San Francisco"]);
+  });
+  it("Removes value if already in array", () => {
+    initialFormData.location = ["San Francisco"];
+    expect(
+      _toggleValueInArray(initialFormData.location, "San Francisco")
+    ).toEqual([]);
   });
 });
