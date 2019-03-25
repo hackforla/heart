@@ -29,9 +29,11 @@ class Card extends React.Component {
   }
   toggleEditMode = () => {
     let { editing, localUserInfo, changeInFormState } = this.state;
-    let { id } = this.props.user;
-    if (editing && changeInFormState) {
-      this.postFormData(id, localUserInfo);
+    if (this.props.user) {
+      let { id } = this.props.user;
+      if (editing && changeInFormState) {
+        this.postFormData(id, localUserInfo);
+      }
     }
     this.setState({
       editing: !editing,
