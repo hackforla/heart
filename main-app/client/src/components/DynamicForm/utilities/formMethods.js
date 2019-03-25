@@ -1,24 +1,23 @@
-import { isFieldInvalid, isEmpty } from "./utilities";
+import { isFieldValid } from "./validation";
+import { SubmitBtnState } from "./types";
 
-/**
- * Purpose: validates every answer in form_data
- *
- * iterates over Question set
- * calls the external onValidate() handler or default isFieldInvalid()
- *   use Question and form_data values to validate and update field_errors{}
- * returns
- *  'disabled' boolean (overall control of DF Container submit)
- *  'field_errors' object for individual field error tracking
- *
- */
-export function _validateAllAnswers(
-  form_data,
-  questions,
-  recursionIdx,
-  onValidate
-) {
-  const validateField = onValidate || isFieldInvalid;
-  let currIdx = recursionIdx ? recursionIdx : 0;
+export function _isFormValid(fields_is_valid) {
+  for (let field_name in fields_is_valid) {
+    if (fields_is_valid[field_name] === false) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export function _determineSubmitBtnState(fields_is_valid) {
+  return _isFormValid(fields_is_valid)
+    ? SubmitBtnState.ENABLED
+    : SubmitBtnState.DISABLED;
+}
+
+export function _validateAllAnswers(form_data, questions, onValidate) {
+  const validateField = onValidate || isFieldValid;
   return questions.reduce(
     (result, question) => {
       const { input_type, field_name, min, max, optional } = question;
@@ -32,7 +31,6 @@ export function _validateAllAnswers(
           nestedValidationResults = _validateAllAnswers(
             form_data,
             row,
-            currIdx + 1,
             onValidate
           );
         }
@@ -40,73 +38,39 @@ export function _validateAllAnswers(
           nestedValidationResults = _validateAllAnswers(
             form_data,
             category_contents,
-            currIdx + 1,
             onValidate
           );
         }
         let mergedFieldErrors = {
-          ...result.field_errors,
-          ...nestedValidationResults.field_errors
+          ...result.fields_is_valid,
+          ...nestedValidationResults.fields_is_valid
         };
-        result.field_errors = mergedFieldErrors;
+        result.fields_is_valid = mergedFieldErrors;
         return result;
       }
-      const field_error = validateField(
-        input_type,
-        form_data[field_name],
-        min,
-        max,
-        optional
-      );
-      result.field_errors[field_name] = field_error;
-      if (result.disabled !== field_error) result.disabled = field_error;
+
+      const field_is_valid = optional
+        ? true
+        : validateField(input_type, form_data[field_name], min, max);
+
+      let { fields_is_valid } = result;
+      fields_is_valid[`${field_name}_is_valid`] = field_is_valid;
       return result;
     },
-    { field_errors: {}, disabled: false }
+    { fields_is_valid: {} }
   );
 }
-
-/**
- * Iterates over the form_data and checks for empty answers
- * used to control the 'disabled' flag
- */
-export const _hasEmptyAnswers = form_data => {
-  return Object.keys(form_data).some(field_name => {
-    console.log(form_data);
-    const value = form_data[field_name];
-
-    // if form_data is optional, return false
-    // and continue looping
-    if (form_data.optional) {
-      return false;
-    }
-    /*
-          if non-numeric returns if value is empty
-          - if value is empty (true) then the loop breaks -> disabled true
-          if numeric value returns false to continue looping
-          - any numeric value is consideed non-empty
-        */
-    return typeof value !== "number" && isEmpty(value);
-  });
-};
 
 export const _isMultiAnswer = input_type => {
   // add other multiple answer types here
   return ["checkbox", "dropdown-multi"].includes(input_type);
 };
 
-/**
- * maps 'questions' to provide 'form_data' field defaults
- *
- * - handles single and multi-answer defaults
- * - injects 'hiddenData' values
- */
-
 export const _getDefaultFormData = questions => {
   return questions.reduce(
     (form_data, { field_name, input_type, options }, idx) => {
       if (field_name === undefined) {
-        // no field name (can be category or row)
+        // no field name is category or row.
         // pass nested questions into _getDefaultFormData
         let { category_contents, row } = questions[idx];
         if (row) {
@@ -126,22 +90,22 @@ export const _getDefaultFormData = questions => {
         const first_option = options[0];
         // options can be a single value or an object of text / value
         // to support difference between user text and stored value
-        const value = first_option.value || first_option;
+        const value = first_option.value || first_option.text || first_option;
         form_data[field_name] = value;
       } else form_data[field_name] = "";
 
       // insert hidden field values from hiddenData
       // passed as hiddenData and / or queryString prop of <DynamicForm>
-      // if (input_type === "hidden") {
-      //   const { hiddenData } = this.props;
-      //   if (!hiddenData || !hiddenData[field_name]) {
-      //     console.error(`Missing hiddenData for: ${field_name}`);
-      //     return form_data;
-      //   }
+      if (input_type === "hidden") {
+        const { hiddenData } = this.props;
+        if (!hiddenData || !hiddenData[field_name]) {
+          console.error(`Missing hiddenData for: ${field_name}`);
+          return form_data;
+        }
 
-      //   const hiddenValue = hiddenData[field_name];
-      //   form_data[field_name] = hiddenValue;
-      // }
+        const hiddenValue = hiddenData[field_name];
+        form_data[field_name] = hiddenValue;
+      }
       return form_data;
     },
     {}
@@ -177,13 +141,11 @@ export const _handleNewQuestions = (questions, form_data) => {
   return { ...new_questions_form_data, ...overlapping_form_data };
 };
 
-/**
- * toggles values in multi-answer arrays
- * - limits based on maxChoices if defined
- */
 export const _toggleValueInArray = (array, value, maxChoices) => {
   const clone = array.slice(0);
   const index = clone.indexOf(value);
+
+  console.log({ array, value });
 
   if (index !== -1) clone.splice(index, 1);
   else {
@@ -208,6 +170,7 @@ export const _searchForDataBy = (field_type, name, questions) => {
     if (item[field_type] === name) {
       return item;
     }
+    return false;
   });
 };
 
@@ -216,7 +179,7 @@ export const _getStateFromPersistence = (
   persistence,
   initialData
 ) => {
-  const persisted_data = JSON.parse(persistence); // { disabled, field_errors, form_data }
+  const persisted_data = JSON.parse(persistence); // { disabled, fields_is_valid, form_data }
   const state = { ...base_state, ...persisted_data };
   if (initialData) state.form_data = { ...state.form_data, ...initialData };
 
