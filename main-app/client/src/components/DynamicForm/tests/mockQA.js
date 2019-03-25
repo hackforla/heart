@@ -92,5 +92,17 @@ export const question_set_1 = [
       { text: "VC 4159", description: "Notice of Change of Address" },
       { text: "VC 4454", description: "Registration Card Kept With Vehicle" }
     ]
+  },
+  {
+    text: "Location",
+    input_type: "dropdown-multi",
+    field_name: "location",
+    placeholder: "Los Angeles",
+    isMulti: true,
+    options: [
+      { text: "Los Angeles" },
+      { text: "San Francisco" },
+      { text: "San Diego" }
+    ]
   }
 ];
