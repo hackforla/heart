@@ -170,6 +170,7 @@ export const _searchForDataBy = (field_type, name, questions) => {
     if (item[field_type] === name) {
       return item;
     }
+    return false;
   });
 };
 
