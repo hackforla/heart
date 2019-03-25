@@ -20,7 +20,7 @@ class Citations extends React.Component {
     if (prevProps.user !== this.props.user) {
       let userId = this.props.user.id;
       this.setState({ userId });
-      return getCitations(userId, this.onSuccess, this.onError);
+      // return getCitations(userId, this.onSuccess, this.onError);
     }
   };
   onSuccess = data => {
