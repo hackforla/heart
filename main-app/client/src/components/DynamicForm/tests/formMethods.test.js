@@ -2,9 +2,45 @@ import {
   _getDefaultFormData,
   _validateAllAnswers,
   _determineSubmitBtnState
-} from "../components/formMethods";
+} from "../utilities/formMethods";
 import { question_set_1 } from "./mockQA";
-import { SubmitBtnState } from "../components/types";
+import { SubmitBtnState } from "../utilities/types";
+
+describe("Dynamic Form Initialization", () => {
+  let initialFormData, initialValidation;
+  beforeEach(() => {
+    initialFormData = {
+      clinic_attended: "",
+      first_name: "",
+      known_as: "",
+      email: "",
+      age: "18-24",
+      ethnicity: "Hispanic/Latino",
+      violations: [],
+      location: []
+    };
+
+    initialValidation = {
+      clinic_attended_is_valid: true,
+      first_name_is_valid: false, // required
+      known_as_is_valid: true,
+      email_is_valid: false, // required
+      age_is_valid: true,
+      ethnicity_is_valid: true,
+      violations_is_valid: true,
+      location_is_valid: false // required
+    };
+  });
+  it("creates default form data", () => {
+    expect(_getDefaultFormData(question_set_1)).toEqual(initialFormData);
+  });
+
+  it("Initial State", () => {
+    expect(_validateAllAnswers(initialFormData, question_set_1)).toEqual({
+      fields_is_valid: initialValidation
+    });
+  });
+});
 
 describe("Dynamic Form Validation", () => {
   let initialFormData, initialValidation;
@@ -30,16 +66,6 @@ describe("Dynamic Form Validation", () => {
       violations_is_valid: true,
       location_is_valid: false // required
     };
-  });
-
-  it("creates default form data", () => {
-    expect(_getDefaultFormData(question_set_1)).toEqual(initialFormData);
-  });
-
-  it("Initial State", () => {
-    expect(_validateAllAnswers(initialFormData, question_set_1)).toEqual({
-      fields_is_valid: initialValidation
-    });
   });
 
   it("Optional input change", () => {
