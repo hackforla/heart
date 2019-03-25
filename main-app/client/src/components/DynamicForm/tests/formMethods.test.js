@@ -1,10 +1,12 @@
 import {
   _getDefaultFormData,
-  _validateAllAnswers
+  _validateAllAnswers,
+  _determineSubmitBtnState
 } from "../components/formMethods";
 import { question_set_1 } from "./mockQA";
+import { SubmitBtnState } from "../components/types";
 
-describe("Dynamic Form Methods: Regular Mode", () => {
+describe("Dynamic Form Validation", () => {
   let initialFormData, initialValidation;
   beforeEach(() => {
     initialFormData = {
@@ -19,9 +21,9 @@ describe("Dynamic Form Methods: Regular Mode", () => {
 
     initialValidation = {
       clinic_attended_is_valid: true,
-      first_name_is_valid: false,
+      first_name_is_valid: false, // required
       known_as_is_valid: true,
-      email_is_valid: false,
+      email_is_valid: false, // required
       age_is_valid: true,
       ethnicity_is_valid: true,
       violations_is_valid: true
@@ -32,33 +34,54 @@ describe("Dynamic Form Methods: Regular Mode", () => {
     expect(_getDefaultFormData(question_set_1)).toEqual(initialFormData);
   });
 
-  it("Validates: On initial form, field errors are set to false and disabled state is true", () => {
-    expect(_validateAllAnswers(initialFormData, question_set_1, 0)).toEqual({
+  it("Initial State", () => {
+    expect(_validateAllAnswers(initialFormData, question_set_1)).toEqual({
       fields_is_valid: initialValidation
     });
   });
 
-  it("Validates: On input change, field errors are changed appropriately ", () => {
+  it("Optional input change", () => {
     initialFormData.clinic_attended = "testing"; // optional
-    expect(_validateAllAnswers(initialFormData, question_set_1, 0)).toEqual({
+    expect(_validateAllAnswers(initialFormData, question_set_1)).toEqual({
       fields_is_valid: initialValidation
     });
   });
 
-  it("Validates: On input change, field errors are changed appropriately ", () => {
+  it("Required input change", () => {
     initialFormData.first_name = "Frank"; // required
     initialValidation.first_name_is_valid = true;
-    expect(_validateAllAnswers(initialFormData, question_set_1, 0)).toEqual({
+    expect(_validateAllAnswers(initialFormData, question_set_1)).toEqual({
       fields_is_valid: initialValidation
     });
+    expect(_determineSubmitBtnState(initialValidation)).toEqual(
+      SubmitBtnState.DISABLED
+    );
   });
 
-  it("Validates: On input change of all required fields, no errors and submit button is ok", () => {
+  it("Incorrect input change of all required fields", () => {
     initialFormData.first_name = "Frank"; // required
-    initialFormData.first_name = "Frank"; // required
+    initialFormData.email_is_valid = "not_valid_email"; // required
     initialValidation.first_name_is_valid = true;
-    expect(_validateAllAnswers(initialFormData, question_set_1, 0)).toEqual({
+    expect(_validateAllAnswers(initialFormData, question_set_1)).toEqual({
       fields_is_valid: initialValidation
     });
+    expect(_determineSubmitBtnState(initialValidation)).toEqual(
+      SubmitBtnState.DISABLED
+    );
+  });
+
+  it("Correct input change of all required fields", () => {
+    initialFormData.first_name = "Frank"; // required
+    initialFormData.email = "test@gmail.com"; // required
+
+    initialValidation.first_name_is_valid = true;
+    initialValidation.email_is_valid = true;
+
+    expect(_validateAllAnswers(initialFormData, question_set_1)).toEqual({
+      fields_is_valid: initialValidation
+    });
+    expect(_determineSubmitBtnState(initialValidation)).toEqual(
+      SubmitBtnState.ENABLED
+    );
   });
 });
