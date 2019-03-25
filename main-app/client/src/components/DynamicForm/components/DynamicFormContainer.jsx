@@ -2,7 +2,6 @@ import React from "react";
 import "./DynamicForm.scss";
 import PropTypes from "prop-types";
 import { isEqual } from "lodash";
-
 import { dynamicFormMaker } from "./DynamicFormMaker";
 import { isFieldValid } from "../utilities/validation";
 import {
@@ -54,26 +53,19 @@ class DynamicFormContainer extends React.Component {
 
     const persistence = window.localStorage.getItem(purpose);
     if (persistence) {
-      const persisted_state = _getStateFromPersistence(
-        state,
-        persistence,
-        initialData
+      return this.setState(
+        _getStateFromPersistence(state, persistence, initialData)
       );
-      return this.setState(persisted_state);
     }
 
-    // get initial default values
     state.form_data = _getDefaultFormData(questions);
 
     // merge with initialData if available
     if (initialData) state.form_data = { ...state.form_data, ...initialData };
 
-    // validate all answers (defaults and any provided by initialData)
-    // uses onValidate() or isFieldValid() on each question / form_data field value
     const { fields_is_valid } = _validateAllAnswers(
       state.form_data,
       questions,
-      0,
       this.props.onValidate
     );
     state.fields_is_valid = fields_is_valid;
