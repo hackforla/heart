@@ -145,6 +145,8 @@ export const _toggleValueInArray = (array, value, maxChoices) => {
   const clone = array.slice(0);
   const index = clone.indexOf(value);
 
+  console.log({ array, value });
+
   if (index !== -1) clone.splice(index, 1);
   else {
     // limit max selected choices if defined
