@@ -1,3 +1,10 @@
+const custom_validation_types = [
+  {
+    name: "myCustomInput",
+    validationFn: function(value) {}
+  }
+];
+
 export const question_set_1 = [
   {
     category_name: "",
