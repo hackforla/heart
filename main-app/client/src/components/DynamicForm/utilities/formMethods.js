@@ -16,14 +16,8 @@ export function _determineSubmitBtnState(fields_is_valid) {
     : SubmitBtnState.DISABLED;
 }
 
-export function _validateAllAnswers(
-  form_data,
-  questions,
-  recursionIdx,
-  onValidate
-) {
+export function _validateAllAnswers(form_data, questions, onValidate) {
   const validateField = onValidate || isFieldValid;
-  let currIdx = recursionIdx ? recursionIdx : 0;
   return questions.reduce(
     (result, question) => {
       const { input_type, field_name, min, max, optional } = question;
@@ -37,7 +31,6 @@ export function _validateAllAnswers(
           nestedValidationResults = _validateAllAnswers(
             form_data,
             row,
-            currIdx + 1,
             onValidate
           );
         }
@@ -45,7 +38,6 @@ export function _validateAllAnswers(
           nestedValidationResults = _validateAllAnswers(
             form_data,
             category_contents,
-            currIdx + 1,
             onValidate
           );
         }
