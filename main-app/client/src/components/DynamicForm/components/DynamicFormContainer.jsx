@@ -15,6 +15,7 @@ import {
   _determineSubmitBtnState
 } from "./formMethods";
 import { SubmitBtn, EditableModeControls } from "./DynamicFormMaker/FormBtns";
+import { SubmitBtnState } from "./types";
 
 // TODO: update DF repo new changes as of 11/6/18
 /**
@@ -199,18 +200,19 @@ class DynamicFormContainer extends React.Component {
 
   render() {
     const { editable, editableMode, form_data, fields_is_valid } = this.state;
-    let submitBtnState = _determineSubmitBtnState(fields_is_valid);
+    let submitBtnIsEnabled =
+      _determineSubmitBtnState(fields_is_valid) === SubmitBtnState.ENABLED;
 
     let renderSubmitBtn = !editableMode ? (
       <SubmitBtn
         form_data={form_data}
-        disabled={submitBtnState}
+        disabled={!submitBtnIsEnabled}
         onSubmit={this.props.onSubmit}
       />
     ) : (
       <EditableModeControls
         editable={editable}
-        disabled={submitBtnState}
+        disabled={!submitBtnIsEnabled}
         deleteItem={this.props.onDelete}
         toggleEdit={this.toggleEdit}
         cancelEdit={this.cancelEdit}
