@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { isEqual } from "lodash";
 
 import { dynamicFormMaker } from "./DynamicFormMaker";
-import { isFieldValid } from "./validation";
+import { isFieldValid } from "../utilities/validation";
 import {
   _validateAllAnswers,
   _getDefaultFormData,
@@ -13,11 +13,10 @@ import {
   _searchForDataBy,
   _getStateFromPersistence,
   _determineSubmitBtnState
-} from "./formMethods";
+} from "../utilities/formMethods";
 import { SubmitBtn, EditableModeControls } from "./DynamicFormMaker/FormBtns";
-import { SubmitBtnState } from "./types";
+import { SubmitBtnState } from "../utilities/types";
 
-// TODO: update DF repo new changes as of 11/6/18
 /**
  * @prop {array} questions array of Question data objects for rendering
  * @prop {string} purpose Dynamic Form collection name (for form data persistence)
@@ -229,17 +228,12 @@ class DynamicFormContainer extends React.Component {
 }
 
 const questionShape = {
-  id: PropTypes.string, // mongo oID of Dynamic Question
-  text: PropTypes.string, // user facing text
-  subtext: PropTypes.oneOfType([
-    // user facing extra info
-    PropTypes.string, // text
-    PropTypes.element // <a> link
-  ]),
-  input_type: PropTypes.string, // html input type
-  field_name: PropTypes.string, // form field name
+  id: PropTypes.string,
+  text: PropTypes.string,
+  subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  input_type: PropTypes.string,
+  field_name: PropTypes.string,
   options: PropTypes.arrayOf(
-    // selection options
     PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
@@ -253,8 +247,8 @@ const questionShape = {
   ),
   minlength: PropTypes.number, // min length or number of choices
   maxlength: PropTypes.number, // max length or number of choices
-  placeholder: PropTypes.string, // placeholder text
-  isMulti: PropTypes.bool // multiple option for dropdown
+  placeholder: PropTypes.string,
+  isMulti: PropTypes.bool
 };
 
 DynamicFormContainer.propTypes = {
