@@ -60,8 +60,11 @@ describe("Dynamic Form Validation", () => {
 
   it("Incorrect input change of all required fields", () => {
     initialFormData.first_name = "Frank"; // required
-    initialFormData.email_is_valid = "not_valid_email"; // required
+    initialFormData.email = "not_valid_email"; // required
+
     initialValidation.first_name_is_valid = true;
+    initialValidation.email_is_valid = false;
+
     expect(_validateAllAnswers(initialFormData, question_set_1)).toEqual({
       fields_is_valid: initialValidation
     });
