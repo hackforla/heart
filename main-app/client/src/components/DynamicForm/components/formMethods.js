@@ -3,7 +3,7 @@ import { SubmitBtnState } from "./types";
 
 export function _isFormValid(fields_is_valid) {
   for (let field_name in fields_is_valid) {
-    if (fields_is_valid[`${field_name}_is_valid`] === false) {
+    if (fields_is_valid[field_name] === false) {
       return false;
     }
   }
