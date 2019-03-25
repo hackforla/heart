@@ -7,30 +7,33 @@ import {
 import { question_set_1 } from "./mockQA";
 import { SubmitBtnState } from "../utilities/types";
 
+let formData = {
+  clinic_attended: "",
+  first_name: "",
+  known_as: "",
+  email: "",
+  age: "18-24",
+  ethnicity: "Hispanic/Latino",
+  violations: [],
+  location: []
+};
+
+let validation = {
+  clinic_attended_is_valid: true,
+  first_name_is_valid: false, // required
+  known_as_is_valid: true,
+  email_is_valid: false, // required
+  age_is_valid: true,
+  ethnicity_is_valid: true,
+  violations_is_valid: true,
+  location_is_valid: false // required
+};
+
 describe("Dynamic Form Initialization", () => {
   let initialFormData, initialValidation;
   beforeEach(() => {
-    initialFormData = {
-      clinic_attended: "",
-      first_name: "",
-      known_as: "",
-      email: "",
-      age: "18-24",
-      ethnicity: "Hispanic/Latino",
-      violations: [],
-      location: []
-    };
-
-    initialValidation = {
-      clinic_attended_is_valid: true,
-      first_name_is_valid: false, // required
-      known_as_is_valid: true,
-      email_is_valid: false, // required
-      age_is_valid: true,
-      ethnicity_is_valid: true,
-      violations_is_valid: true,
-      location_is_valid: false // required
-    };
+    initialFormData = { ...formData };
+    initialValidation = { ...validation };
   });
   it("creates default form data", () => {
     expect(_getDefaultFormData(question_set_1)).toEqual(initialFormData);
@@ -46,27 +49,8 @@ describe("Dynamic Form Initialization", () => {
 describe("Dynamic Form Validation", () => {
   let initialFormData, initialValidation;
   beforeEach(() => {
-    initialFormData = {
-      clinic_attended: "",
-      first_name: "",
-      known_as: "",
-      email: "",
-      age: "18-24",
-      ethnicity: "Hispanic/Latino",
-      violations: [],
-      location: []
-    };
-
-    initialValidation = {
-      clinic_attended_is_valid: true,
-      first_name_is_valid: false, // required
-      known_as_is_valid: true,
-      email_is_valid: false, // required
-      age_is_valid: true,
-      ethnicity_is_valid: true,
-      violations_is_valid: true,
-      location_is_valid: false // required
-    };
+    initialFormData = { ...formData };
+    initialValidation = { ...validation };
   });
 
   it("Optional input change", () => {
@@ -140,27 +124,8 @@ describe("Dynamic Form Validation", () => {
 describe("Dynamic Form Validation Flow", () => {
   let initialFormData, initialValidation;
   beforeAll(() => {
-    initialFormData = {
-      clinic_attended: "",
-      first_name: "",
-      known_as: "",
-      email: "",
-      age: "18-24",
-      ethnicity: "Hispanic/Latino",
-      violations: [],
-      location: []
-    };
-
-    initialValidation = {
-      clinic_attended_is_valid: true,
-      first_name_is_valid: false, // required
-      known_as_is_valid: true,
-      email_is_valid: false, // required
-      age_is_valid: true,
-      ethnicity_is_valid: true,
-      violations_is_valid: true,
-      location_is_valid: false // required
-    };
+    initialFormData = { ...formData };
+    initialValidation = { ...validation };
   });
   it("Correct input change of all required fields", () => {
     initialFormData.first_name = "Frank"; // required
@@ -205,16 +170,7 @@ describe("Dynamic Form Validation Flow", () => {
 describe("Dynamic Form Toggling Values in Array", () => {
   let initialFormData;
   beforeAll(() => {
-    initialFormData = {
-      clinic_attended: "",
-      first_name: "",
-      known_as: "",
-      email: "",
-      age: "18-24",
-      ethnicity: "Hispanic/Latino",
-      violations: [],
-      location: []
-    };
+    initialFormData = { ...formData };
   });
   it("Adds value if not there", () => {
     expect(
