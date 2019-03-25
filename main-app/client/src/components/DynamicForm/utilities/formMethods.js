@@ -149,13 +149,11 @@ export const _handleNewQuestions = (questions, form_data) => {
   return { ...new_questions_form_data, ...overlapping_form_data };
 };
 
-/**
- * toggles values in multi-answer arrays
- * - limits based on maxChoices if defined
- */
 export const _toggleValueInArray = (array, value, maxChoices) => {
   const clone = array.slice(0);
   const index = clone.indexOf(value);
+
+  console.log({ array, value });
 
   if (index !== -1) clone.splice(index, 1);
   else {
