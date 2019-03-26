@@ -6,7 +6,7 @@ import axios from "axios";
 jest.mock("axios");
 
 // calls for API and saves user data
-describe("api calls", () => {
+describe("Profile - API", () => {
   let renderedComponent = mount(<Profile />);
   const mockResults = {
     status: 200,
