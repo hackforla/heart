@@ -7,7 +7,7 @@ import './App.css';
 
 class App extends Component {
   render() {
-    return (  
+    return (
       <BrowserRouter>
         <Switch>
           <Route exact={true} path='/participants/:id/' component={ParticipantProfile} />

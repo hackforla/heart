@@ -10,7 +10,7 @@ module.exports = (app) => {
   app.put('/citations/:id', (req, res) => {
     knex('citations')
       .where('id', req.params.id)
-      .update(req.body.data, Object.keys(req.body.data))
+      .update(req.body, Object.keys(req.body))
       .then(citations => res.status(200).send({ citations }))
       .catch(err => res.status(500).send(err));
   });
