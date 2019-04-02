@@ -2,11 +2,12 @@ import axios from 'axios';
 import { API_ENDPOINT } from 'get_uri';
 
 const updateParticipant = ({ id, data }, successFn, errorFn) => {
-  return axios.put(`${API_ENDPOINT}/participants/${id}`, {
-    data,
-    timeout: 5000,
-  })
+  return axios.put(`${API_ENDPOINT}/participants/${id}`, 
+    data, 
+    { timeout: 5000},
+  )
   .then(res => {
+    console.log(res)
     let { data: { participants } } = res;
     successFn(participants[0]);
     return res;
