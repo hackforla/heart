@@ -19,7 +19,7 @@ module.exports = (app) => {
   app.put('/participants/:id', jwtAuth, (req, res) => {
     knex('participants')
       .where('id', req.params.id)
-      .update(req.body.data, Object.keys(req.body.data))
+      .update(req.body, Object.keys(req.body))
       .then(participants => res.status(200).send({ participants }))
       .catch(err => res.status(500).send(err));
   });

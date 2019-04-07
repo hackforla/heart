@@ -29,9 +29,11 @@ class Card extends React.Component {
   }
   toggleEditMode = () => {
     let { editing, localUserInfo, changeInFormState } = this.state;
-    let { id } = this.props.user;
-    if (editing && changeInFormState) {
-      this.postFormData(id, localUserInfo);
+    if (this.props.user) {
+      let { id } = this.props.user;
+      if (editing && changeInFormState) {
+        this.postFormData(id, localUserInfo);
+      }
     }
     this.setState({
       editing: !editing,
@@ -55,17 +57,11 @@ class Card extends React.Component {
     let { localUserInfo } = this.state;
 
     if (name === 'aka') {
-      if (value.includes(',')) {
-        let akaArray = value.split(',');
-        value = akaArray;
-      }
-      else {
-        value = [value];
-      }
+      value = value.includes(',') ? value.split(',') : [value]
     }
 
     localUserInfo[name] = value;
-    this.setState({ localUserInfo: localUserInfo, changeInFormState: true });
+    this.setState({ localUserInfo, changeInFormState: true });
   }
   initializeFormState = (initialData) => {
     let { localUserInfo } = this.state;

@@ -25,7 +25,7 @@ class App extends Component {
             </Switch>
           </main>
         </div>
-      </BrowserRouter>       
+      </BrowserRouter>
     );
   }
 }
