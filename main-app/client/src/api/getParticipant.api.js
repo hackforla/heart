@@ -2,9 +2,9 @@ import axios from 'axios';
 //import { API_ENDPOINT } from 'get_uri';
 import { API_BASE_URL } from '../config/url_config';
 
-import { userAuth } from '../utilities/auth';
+import { UserAuth } from '../utilities/auth';
 
-const authToken = userAuth.getAuthToken();
+const authToken = UserAuth.getAuthToken();
 
 const getParticipant = (id, successFn, errorFn) => {
   let config = {

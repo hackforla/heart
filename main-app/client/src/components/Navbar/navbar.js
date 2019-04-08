@@ -1,23 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
-import { userAuth } from '../../utilities/auth';
+import { UserAuth } from '../../utilities/auth';
 
 import "./navbar.css";
 
 export class NavBar extends React.Component {
+  static propTypes = {
+    onLogout: PropTypes.func.isRequired,
+};
+
  logOut() {
-    userAuth.logout();
+    this.props.onLogout();
   }
 
   render() {
     // Render either log-in or log-out on nav-bar according to the state
     let logInOutOption;
 
-    if(userAuth.loggedIn() === true) {
+    if(UserAuth.loggedIn() === true) {
       logInOutOption = (
         <div>
-          <Link to="/login" onClick={() => this.logOut()}>
+          <Link to="/login" onClick={() => this.props.onLogout()}>
             Log out
           </Link>
         </div>

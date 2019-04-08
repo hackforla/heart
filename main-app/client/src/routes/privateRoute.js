@@ -6,26 +6,33 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 
-import { userAuth } from '../utilities/auth';
+import { UserConsumer } from '../../src/App';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      userAuth.loggedIn() === true ? (
-        <Component {...props} />
-      ) : (
+export const PrivateRouteWithoutContext = ({ user, ...rest }) =>
+    user ? (
+        <Route {...rest} />
+    ) : (
         <Redirect
-          to={{
-            pathname: '/login',
-            state: { from: props.location },
-          }}
+            to={{
+                pathname: '/login',
+                state: { from: rest.location },
+            }}
         />
-      )
-    }
-  />
-);
+    );
 
-export default PrivateRoute;
+PrivateRouteWithoutContext.propTypes = {
+    user: PropTypes.object,
+};
+
+export const PrivateRoute = props => {
+    return (
+        <UserConsumer>
+            {({ user }) => (
+                <PrivateRouteWithoutContext user={user} {...props} />
+            )}
+        </UserConsumer>
+    );
+};

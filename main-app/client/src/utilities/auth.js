@@ -1,8 +1,8 @@
-import { loadAuthToken, clearAuthToken } from '../utilities/localStorage';
-import { userAuthApi } from '../api/userAuth.api';
+import { saveAuthToken, loadAuthToken, clearAuthToken } from '../utilities/localStorage';
+import { UserAuthApi } from '../api/userAuth.api';
 
 function login(username, password) {
-  return userAuthApi.loginApi(username, password);
+  return UserAuthApi.loginApi(username, password);
 }
 
 function logout() {
@@ -16,14 +16,24 @@ function loggedIn() {
   return authToken !== null ? true : false;
 }
 
+function setAuthToken(authToken) {
+  return saveAuthToken(authToken);
+}
+
 function getAuthToken() {
   const authToken = loadAuthToken();
   return authToken;
 }
 
-export const userAuth = {
+function refreshAuthToken() {
+  UserAuthApi.refreshAuthTokenApi();
+}
+
+export const UserAuth = {
   login,
   logout,
   loggedIn,
+  setAuthToken,
   getAuthToken,
+  refreshAuthToken,
 };

@@ -2,6 +2,7 @@ import {normalizeResponseErrors } from '../utilities/errorsUtils'
 //import { API_ENDPOINT } from 'get_uri';
 import { API_BASE_URL } from '../config/url_config';
 import { saveAuthToken } from '../utilities/localStorage';
+import { UserAuth } from '../utilities/auth'
 
 function loginApi(username, password) {
   const requestOptions = {
@@ -19,7 +20,6 @@ function loginApi(username, password) {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then(res => {
-      saveAuthToken(res.authToken);
       return res;
     })
     .catch(err => {
@@ -36,6 +36,31 @@ function loginApi(username, password) {
   );
 }
 
-export const userAuthApi = {
+function refreshAuthTokenApi () {
+  //dispatch(authRequest());
+  const authToken = UserAuth.getAuthToken();
+  return fetch(`${API_BASE_URL}/refresh`, {
+      method: 'POST',
+      headers: {
+          // Provide our existing token as credentials to get a new one
+          Authorization: `Bearer ${authToken}`
+      }
+  })
+      .then(res => normalizeResponseErrors(res))
+      .then(res => res.json())
+      .then(res => {
+        saveAuthToken(res.authToken);
+        return res;
+      })
+      .catch(err => {
+          // We couldn't get a refresh token because our current credentials
+          // are invalid or expired, or something else went wrong, so clear
+          // them and sign us out
+          UserAuth.logout();
+      });
+};
+
+export const UserAuthApi = {
   loginApi,
+  refreshAuthTokenApi,
 };

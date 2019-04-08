@@ -1,7 +1,8 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
+import PropTypes from 'prop-types';
+import { withRouter, Redirect } from "react-router-dom";
 
-import { userAuth } from '../../utilities/auth';
+import { UserAuth } from '../../utilities/auth';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -11,13 +12,19 @@ class LoginForm extends React.Component {
       password: '',
       submitted: false,
       loading: false,
+      redirectToReferrer: false,
       error: ''
     };
   }
 
+  static propTypes = {
+    location: PropTypes.object.isRequired,
+    onNewLogin: PropTypes.func.isRequired,
+  };
+
   componentWillMount() {
     // If user is logged in redirect straight to the participants page
-    const res = userAuth.loggedIn();
+    const res = UserAuth.loggedIn();
     if (res) {
       this.props.history.push('/participants/1');
     }
@@ -40,17 +47,26 @@ class LoginForm extends React.Component {
     }
 
     this.setState({ loading: true });
-    userAuth.login(username, password)
-      .then(
-        res => {
-          this.props.history.push('/participants/1');
-        },
-        error => this.setState({ error, loading: false })
-      );
+    UserAuth.login(username, password)
+      .then(res => {
+        this.props.onNewLogin(res.authToken);
+        this.setState({ error: null, redirectToReferrer: true });
+      })
+      .catch(error => {
+        this.setState({ error, loading: false });
+      });
   }
 
   render() {
-    const { username, password, submitted, loading, error } = this.state;
+    const { username, password, submitted, loading, redirectToReferrer, error } = this.state;
+    const { from } = this.props.location.state || {
+      from: { pathname: '/participants/1' },
+    };
+
+    if (redirectToReferrer) {
+      //this.props.history.push(from);
+      return <Redirect to={from} />;
+    }
     return (
       <div className="col-md-6 col-md-offset-3">
         <h2>Login</h2>
