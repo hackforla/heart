@@ -45,6 +45,15 @@ $underline-dotted: 3px dotted $grey;
   margin-bottom: 10px;
 }
 $border-radius: 6px;
+
+@mixin heart-input-box {
+  border: 1px solid $light-grey;
+  border-radius: 2px;
+  box-shadow: inset 0 0 3px $light-grey;
+  &::placeholder {
+    color: $light-grey;
+  }
+}
 /*
 ==========================
 Z-INDEXES
