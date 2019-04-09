@@ -76,14 +76,13 @@ EDITABLE TEXT FIELDS
   border: none;
   background-color: white;
   color: $darker-grey;
+  box-shadow: none;
 }
 
 @mixin editableInput {
   width: 100%;
-  border: none;
-  border-bottom: 1px solid $lighter-grey;
-  padding-bottom: 5px;
-  color: $darker-grey;
+  @include heart-input-box;
+  padding: 10px 0px;
   &:disabled {
     @include editableInput--disabled;
   }
