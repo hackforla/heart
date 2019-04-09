@@ -1,11 +1,25 @@
 @import "styles/_shared.scss";
 
+.form-btn--save {
+    @include system-button($blue, $blue-hover);
+    padding: 8px 16px;
+    float: right;
+}
+
 .editable-mode--controls {
+    float: clear;
+
     display: grid;
     grid-template-columns: repeat(4,1fr);
     grid-template-areas: "delete delete cancel save";
     align-items: center;
     grid-gap: 10px;
+
+    .form-btn--edit, 
+    .form-btn--save {
+        grid-area: save;
+        @include system-button($blue, $blue-hover);
+    }
 }
 
 .form-btn--delete {
@@ -31,10 +45,4 @@
     @include system-button--sub($lighter-grey, $grey);
     width: 90px;
     justify-self: end;
-}
-
-.form-btn--edit, 
-.form-btn--save {
-    grid-area: save;
-    @include system-button($blue, $blue-hover);
 }
