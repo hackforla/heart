@@ -95,20 +95,33 @@ MAIN BUTTONS
 ==========================
 */
 @mixin system-button($background, $hover) {
-  width: 150px;
+  color: white;
+  border: 1px solid $background;
   font-size: 14px;
   background-color: $background;
-  color: white;
-  text-transform: uppercase;
-  border-radius: $button-border-radius;
-  padding: 10px;
-  letter-spacing: 0.1em;
+  border-radius: $border-radius;
+  padding: 8px 0px;
   text-align: center;
-  border: none;
   display: block;
-  box-shadow: $box-shadow;
+  cursor: pointer;
   &:hover {
     background-color: $hover;
+  }
+}
+
+@mixin system-button--sub($color, $hover) {
+  color: $hover;
+  border: 1px solid $color;
+  font-size: 14px;
+  background-color: white;
+  border-radius: $border-radius;
+  padding: 8px 0px;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  &:hover {
+    color: $hover;
+    border: 1px solid $hover;
   }
 }
 
