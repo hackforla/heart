@@ -13,6 +13,12 @@ import {
   _getStateFromPersistence,
   _determineSubmitBtnState
 } from "../utilities/formMethods";
+import {
+  _initialize
+} from "../utilities/initialize";
+import {
+  _getStateFromLocalStorage
+} from "../utilities/localStorage";
 import { SubmitBtn, EditableModeControls } from "./DynamicFormMaker/FormBtns";
 import { SubmitBtnState } from "../utilities/types";
 
@@ -46,40 +52,17 @@ class DynamicFormContainer extends React.Component {
       initialData,
       purpose,
       questions,
-      editable,
-      editableMode
     } = this.props;
     const state = { questions };
 
     const persistence = window.localStorage.getItem(purpose);
     if (persistence) {
       return this.setState(
-        _getStateFromPersistence(state, persistence, initialData)
+        _getStateFromLocalStorage(state, persistence, initialData)
       );
-    }
-
-    state.form_data = _getDefaultFormData(questions);
-
-    // merge with initialData if available
-    if (initialData) state.form_data = { ...state.form_data, ...initialData };
-
-    const { fields_is_valid } = _validateAllAnswers(
-      state.form_data,
-      questions,
-      this.props.onValidate
-    );
-    state.fields_is_valid = fields_is_valid;
-
-    // // checks if the form should NOT be editable
-    if (!editable) {
-      state.editable = editable;
-    }
-
-    if (editableMode) {
-      state.editableMode = editableMode;
-    }
-
-    return this.setState(state);
+    } 
+    let new_state = _initialize(this.props);
+    return this.setState(new_state);
   }
 
   setInitialValues = (questions, initialData) => {
