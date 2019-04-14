@@ -7,7 +7,7 @@ import ParticipantProfile from './components/Participant/Profile';
 import LoginPage from './components/Authorization/loginPage';
 import { UserAuth } from './utilities/auth';
 import IntakeForm from './components/IntakeForm/IntakeForm';
-import { NoMatch } from './components/NoMatch';
+import { NoMatch } from './routes/NoMatch';
 // Higher Order Component (HOC) to prevent the users from accessing a route if they are not logged in
 import { PrivateRoute } from '../src/routes/privateRoute';
 

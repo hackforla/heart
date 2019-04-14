@@ -4,8 +4,8 @@ import { API_BASE_URL } from '../config/url_config';
 
 import { UserAuth } from '../utilities/auth';
 
-const authToken = UserAuth.getAuthToken();
 const updateCitation = ({ id, data, citationId }, successFn, errorFn) => {
+  const authToken = UserAuth.getAuthToken();
   let config = {
     headers: {
       // Provide user's auth token as credentials

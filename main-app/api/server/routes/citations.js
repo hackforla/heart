@@ -10,7 +10,7 @@ module.exports = (app) => {
       .catch(err => res.status(500).send(err));
   });
 
-  app.put('/citations/:id', jwtAuth, (req, res) => {
+  app.put('/citations/:id', jwtAuth, (req, res) => {k
     knex('citations')
       .where('id', req.params.id)
       .update(req.body, Object.keys(req.body))

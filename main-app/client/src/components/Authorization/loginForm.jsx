@@ -4,6 +4,8 @@ import { withRouter, Redirect } from "react-router-dom";
 
 import { UserAuth } from '../../utilities/auth';
 
+import './loginForm.scss';
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -68,25 +70,25 @@ class LoginForm extends React.Component {
       return <Redirect to={from} />;
     }
     return (
-      <div className="col-md-6 col-md-offset-3">
-        <h2>Login</h2>
-        <form name="form" onSubmit={evt => this.handleSubmit(evt)}>
+      <div className="centered-container">
+        <h2 className="login-header">Login</h2>
+        <form name="form" className="login-form" onSubmit={evt => this.handleSubmit(evt)}>
           {error &&
             <div className={'alert alert-danger'}>{error}</div>
           }
           <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
             <label htmlFor="username">Username</label>
-            <input type="text" className="form-control" name="username" value={username} onChange={evt => this.handleChange(evt)} />
             {submitted && !username &&
-              <div className="help-block">Username is required</div>
+              <div className="help-block login-error">Username is required</div>
             }
+            <input type="text" className="form-input" name="username" value={username} placeholder="Username" aria-label="Username" onChange={evt => this.handleChange(evt)} />            
           </div>
           <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
             <label htmlFor="password">Password</label>
-            <input type="password" className="form-control" name="password" value={password} onChange={evt => this.handleChange(evt)} />
             {submitted && !password &&
-              <div className="help-block">Password is required</div>
+              <div className="help-block login-error">Password is required</div>
             }
+            <input type="password" className="form-input" name="password" value={password} placeholder="Password" aria-label="Password" onChange={evt => this.handleChange(evt)} />            
           </div>
           <div className="form-group">
             <button className="btn btn-primary" disabled={loading}>Login</button>

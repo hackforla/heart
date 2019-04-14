@@ -1,15 +1,12 @@
 import React from "react";
 
 import LoginForm from "./loginForm";
+import './loginPage.scss';
 
 export function LoginPage(props) {
   return (
-    <div>
-      <div className="top-image">
-        <div className="centered-container centered-text content">
-          <h1 className="top-image-header">Welcome to Heart</h1>
-        </div>
-      </div>
+    <div className="login-page--container">
+      <h1 className="login-page-header">Welcome to Heart</h1>
       <LoginForm 
         location={props.location}
         onNewLogin={props.onNewLogin}
