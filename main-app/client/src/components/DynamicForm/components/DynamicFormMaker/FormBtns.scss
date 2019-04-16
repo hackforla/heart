@@ -1,0 +1,48 @@
+@import "styles/_shared.scss";
+
+.form-btn--save {
+    @include system-button($blue, $blue-hover);
+    padding: 8px 16px;
+    float: right;
+}
+
+.editable-mode--controls {
+    float: clear;
+
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-areas: "delete delete cancel save";
+    align-items: center;
+    grid-gap: 10px;
+
+    .form-btn--edit, 
+    .form-btn--save {
+        grid-area: save;
+        @include system-button($blue, $blue-hover);
+    }
+}
+
+.form-btn--delete {
+    grid-area: delete;
+    justify-self: start;
+
+    background-color: white;
+    border: none;
+    color: $attention-red--light;
+    padding-left: 0px;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    &:hover {
+        color: $attention-red;
+    }
+}
+
+.form-btn--cancel {
+    grid-area: cancel;
+    @include system-button--sub($lighter-grey, $grey);
+    width: 90px;
+    justify-self: end;
+}
