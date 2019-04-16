@@ -3,7 +3,7 @@ import { API_ENDPOINT } from "get_uri";
 
 const updateCitation = ({ id, data, citationId }, successFn, errorFn) => {
   return axios
-    .put(`${API_ENDPOINT}/participants/${id}/citations/${citationId}`, {
+    .put(`${API_ENDPOINT}/citations/${citationId}`, {
       data,
       timeout: 5000
     })
