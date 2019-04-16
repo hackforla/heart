@@ -13,7 +13,7 @@ const updateCitation = ({ id, data, citationId }, successFn, errorFn) => {
     }
   }
   return axios
-    .put(`${API_BASE_URL}/participants/${id}/citations/${citationId}`, config, {
+    .put(`${API_BASE_URL}/citations/${citationId}`, config, {
       data,
       timeout: 5000
     })

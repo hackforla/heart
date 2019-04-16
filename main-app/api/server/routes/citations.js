@@ -13,7 +13,7 @@ module.exports = (app) => {
   app.put('/citations/:id', jwtAuth, (req, res) => {k
     knex('citations')
       .where('id', req.params.id)
-      .update(req.body, Object.keys(req.body))
+      .update(req.body.data, Object.keys(req.body.data))
       .then(citations => res.status(200).send({ citations }))
       .catch(err => res.status(500).send(err));
   });
