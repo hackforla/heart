@@ -1,4 +1,4 @@
-@import 'styles/_shared.scss';
+@import "styles/_shared.scss";
 
 .citations-container {
   grid-area: citation;
@@ -8,6 +8,12 @@
   @include section-title;
 }
 
+.citations-form-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 30px;
+}
+
 .citations-form {
   box-shadow: $box-shadow;
   background-color: white;
@@ -15,9 +21,9 @@
 
   // form styling changes
   .form-question {
-    color: $med-grey;
+    color: $dark-grey;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 14px;
     text-transform: capitalize;
   }
   .form-answer,
@@ -26,22 +32,17 @@
     color: $darker-grey;
   }
   .form-input {
-    background-color: transparent;
-    border: none;
-    border-bottom: $underline-dotted;
-    padding-left: 0px;
-    width: 100px;
+    // width: 150px;
+    @include heart-input-box;
   }
   .form-QA--row {
     grid-gap: 20px;
     background-color: $palest-grey;
-    padding: 20px;
+    padding: 15px 20px;
     width: calc(100% + 20px);
     margin-left: -30px;
     margin-top: -30px;
-    margin-bottom: 30px;
-  }
-  .react-dropdown {
-
+    margin-bottom: 20px;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
