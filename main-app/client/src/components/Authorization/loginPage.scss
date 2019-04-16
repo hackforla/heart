@@ -1,0 +1,45 @@
+@import 'styles/shared.scss';
+
+/*
+==========================
+Login page
+==========================
+*/
+h1 {
+    text-align: center;
+}
+
+.login-page--container {
+  width: 100%;
+  border-top: 6px solid $theme-color;
+  padding: 40px;
+}
+
+.centered-container {
+    width: 100%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+ }
+
+ .login-page-header {
+     text-align: center;
+ }
+
+/*
+==========================
+MEDIA QUERIES
+==========================
+*/
+@media (min-width: 768px) {
+  .centered-container  {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .centered-container  {
+    width: 25%;
+  }
+}
