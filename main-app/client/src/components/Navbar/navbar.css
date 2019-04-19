@@ -15,6 +15,15 @@
   text-decoration: none;
 }
 
+.topnav-menu-left li {
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.topnav-menu-left li > a {
+  text-decoration: none;
+}
+
 .topnav-menu-right {
   position: absolute;
   display: inline-flex;
