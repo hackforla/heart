@@ -486,17 +486,23 @@ DROPDOWN MULTIPLE
   padding: 5px 10px;
   border-radius: $border-radius 0px 0px $border-radius;
 }
-
-.dropdown--multiple-btn {
+.dropdown--multiple-btn,
+.dropdown--disabled {
   background-color: $light-grey;
   color: $darkest-grey;
   padding: 5px 10px;
   border-radius: 0px $border-radius $border-radius 0px;
   border: none;
   font-weight: 600;
+}
 
+.dropdown--multiple-btn {
   &:hover {
     background-color: $lighter-grey;
     cursor: pointer;
   }
+}
+.dropdown--disabled {
+  width: 5px;
+  padding: 0px;
 }
