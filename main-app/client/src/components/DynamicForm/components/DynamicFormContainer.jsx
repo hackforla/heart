@@ -1,51 +1,37 @@
 import React from "react";
 import "./DynamicForm.scss";
-import PropTypes from "prop-types";
 import { isEqual } from "lodash";
 import { dynamicFormMaker } from "./DynamicFormMaker";
 import { isFieldValid } from "../utilities/validation";
 import {
-  _validateAllAnswers,
   _getDefaultFormData,
   _handleNewQuestions,
   _toggleValueInArray,
   _searchForDataBy,
-  _getStateFromPersistence,
   _determineSubmitBtnState
 } from "../utilities/formMethods";
 import {
   _initialize
 } from "../utilities/initialize";
 import {
-  _getStateFromLocalStorage
+  _mergeWithPersistedData,
+  _saveStateToLocalStorage,
+  _getFromLocalStorage
 } from "../utilities/localStorage";
 import { SubmitBtn, EditableModeControls } from "./DynamicFormMaker/FormBtns";
 import { SubmitBtnState } from "../utilities/types";
 
-/**
- * @prop {array} questions array of Question data objects for rendering
- * @prop {string} purpose Dynamic Form collection name (for form data persistence)
- * @prop {array} questions array of Dynamic Question objects
- *
- * -- OPTIONAL --
- * @prop {object} initialData CAUTION: very delicate - must match expected shape EXACTLY. Provide initial form_data.
- * @prop {object} hiddenData values for 'hidden' input types -> { field_name: value }
- * @prop {bool} persistence controls storing form data in LS onFormChange
- * @prop {func} onSubmit wrapper callback for handling submit behavior
- * @prop {func} onDelete wrapper callback for handling deletion behavior
- * @prop {func} onValidate callback for whole form validation
- * @prop {func} onInputChange observation-only handler with args (field_name, value, form_data)
- * @prop {func} customComponents custom input_type components (merged with defaults, precedence to custom components)
- * @prop {bool} editable controls whether form is editable or non-editable
- */
 class DynamicFormContainer extends React.Component {
-  state = {
-    form_data: {},
-    questions: [],
-    fields_is_valid: {},
-    editable: true,
-    editableMode: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      form_data: {},
+      questions: [],
+      fields_is_valid: {},
+      editable: true,
+      editableMode: false
+    };
+  }
 
   componentDidMount() {
     const {
@@ -55,10 +41,10 @@ class DynamicFormContainer extends React.Component {
     } = this.props;
     const state = { questions };
 
-    const persistence = window.localStorage.getItem(purpose);
+    const persistence = _getFromLocalStorage(purpose);
     if (persistence) {
       return this.setState(
-        _getStateFromLocalStorage(state, persistence, initialData)
+        _mergeWithPersistedData(state, persistence, initialData)
       );
     } 
     let new_state = _initialize(this.props);
@@ -77,16 +63,9 @@ class DynamicFormContainer extends React.Component {
     // when the form_data is updated from onFormChange
     const { form_data, fields_is_valid } = this.state;
     // or it receives new questions (for multi-question sets)
-    const { purpose, persistence, questions } = this.props;
+    const { purpose, questions } = this.props;
 
-    // persistence in LS
-    if (persistence) {
-      const persistedData = JSON.stringify({
-        form_data,
-        fields_is_valid
-      });
-      localStorage.setItem(purpose, persistedData);
-    }
+    _saveStateToLocalStorage(form_data, fields_is_valid, purpose || "form_data");
 
     // update form_data when a new question set is introduced
     // handles cases where multiple question sets may be introduced by
@@ -201,42 +180,5 @@ class DynamicFormContainer extends React.Component {
     );
   }
 }
-
-const questionShape = {
-  id: PropTypes.string,
-  text: PropTypes.string,
-  subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  input_type: PropTypes.string,
-  field_name: PropTypes.string,
-  options: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.object,
-      // { text, value } option for different user facing text and stored value
-      PropTypes.shape({
-        text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-      })
-    ])
-  ),
-  minlength: PropTypes.number, // min length or number of choices
-  maxlength: PropTypes.number, // max length or number of choices
-  placeholder: PropTypes.string,
-  isMulti: PropTypes.bool
-};
-
-DynamicFormContainer.propTypes = {
-  purpose: PropTypes.string, // used for labeling persisted form data
-  questions: PropTypes.arrayOf(PropTypes.shape(questionShape)),
-  customComponents: PropTypes.func, // custom input_type components
-  hiddenData: PropTypes.object, // values for hidden fields
-  initialData: PropTypes.object, // initial form_data - USE SPARINGLY, very delicate
-  persistence: PropTypes.bool, // enable LS form data persistence
-  onSubmit: PropTypes.func, // optional handler for form submission
-  onValidate: PropTypes.func, // optional handler for field validation
-  onInputChange: PropTypes.func, // optional observation-only handler for viewing form data on change
-  editable: PropTypes.bool
-};
 
 export default DynamicFormContainer;
