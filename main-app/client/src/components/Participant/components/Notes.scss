@@ -1,0 +1,32 @@
+@import 'styles/shared.scss';
+// .notes-btn {
+//     border-radius: $button-border-radius;
+// }
+// .content-container {
+//     // grid-area: notes;
+//     width: 100%;
+//     box-sizing: border-box;
+//     border: 1px solid #e6e6e6;
+//     padding: 15px;
+//     border-radius: 5px;
+//     box-shadow: 0px 3px 6px #e6e6e6;
+//     background-color: white;
+//     // display: grid;
+// }
+form-textarea {
+    display: block;
+    // border: 1px solid $light-grey;
+    // padding: 5px;
+    // color: $dark-grey;
+    // font-size: 14px;
+    // text-align: left;
+    // margin: 5px auto;
+}
+
+.label {
+    display: block;
+}
+
+// .content {
+//     max-width: $max-width;
+// }
