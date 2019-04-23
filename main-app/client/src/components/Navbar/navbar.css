@@ -1,0 +1,56 @@
+.nav-bar {
+  height: 60px;
+  margin: 0;
+  background: lightgray;
+  display: flex;
+  align-items: center;
+}
+
+.nav-bar .logo {
+  padding-left: 5px;
+  font-size: 1.2em;
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+.topnav-menu-right {
+  position: absolute;
+  display: inline-flex;
+  right: 0px;
+  font-size: 1em;
+  text-decoration: none;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.topnav-menu-right a {
+  text-decoration: none;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+@media only screen and (min-width: 640px) {
+  .nav-bar .logo {
+    font-size: 2.2em;
+    padding-left: 20px;
+  }
+
+  .topnav-menu-right {
+    font-size: 1.3em;
+  }
+}
+
+.current-username {
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 600px) {
+  .current-username {
+    max-width: 250px;
+  }
+}

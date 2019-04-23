@@ -115,3 +115,11 @@ INSERT INTO citations (
   'warrant',
   1
 );
+
+INSERT INTO users (
+  username,
+  password
+) VALUES (
+  'demo',
+  '$2a$10$tW3KLuaVGGKLxfOjWcBAGu5v/W/HwEQY8ZxhMgqezRyJtTibcgDBW'
+);

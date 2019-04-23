@@ -1,8 +1,18 @@
 import axios from 'axios';
-import { API_ENDPOINT } from 'get_uri';
+//import { API_ENDPOINT } from 'get_uri';
+import { API_BASE_URL } from '../config/url_config';
+
+import { UserAuth } from '../utilities/auth';
 
 const getParticipant = (id, successFn, errorFn) => {
-  return axios.get(`${API_ENDPOINT}/participants/${id}`, {
+  const authToken = UserAuth.getAuthToken();
+  let config = {
+    headers: {
+      // Provide user's auth token as credentials
+      Authorization: `Bearer ${authToken}`,
+    }
+  }
+  return axios.get(`${API_BASE_URL}/participants/${id}`, config, {
     timeout: 3000,
   })
   .then(res => {

@@ -1,4 +1,5 @@
 import React from "react";
+import './FormBtns.scss';
 
 export const SubmitBtn = ({ form_data, disabled, onSubmit }) => {
   return (
@@ -22,7 +23,7 @@ export const EditableModeToggleBtn = ({ editable, disabled, toggleEdit }) => (
   <input
     className={editable ? "form-btn--edit" : "form-btn--save"}
     type="submit"
-    value={editable ? "Save" : "Edit"}
+    value={editable ? "Save Citation" : "Edit"}
     disabled={disabled}
     onClick={e => {
       e.preventDefault();
@@ -34,7 +35,7 @@ export class EditableModeButtonRow extends React.Component {
   render() {
     let { deleteItem, cancelEdit } = this.props;
     return (
-      <>
+      <div className='editable-mode--controls'>
         <button className="form-btn--delete" onClick={e => deleteItem(e)}>
           Delete Citation
         </button>
@@ -42,7 +43,7 @@ export class EditableModeButtonRow extends React.Component {
           Cancel
         </button>
         {this.props.children}
-      </>
+      </div>
     );
   }
 }

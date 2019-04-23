@@ -13,23 +13,25 @@ NAME ROW
   justify-items: start;
   grid-gap: 15px;
 }
-
+.user-card-name {
+  font-size: 30px;
+  width: 100%;
+}
 .user-card-name,
 .user-card-aka {
   text-transform: capitalize;
-}
-.user-card-name {
-  font-size: 30px;
   @include editableInput;
 }
 .name--aka {
-  border-bottom: none;
+  border: none;
+  box-shadow: none;
   font-size: 16px;
   line-height: 28px;
   font-weight: 600;
 }
 .name-finalized {
-  border-bottom: none;
+  border: none;
+  box-shadow: none;
   width: 100%;
 }
 .user-card-aka {
@@ -37,19 +39,11 @@ NAME ROW
   margin-left: 8px;
 }
 .user-card--edit-btn {
-  border: none;
-  background-color: white;
-  font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
   justify-self: end;
-  align-self: start;
-  cursor: pointer;
-  &:hover {
-    color: $theme-color;
-    text-decoration: underline;
-    padding-bottom: 10px;
-  }
+  align-self: center;
+  @include system-button--sub($blue, $blue-hover);
+  padding: 10px;
+  margin-top: 7px;
 }
 /*
 ==========================
