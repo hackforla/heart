@@ -5,6 +5,8 @@ import Error from "../UI/Error";
 import "./Profile.scss";
 import getParticipant from "api/getParticipant.api";
 import Citations from "./components/Citations";
+import NotesContainer from "./components/NotesContainer";
+
 class ParticipantProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +34,7 @@ class ParticipantProfile extends React.Component {
   onError = errorMessage => {
     this.setState({ error: errorMessage, loading: false });
   };
+  
   render() {
     let { user, loading, error } = this.state;
     console.log(user);
@@ -44,6 +47,7 @@ class ParticipantProfile extends React.Component {
         </a>
         <div className="user-profile--content-container">
           <Card user={user} />
+          <NotesContainer />
           <Citations user={user} />
         </div>
       </div>
