@@ -1,7 +1,7 @@
 @import "styles/_shared.scss";
 
 .form-btn--save {
-    @include system-button($blue, $blue-hover);
+    @include system-button--sub($blue, $blue-hover);
     padding: 8px 16px;
     float: right;
 }
