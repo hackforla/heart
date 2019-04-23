@@ -1,17 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import "./navbar.scss";
+import PropTypes from "prop-types";
 
-import { UserAuth } from '../../utilities/auth';
-
-import "./navbar.css";
+import { UserAuth } from "../../utilities/auth";
 
 export class NavBar extends React.Component {
   static propTypes = {
-    onLogout: PropTypes.func.isRequired,
-};
+    onLogout: PropTypes.func.isRequired
+  };
 
- logOut() {
+  logOut() {
     this.props.onLogout();
   }
 
@@ -20,7 +19,7 @@ export class NavBar extends React.Component {
     let logInOutOption;
     let authNav;
 
-    if(UserAuth.loggedIn() === true) {
+    if (UserAuth.loggedIn() === true) {
       // if user is logged in, provide option to log out
       logInOutOption = (
         <div>
@@ -33,18 +32,17 @@ export class NavBar extends React.Component {
       authNav = (
         <ul className="nav-links-list">
           <li>
-           <Link to="/">Home</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-           <Link to="/participants/1">Participants</Link>
+            <Link to="/participants/1">Participants</Link>
           </li>
           <li>
-           <Link to="/form">Reporting</Link>
+            <Link to="/form">Reporting</Link>
           </li>
         </ul>
-      )
-    }
-    else {
+      );
+    } else {
       // if user is not logged in, provide link to login
       logInOutOption = (
         <div>
@@ -53,21 +51,16 @@ export class NavBar extends React.Component {
       );
       // Not logged in... Create default navigation links?
       authNav = (
-      <div className="logo">
-        <p>Heart</p>
-      </div> 
+        <div className="logo">
+          <p>Heart</p>
+        </div>
       );
-      
     }
-  
+
     return (
       <div role="navigation" className="nav-bar">
-        <div className="topnav-menu-left">
-          {authNav}
-        </div>
-        <div className="topnav-menu-right">
-          {logInOutOption}
-        </div>
+        <div className="topnav-menu-left">{authNav}</div>
+        <div className="topnav-menu-right">{logInOutOption}</div>
       </div>
     );
   }

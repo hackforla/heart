@@ -1,9 +1,12 @@
+@import "styles/shared.scss";
+
 .nav-bar {
   height: 60px;
   margin: 0;
-  background: lightgray;
+  background: $blue;
   display: flex;
   align-items: center;
+  box-shadow: $box-shadow;
 }
 
 .nav-bar .logo {
@@ -22,6 +25,8 @@
 
 .topnav-menu-left li > a {
   text-decoration: none;
+  text-transform: uppercase;
+  color: white;
 }
 
 .topnav-menu-right {
