@@ -173,15 +173,3 @@ export const _searchForDataBy = (field_type, name, questions) => {
     return false;
   });
 };
-
-export const _getStateFromPersistence = (
-  base_state,
-  persistence,
-  initialData
-) => {
-  const persisted_data = JSON.parse(persistence); // { disabled, fields_is_valid, form_data }
-  const state = { ...base_state, ...persisted_data };
-  if (initialData) state.form_data = { ...state.form_data, ...initialData };
-
-  return state;
-};
