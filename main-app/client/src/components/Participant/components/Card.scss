@@ -40,3 +40,11 @@ MEDIA QUERIES
     justify-items: start;
   }
 }
+
+@media (max-width: 600px) {
+  .user-card--container {
+    grid-template-columns: 1fr;
+    grid-template-areas: "name" "info";
+    justify-items: start;
+  }
+}

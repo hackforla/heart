@@ -66,7 +66,9 @@ MEDIA QUERIES
 @media (max-width: 600px) {
   .user-card-name--container,
   .user-card--avatar {
-    justify-self: center;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+    line-height: 16px;
   }
   .user-card-name,
   .user-card-aka {
@@ -75,10 +77,6 @@ MEDIA QUERIES
 }
 
 @media (max-width: 500px) {
-  .user-card-name--container,
-  .user-card--avatar {
-    grid-auto-flow: row;
-  }
   .user-card-name,
   .user-card-aka {
     display: block;
