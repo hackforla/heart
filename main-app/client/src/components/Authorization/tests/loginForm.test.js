@@ -95,13 +95,5 @@ describe("<LoginForm />", () => {
       .toMatch("Unable to login, please try again");
   });
 
-  // still pending this test
-  it("validates user login", () => {
-    UserAuthApi.loginApi = jest.fn(() => {
-      return new Promise.resolve({ username: "tester", password: "secret" });
-    });
-    usernameInput.simulate("change", usernameInputValues);
-    passwordInput.simulate("change", passwordInputValues);
-    // wrapper.find("form").simulate("submit");
-  });
+  // may need more tests such as redirect on login and form validation.
 });
