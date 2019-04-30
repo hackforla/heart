@@ -22,20 +22,18 @@ export class NavBar extends React.Component {
     if (UserAuth.loggedIn() === true) {
       // if user is logged in, provide option to log out
       logInOutOption = (
-        <div>
-          <Link to="/login" onClick={() => this.props.onLogout()}>
-            Log out
-          </Link>
-        </div>
+        <Link to="/login" onClick={() => this.props.onLogout()}>
+          Log out
+        </Link>
       );
       // authorized navigation links, when user is logged in
       authNav = (
         <ul className="nav-links-list">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/participants/1">Home</Link>
           </li>
           <li>
-            <Link to="/participants/1">Participants</Link>
+            <Link to="/">Intake Upload</Link>
           </li>
           <li>
             <Link to="/form">Reporting</Link>
@@ -44,11 +42,7 @@ export class NavBar extends React.Component {
       );
     } else {
       // if user is not logged in, provide link to login
-      logInOutOption = (
-        <div>
-          <Link to="/login">Login</Link>
-        </div>
-      );
+      logInOutOption = <Link to="/login">Login</Link>;
       // Not logged in... Create default navigation links?
       authNav = (
         <div className="logo">

@@ -2,11 +2,10 @@
 
 .nav-bar {
   height: 60px;
-  margin: 0;
-  background: $blue;
+  margin: 0 10%;
+  background: #ffffff;
   display: flex;
   align-items: center;
-  box-shadow: $box-shadow;
 }
 
 .nav-bar .logo {
@@ -17,26 +16,28 @@
 .logo a {
   text-decoration: none;
 }
+.nav-links-list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
 
 .topnav-menu-left li {
-  margin-left: 10px;
-  display: inline-block;
+  margin-left: 25px;
+  display: flex;
+  list-style: none;
 }
 
 .topnav-menu-left li > a {
   text-decoration: none;
-  text-transform: uppercase;
-  color: white;
+  font-size: 12px;
+  color: black;
 }
 
 .topnav-menu-right {
-  position: absolute;
-  display: inline-flex;
-  right: 0px;
+  margin-left: auto;
   font-size: 1em;
   text-decoration: none;
-  margin-right: 10px;
-  margin-left: 10px;
 }
 
 .topnav-menu-right a {
