@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./navbar.scss";
 import PropTypes from "prop-types";
 
@@ -30,13 +30,23 @@ export class NavBar extends React.Component {
       authNav = (
         <ul className="nav-links-list">
           <li>
-            <Link to="/participants/1">Home</Link>
+            <NavLink
+              to="/participants/1"
+              className="btn nav"
+              activeClassName="active"
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to="/">Intake Upload</Link>
+            <NavLink to="/intake" className="btn nav" activeClassName="active">
+              Intake Upload
+            </NavLink>
           </li>
           <li>
-            <Link to="/form">Reporting</Link>
+            <NavLink to="/form" className="btn nav" activeClassName="active">
+              Reporting
+            </NavLink>
           </li>
         </ul>
       );
