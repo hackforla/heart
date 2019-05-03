@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import * as jwtDecode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 import NavBar from "./components/Navbar/navbar";
 import ParticipantProfile from "./components/Participant/Profile";
