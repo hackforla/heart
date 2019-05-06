@@ -3,15 +3,14 @@
 .user-profile--container {
   background-color: $theme-color--background;
   min-height: 100vh;
-  width: 80vw;
+  width: 100vw;
   box-sizing: border-box;
   padding: 20px;
-  margin: auto;
+  padding-bottom: 100px;
 }
 
 .user-profile--content-container {
   margin: 0 auto;
-  width: 85vw;
   max-width: $max-width;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
