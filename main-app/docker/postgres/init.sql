@@ -3,7 +3,8 @@ CREATE TABLE users(
   first_name VARCHAR(20),
   last_name VARCHAR(20),
   email VARCHAR(50),
-  password VARCHAR(50)
+  username VARCHAR(50),
+  password VARCHAR(100)
 );
 
 CREATE TABLE participants(

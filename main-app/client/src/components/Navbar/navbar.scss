@@ -1,0 +1,75 @@
+@import "styles/shared.scss";
+
+.nav-bar {
+  height: 60px;
+  margin: 0 10%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+}
+.active {
+  font-weight: bold;
+}
+.nav-bar .logo {
+  padding-left: 5px;
+  font-size: 1.2em;
+}
+
+.logo a {
+  text-decoration: none;
+}
+.nav-links-list {
+  display: flex;
+  width: 375px;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+
+.topnav-menu-left li {
+  margin-left: 25px;
+  display: flex;
+  list-style: none;
+}
+
+.topnav-menu-left li > a {
+  text-decoration: none;
+  font-size: 12px;
+  color: black;
+}
+
+.topnav-menu-right {
+  margin-left: auto;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.topnav-menu-right a {
+  text-decoration: none;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+@media only screen and (min-width: 640px) {
+  .nav-bar .logo {
+    font-size: 2.2em;
+    padding-left: 20px;
+  }
+
+  .topnav-menu-right {
+    font-size: 1.3em;
+  }
+}
+
+.current-username {
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 600px) {
+  .current-username {
+    max-width: 250px;
+  }
+}
