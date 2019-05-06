@@ -11,6 +11,8 @@ import { NoMatch } from "./routes/NoMatch";
 // Higher Order Component (HOC) to prevent the users from accessing a route if they are not logged in
 import { PrivateRoute } from "../src/routes/privateRoute";
 
+import Participants from './components/Participants/Participants';
+
 import "./App.css";
 
 const UserContext = React.createContext({
@@ -102,6 +104,7 @@ class App extends Component {
                     />
                   )}
                 />
+                <Route exact={true} path="/participants" component={Participants} />
                 <PrivateRoute
                   exact={true}
                   path="/participants/:id/"

@@ -31,7 +31,7 @@ export class NavBar extends React.Component {
         <ul className="nav-links-list">
           <li>
             <NavLink
-              to="/participants/1"
+              to="/participants"
               className="btn nav"
               activeClassName="active"
             >
