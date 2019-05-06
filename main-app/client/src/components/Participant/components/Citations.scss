@@ -45,3 +45,22 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/*
+==========================
+MEDIA QUERIES
+==========================
+*/
+
+@media (max-width: 600px) {
+  
+.citations-form {
+  .form-QA--row {
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+  }
+  .form-QA {
+    margin-bottom: 0px;
+  }
+}
+}

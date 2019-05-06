@@ -17,3 +17,11 @@
   grid-template-areas: "card card card" "citation citation status";
   grid-gap: 50px;
 }
+
+@media (max-width: 600px) {
+  .user-profile--content-container {
+    grid-template-columns: 1fr;
+    grid-template-areas: "card" "status" "citation";
+    grid-gap: 20px;
+  }
+}
