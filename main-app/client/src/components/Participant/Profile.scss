@@ -1,12 +1,12 @@
-@import 'styles/shared.scss';
+@import "styles/shared.scss";
 
 .user-profile--container {
   background-color: $theme-color--background;
-
   min-height: 100vh;
-  width: 100vw;
+  width: 80vw;
   box-sizing: border-box;
   padding: 20px;
+  margin: auto;
 }
 
 .user-profile--content-container {
