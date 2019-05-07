@@ -51,7 +51,6 @@ const Pagination = ({
           handleClick={setCurrentPage}
         />
       ))}
-      <PaginationBtn label={'...'} handleClick={() => null} />
       <Arrow direction="right" handleClick={() => handlePrevNextSelection(1)} />
       <Arrow direction="last" handleClick={() => setCurrentPage(maxTab)} />
     </div>
