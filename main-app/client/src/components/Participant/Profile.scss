@@ -14,14 +14,14 @@
   max-width: $max-width;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-areas: "card card card" "citation citation status";
+  grid-template-areas: "card card card" "notes notes status" "citation citation status";
   grid-gap: 50px;
 }
 
 @media (max-width: 600px) {
   .user-profile--content-container {
     grid-template-columns: 1fr;
-    grid-template-areas: "card" "status" "citation";
+    grid-template-areas: "card" "status" "notes" "citation";
     grid-gap: 20px;
   }
 }

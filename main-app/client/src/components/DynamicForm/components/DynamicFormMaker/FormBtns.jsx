@@ -23,7 +23,7 @@ export const EditableModeToggleBtn = ({ editable, disabled, toggleEdit }) => (
   <input
     className={editable ? "form-btn--edit" : "form-btn--save"}
     type="submit"
-    value={editable ? "Save Citation" : "Edit"}
+    value={editable ? "Save" : "Edit"}
     disabled={disabled}
     onClick={e => {
       e.preventDefault();
@@ -37,7 +37,7 @@ export class EditableModeButtonRow extends React.Component {
     return (
       <div className='editable-mode--controls'>
         <button className="form-btn--delete" onClick={e => deleteItem(e)}>
-          Delete Citation
+          Delete
         </button>
         <button className="form-btn--cancel" onClick={e => cancelEdit(e)}>
           Cancel

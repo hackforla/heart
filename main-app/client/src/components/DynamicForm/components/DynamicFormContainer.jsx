@@ -48,6 +48,9 @@ class DynamicFormContainer extends React.Component {
       );
     } 
     let new_state = _initialize(this.props);
+    if (this.props.editableModeOn) {
+      new_state.editable = true;
+    }
     return this.setState(new_state);
   }
 
@@ -65,7 +68,7 @@ class DynamicFormContainer extends React.Component {
     // or it receives new questions (for multi-question sets)
     const { purpose, questions } = this.props;
 
-    _saveStateToLocalStorage(form_data, fields_is_valid, purpose || "form_data");
+    // _saveStateToLocalStorage(form_data, fields_is_valid, purpose || "form_data");
 
     // update form_data when a new question set is introduced
     // handles cases where multiple question sets may be introduced by
@@ -149,6 +152,7 @@ class DynamicFormContainer extends React.Component {
     e.preventDefault();
     this.setInitialValues(this.props.questions, this.props.initialData);
     this.setState({ editable: false });
+    this.props.onCancel(e)
   };
 
   render() {

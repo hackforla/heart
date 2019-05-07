@@ -5,6 +5,8 @@ import Error from "../UI/Error";
 import "./Profile.scss";
 import getParticipant from "api/getParticipant.api";
 import Citations from "./components/Citations";
+import Notes from './components/Notes';
+
 class ParticipantProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -43,6 +45,7 @@ class ParticipantProfile extends React.Component {
         </a>
         <div className="user-profile--content-container">
           <Card user={user} />
+          <Notes user={user} />
           <Citations user={user} />
         </div>
       </div>

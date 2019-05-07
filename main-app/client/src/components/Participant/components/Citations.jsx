@@ -20,17 +20,23 @@ class Citations extends React.Component {
     // fetch all of users citations
     if (prevProps.user !== this.props.user) {
       if (this.props.user.id) {
-        let userId = this.props.user.id;
-        this.setState({ userId });
-        return getCitations(userId, this.onSuccess, this.onError);
+        this.fetchUserCitations()
       }
     }
   };
+
+  fetchUserCitations = () => {
+    let userId = this.props.user.id;
+    this.setState({ userId });
+    return getCitations(userId, this.onSuccess, this.onError);
+  }
+
   onSuccess = data => {
     this.setState({ loading: false, citations: data });
   };
   onError = errorMessage => {
     this.setState({ error: errorMessage, loading: false });
+    return this.fetchUserCitations()
   };
   postFormData = formData => {
     this.setState({ loading: true, error: null });
