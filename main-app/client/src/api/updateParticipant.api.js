@@ -12,13 +12,11 @@ const updateParticipant = ({ id, data }, successFn, errorFn) => {
       Authorization: `Bearer ${authToken}`,
     }
   }
-  return axios.put(`${API_BASE_URL}/participants/${id}`, config, {
+  return axios.put(`${API_BASE_URL}/participants/${id}`, config,
     data,
-    timeout: 5000,
-  })
-
+    {timeout: 5000},
+  )
   .then(res => {
-    console.log(res)
     let { data: { participants } } = res;
     successFn(participants[0]);
     return res;
