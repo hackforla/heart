@@ -41,6 +41,7 @@ class ParticipantProfile extends React.Component {
         {loading && <Loader />}
         {error && <Error error={error} />}
         <a href={"/participants"} className="user-profile--nav">
+          <i class="fas fa-arrow-left"></i>
           Back to Index
         </a>
         <div className="user-profile--content-container">

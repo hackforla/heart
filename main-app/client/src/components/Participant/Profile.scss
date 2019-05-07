@@ -18,6 +18,20 @@
   grid-gap: 50px;
 }
 
+.user-profile--nav {
+  color: $darker-grey;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 12px;
+  .fa-arrow-left {
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+  &:hover {
+    color: $theme-color;
+  }
+}
 @media (max-width: 600px) {
   .user-profile--content-container {
     grid-template-columns: 1fr;
