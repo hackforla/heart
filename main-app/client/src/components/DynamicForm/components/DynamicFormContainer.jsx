@@ -95,6 +95,10 @@ class DynamicFormContainer extends React.Component {
     const form_data = { ...this.state.form_data };
     const fields_is_valid = { ...this.state.fields_is_valid };
 
+    console.log({
+      form_data
+    })
+
     const { onInputChange, onValidate } = this.props;
 
     const QA_Object = _searchForDataBy(
@@ -152,7 +156,7 @@ class DynamicFormContainer extends React.Component {
     e.preventDefault();
     this.setInitialValues(this.props.questions, this.props.initialData);
     this.setState({ editable: false });
-    this.props.onCancel(e)
+    this.props.onCancel() && this.props.onCancel();
   };
 
   render() {
