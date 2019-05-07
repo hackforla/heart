@@ -14,11 +14,14 @@
   max-width: $max-width;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-areas: "card card card" "notes notes status" "citation citation status";
+  grid-template-areas: "nav . ." "card card card" "notes notes status" "citation citation status";
   grid-gap: 50px;
 }
 
 .user-profile--nav {
+  margin-top: 10px;
+  grid-area: nav;
+  margin-bottom: -50px;
   color: $darker-grey;
   text-transform: uppercase;
   text-decoration: none;

@@ -42,11 +42,11 @@ class ParticipantProfile extends React.Component {
       <div className="user-profile--container">
         {loading && <Loader />}
         {error && <Error error={error} />}
-        <a href={"/participants"} className="user-profile--nav">
-          <i class="fas fa-arrow-left"></i>
-          Back to Index
-        </a>
         <div className="user-profile--content-container">
+          <a href={"/participants"} className="user-profile--nav">
+            <i class="fas fa-arrow-left"></i>
+            Back to Index
+          </a>
           <Card user={user} />
           <Notes user={user} />
           <Citations user={user} />

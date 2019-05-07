@@ -156,7 +156,7 @@ class DynamicFormContainer extends React.Component {
     e.preventDefault();
     this.setInitialValues(this.props.questions, this.props.initialData);
     this.setState({ editable: false });
-    this.props.onCancel() && this.props.onCancel();
+    this.props.onCancel && this.props.onCancel();
   };
 
   render() {
