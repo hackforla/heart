@@ -15,9 +15,7 @@
 }
 
 .notes-form {
-    box-shadow: $box-shadow;
-    background-color: white;
-    padding: 15px;
+    @include form-box;
 
     .form-question {
         display: none;

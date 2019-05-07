@@ -15,9 +15,7 @@
 }
 
 .citations-form {
-  box-shadow: $box-shadow;
-  background-color: white;
-  padding: 30px;
+  @include form-box;
 
   // form styling changes
   .form-question {
@@ -38,9 +36,9 @@
     grid-gap: 20px;
     background-color: $palest-grey;
     padding: 15px 20px;
-    width: calc(100% + 60px);
-    margin-left: -30px;
-    margin-top: -30px;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    margin-top: -15px;
     margin-bottom: 20px;
     grid-template-columns: repeat(3, 1fr);
   }

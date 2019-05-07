@@ -15,24 +15,5 @@
 }
 
 .status-form {
-    box-shadow: $box-shadow;
-    background-color: white;
-    padding: 15px;
-
-    // .form-question {
-    //     display: none;
-    // }
-    // .form-text-area {
-    //     margin-top: 0px;
-    //     min-height: 100px;
-    // }
-
-    // .user-card--edit-btn {
-    //     width: 50px;
-    //     float: right;
-    // }
-    // .notes-form--text {
-    //     color: $darker-grey;
-    //     margin-top: 10px;
-    // }
+   @include form-box;
 }

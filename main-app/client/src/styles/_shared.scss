@@ -55,6 +55,12 @@ $border-radius: 6px;
     color: $light-grey;
   }
 }
+@mixin form-box {
+  box-shadow: $box-shadow;
+  background-color: white;
+  padding: 15px;
+
+}
 /*
 ==========================
 Z-INDEXES
