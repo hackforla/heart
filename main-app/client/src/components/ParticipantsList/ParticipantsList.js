@@ -3,7 +3,7 @@ import TableHead from './TableHead';
 import TableRow from './TableRow';
 import Pagination from './Pagination';
 import { participantData } from './dataset';
-import './participants.scss';
+import './participantsList.scss';
 import getParticipants from '../../api/getParticipants.api';
 
 class Participants extends Component {
@@ -17,8 +17,9 @@ class Participants extends Component {
   };
 
   componentDidMount() {
+    // currently using fake data to populate list
+    // getParcicipants hits the backend with one record
     let results = getParticipants();
-    console.log('results', results);
     results.then(res => {
       this.setState(prevState => ({
         participants: prevState.participants.concat(res.data),
@@ -74,7 +75,7 @@ class Participants extends Component {
           <TableHead
             headings={[
               'Date',
-              'Refereal Source',
+              'Referral Source',
               'Case Status',
               'Last Update',
               'name',
