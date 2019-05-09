@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
+import React, { Component } from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
-import NavBar from './components/Navbar/navbar';
-import ParticipantProfile from './components/Participant/Profile';
-import LoginPage from './components/Authorization/loginPage';
-import { UserAuth } from './utilities/auth';
-import IntakeForm from './components/IntakeForm/IntakeForm';
-import { NoMatch } from './routes/NoMatch';
+import NavBar from "./components/Navbar/navbar";
+import ParticipantProfile from "./components/Participant/Profile";
+import LoginPage from "./components/Authorization/loginPage";
+import { UserAuth } from "./utilities/auth";
+import IntakeForm from "./components/IntakeForm/IntakeForm";
+import { NoMatch } from "./routes/NoMatch";
 // Higher Order Component (HOC) to prevent the users from accessing a route if they are not logged in
-import { PrivateRoute } from '../src/routes/privateRoute';
+import { PrivateRoute } from "../src/routes/privateRoute";
 
-import ParticipantsList from './components/ParticipantsList/ParticipantsList';
+import ParticipantsList from "./components/ParticipantsList/ParticipantsList";
 
-import './App.css';
+import "./App.css";
 
 const UserContext = React.createContext({
   user: null,
-  onLogout: () => true,
+  onLogout: () => true
 });
 export const UserConsumer = UserContext.Consumer;
 const UserProvider = UserContext.Provider;
 
 class App extends Component {
   state = {
-    user: null,
+    user: null
   };
 
   decodeToken = authToken => {
@@ -37,9 +37,9 @@ class App extends Component {
   }
 
   componentWillMount() {
-    const authToken = localStorage.getItem('authToken');
-    if (authToken === 'undefined') {
-      console.log('authToken is undefined');
+    const authToken = localStorage.getItem("authToken");
+    if (authToken === "undefined") {
+      console.log("authToken is undefined");
       // If for some reason authToken is undefined log the user out.
       UserAuth.logout();
       return;
@@ -67,7 +67,7 @@ class App extends Component {
       () => {
         UserAuth.refreshAuthToken();
       },
-      60 * 60 * 1000, // One hour
+      60 * 60 * 1000 // One hour
     );
   }
 
@@ -85,7 +85,7 @@ class App extends Component {
       <UserProvider
         value={{
           user,
-          onLogout: this.handleLogout,
+          onLogout: this.handleLogout
         }}
       >
         <BrowserRouter>
@@ -104,9 +104,9 @@ class App extends Component {
                     />
                   )}
                 />
-                <Route
+                <PrivateRoute
                   exact={true}
-                  path="/participants"
+                  path="/"
                   component={ParticipantsList}
                 />
                 <PrivateRoute
@@ -114,7 +114,9 @@ class App extends Component {
                   path="/participants/:id/"
                   component={ParticipantProfile}
                 />
+                {/* hold off on making this route privat */}
                 <Route exact={true} path="/form" component={IntakeForm} />
+                <Redirect from="/" to="/login" />
                 <Route component={NoMatch} />
               </Switch>
             </main>

@@ -1,34 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import { withRouter, Redirect } from "react-router-dom";
 
-import { UserAuth } from '../../utilities/auth';
+import { UserAuth } from "../../utilities/auth";
 
-import './loginForm.scss';
+import "./loginForm.scss";
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
       submitted: false,
       loading: false,
       redirectToReferrer: false,
-      error: ''
+      error: ""
     };
   }
 
   static propTypes = {
     location: PropTypes.object.isRequired,
-    onNewLogin: PropTypes.func.isRequired,
+    onNewLogin: PropTypes.func.isRequired
   };
 
   componentWillMount() {
     // If user is logged in redirect straight to the participants page
     const res = UserAuth.loggedIn();
     if (res) {
-      this.props.history.push('/participants/1');
+      this.props.history.push("/");
     }
   }
 
@@ -60,9 +60,16 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const { username, password, submitted, loading, redirectToReferrer, error } = this.state;
+    const {
+      username,
+      password,
+      submitted,
+      loading,
+      redirectToReferrer,
+      error
+    } = this.state;
     const { from } = this.props.location.state || {
-      from: { pathname: '/participants/1' },
+      from: { pathname: "/participants/1" }
     };
 
     if (redirectToReferrer) {
@@ -72,26 +79,54 @@ class LoginForm extends React.Component {
     return (
       <div className="centered-container">
         <h2 className="login-header">Login</h2>
-        <form name="form" className="login-form" onSubmit={evt => this.handleSubmit(evt)}>
-          {error &&
-            <div className={'alert alert-danger'}>{error}</div>
-          }
-          <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
+        <form
+          name="form"
+          className="login-form"
+          onSubmit={evt => this.handleSubmit(evt)}
+        >
+          {error && <div className={"alert alert-danger"}>{error}</div>}
+          <div
+            className={
+              "form-group" + (submitted && !username ? " has-error" : "")
+            }
+          >
             <label htmlFor="username">Username</label>
-            {submitted && !username &&
+            {submitted && !username && (
               <div className="help-block login-error">Username is required</div>
-            }
-            <input type="text" className="form-input" name="username" value={username} placeholder="Username" aria-label="Username" onChange={evt => this.handleChange(evt)} />            
+            )}
+            <input
+              type="text"
+              className="form-input"
+              name="username"
+              value={username}
+              placeholder="Username"
+              aria-label="Username"
+              onChange={evt => this.handleChange(evt)}
+            />
           </div>
-          <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-            <label htmlFor="password">Password</label>
-            {submitted && !password &&
-              <div className="help-block login-error">Password is required</div>
+          <div
+            className={
+              "form-group" + (submitted && !password ? " has-error" : "")
             }
-            <input type="password" className="form-input" name="password" value={password} placeholder="Password" aria-label="Password" onChange={evt => this.handleChange(evt)} />            
+          >
+            <label htmlFor="password">Password</label>
+            {submitted && !password && (
+              <div className="help-block login-error">Password is required</div>
+            )}
+            <input
+              type="password"
+              className="form-input"
+              name="password"
+              value={password}
+              placeholder="Password"
+              aria-label="Password"
+              onChange={evt => this.handleChange(evt)}
+            />
           </div>
           <div className="form-group">
-            <button className="btn btn-primary" disabled={loading}>Login</button>
+            <button className="btn btn-primary" disabled={loading}>
+              Login
+            </button>
           </div>
         </form>
       </div>
