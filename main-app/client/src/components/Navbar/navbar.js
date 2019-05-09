@@ -30,11 +30,7 @@ export class NavBar extends React.Component {
       authNav = (
         <ul className="nav-links-list">
           <li>
-            <NavLink
-              to="/participants/1"
-              className="btn nav"
-              activeClassName="active"
-            >
+            <NavLink to="/" className="btn nav" activeClassName="active">
               Home
             </NavLink>
           </li>

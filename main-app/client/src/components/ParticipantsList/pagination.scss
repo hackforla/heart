@@ -1,0 +1,24 @@
+.pagination-container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 90%;
+}
+
+.pagination-container span {
+  height: 35px;
+  width: 35px;
+  margin: 4px;
+  border-radius: 5px;
+  border: 1px solid #0079d3;
+  line-height: 35px;
+  color: #0079d3;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+.pagination-container .pagination-active-tab {
+  background-color: #0079d3;
+  color: white;
+}

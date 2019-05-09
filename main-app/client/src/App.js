@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
 import NavBar from "./components/Navbar/navbar";
@@ -10,6 +10,8 @@ import IntakeForm from "./components/IntakeForm/IntakeForm";
 import { NoMatch } from "./routes/NoMatch";
 // Higher Order Component (HOC) to prevent the users from accessing a route if they are not logged in
 import { PrivateRoute } from "../src/routes/privateRoute";
+
+import ParticipantsList from "./components/ParticipantsList/ParticipantsList";
 
 import "./App.css";
 
@@ -104,10 +106,17 @@ class App extends Component {
                 />
                 <PrivateRoute
                   exact={true}
+                  path="/"
+                  component={ParticipantsList}
+                />
+                <PrivateRoute
+                  exact={true}
                   path="/participants/:id/"
                   component={ParticipantProfile}
                 />
+                {/* hold off on making this route privat */}
                 <Route exact={true} path="/form" component={IntakeForm} />
+                <Redirect from="/" to="/login" />
                 <Route component={NoMatch} />
               </Switch>
             </main>
