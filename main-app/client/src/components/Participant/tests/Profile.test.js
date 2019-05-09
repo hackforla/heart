@@ -24,8 +24,8 @@ describe("Profile - API", () => {
   });
 
   it("saves results to state after making successful query", () => {
-    axios.get.mockResolvedValueOnce(mockResults);
-    return renderedComponent
+    axios.get.mockResolvedValueOnce(() => {
+      return renderedComponent
       .instance()
       .getParticipant(1)
       .then(res => {
@@ -33,6 +33,7 @@ describe("Profile - API", () => {
         expect(renderedComponent.state("user")).toEqual(mockItems);
         expect(renderedComponent.state("error")).toEqual(null);
       });
+    });
   });
 
   it("does not make API call if there is no ID", () => {
@@ -44,8 +45,8 @@ describe("Profile - API", () => {
   });
 
   it("saves error to state after API call error", () => {
-    axios.get.mockRejectedValueOnce(mockError);
-    return renderedComponent
+    axios.get.mockRejectedValueOnce(() => {
+      return renderedComponent
       .instance()
       .getParticipant(1)
       .then(res => {
@@ -53,5 +54,6 @@ describe("Profile - API", () => {
         expect(renderedComponent.state("user")).toEqual(null);
         expect(renderedComponent.state("error")).toEqual(mockError.message);
       });
+    });
   });
 });

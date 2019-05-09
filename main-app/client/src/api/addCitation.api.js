@@ -13,10 +13,7 @@ const addCitation = ({ id, data }, successFn, errorFn) => {
     }
   }
   return axios
-    .post(`${API_BASE_URL}/participants/${id}/citations`, config, {
-      data,
-      timeout: 5000
-    })
+    .post(`${API_BASE_URL}/participants/${id}/citations`, { data, timeout: 5000 }, config)
     .then(res => {
       let {
         data: { citations }

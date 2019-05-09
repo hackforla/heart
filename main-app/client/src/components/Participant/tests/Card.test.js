@@ -130,8 +130,8 @@ describe("Card - API Calls", () => {
     input.instance().value = "Mitch";
     input.simulate("change");
 
-    axios.get.mockResolvedValueOnce(mockResults);
-    return wrapper
+    axios.get.mockResolvedValueOnce(() => {
+      return wrapper
       .instance()
       .postFormData(1, mockItems)
       .then(res => {
@@ -140,6 +140,7 @@ describe("Card - API Calls", () => {
         expect(wrapper.state("error")).toEqual(null);
         expect(wrapper.state("loading")).toEqual(false);
       });
+    });
   });
 
 })

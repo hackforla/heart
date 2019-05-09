@@ -13,9 +13,7 @@ const deleteCitation = ({ id, citationId }, successFn, errorFn) => {
     }
   }
   return axios
-    .delete(`${API_BASE_URL}/participants/${id}/citations/${citationId}`, config, {
-      timeout: 5000
-    })
+    .delete(`${API_BASE_URL}/participants/${id}/citations/${citationId}`, { timeout: 5000 }, config)
     .then(res => {
       let {
         data: { citations }

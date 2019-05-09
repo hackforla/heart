@@ -7,7 +7,7 @@ USER CARD
 */
 .user-card--container {
   grid-area: card;
-  width: 85%;
+  // width: 85%;
   box-sizing: border-box;
   border: 1px solid $light-grey;
   border-top: 6px solid $theme-color;
@@ -33,10 +33,11 @@ USER CARD
 MEDIA QUERIES
 ==========================
 */
+
 @media (max-width: 600px) {
   .user-card--container {
     grid-template-columns: 1fr;
-    grid-template-areas: "image" "name" "info";
+    grid-template-areas: "name" "info";
     justify-items: start;
   }
 }

@@ -9,14 +9,12 @@ const updateCitation = ({ id, data, citationId }, successFn, errorFn) => {
   let config = {
     headers: {
       // Provide user's auth token as credentials
-      Authorization: `Bearer ${authToken}`,
+      'Authorization': `Bearer ${authToken}`,
     }
   }
+
   return axios
-    .put(`${API_BASE_URL}/citations/${citationId}`, config, {
-      data,
-      timeout: 5000
-    })
+    .put(`${API_BASE_URL}/citations/${citationId}`, { data, timeout: 5000 }, config)
     .then(res => {
       let {
         data: { citations }
