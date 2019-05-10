@@ -2,22 +2,20 @@ version: "3"
 
 services:
   postgres:
-    build: ./docker/postgres
-    image: heart_postgres
+    image: postgres:latest
     container_name: heart_postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: heart
     volumes:
-      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./docker/postgres/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres/seed.sql:/docker-entrypoint-initdb.d/seed.sql
     ports:
       - 5432:5432
 
   pgadmin:
-    build: ./docker/pgadmin
-    image: heart_pgadmin
+    image: dpage/pgadmin4
     container_name: heart_pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: pgadmin@example.com
@@ -42,12 +40,12 @@ services:
       - debug
 
   node-client:
-    build: ./docker/node-client
-    image: heart_node_client
+    build: ./client
     container_name: heart_node_client
     depends_on:
       - "node-api"
     volumes:
+      - code/node_modules
       - ./client:/code
     ports:
       - 3000:3000
