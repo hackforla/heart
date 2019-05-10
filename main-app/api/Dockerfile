@@ -1,9 +1,10 @@
-FROM node:10.14.2-alpine
-
-COPY . .
+FROM node:alpine
 
 WORKDIR /code
 
+COPY ./package.json ./
 RUN npm install
+
+COPY . .
 
 CMD ["npm", "debug"]
