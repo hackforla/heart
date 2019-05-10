@@ -1,4 +1,4 @@
-@import "styles/_shared.scss";
+@import "styles/shared.scss";
 
 .citations-container {
   grid-area: citation;
@@ -51,14 +51,13 @@ MEDIA QUERIES
 */
 
 @media (max-width: 600px) {
-  
-.citations-form {
-  .form-QA--row {
-    grid-template-columns: 1fr;
-    grid-gap: 10px;
+  .citations-form {
+    .form-QA--row {
+      grid-template-columns: 1fr;
+      grid-gap: 10px;
+    }
+    .form-QA {
+      margin-bottom: 0px;
+    }
   }
-  .form-QA {
-    margin-bottom: 0px;
-  }
-}
 }
