@@ -46,8 +46,6 @@ services:
       dockerfile: Dockerfile
       context: ./client
     container_name: heart_node_client
-    depends_on:
-      - "node-api"
     volumes:
       - ./code/node_modules
       - ./client:/code
