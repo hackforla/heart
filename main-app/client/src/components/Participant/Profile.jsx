@@ -5,8 +5,10 @@ import Error from "../UI/Error";
 import "./Profile.scss";
 import getParticipant from "api/getParticipant.api";
 import Citations from "./components/Citations";
+
 import Notes from './components/Notes';
 import Status from './components/Status';
+
 
 class ParticipantProfile extends React.Component {
   constructor(props) {
@@ -35,6 +37,7 @@ class ParticipantProfile extends React.Component {
   onError = errorMessage => {
     this.setState({ error: errorMessage, loading: false });
   };
+  
   render() {
     let { user, loading, error } = this.state;
     console.log(user)

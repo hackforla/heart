@@ -1,5 +1,4 @@
 @import "styles/shared.scss";
-
 .notes-container {
     grid-area: notes;
 }
@@ -16,7 +15,6 @@
 
 .notes-form {
     @include form-box;
-
     .form-question {
         display: none;
     }
@@ -24,7 +22,6 @@
         margin-top: 0px;
         min-height: 100px;
     }
-
     .user-card--edit-btn {
         width: 50px;
         float: right;
