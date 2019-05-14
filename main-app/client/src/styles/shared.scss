@@ -37,6 +37,7 @@ SIZING & STYLING
 ==========================
 */
 $max-width: 1180px;
+$max-width-medium: 1080px;
 $button-border-radius: 20px;
 $underline-dotted: 3px dotted $grey;
 @mixin section-title {
@@ -53,6 +54,12 @@ $border-radius: 6px;
   &::placeholder {
     color: $light-grey;
   }
+}
+@mixin form-box {
+  box-shadow: $box-shadow;
+  background-color: white;
+  padding: 15px;
+
 }
 /*
 ==========================

@@ -46,7 +46,7 @@ module.exports = (app) => {
       .catch(err => res.status(500).send(err));
   });
 
-  app.post('/participants/:id/citations', (req, res) => {
+  app.post('/participants/:id/citations', jwtAuth, (req, res) => {
     knex('citations')
       .insert('participant_id', req.params.id)
       .insert(req.body.data, Object.keys(req.body.data)) // possibly overwriting id, not saving

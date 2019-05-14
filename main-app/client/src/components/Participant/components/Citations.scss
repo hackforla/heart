@@ -1,4 +1,4 @@
-@import "styles/_shared.scss";
+@import "styles/shared.scss";
 
 .citations-container {
   grid-area: citation;
@@ -15,9 +15,7 @@
 }
 
 .citations-form {
-  box-shadow: $box-shadow;
-  background-color: white;
-  padding: 30px;
+  @include form-box;
 
   // form styling changes
   .form-question {
@@ -32,17 +30,34 @@
     color: $darker-grey;
   }
   .form-input {
-    // width: 150px;
     @include heart-input-box;
   }
   .form-QA--row {
     grid-gap: 20px;
     background-color: $palest-grey;
     padding: 15px 20px;
-    width: calc(100% + 20px);
-    margin-left: -30px;
-    margin-top: -30px;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    margin-top: -15px;
     margin-bottom: 20px;
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/*
+==========================
+MEDIA QUERIES
+==========================
+*/
+
+@media (max-width: 600px) {
+  .citations-form {
+    .form-QA--row {
+      grid-template-columns: 1fr;
+      grid-gap: 10px;
+    }
+    .form-QA {
+      margin-bottom: 0px;
+    }
   }
 }
