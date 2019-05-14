@@ -1,4 +1,4 @@
-@import "../../../styles/_shared.scss";
+@import "styles/shared.scss";
 
 /*
 ==========================
@@ -464,19 +464,17 @@ DROPDOWN MULTIPLE
 .dropdown--multiple-container {
   width: 100%;
   display: grid;
-  // grid-template-columns: repeat(auto-fill, minmax(50px, fit-content(150px)));
-  // grid-auto-flow: column dense;
-  grid-template-columns: repeat(5, fit-content(150px));
+  grid-template-columns: repeat(4, 1fr);
   justify-items: left;
+  align-items: span;
   grid-gap: 10px;
   margin: 10px 0px;
 }
 
 .dropdown--multiple-value-container {
   display: grid;
-  grid-template-columns: fit-content(150px) 1fr;
+  grid-template-columns: 1fr 40px;
   width: 100%;
-  align-items: span;
   font-weight: 600;
 }
 
@@ -485,18 +483,33 @@ DROPDOWN MULTIPLE
   color: $darkest-grey;
   padding: 5px 10px;
   border-radius: $border-radius 0px 0px $border-radius;
+  line-height: 30px;
 }
-
-.dropdown--multiple-btn {
+.dropdown--multiple-btn,
+.dropdown--disabled {
   background-color: $light-grey;
   color: $darkest-grey;
   padding: 5px 10px;
   border-radius: 0px $border-radius $border-radius 0px;
   border: none;
   font-weight: 600;
+  margin: 0px;
+  align-self: center;
+}
 
+.dropdown--multiple-btn {
   &:hover {
     background-color: $lighter-grey;
     cursor: pointer;
+  }
+}
+.dropdown--disabled {
+  width: 5px;
+  padding: 0px;
+}
+
+@media (max-width: 800px) {
+  .dropdown--multiple-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

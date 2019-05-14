@@ -55,12 +55,18 @@ const dropdown = (
             return (
               <div key={idx} className="dropdown--multiple-value-container">
                 <div className="dropdown--multiple-labels">{value.label}</div>
-                <button
-                  onClick={e => changeHandlerForMulti(e, value.label)}
-                  className="dropdown--multiple-btn"
-                >
-                  X
-                </button>
+                {
+                  !editable 
+                  ? <div className="dropdown--disabled" /> 
+                  : (
+                    <button
+                    onClick={e => changeHandlerForMulti(e, value.label)}
+                    className="dropdown--multiple-btn"
+                  >
+                    X
+                  </button>
+                  )
+                }
               </div>
             );
           })}

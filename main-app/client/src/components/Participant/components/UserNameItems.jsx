@@ -61,7 +61,7 @@ const UserNameItems = ({
           {renderedNameArray[0].value()}
         </div>
         <div className='user-card-name name--aka'>AKA</div>
-        <div className='user-card-name name--aka'>
+        <div className='user-card-name aka'>
           {renderedNameArray[1].value()}
         </div>
       </>
