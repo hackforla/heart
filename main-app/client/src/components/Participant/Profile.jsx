@@ -5,6 +5,9 @@ import Error from "../UI/Error";
 import "./Profile.scss";
 import getParticipant from "api/getParticipant.api";
 import Citations from "./components/Citations";
+import Notes from './components/Notes';
+import Status from './components/Status';
+
 class ParticipantProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -34,18 +37,25 @@ class ParticipantProfile extends React.Component {
   };
   render() {
     let { user, loading, error } = this.state;
-    console.log(user);
+    console.log(user)
     return (
       <div className="user-profile--container">
         {loading && <Loader />}
         {error && <Error error={error} />}
-        <a href={"/participants"} className="user-profile--nav">
-          Back to Index
-        </a>
-        <div className="user-profile--content-container">
-          <Card user={user} />
-          <Citations user={user} />
-        </div>
+        {
+          !loading && (
+            <div className="user-profile--content-container">
+            <a href={"/participants"} className="user-profile--nav">
+              <i className="fas fa-arrow-left"></i>
+              Back to Index
+            </a>
+            <Card user={user} />
+            <Notes user={user} />
+            <Citations user={user} />
+            <Status user={user} />
+          </div>
+          )
+        }
       </div>
     );
   }

@@ -1,4 +1,4 @@
-@import "styles/_shared.scss";
+@import "styles/shared.scss";
 
 .citations-container {
   grid-area: citation;
@@ -15,15 +15,13 @@
 }
 
 .citations-form {
-  box-shadow: $box-shadow;
-  background-color: white;
-  padding: 30px;
+  @include form-box;
 
   // form styling changes
   .form-question {
-    color: $med-grey;
+    color: $dark-grey;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 14px;
     text-transform: capitalize;
   }
   .form-answer,
@@ -32,21 +30,34 @@
     color: $darker-grey;
   }
   .form-input {
-    background-color: transparent;
-    border: none;
-    border-bottom: $underline-dotted;
-    padding-left: 0px;
-    width: 100px;
+    @include heart-input-box;
   }
   .form-QA--row {
     grid-gap: 20px;
     background-color: $palest-grey;
-    padding: 20px;
-    width: calc(100% + 20px);
-    margin-left: -30px;
-    margin-top: -30px;
-    margin-bottom: 30px;
+    padding: 15px 20px;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    margin-top: -15px;
+    margin-bottom: 20px;
+    grid-template-columns: repeat(3, 1fr);
   }
-  .react-dropdown {
+}
+
+/*
+==========================
+MEDIA QUERIES
+==========================
+*/
+
+@media (max-width: 600px) {
+  .citations-form {
+    .form-QA--row {
+      grid-template-columns: 1fr;
+      grid-gap: 10px;
+    }
+    .form-QA {
+      margin-bottom: 0px;
+    }
   }
 }

@@ -19,8 +19,8 @@
 2. run `npm install`
 3. cd .. (back to main-app)
 4. run `docker-compose up` to bring up heart_node, heart_postgres, and heart_pgadmin containers
-5. Go to localhost:3000 to access main-app
-6. Go to localhost:8080 to access pgadmin using user: pgadmin@example.com password: pgadmin. 
+5. Go to localhost:3000 to access main-app using user: `demo` password: `pwd123`
+6. Go to localhost:8080 to access pgadmin using user: `pgadmin@example.com` password: `pgadmin`. 
 
 See "How to browse postgres using pgadmin" section below if you wish to see the db structure.
 
@@ -50,6 +50,19 @@ To use what we've provided, you'll need the latest version of [NodeJS](https://n
 docker-compose.yml    
 README.md             // you're reading it
 ```
+
+### Logins
+
+**App Login**
+
+User: demo
+Password: pwd123
+
+
+**PGAdmin Login**
+
+User: pgadmin@example.com
+Password: pgadmin
 
 ### Start Guide
 

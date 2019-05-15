@@ -1,9 +1,10 @@
 const violationStyles = {
   control: styles => ({
     ...styles,
-    border: "none",
-    borderBottom: "1px solid #7f7f7f",
-    borderRadius: "0px"
+    border: "1px solid #e6e6e6",
+    boxShadow: "inset 0 0 3px #e6e6e6",
+    borderRadius: "2px",
+    backgroundColor: "white"
   }),
   option: (provided, state) => ({
     ...provided
@@ -16,15 +17,23 @@ const violationStyles = {
   }
 };
 
+// border: 1px solid $light-grey;
+// border-radius: 2px;
+// box-shadow: inset 0 0 3px $light-grey;
+// &::placeholder {
+//   color: $light-grey;
+// }
+
 const courtStyles = {
-  control: styles => ({
+  control: (styles, state) => ({
     ...styles,
-    border: "none",
-    backgroundColor: "transparent",
-    borderBottom: "3px dotted #adadad",
-    borderRadius: "0px",
-    padding: "6px",
-    paddingLeft: "0px"
+    padding: "2px",
+    paddingLeft: "0px",
+    marginTop: "5px",
+    border: "1px solid #e6e6e6",
+    boxShadow: "inset 0 0 3px #e6e6e6",
+    borderRadius: "2px",
+    backgroundColor: "white"
   }),
   option: (provided, state) => ({
     ...provided

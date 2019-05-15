@@ -1,12 +1,19 @@
 import axios from "axios";
-import { API_ENDPOINT } from "get_uri";
+//import { API_ENDPOINT } from "get_uri";
+import { API_BASE_URL } from '../config/url_config';
+
+import { UserAuth } from '../utilities/auth';
 
 const addCitation = ({ id, data }, successFn, errorFn) => {
+  const authToken = UserAuth.getAuthToken();
+  let config = {
+    headers: {
+      // Provide user's auth token as credentials
+      Authorization: `Bearer ${authToken}`,
+    }
+  }
   return axios
-    .post(`${API_ENDPOINT}/participants/${id}/citations`, {
-      data,
-      timeout: 5000
-    })
+    .post(`${API_BASE_URL}/participants/${id}/citations`, { data, timeout: 5000 }, config)
     .then(res => {
       let {
         data: { citations }

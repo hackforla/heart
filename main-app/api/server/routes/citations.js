@@ -1,21 +1,18 @@
+const passport = require('passport');
 const knex = require('../config/knex_config.js');
 
-module.exports = (app) => {
-  app.post('/citations', (req, res) => {
-    knex('citations').insert(req.body)
-      .then(() => res.status(200).send())
-      .catch(err => res.status(500).send(err));
-  });
+const jwtAuth = passport.authenticate('jwt', { session: false });
 
-  app.put('/citations/:id', (req, res) => {
+module.exports = (app) => {
+  app.put('/citations/:id', jwtAuth, (req, res) => {
     knex('citations')
       .where('id', req.params.id)
-      .update(req.body, Object.keys(req.body))
+      .update(req.body.data, Object.keys(req.body.data))
       .then(citations => res.status(200).send({ citations }))
       .catch(err => res.status(500).send(err));
   });
 
-  app.delete('/citations/:id', (req, res) => {
+  app.delete('/citations/:id', jwtAuth, (req, res) => {
     knex('citations')
       .where('id', req.params.id)
       .del()
@@ -23,14 +20,14 @@ module.exports = (app) => {
       .catch(err => res.status(500).send(err));
   });
 
-  app.get('/citations/:id', (req, res) => {
+  app.get('/citations/:id', jwtAuth, (req, res) => {
     knex('citations')
       .where('id', req.params.id)
       .then(citations => res.status(200).send(citations))
       .catch(err => res.status(500).send(err));
   });
 
-  app.get('/citations', (req, res) => {
+  app.get('/citations', jwtAuth, (req, res) => {
     knex.select().table('citations')
       .then(citations => res.status(200).send(citations))
       .catch(err => res.status(500).send(err));

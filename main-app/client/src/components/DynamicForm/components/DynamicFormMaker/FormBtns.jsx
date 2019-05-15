@@ -1,4 +1,5 @@
 import React from "react";
+import './FormBtns.scss';
 
 export const SubmitBtn = ({ form_data, disabled, onSubmit }) => {
   return (
@@ -34,15 +35,15 @@ export class EditableModeButtonRow extends React.Component {
   render() {
     let { deleteItem, cancelEdit } = this.props;
     return (
-      <>
+      <div className='editable-mode--controls'>
         <button className="form-btn--delete" onClick={e => deleteItem(e)}>
-          Delete Citation
+          Delete
         </button>
         <button className="form-btn--cancel" onClick={e => cancelEdit(e)}>
           Cancel
         </button>
         {this.props.children}
-      </>
+      </div>
     );
   }
 }

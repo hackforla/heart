@@ -1,12 +1,20 @@
 import axios from "axios";
-import { API_ENDPOINT } from "get_uri";
+//import { API_ENDPOINT } from "get_uri";
+import { API_BASE_URL } from '../config/url_config';
+
+import { UserAuth } from '../utilities/auth';
 
 const updateCitation = ({ id, data, citationId }, successFn, errorFn) => {
+  const authToken = UserAuth.getAuthToken();
+  let config = {
+    headers: {
+      // Provide user's auth token as credentials
+      'Authorization': `Bearer ${authToken}`,
+    }
+  }
+
   return axios
-    .put(`${API_ENDPOINT}/participants/${id}/citations/${citationId}`, {
-      data,
-      timeout: 5000
-    })
+    .put(`${API_BASE_URL}/citations/${citationId}`, { data, timeout: 5000 }, config)
     .then(res => {
       let {
         data: { citations }
