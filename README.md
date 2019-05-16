@@ -71,7 +71,7 @@ To use what we've provided, you'll need the latest version of [NodeJS](https://n
   \api                  // contains all the backend code
   \client               // contains the front-end code
   docker-compose.yml
-  README.md             // you are reading it
+README.md               // you are reading it
 ```
 
 ### Logins
