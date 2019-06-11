@@ -1,16 +1,16 @@
 # DynamicFormContainer Options
-## REQUIRED
+### REQUIRED
  * `questions` {array} Array of Question / Answer data object
  * `onSubmit` {func} onSubmit wrapper callback for handling submit behavior
  * `editable` {bool} editable controls whether form is editable or non-editable
 
-## OPTIONAL
+### OPTIONAL
  * `onDelete` {func} onDelete wrapper callback for handling deletion behavior
  * `onCancel` {func} onCancel wrapper callback for handling cancel behavior
  * `editable` {bool} editable controls whether form is editable or non-editable
  * `editableMode` {bool} editable controls whether form has edit mode
 
-##  UNSTABLE / UNTESTED
+###  UNSTABLE / UNTESTED
  * `initialData` {object} initialData CAUTION: very delicate - must match expected shape EXACTLY. Provide initial form_data.
  * `Purpose` {string} Dynamic Form collection purpose name (for form data persistence)
  * `hiddenData` {object} hiddenData values for 'hidden' input types -> { field_name: value }
@@ -20,27 +20,27 @@
  * `customComponents` {func} customComponents custom input_type components (merged with defaults, precedence to custom components)
 
 # Question/Answer Array Options
-## Category Type
+### Category Type
 ![category img](https://i.ibb.co/6ZHptsD/Screen-Shot-2019-06-10-at-5-06-06-PM.png)
 Categories will be rendered as a section in the form, with an optional Category name.
  * [Optional] `category_name` {string} Category name
  * [Optional] `category_contents` {array} Array of Question/Answer type or Row type
 
-## Row Type
+### Row Type
 ![row img](https://i.ibb.co/H7D2RYj/Screen-Shot-2019-06-10-at-5-04-59-PM.png)
 Rows will render it's nested contents as a single span
 * [Optional] `row` {array} Array of Question/Answer types
 
-# Question/Answer Type
+### Question/Answer Type
 Question/Answer objects are the basic building blocks
  * [Optional] `text` {string} Question text that is rendered
  * [Required] `input_type` {string} Input Type (see below)
  * [Required] `field_name` {string} Name of field to be saved
  * [Optional] `placeholder` {string} Placeholder answer
  * [Optional] `optional` {bool} Validation boolean. If true, validaiton is skipped for the question. 
- * [Optional] `options` {array} Array of Option Types
+ * [Optional/Required] `options` {array} Array of Option Types. Required for dropdown, checkbox, and radio Input Types
 
-# Input Type Options
+### Input Type Options
 Choose one: 
 - text
 - textarea
@@ -51,7 +51,7 @@ Choose one:
 - email
 - password
 
-# Option Type
+### Option Type
  * [Required] `text` {string} Answer text that's rendered.
  * [Optional] `value` {string} Answer text that get's saved. If not provided, `text` is used for both text and value. 
 
