@@ -11,6 +11,7 @@ class IntakeForm extends React.Component {
           <h1 className="intake-form-title">Intake Form</h1>
           <DynamicFormContainer 
             questions={IntakeFormQA}
+            editable={true}
           />
         </section>
       </div>
