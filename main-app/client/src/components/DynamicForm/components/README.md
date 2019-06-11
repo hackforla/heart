@@ -21,13 +21,11 @@
 
 # Question/Answer Array Options
 ### Category Type
-![category img](https://i.ibb.co/6ZHptsD/Screen-Shot-2019-06-10-at-5-06-06-PM.png)
 Categories will be rendered as a section in the form, with an optional Category name.
  * [Optional] `category_name` {string} Category name
  * [Optional] `category_contents` {array} Array of Question/Answer type or Row type
 
 ### Row Type
-![row img](https://i.ibb.co/H7D2RYj/Screen-Shot-2019-06-10-at-5-04-59-PM.png)
 Rows will render it's nested contents as a single span
 * [Optional] `row` {array} Array of Question/Answer types
 
@@ -37,6 +35,7 @@ Question/Answer objects are the basic building blocks
  * [Required] `input_type` {string} Input Type (see below)
  * [Required] `field_name` {string} Name of field to be saved
  * [Optional] `placeholder` {string} Placeholder answer
+ * [Optional] `subtext` {string} Subtext rendered under the question text
  * [Optional] `optional` {bool} Validation boolean. If true, validaiton is skipped for the question. 
  * [Optional/Required] `options` {array} Array of Option Types. Required for dropdown, checkbox, and radio Input Types
 
@@ -54,7 +53,6 @@ Choose one:
 ### Option Type
  * [Required] `text` {string} Answer text that's rendered.
  * [Optional] `value` {string} Answer text that get's saved. If not provided, `text` is used for both text and value. 
-
 
 
 # Quick Start
@@ -115,3 +113,51 @@ class IntakeForm extends React.Component {
   }
 }
 ```
+### 3 - For custom styling, wrap DynamicFormContainer in a className
+```
+.intake-form {
+    // dynamic form styling changes
+    .form-QA {
+        // styles the entire form question/answer (QA) block
+    }
+    .form-question {
+        // styles the form question of the QA block
+    }
+    .form-subtext {
+        // styles the subtext of a question
+    }
+    .form-btn {
+        // styles the submit button
+    }
+    .form-btn--disabled {
+        // styles the disabled submit button
+    }
+    .form-answer {
+        // styles the form answer text
+    }
+    .form-input {
+        // styles the input box
+    }
+    .form-date {
+        // styles the date input box
+    }
+    .form-text-area {
+        // styles the textarea input box
+    }
+    .form-QA--category {
+        // styles the category section
+    }
+    .form-QA--category--header {
+        // styles the category header text
+    }
+    .form-QA--row {
+        // styles the row block
+    }
+
+}
+```
+# Rendered Examples
+### Category Example
+![category img](https://i.ibb.co/6ZHptsD/Screen-Shot-2019-06-10-at-5-06-06-PM.png)
+### Row Example
+![row img](https://i.ibb.co/H7D2RYj/Screen-Shot-2019-06-10-at-5-04-59-PM.png)
