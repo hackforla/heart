@@ -17,13 +17,6 @@ const violationStyles = {
   }
 };
 
-// border: 1px solid $light-grey;
-// border-radius: 2px;
-// box-shadow: inset 0 0 3px $light-grey;
-// &::placeholder {
-//   color: $light-grey;
-// }
-
 const courtStyles = {
   control: (styles, state) => ({
     ...styles,
