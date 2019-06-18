@@ -169,6 +169,13 @@ const IntakeFormQA = [
     ],
     optional: true,
   },
+  {
+    text: "Notes",
+    input_type: 'textarea',
+    field_name: 'notes',
+    optional: true,
+    placeholder: 'Intaker notes for participant'
+  }
 ]
 
 export default IntakeFormQA;

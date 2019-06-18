@@ -43,7 +43,7 @@ class ParticipantProfile extends React.Component {
         {loading && <Loader />}
         {error && <Error error={error} />}
         {
-          !loading && (
+          !loading && user && (
             <div className="user-profile--content-container">
             <a href={"/participants"} className="user-profile--nav">
               <i className="fas fa-arrow-left"></i>

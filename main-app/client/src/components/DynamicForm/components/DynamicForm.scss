@@ -89,10 +89,10 @@ INPUT & TEXTAREA & DATE
   display: block;
   width: 100%;
   font-size: 14px;
-  color: $dark-grey;
+  color: $darker-grey;
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid $lighter-grey;
+  border: 1px solid $med-grey;
   box-sizing: border-box;
   &::placeholder {
     color: $grey;
@@ -107,12 +107,12 @@ INPUT & TEXTAREA & DATE
   display: block;
   width: 100%;
   font-size: 14px;
-  color: $dark-grey;
-  padding: 5px;
+  color: $darker-grey;
+  padding: 10px;
   margin-top: 5px;
-  border: 1px solid $light-grey;
-  min-height: 50px;
-  max-height: 50px;
+  border: 1px solid $med-grey;
+  min-height: 100px;
+  max-height: 1000px;
   max-width: 100%;
   min-width: 100%;
   &::placeholder {
@@ -461,6 +461,10 @@ RADIO STYLING
 DROPDOWN MULTIPLE
 ==========================
 */
+
+.react-downdown__control {
+  border-color: $med-grey !important;
+}
 .dropdown--multiple-container {
   width: 100%;
   display: grid;

@@ -77,7 +77,7 @@ class LoginForm extends React.Component {
       return <Redirect to={from} />;
     }
     return (
-      <div className="centered-container">
+      <div className="centered-container login-form-container">
         <h2 className="login-header">Login</h2>
         <form
           name="form"

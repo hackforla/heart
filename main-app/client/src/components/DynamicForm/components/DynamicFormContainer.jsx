@@ -20,7 +20,7 @@ import {
 } from "../utilities/localStorage";
 import { SubmitBtn, EditableModeControls } from "./DynamicFormMaker/FormBtns";
 import { SubmitBtnState } from "../utilities/types";
-
+ 
 class DynamicFormContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -41,10 +41,10 @@ class DynamicFormContainer extends React.Component {
     } = this.props;
     const state = { questions };
 
-    const persistence = _getFromLocalStorage(purpose);
-    if (persistence) {
+    const persisted_data = _getFromLocalStorage(purpose);
+    if (persisted_data) {
       return this.setState(
-        _mergeWithPersistedData(state, persistence, initialData)
+        _mergeWithPersistedData(state, persisted_data, initialData)
       );
     } 
     let new_state = _initialize(this.props);
@@ -95,10 +95,6 @@ class DynamicFormContainer extends React.Component {
     const form_data = { ...this.state.form_data };
     const fields_is_valid = { ...this.state.fields_is_valid };
 
-    console.log({
-      form_data
-    })
-
     const { onInputChange, onValidate } = this.props;
 
     const QA_Object = _searchForDataBy(
@@ -109,8 +105,6 @@ class DynamicFormContainer extends React.Component {
 
     const optional = QA_Object.optional;
 
-    // provides observational window into form data
-    // no control over behavior at this time
     onInputChange && onInputChange(name, value, form_data);
 
     form_data[name] =
@@ -130,10 +124,6 @@ class DynamicFormContainer extends React.Component {
     this.setState({ form_data, fields_is_valid });
   };
 
-  /**
-   * calls DynamicFormMaker()
-   * - creates form Question components for each 'question'
-   */
   renderInputs = () =>
     dynamicFormMaker(
       this.state.questions,
