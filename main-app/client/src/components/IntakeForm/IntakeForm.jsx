@@ -4,6 +4,9 @@ import { DynamicFormContainer } from 'components/DynamicForm';
 import './IntakeForm.scss';
 
 class IntakeForm extends React.Component {
+  onSubmit = (formData) => {
+    console.log(formData)
+  }
   render() {
     return (
       <div className="intake-form-container">
@@ -12,6 +15,7 @@ class IntakeForm extends React.Component {
           <DynamicFormContainer 
             questions={IntakeFormQA}
             editable={true}
+            onSubmit={this.onSubmit}
           />
         </section>
       </div>
