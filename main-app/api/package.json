@@ -2,6 +2,10 @@
   "name": "heart_api",
   "version": "1.0.0",
   "description": "API for Hack for LA Heart project",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/hackforla/heart.git"
+  },
   "main": "./server/index.js",
   "scripts": {
     "start": "node ./server/index.js",
