@@ -1,10 +1,12 @@
-FROM node:12.2-alpine
+FROM node:12.2-alpine as prod
 
 WORKDIR /code
 
-COPY ./package.json ./
-RUN npm install
+COPY package*.json ./
+RUN npm install && npm cache clean --force
+
+ENV PATH /code/node_modules/.bin:$PATH
 
 COPY . .
 
-CMD ["npm", "debug"]
+CMD ["node", "./server/index.js"]
