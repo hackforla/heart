@@ -2,6 +2,10 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/hackforla/heart.git"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^7.0.0",
