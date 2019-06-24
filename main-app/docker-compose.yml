@@ -52,6 +52,8 @@ services:
       context: ./client
       dockerfile: Dockerfile
     init: true
+    depends_on:
+      - node-api
     volumes:
       - ./client:/app
 # anonymous volume to prevent overwriting during mount
