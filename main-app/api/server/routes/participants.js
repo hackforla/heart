@@ -49,7 +49,7 @@ module.exports = (app) => {
   app.post('/participants/:id/citations', jwtAuth, (req, res) => {
     knex('citations')
       .insert('participant_id', req.params.id)
-      .insert(req.body.data, Object.keys(req.body.data)) // possibly overwriting id, not saving
+      .insert(req.body, Object.keys(req.body)) // possibly overwriting id, not saving
       .then(citations => res.status(200).send(citations))
       .catch(err => res.status(500).send(err));
   });
