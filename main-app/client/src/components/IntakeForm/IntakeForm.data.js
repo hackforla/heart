@@ -9,12 +9,14 @@ const IntakeFormQA = [
             input_type: 'text',
             field_name: 'clinic_attended',
             placeholder: 'location',
+            optional: true,
           },
           {
             text: 'Clinic Date',
             input_type: 'text',
             field_name: 'clinic_date',
             placeholder: 'date',
+            optional: true,
           },
         ]
       }
@@ -30,18 +32,21 @@ const IntakeFormQA = [
             input_type: 'text',
             field_name: 'first_name',
             placeholder: 'First Name',
+            optional: true,
           },
           {
             text: 'Middle Name',
             input_type: 'text',
             field_name: 'middle_name',
             placeholder: 'Middle Name',
+            optional: true,
           },
           {
             text: 'Last Name',
             input_type: 'text',
             field_name: 'last_name',
             placeholder: 'Last Name',
+            optional: true,
           },
         ],
       },
@@ -50,18 +55,21 @@ const IntakeFormQA = [
         input_type: 'text',
         field_name: 'known_as',
         placeholder: 'Other names they go by',
+        optional: true,
       },
       {
         text: `Driver's License`,
         input_type: 'text',
         field_name: 'driver_license',
         placeholder: 'License Number',
+        optional: true,
       },
       {
         text: 'Date of Birth',
         input_type: 'text',
         field_name: 'date_of_birth',
         placeholder: 'Month/Day/Year',
+        optional: true,
       },
     ],
   },
@@ -87,7 +95,8 @@ const IntakeFormQA = [
       { text: '25-54' },
       { text: '55-61' },
       { text: '62-Older' },
-    ]
+    ],
+    optional: true,
   },
   {
     text: 'Ethnicity',
@@ -98,7 +107,8 @@ const IntakeFormQA = [
       { text: 'Hispanic/Latino' },
       { text: 'Not Hispanic/Latino' },
       { text: 'Unknown' },
-    ]
+    ],
+    optional: true,
   },
   {
     text: 'Race',
@@ -113,7 +123,8 @@ const IntakeFormQA = [
       { text: 'Native Hawaiian/Other Pacific Islander' },
       { text: 'Multi-Racial/Other' },
       { text: 'Other' },
-    ]
+    ],
+    optional: true,
   },
   {
     text: 'Gender',
@@ -127,7 +138,8 @@ const IntakeFormQA = [
       { text: 'Transgender Female to Male' },
       { text: 'Other' },
       { text: 'Unknown' },
-    ]
+    ],
+    optional: true,
   },
   {
     text: 'Income Source',
@@ -154,8 +166,16 @@ const IntakeFormQA = [
       { text: '$501-1000' },
       { text: '$1000-1500' },
       { text: '$1500 and up' },
-    ]
+    ],
+    optional: true,
   },
+  {
+    text: "Notes",
+    input_type: 'textarea',
+    field_name: 'notes',
+    optional: true,
+    placeholder: 'Intaker notes for participant'
+  }
 ]
 
 export default IntakeFormQA;

@@ -1,9 +1,11 @@
-version: "3"
+version: "2.4"
 
 services:
   postgres:
     image: postgres:10.6
     container_name: heart_postgres
+    healthcheck:
+      test: pg_isready -U postgres -h 127.0.0.1
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -24,30 +26,41 @@ services:
       - 8080:80
 
   node-api:
+    container_name: heart_node_api
     build:
       dockerfile: Dockerfile
       context: ./api
-    container_name: heart_node_api
+    init: true
     depends_on:
-      - "postgres"
+      postgres:
+        condition: service_healthy
     volumes:
       - ./code/node_modules
       - ./api:/code
     ports:
       - 4000:4000
       - 9229:9229
-    command:
-      - npm
-      - run
-      - debug
+    command: nodemon --inspect=0.0.0.0:9229 server/index.js
+    environment:
+      - DEBUG=heart_api:*
+      - NODE_ENV=development
+      - COMPOSE_HTTP_TIMEOUT=200
 
   node-client:
-    build:
-      dockerfile: Dockerfile
-      context: ./client
     container_name: heart_node_client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    init: true
+    depends_on:
+      - node-api
     volumes:
-      - ./code/node_modules
-      - ./client:/code
+      - ./client:/app
+# anonymous volume to prevent overwriting during mount
+      - ./app/node_modules
     ports:
       - 3000:3000
+    environment:
+      - NODE_ENV=development
+#added for windows hot-reload to enable watchers
+      - CHOKIDAR_USEPOLLING=true
