@@ -1,0 +1,40 @@
+.paper {
+  position: absolute;
+  top: 150px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 60%;
+  min-width: 600px;
+  height: 1000px;
+}
+
+.intake-title {
+  text-align: center;
+  background: #3122d6;
+  color: white;
+  font-size: 48px;
+  padding: 20px 0;
+  font-weight: 200;
+}
+
+.intake-form {
+  position: relative;
+  margin: 50px;
+  height: 800px;
+}
+
+.submit-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0 30px 30px 0;
+  background: #3122d6;
+  color: white;
+  font-size: 24px;
+  padding: 20px 50px;
+  font-weight: 100;
+  width: auto;
+  height: auto;
+  border: none;
+}
