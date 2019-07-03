@@ -1,0 +1,36 @@
+.title {
+  font-size: 16px;
+  color: #adadad;
+  font-weight: 600;
+  margin: 28px auto;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.label {
+  font-size: 16px;
+  color: #4f4f4f;
+  font-weight: 600;
+  display: block;
+  padding-bottom: 4px;
+  text-align: left;
+}
+
+.form-inputs {
+  padding: 12px 0;
+}
+
+.input-field {
+  display: block;
+  width: 50%;
+  font-size: 14px;
+  color: #4f4f4f;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #9e9e9e;
+  box-sizing: border-box;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
