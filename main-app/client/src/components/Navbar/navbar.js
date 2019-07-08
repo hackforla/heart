@@ -35,11 +35,6 @@ export class NavBar extends React.Component {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/intake" className="btn nav" activeClassName="active">
-              Intake Upload
-            </NavLink>
-          </li>
-          <li>
             <NavLink to="/form" className="btn nav" activeClassName="active">
               Intake Form
             </NavLink>
