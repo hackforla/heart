@@ -22,9 +22,13 @@ export class NavBar extends React.Component {
     if (UserAuth.loggedIn() === true) {
       // if user is logged in, provide option to log out
       logInOutOption = (
-        <Link to="/login" onClick={() => this.props.onLogout()}>
-          Log out
+        <div className="topnav-menu-right">
+          <div className="search-bar">Insert search bar here</div>
+          <div className="current-username">Gina</div>
+          <Link to="/login" onClick={() => this.props.onLogout()}>
+            Log out
         </Link>
+        </div>
       );
       // authorized navigation links, when user is logged in
       authNav = (
@@ -53,10 +57,10 @@ export class NavBar extends React.Component {
     }
 
     return (
-      <div role="navigation" className="nav-bar">
-        <div className="topnav-menu-left">{authNav}</div>
-        <div className="topnav-menu-right">{logInOutOption}</div>
-      </div>
+      < div role="navigation" className="nav-bar" >
+        <div className="topnav-menu-left">{authNav}{console.log("this is props", this.props)}</div>
+        {logInOutOption}
+      </div >
     );
   }
 }
