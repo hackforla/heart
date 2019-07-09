@@ -37,14 +37,14 @@ This serves both the backend api and frontend pages for the processing system an
 
 ### Recomendations
 
-- Latest version of Docker is rquired must be installed on your computer.
+- Latest version of Docker is required must be installed on your computer.
 - Node and NPM does not have to be installed but it is highly recommended.
 
 ### Installation Instructions
 
 1. cd into `main-app`
 2. run `docker-compose build`
-3. run `docker-compose up` once the obove command is finished runiing. This will bring up heart_node, heart_postgres, and heart_pgadmin containers and start the application.
+3. run `docker-compose up` once the obove command is finished running. This will bring up heart_node, heart_postgres, and heart_pgadmin containers and start the application.
 4. Go to localhost:3000 to access main-app using user: `demo` password: `pwd123`
 5. Go to localhost:8080 to access pgadmin using user: `pgadmin@example.com` password: `pgadmin`.
 

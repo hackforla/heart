@@ -22,29 +22,30 @@ export class NavBar extends React.Component {
     if (UserAuth.loggedIn() === true) {
       // if user is logged in, provide option to log out
       logInOutOption = (
-        <Link to="/login" onClick={() => this.props.onLogout()}>
-          Log out
-        </Link>
+        <div className="topnav-menu-right">
+          <div className="login-username"><div className="current-username">Gina</div>
+            <Link className="nav-bar" to="/login" onClick={() => this.props.onLogout()}>
+              Log out
+        </Link></div>
+        </div>
       );
       // authorized navigation links, when user is logged in
       authNav = (
-        <ul className="nav-links-list">
-          <li>
-            <NavLink to="/" className="btn nav" activeClassName="active">
-              Home
+        <div className="topnav-menu-left">
+          <ul className="nav-links-list">
+            <li>
+              <NavLink to="/" className="btn nav" activeClassName="active">
+                Home
             </NavLink>
-          </li>
-          <li>
-            <NavLink to="/intake" className="btn nav" activeClassName="active">
-              Intake Upload
+            </li>
+            <li>
+              <NavLink to="/form" className="btn nav" activeClassName="active">
+                Intake Form
             </NavLink>
-          </li>
-          <li>
-            <NavLink to="/form" className="btn nav" activeClassName="active">
-              Intake Form
-            </NavLink>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
+
       );
     } else {
       // if user is not logged in, provide link to login
@@ -58,10 +59,10 @@ export class NavBar extends React.Component {
     }
 
     return (
-      <div role="navigation" className="nav-bar">
-        <div className="topnav-menu-left">{authNav}</div>
-        <div className="topnav-menu-right">{logInOutOption}</div>
-      </div>
+      < div role="navigation" className="nav-bar" >
+        {authNav}
+        {logInOutOption}
+      </div >
     );
   }
 }
