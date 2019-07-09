@@ -69,7 +69,7 @@ class LoginForm extends React.Component {
       error
     } = this.state;
     const { from } = this.props.location.state || {
-      from: { pathname: "/participants/1" }
+      from: { pathname: "/" }
     };
 
     if (redirectToReferrer) {
