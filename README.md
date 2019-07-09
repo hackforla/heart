@@ -145,7 +145,7 @@ postgresql://<user>:<password>@<host>:<port>/<database>
 With our defaults:
 
 ```console
-postgresql://postgres:postgres@localhost:5432/postgres
+postgresql://postgres:postgres@localhost:5432/heart
 ```
 
 ### Pgadmin
