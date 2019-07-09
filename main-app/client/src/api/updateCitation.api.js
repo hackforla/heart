@@ -1,36 +1,40 @@
-import axios from "axios";
+import axios from 'axios'
 //import { API_ENDPOINT } from "get_uri";
-import { API_BASE_URL } from '../config/url_config';
+import { API_BASE_URL } from '../config/url_config'
 
-import { UserAuth } from '../utilities/auth';
+import { UserAuth } from '../utilities/auth'
 
 const updateCitation = ({ id, data, citationId }, successFn, errorFn) => {
-  const authToken = UserAuth.getAuthToken();
+  const authToken = UserAuth.getAuthToken()
   let config = {
     headers: {
       // Provide user's auth token as credentials
-      'Authorization': `Bearer ${authToken}`,
-    }
+      Authorization: `Bearer ${authToken}`,
+    },
   }
 
   return axios
-    .put(`${API_BASE_URL}/citations/${citationId}`, { data, timeout: 5000 }, config)
+    .put(
+      `${API_BASE_URL}/citations/${citationId}`,
+      { data, timeout: 5000 },
+      config
+    )
     .then(res => {
       let {
-        data: { citations }
-      } = res;
-      successFn(citations);
-      return res;
+        data: { citations },
+      } = res
+      successFn(res.data)
+      return res.data
     })
     .catch(err => {
-      console.error(err);
-      let { message } = err;
-      if (err.code === "ECONNABORTED") {
-        message = "The request took too long - please try again later.";
+      console.error(err)
+      let { message } = err
+      if (err.code === 'ECONNABORTED') {
+        message = 'The request took too long - please try again later.'
       }
-      errorFn(message);
-      return err;
-    });
-};
+      errorFn(message)
+      return err
+    })
+}
 
-export default updateCitation;
+export default updateCitation

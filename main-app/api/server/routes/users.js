@@ -43,7 +43,7 @@ module.exports = (app) => {
       })
       .then((hash) => {
         req.body[0].password = hash;
-        knex('users').insert(req.body)
+        knex('users').insert(req.body.data)
           .then(() => res.status(201).send());
       })
       .catch((err) => {
