@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
+import theme from './theme'
 import NavBar from './components/Navbar/navbar'
 import ParticipantProfile from './components/Participant/Profile'
 import LoginPage from './components/Authorization/loginPage'
@@ -82,47 +85,52 @@ class App extends Component {
   render() {
     const { user } = this.state
     return (
-      <UserProvider
-        value={{
-          user,
-          onLogout: this.handleLogout,
-        }}
-      >
-        <BrowserRouter>
-          <div>
-            <header>
-              <NavBar onLogout={this.handleLogout} />
-            </header>
-            <main>
-              <Switch>
-                <Route
-                  path="/login"
-                  render={({ location }) => (
-                    <LoginPage
-                      location={location}
-                      onNewLogin={this.handleNewLogin}
+      <React.Fragment>
+      <CssBaseline />
+        <MuiThemeProvider theme={theme}>
+          <UserProvider
+            value={{
+              user,
+              onLogout: this.handleLogout,
+            }}
+          >
+            <BrowserRouter>
+              <div>
+                <header>
+                  <NavBar onLogout={this.handleLogout} />
+                </header>
+                <main>
+                  <Switch>
+                    <Route
+                      path="/login"
+                      render={({ location }) => (
+                        <LoginPage
+                          location={location}
+                          onNewLogin={this.handleNewLogin}
+                        />
+                      )}
                     />
-                  )}
-                />
-                <PrivateRoute
-                  exact={true}
-                  path="/"
-                  component={ParticipantsList}
-                />
-                <PrivateRoute
-                  exact={true}
-                  path="/participants/:id/"
-                  component={ParticipantProfile}
-                />
-                {/* hold off on making this route privat */}
-                <Route exact={true} path="/form" component={Intake} />
-                <Redirect from="/" to="/login" />
-                <Route component={NoMatch} />
-              </Switch>
-            </main>
-          </div>
-        </BrowserRouter>
-      </UserProvider>
+                    <PrivateRoute
+                      exact={true}
+                      path="/"
+                      component={ParticipantsList}
+                    />
+                    <PrivateRoute
+                      exact={true}
+                      path="/participants/:id/"
+                      component={ParticipantProfile}
+                    />
+                    {/* hold off on making this route privat */}
+                    <Route exact={true} path="/form" component={Intake} />
+                    <Redirect from="/" to="/login" />
+                    <Route component={NoMatch} />
+                  </Switch>
+                </main>
+              </div>
+            </BrowserRouter>
+          </UserProvider>
+        </MuiThemeProvider>
+      </React.Fragment>
     )
   }
 }
