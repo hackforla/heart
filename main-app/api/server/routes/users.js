@@ -7,7 +7,7 @@ module.exports = (app) => {
   app.post('/users', (req, res) => {
     const {
       username, password,
-    } = req.body[0];
+    } = req.body.data;
 
     if (!username) {
       return res.status(422).json({
