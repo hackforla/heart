@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles'
 
 import theme from './theme'
 import NavBar from './components/Navbar/navbar'
@@ -86,7 +86,7 @@ class App extends Component {
     const { user } = this.state
     return (
       <React.Fragment>
-      <CssBaseline />
+        <CssBaseline />
         <MuiThemeProvider theme={theme}>
           <UserProvider
             value={{
