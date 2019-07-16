@@ -38,7 +38,6 @@ class ParticipantProfile extends React.Component {
   }
   render() {
     let { user, loading, error } = this.state
-    console.log(user)
     return (
       <Page blue>
         <PageContent>
