@@ -2,6 +2,13 @@ const request = require('supertest');
 const app = require('../server/app');
 const knex = require('../server/config/knex_config');
 
+let daToken = 'EXAMPLETOKEN';
+
+const login = {
+  username: process.env.TEST_LOGIN_USERNAME,
+  password: process.env.TEST_LOGIN_PASSWORD,
+};
+
 const newParticipant = {
   first_name: 'Mitchell2',
   middle_name: 'W',
@@ -31,6 +38,15 @@ const newParticipant = {
   ],
 };
 
+beforeAll(() => request(app)
+  .post('/login')
+  .set('Accept', 'application/json')
+  .set('Content-Type', 'application/json')
+  .send(login)
+  .then((response) => {
+    daToken = response.body.authToken;
+  }));
+
 afterAll(() => {
   knex.destroy();
 });
@@ -39,6 +55,9 @@ describe('GET /participants', () => {
   test('It should respond with a 200', (done) => {
     request(app)
       .get('/participants')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${daToken}`)
       .then((response) => {
         expect(response.statusCode).toBe(200);
         done();
@@ -53,6 +72,9 @@ describe('POST /participants', () => {
   test('It should respond with a 200', (done) => {
     request(app)
       .post('/participants')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${daToken}`)
       .send(JSON.stringify(newParticipant))
       .then((response) => {
         expect(response.statusCode).toBe(200);
@@ -67,7 +89,10 @@ describe('PUT /participants', () => {
   test('It should respond with a 200', (done) => {
     request(app)
       .put('/participants/2')
-      .send({ first_name: 'Mitchellupdated' })
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${daToken}`)
+      .send({ data: { first_name: 'Mitchellupdated' } })
       .then((response) => {
         expect(response.statusCode).toBe(200);
         done();
@@ -82,6 +107,9 @@ describe('DELETE /participants', () => {
   test('It should respond with a 200', (done) => {
     request(app)
       .delete('/participants/2')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${daToken}`)
       .then((response) => {
         expect(response.statusCode).toBe(200);
         done();
