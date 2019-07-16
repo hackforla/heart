@@ -1,59 +1,102 @@
-import React from "react";
-import Profile from "../Profile";
-import { mount } from "enzyme";
-import axios from "axios";
+import React from 'react';
+import Profile from '../Profile';
+import { shallow } from 'enzyme';
 
-jest.mock("axios");
+import getParticipant from 'api/getParticipant.api';
+jest.mock('api/getParticipant.api');
 
-// calls for API and saves user data
-describe("Profile - API", () => {
-  let renderedComponent = mount(<Profile />);
-  const mockResults = {
-    status: 200,
-    data: [{ first_name: "first_user" }, { first_name: "second_user" }]
-  };
-  const mockItems = mockResults.data[0];
-  const mockError = { message: "Test Error" };
+describe('Profile', () => {
+  const getProfileWrapper = props => shallow(<Profile {...props} />);
+  const getProfileInstance = (props = {}) =>
+    getProfileWrapper(props).instance();
 
-  beforeEach(() => {
-    renderedComponent = mount(<Profile />);
-  });
+  describe('componentDidMount', () => {
+    describe('when match.params.id is present', () => {
+      it('gets the participant data with id', () => {
+        const profileId = 1;
+        const match = { params: { id: profileId } };
+        const profile = getProfileInstance({ match });
 
-  afterEach(() => {
-    renderedComponent.unmount();
-  });
+        jest.spyOn(profile, 'getParticipant').mockImplementation();
+        profile.componentDidMount();
+        expect(profile.getParticipant).toBeCalledWith(profileId);
+      });
+    });
 
-  it("saves results to state after making successful query", () => {
-    axios.get.mockResolvedValueOnce(() => {
-      return renderedComponent
-      .instance()
-      .getParticipant(1)
-      .then(res => {
-        expect(res).toEqual(mockResults);
-        expect(renderedComponent.state("user")).toEqual(mockItems);
-        expect(renderedComponent.state("error")).toEqual(null);
+    describe('when match.params.id is not present', () => {
+      it('calls onError', () => {
+        const profile = getProfileInstance();
+
+        jest.spyOn(profile, 'onError').mockImplementation();
+        profile.componentDidMount();
+        expect(profile.onError).toBeCalledWith(
+          'Please add a participant ID to the route.'
+        );
       });
     });
   });
 
-  it("does not make API call if there is no ID", () => {
-    renderedComponent.instance();
-    expect(renderedComponent.state("user")).toEqual(null);
-    expect(renderedComponent.state("error")).toEqual(
-      "Please add a participant ID to the route."
-    );
+  describe('getParticipant', () => {
+    let profile;
+
+    beforeEach(() => {
+      profile = getProfileInstance();
+    });
+
+    afterEach(() => {
+      profile = null;
+    });
+
+    it('delegates to getParticipant api', () => {
+      const profileId = 1;
+      profile.getParticipant(profileId);
+
+      expect(getParticipant).toBeCalledWith(
+        profileId,
+        profile.onSuccess,
+        profile.onError
+      );
+    });
+
+    it('correctly sets the default loading state', () => {
+      profile.getParticipant();
+
+      expect(profile.state).toEqual(
+        expect.objectContaining({
+          error: null,
+          loading: true,
+        })
+      );
+    });
   });
 
-  it("saves error to state after API call error", () => {
-    axios.get.mockRejectedValueOnce(() => {
-      return renderedComponent
-      .instance()
-      .getParticipant(1)
-      .then(res => {
-        expect(res).toEqual(mockError);
-        expect(renderedComponent.state("user")).toEqual(null);
-        expect(renderedComponent.state("error")).toEqual(mockError.message);
-      });
+  describe('onSuccess', () => {
+    it('sets the user state correctly', () => {
+      const userData = { first_name: 'Mario' };
+      const profile = getProfileInstance();
+      profile.onSuccess(userData);
+
+      expect(profile.state).toEqual(
+        expect.objectContaining({
+          user: userData,
+          loading: false,
+        })
+      );
+    });
+  });
+
+  describe('onError', () => {
+    it('sets the error state correctly', () => {
+      const errorMessage = 'oopsies';
+      const profile = getProfileInstance();
+      profile.onError(errorMessage);
+
+      expect(profile.state).toEqual(
+        expect.objectContaining({
+          error: errorMessage,
+          loading: false,
+        })
+      );
     });
   });
 });
