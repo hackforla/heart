@@ -6,7 +6,7 @@ import NavBar from './components/Navbar/navbar'
 import ParticipantProfile from './components/Participant/Profile'
 import LoginPage from './components/Authorization/loginPage'
 import { UserAuth } from './utilities/auth'
-import Intake from './components/Form/Intake'
+import IntakeForm from './components/Form/IntakeForm/index'
 import { NoMatch } from './routes/NoMatch'
 // Higher Order Component (HOC) to prevent the users from accessing a route if they are not logged in
 import { PrivateRoute } from '../src/routes/privateRoute'
@@ -115,7 +115,7 @@ class App extends Component {
                   component={ParticipantProfile}
                 />
                 {/* hold off on making this route privat */}
-                <Route exact={true} path="/form" component={Intake} />
+                <Route exact={true} path="/form" component={IntakeForm} />
                 <Redirect from="/" to="/login" />
                 <Route component={NoMatch} />
               </Switch>

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly intake component 1`] = `
+<div
+  className="intake"
+>
+  <div
+    style={
+      Object {
+        "background": "#6f7ce2",
+        "height": "400px",
+      }
+    }
+  />
+  <div>
+    I'm wrapped
+  </div>
+</div>
+`;
