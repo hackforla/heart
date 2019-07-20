@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import TableField from './TableField'
 const TableRow = ({ record, header_fields }) => {
-  console.log(header_fields)
   return (
     <tr>
       {Object.keys(header_fields).map((key, index) =>
@@ -13,7 +13,9 @@ const TableRow = ({ record, header_fields }) => {
             </Link>
           </td>
         ) : (
-          <td key={index}>{record[key]}</td>
+          <td>
+            <TableField record={record} formatter={header_fields[key]} />
+          </td>
         )
       )}
     </tr>

@@ -17,26 +17,32 @@ class Participants extends Component {
       urgent: {
         as: 'Rush',
         fields: ['urgent'],
+        format: 'flame',
       },
       created_at: {
         as: 'Date',
         fields: ['created_at'],
+        format: 'date',
       },
       referral_source: {
         as: 'Referral Source',
         fields: ['referral_source'],
+        format: 'string',
       },
       name: {
         as: 'Name',
         fields: ['first_name', 'last_name'],
+        format: 'string',
       },
       status: {
         as: 'Case Status',
         fields: ['status'],
+        format: 'string',
       },
       updated_at: {
         as: 'Last Update',
         fields: ['updated_at'],
+        format: 'date',
       },
       view: {
         special: 'link',
