@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { MuiThemeProvider } from '@material-ui/core/styles'
-
-import theme from './theme'
+import { withStyles } from '@material-ui/core/styles'
 import NavBar from './components/Navbar/navbar'
 import ParticipantProfile from './components/Participant/Profile'
 import LoginPage from './components/Authorization/loginPage'
@@ -13,10 +10,8 @@ import Intake from './components/Form/Intake'
 import { NoMatch } from './routes/NoMatch'
 // Higher Order Component (HOC) to prevent the users from accessing a route if they are not logged in
 import { PrivateRoute } from '../src/routes/privateRoute'
-
+import withRoot from './withRoot'
 import ParticipantsList from './components/ParticipantsList/ParticipantsList'
-
-import './App.css'
 
 const UserContext = React.createContext({
   user: null,
@@ -86,8 +81,6 @@ class App extends Component {
     const { user } = this.state
     return (
       <React.Fragment>
-        <CssBaseline />
-        <MuiThemeProvider theme={theme}>
           <UserProvider
             value={{
               user,
@@ -129,10 +122,9 @@ class App extends Component {
               </div>
             </BrowserRouter>
           </UserProvider>
-        </MuiThemeProvider>
       </React.Fragment>
     )
   }
 }
 
-export default App
+export default withRoot(withStyles()(App))
