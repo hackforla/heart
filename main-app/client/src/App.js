@@ -20,6 +20,12 @@ const UserContext = React.createContext({
 export const UserConsumer = UserContext.Consumer
 const UserProvider = UserContext.Provider
 
+const styles = theme => ({
+  root: {
+    flexBasis: 1,
+  }
+});
+
 class App extends Component {
   state = {
     user: null,
@@ -81,50 +87,50 @@ class App extends Component {
     const { user } = this.state
     return (
       <React.Fragment>
-          <UserProvider
-            value={{
-              user,
-              onLogout: this.handleLogout,
-            }}
-          >
-            <BrowserRouter>
-              <div>
-                <header>
-                  <NavBar onLogout={this.handleLogout} />
-                </header>
-                <main>
-                  <Switch>
-                    <Route
-                      path="/login"
-                      render={({ location }) => (
-                        <LoginPage
-                          location={location}
-                          onNewLogin={this.handleNewLogin}
-                        />
-                      )}
-                    />
-                    <PrivateRoute
-                      exact={true}
-                      path="/"
-                      component={ParticipantsList}
-                    />
-                    <PrivateRoute
-                      exact={true}
-                      path="/participants/:id/"
-                      component={ParticipantProfile}
-                    />
-                    {/* hold off on making this route privat */}
-                    <Route exact={true} path="/form" component={Intake} />
-                    <Redirect from="/" to="/login" />
-                    <Route component={NoMatch} />
-                  </Switch>
-                </main>
-              </div>
-            </BrowserRouter>
-          </UserProvider>
+        <UserProvider
+          value={{
+            user,
+            onLogout: this.handleLogout,
+          }}
+        >
+          <BrowserRouter>
+            <div>
+              <header>
+                <NavBar onLogout={this.handleLogout} />
+              </header>
+              <main>
+                <Switch>
+                  <Route
+                    path="/login"
+                    render={({ location }) => (
+                      <LoginPage
+                        location={location}
+                        onNewLogin={this.handleNewLogin}
+                      />
+                    )}
+                  />
+                  <PrivateRoute
+                    exact={true}
+                    path="/"
+                    component={ParticipantsList}
+                  />
+                  <PrivateRoute
+                    exact={true}
+                    path="/participants/:id/"
+                    component={ParticipantProfile}
+                  />
+                  {/* hold off on making this route privat */}
+                  <Route exact={true} path="/form" component={Intake} />
+                  <Redirect from="/" to="/login" />
+                  <Route component={NoMatch} />
+                </Switch>
+              </main>
+            </div>
+          </BrowserRouter>
+        </UserProvider>
       </React.Fragment>
     )
   }
 }
 
-export default withRoot(withStyles()(App))
+export default withRoot(withStyles(styles)(App))
