@@ -1,6 +1,5 @@
 import React from 'react'
 import { Paper, Typography, Container } from '@material-ui/core'
-import '../style/IntakeForm.scss'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
