@@ -1,29 +1,39 @@
 import React from 'react'
-import Paper from '@material-ui/core/Paper'
+import { Paper, Typography, Container } from '@material-ui/core'
 import '../style/IntakeForm.scss'
-import { Formik, Form } from 'formik'
-import ClinicFormGroup from './ClinicFormGroup'
-import ContactInfoFormGroup from './ContactInfoFormGroup'
+import { makeStyles } from '@material-ui/core/styles'
 
-const IntakeForm = () => {
+const useStyles = makeStyles(theme => ({
+  paper: {
+    position: 'absolute',
+    top: 150,
+    margin: `0 auto`,
+    left: 0,
+    right: 0,
+    width: '60%',
+    minWidth: 600,
+    minHeight: 600,
+    marginBottom: theme.spacing(3)
+  },
+  title: {
+    background: '#3122d6',
+    color: 'white',
+    padding: theme.spacing(2),
+  },
+  container: {
+    paddingTop: theme.spacing(2),
+  },
+}))
+
+const IntakeForm = ({ children }) => {
+  const classes = useStyles()
+
   return (
-    <Paper elevation={10} className="paper">
-      <div className="intake-title">Intake Form</div>
-
-      <div className="intake-form">
-        <Formik onSubmit={values => console.log(values)}>
-          {props => (
-            <Form>
-              <ClinicFormGroup {...props} />
-              <ContactInfoFormGroup {...props} />
-              {/*The rest of the form groups could go here */}
-              <button type="submit" className="submit-button">
-                Intake Person
-              </button>
-            </Form>
-          )}
-        </Formik>
-      </div>
+    <Paper elevation={10} className={classes.paper}>
+      <Typography variant="h1" className={classes.title}>
+        Intake Form
+      </Typography>
+      <Container className={classes.container}>{children}</Container>
     </Paper>
   )
 }
