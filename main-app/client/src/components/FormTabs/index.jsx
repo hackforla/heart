@@ -66,7 +66,9 @@ const FormTabs = ({ forms }) => {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="Simple tabs example">
+        <Tabs
+          variant="fullWidth"
+          value={value} onChange={handleChange} aria-label="Simple tabs example">
           {renderTabs(forms)}
         </Tabs>
       </AppBar>
