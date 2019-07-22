@@ -6,6 +6,7 @@ import './Intake.scss'
 import FormTabs from '../FormTabs'
 import ClinicFormGroup from './IntakeForm/components/ClinicFormGroup'
 import ContactInfoFormGroup from './IntakeForm/components/ContactInfoFormGroup'
+import ProgramInfoFormGroup from './IntakeForm/components/ProgramInfoFormGroup'
 import { Typography, Grid } from '@material-ui/core'
 
 const Intake = () => {
@@ -25,7 +26,8 @@ const Intake = () => {
                       <ClinicFormGroup {...props} />
                       <ContactInfoFormGroup {...props} />
                       {/*The rest of the form groups could go here */}
-                      <br/><br/>
+                      <br />
+                      <br />
                       <Grid container justify="center" spacing={4}>
                         <Grid item xs={6}>
                           <Button
@@ -54,7 +56,36 @@ const Intake = () => {
             {
               label: 'Obligations',
               Form: () => (
-                <Typography variant="h1">Obligations Form </Typography>
+                <Formik onSubmit={values => console.log(values)}>
+                  {props => (
+                    <Form>
+                      <ProgramInfoFormGroup {...props} />
+                      {/*The rest of the form groups could go here */}
+                      <br />
+                      <br />
+                      <Grid container justify="center" spacing={4}>
+                        <Grid item xs={6}>
+                          <Button
+                            variant="contained"
+                            size="large"
+                            color="default"
+                          >
+                            Save For Later
+                          </Button>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Button
+                            variant="contained"
+                            size="large"
+                            color="primary"
+                          >
+                            Continue to Agreement
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Form>
+                  )}
+                </Formik>
               ),
             },
             {
