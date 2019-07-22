@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
 import { withStyles } from '@material-ui/core/styles'
-import NavBar from './components/Navbar/navbar'
+import NavBar from './components/NavBar'
 import ParticipantProfile from './components/Participant/Profile'
 import LoginPage from './components/Authorization/loginPage'
 import { UserAuth } from './utilities/auth'
@@ -12,6 +12,8 @@ import { NoMatch } from './routes/NoMatch'
 import { PrivateRoute } from '../src/routes/privateRoute'
 import withRoot from './withRoot'
 import ParticipantsList from './components/ParticipantsList/ParticipantsList'
+
+import { PATHS } from './routes'
 
 const UserContext = React.createContext({
   user: null,
@@ -23,8 +25,8 @@ const UserProvider = UserContext.Provider
 const styles = theme => ({
   root: {
     flexBasis: 1,
-  }
-});
+  },
+})
 
 class App extends Component {
   state = {
@@ -101,7 +103,7 @@ class App extends Component {
               <main>
                 <Switch>
                   <Route
-                    path="/login"
+                    path={PATHS.LOGIN}
                     render={({ location }) => (
                       <LoginPage
                         location={location}
@@ -111,16 +113,16 @@ class App extends Component {
                   />
                   <PrivateRoute
                     exact={true}
-                    path="/"
+                    path={PATHS.PARTICIPANTS}
                     component={ParticipantsList}
                   />
                   <PrivateRoute
                     exact={true}
-                    path="/participants/:id/"
+                    path={PATHS.PARTICIPANT}
                     component={ParticipantProfile}
                   />
                   {/* hold off on making this route privat */}
-                  <Route exact={true} path="/form" component={Intake} />
+                  <Route exact={true} path={PATHS.INTAKE} component={Intake} />
                   <Redirect from="/" to="/login" />
                   <Route component={NoMatch} />
                 </Switch>
