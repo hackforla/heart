@@ -1,14 +1,13 @@
 import React from 'react'
-
+// import AccountCircle from '@material-ui/icons/AccountCircle';
 import { UserAuth } from '../../utilities/auth'
 
 import { PATHS } from '../../routes'
 import { withRouter } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Button from '@material-ui/core/Button'
+import {AppBar, Toolbar, Button, IconButton} from '@material-ui/core'
+
 
 const useStyles = makeStyles(theme => ({
   ToolBar: {
@@ -87,6 +86,7 @@ const NavBar = ({ onLogout }) => {
               </div>
               <div className={classes.RightContent}>
                 <LogOutButton />
+                <span>Gina <i className="fas fa-user-circle"></i></span>
               </div>
             </>
           ) : (
