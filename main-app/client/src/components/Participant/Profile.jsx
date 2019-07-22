@@ -30,6 +30,12 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
+/*
+refactored to use fetch hook but still pending connecting the crud actions
+to each form.
+Also removed sass requirement and using material-ui grid
+ */
+
 const ParticipantProfile = props => {
   const [state, fetchData, dispatch] = useFetch(
     `participants/${props.match.params.id}`
@@ -62,7 +68,6 @@ const ParticipantProfile = props => {
           </Grid>
         </Container>
       )}
-      {JSON.stringify(state)}
     </div>
   )
 }
