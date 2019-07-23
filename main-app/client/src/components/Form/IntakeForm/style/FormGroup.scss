@@ -34,3 +34,38 @@
 .form-field {
   margin-bottom: 20px;
 }
+
+.outer-box {
+  border: 1px solid gray;
+  display: flex;
+  .name {
+    width: 2000px;
+    flex-grow: 1000;
+    padding: 10px;
+  }
+  .yes {
+    width: 400px;
+    flex-grow: 0;
+    text-align: center;
+    border-left: 1px solid gray;
+    padding: 10px;
+    height: 100%;
+  }
+  .no {
+    width: 400px;
+    flex-grow: 0;
+    text-align: center;
+    border-left: 1px solid gray;
+    padding: 10px;
+    height: 100%;
+  }
+  .active {
+    background-color: #b5b3b3;
+    &.green {
+      border-bottom: 2px solid #339900;
+    }
+    &.red {
+      border-bottom: 2px solid red;
+    }
+  }
+}
