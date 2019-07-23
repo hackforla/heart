@@ -113,6 +113,7 @@ class Participants extends Component {
           handlePrevNextSelection={this.handlePrevNextSelection}
           setCurrentPage={this.setCurrentPage}
         />
+        {this.state.participants.JSON.stringify()}
       </div>
     )
   }
