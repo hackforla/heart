@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import uuid from 'uuid';
+import uuid from 'uuid'
 import TableField from './TableField'
 const TableRow = ({ record, header_fields }) => {
   return (
