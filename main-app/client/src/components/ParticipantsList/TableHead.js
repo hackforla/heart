@@ -1,28 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const TableHead = ({ headings }) => {
   return (
     <thead>
       <tr>
-        {headings.map((label, index) =>
-          label === '' ? (
+        {Object.keys(headings).map((label, index) =>
+          headings[label].as === '' ? (
             <th key={index} scope="col">
               &nbsp;
             </th>
           ) : (
             <th key={index} scope="col">
-              {label}
+              {headings[label].as}
             </th>
-          ),
+          )
         )}
       </tr>
     </thead>
-  );
-};
+  )
+}
 
 TableHead.propTypes = {
-  headings: PropTypes.arrayOf(PropTypes.string),
-};
+  headings: PropTypes.object,
+}
 
-export default TableHead;
+export default TableHead
