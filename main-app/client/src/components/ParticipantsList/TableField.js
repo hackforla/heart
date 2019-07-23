@@ -1,5 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {
+  tableDateFormatter,
+  tableCombinedDateFormatter,
+} from '../../utilities/dateFormatter'
 const TableField = ({ record, formatter }) => {
   //So... Dear reader, I've passed us some sort of formatting voodoo
   //  through the formatter field ^^. each object passed has
@@ -19,7 +23,11 @@ const TableField = ({ record, formatter }) => {
             })
           case 'date':
             return formatter.fields.map(field => {
-              return new Date(record[field]) + ' '
+              return tableDateFormatter(record[field]) + ' '
+            })
+          case 'dateTime':
+            return formatter.fields.map(field => {
+              return tableCombinedDateFormatter(record[field]) + ' '
             })
           case 'flame':
             return record[formatter.fields[0]] === true

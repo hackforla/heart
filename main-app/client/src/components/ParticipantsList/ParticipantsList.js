@@ -42,7 +42,7 @@ class Participants extends Component {
       updated_at: {
         as: 'Last Update',
         fields: ['updated_at'],
-        format: 'date',
+        format: 'dateTime',
       },
       view: {
         special: 'link',
