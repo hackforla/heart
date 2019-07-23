@@ -7,7 +7,7 @@ let race = ['white', 'yellow', 'brown', 'brown', 'yellow', 'black']
 let gender = ['male', 'female']
 let bool = ['true', 'false']
 
-let generateData = () => {
+let generateData = async (callback) => {
   for(let i = 1; i < 31; i += 1){
     let raceIndex = Math.floor(Math.random()* (race.length-1))
     let date = faker.date.past(100)
@@ -21,8 +21,7 @@ let generateData = () => {
         formatLastName += lastName[k]
       }
     }
-    let violationsNumber = 1235 + i
-    let citationNumber = 322 + i
+
     let phoneNumber = ''
     let unformatPhoneNum = faker.phone.phoneNumberFormat()
     for (let p = 0; p < unformatPhoneNum.length; p += 1){
@@ -31,7 +30,7 @@ let generateData = () => {
       }
     }
 
-    fs.appendFile('participantSeed.sql',
+    await fs.appendFile('seed.sql',
     `
     INSERT INTO participants (
       first_name,
@@ -80,8 +79,16 @@ let generateData = () => {
     `,
     (err) => {if (err) {console.log(err)}}
     )
+  }
+  callback()
+}
 
-    fs.appendFile('citationSeed.sql',
+let generateCitation = () => {
+  for (let i = 0; i < 31; i+= 1) {
+    let violationsNumber = 1235 + i
+    let citationNumber = 322 + i
+
+    fs.appendFile('seed.sql',
     `
     INSERT INTO citations (
       citation_number,
@@ -100,8 +107,7 @@ let generateData = () => {
     (err) => {if (err) {console.log(err)}}
     )
   }
-
 }
 
 
-generateData();
+generateData(generateCitation);
