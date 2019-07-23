@@ -6,6 +6,8 @@ import './Intake.scss'
 import FormTabs from '../FormTabs'
 import ClinicFormGroup from './IntakeForm/components/ClinicFormGroup'
 import ContactInfoFormGroup from './IntakeForm/components/ContactInfoFormGroup'
+import GeneralInfoFormGroup from './IntakeForm/components/GeneralInfoFormGroup'
+import FamilyAndIncomeFormGroup from './IntakeForm/components/FamilyAndIncomeFormGroup'
 import ProgramInfoFormGroup from './IntakeForm/components/ProgramInfoFormGroup'
 import { Typography, Grid } from '@material-ui/core'
 
@@ -25,6 +27,8 @@ const Intake = () => {
                     <Form>
                       <ClinicFormGroup {...props} />
                       <ContactInfoFormGroup {...props} />
+                      <GeneralInfoFormGroup {...props} />
+                      <FamilyAndIncomeFormGroup {...props} />
                       {/*The rest of the form groups could go here */}
                       <br />
                       <br />
