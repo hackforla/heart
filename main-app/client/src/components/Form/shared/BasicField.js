@@ -1,8 +1,23 @@
 import React from 'react'
 
-const BasicField = ({ field: { name }, value, onChange, label, values }) => {
+const BasicField = ({
+  field: { name },
+  type,
+  value,
+  onChange,
+  label,
+  values,
+  placeholder,
+}) => {
   return (
-    <input name={name} id={name} onChange={onChange} className="input-field" />
+    <input
+      type={type}
+      name={name}
+      id={name}
+      onChange={onChange}
+      placeholder={placeholder}
+      className="input-field"
+    />
   )
 }
 
