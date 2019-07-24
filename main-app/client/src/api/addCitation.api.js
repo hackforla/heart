@@ -19,9 +19,6 @@ const addCitation = ({ id, data }, successFn, errorFn) => {
       config
     )
     .then(res => {
-      let {
-        data: { citations },
-      } = res
       successFn(res.data)
       return res.data
     })
