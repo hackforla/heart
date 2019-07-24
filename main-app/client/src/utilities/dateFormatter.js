@@ -11,11 +11,20 @@ export function tableDateFormatter(timestamp) {
 }
 
 export function tableCombinedDateFormatter(timestamp) {
-  const [, month, day, year, localTime] = new Date(timestamp)
+  const [, month, day, year, militaryTime] = new Date(timestamp)
     .toString()
     .split(' ')
   const currentDate = [
-    `${month} ${day}, ${year} ${localTime.slice(0, 5)}`,
+    `${month} ${day}, ${year} — ${localTime(militaryTime)}`,
   ].join(' ')
   return currentDate
+}
+
+const localTime = militaryTime => {
+  const [hour, minutes] = militaryTime.slice(0, 5).split(':')
+  if (hour <= 12) {
+    return `${hour}:${minutes} AM`
+  } else {
+    return `${hour - 12}:${minutes} PM`
+  }
 }
