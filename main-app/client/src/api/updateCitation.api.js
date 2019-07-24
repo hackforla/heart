@@ -20,9 +20,6 @@ const updateCitation = ({ id, data, citationId }, successFn, errorFn) => {
       config
     )
     .then(res => {
-      let {
-        data: { citations },
-      } = res
       successFn(res.data)
       return res.data
     })
