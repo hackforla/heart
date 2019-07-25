@@ -9,6 +9,7 @@ import ContactInfoFormGroup from './IntakeForm/components/ContactInfoFormGroup'
 import GeneralInfoFormGroup from './IntakeForm/components/GeneralInfoFormGroup'
 import FamilyAndIncomeFormGroup from './IntakeForm/components/FamilyAndIncomeFormGroup'
 import ProgramInfoFormGroup from './IntakeForm/components/ProgramInfoFormGroup'
+import OnsiteObligationsFormGroup from './IntakeForm/components/OnsiteObligationsFormGroup'
 import { Typography, Grid } from '@material-ui/core'
 
 const Intake = () => {
@@ -64,6 +65,7 @@ const Intake = () => {
                   {props => (
                     <Form>
                       <ProgramInfoFormGroup {...props} />
+                      <OnsiteObligationsFormGroup {...props} />
                       {/*The rest of the form groups could go here */}
                       <br />
                       <br />
