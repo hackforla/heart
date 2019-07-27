@@ -1,7 +1,9 @@
 import React from 'react'
 import '../style/FormGroup.scss'
 import YesNoField from '../../shared/YesNoField'
+import FormSummary from '../../shared/FormSummary'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 
 const form_group_boxes = [
   {
@@ -89,6 +91,10 @@ const OnsiteObligationsFormGroup = props => {
         Which onsite obligations did the individual complete?
       </label>
       {form_group_boxes.map((boxes, index) => renderBoxes(index, boxes, props))}
+      <FormSummary
+        values={confirmedPrograms(props.values)}
+        title="Programs Participated In:"
+      />
     </div>
   )
 }
@@ -101,6 +107,14 @@ const renderBoxes = (index, boxes, props) => {
         <YesNoField key={index} box_input={box_input} {...props} />
       ))}
     </div>
+  )
+}
+
+const confirmedPrograms = values => {
+  return _.keys(
+    _.pickBy(values, (value, key) => {
+      return value === true
+    })
   )
 }
 
