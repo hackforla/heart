@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 
-const font = "'Work Sans', sans-serif";
+const font = "'Work Sans', sans-serif"
 
 function pxToRem(value) {
   return `${value / 16}rem`
