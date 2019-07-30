@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withRouter, Redirect } from "react-router-dom";
+import { TextField, Typography, Container, Button } from '@material-ui/core'
 
 import { UserAuth } from "../../utilities/auth";
-
-import "./loginForm.scss";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -77,59 +76,51 @@ class LoginForm extends React.Component {
       return <Redirect to={from} />;
     }
     return (
-      <div className="centered-container login-form-container">
-        <h2 className="login-header">Login</h2>
+      <Container maxWidth="sm">
+        <Typography variant="h2">Login</Typography>
         <form
           name="form"
           className="login-form"
           onSubmit={evt => this.handleSubmit(evt)}
         >
           {error && <div className={"alert alert-danger"}>{error}</div>}
-          <div
-            className={
-              "form-group" + (submitted && !username ? " has-error" : "")
-            }
+          <TextField
+            required
+            id="username"
+            label="Username"
+            style={{ margin: 8 }}
+            name="username"
+            value={username}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={evt => this.handleChange(evt)}
+            /><br />
+          <TextField
+            required
+            id="password"
+            label="Password"
+            type="password"
+            style={{ margin: 8 }}
+            name="password"
+            value={password}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={evt => this.handleChange(evt)}
+          />
+          <br />
+          <br />
+          <Button
+            variant="contained"
+            size="large"
+            color="default"
+            disabled={loading}
           >
-            <label htmlFor="username">Username</label>
-            {submitted && !username && (
-              <div className="help-block login-error">Username is required</div>
-            )}
-            <input
-              type="text"
-              className="form-input"
-              name="username"
-              value={username}
-              placeholder="Username"
-              aria-label="Username"
-              onChange={evt => this.handleChange(evt)}
-            />
-          </div>
-          <div
-            className={
-              "form-group" + (submitted && !password ? " has-error" : "")
-            }
-          >
-            <label htmlFor="password">Password</label>
-            {submitted && !password && (
-              <div className="help-block login-error">Password is required</div>
-            )}
-            <input
-              type="password"
-              className="form-input"
-              name="password"
-              value={password}
-              placeholder="Password"
-              aria-label="Password"
-              onChange={evt => this.handleChange(evt)}
-            />
-          </div>
-          <div className="form-group">
-            <button className="btn btn-primary" disabled={loading}>
-              Login
-            </button>
-          </div>
+            Login
+          </Button>
         </form>
-      </div>
+      </Container>
     );
   }
 }
