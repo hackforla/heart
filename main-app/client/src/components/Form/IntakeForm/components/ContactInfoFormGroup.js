@@ -3,6 +3,10 @@ import { Field } from 'formik'
 import '../style/FormGroup.scss'
 import BasicField from '../../shared/BasicField'
 
+const starStyle = {
+  color: '#f44336',
+}
+
 const form = [
   {
     component: BasicField,
@@ -37,12 +41,13 @@ const form = [
   },
   {
     component: BasicField,
-    label: 'Also Known As - AKA',
+    optional: true,
+    label: 'Also Known As - AKA (Optional)',
     inputs: [
       {
         type: 'text',
         name: 'also_known_as',
-        placeholder: 'Also Known As - AKA',
+        placeholder: 'Also Known As - AKA (Optional)',
         value: '',
       },
     ],
@@ -73,36 +78,39 @@ const form = [
   },
   {
     component: BasicField,
-    label: 'Phone Number',
+    optional: true,
+    label: 'Phone Number (optional)',
     inputs: [
       {
         type: 'tel',
-        name: 'phone_numbe',
-        placeholder: 'Phone Number',
+        name: 'phone_number',
+        placeholder: 'Phone Number (optional)',
         value: '',
       },
     ],
   },
   {
     component: BasicField,
-    label: 'Email Address',
+    optional: true,
+    label: 'Email Address (optional)',
     inputs: [
       {
         type: 'email',
         name: 'email_address',
-        placeholder: 'Email Address',
+        placeholder: 'Email Address (optional)',
         value: '',
       },
     ],
   },
   {
     component: BasicField,
-    label: 'Mailing Address',
+    optional: true,
+    label: 'Mailing Address (optional)',
     inputs: [
       {
         type: 'text',
         name: 'mailing_address',
-        placeholder: 'Mailing Address',
+        placeholder: 'Mailing Address (optional)',
         value: '',
       },
     ],
@@ -112,7 +120,7 @@ const form = [
 const ContactInfoFormGroup = props => {
   return (
     <div className="contact-info-form-group">
-      <div className="title">Contct Information</div>
+      <div className="title">Contact Information</div>
 
       {form.map(form_input =>
         renderInput(form_input, props.handleChange, props.values)
@@ -120,10 +128,14 @@ const ContactInfoFormGroup = props => {
     </div>
   )
 }
+
 const renderInput = (form_input, handleChange, values) => {
   return (
     <div key={form_input.label} className="form-inputs">
-      <label className="label">{form_input.label}</label>
+      <label className="label">
+        {form_input.label}
+        <span style={starStyle}>{!form_input.optional && '*'}</span>
+      </label>
       {form_input.inputs.map(input => {
         return (
           <Field
