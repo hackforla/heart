@@ -1,18 +1,48 @@
 import React from "react";
 
 import LoginForm from "./loginForm";
-import './loginPage.scss';
+import { Paper, Typography, Container } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
-export function LoginPage(props) {
+const useStyles = makeStyles(theme => ({
+  paper: {
+    position: 'absolute',
+    top: 150,
+    margin: `0 auto`,
+    left: 0,
+    right: 0,
+    width: '60%',
+    minWidth: 600,
+    minHeight: 600,
+    marginBottom: theme.spacing(3)
+  },
+  title: {
+    background: '#3122d6',
+    color: 'white',
+    padding: theme.spacing(2),
+    textAlign: 'center'
+  },
+  container: {
+    paddingTop: theme.spacing(2),
+  },
+}))
+
+const LoginPage = props => {
+  const classes = useStyles()
+
   return (
-    <div className="login-page--container">
-      <h1 className="login-page-header">Welcome to Heart</h1>
-      <LoginForm 
-        location={props.location}
-        onNewLogin={props.onNewLogin}
-      />
-    </div>
-  );
+    <Paper elevation={10} className={classes.paper}>
+      <Typography variant="h1" className={classes.title}>
+        Welcome to Heart
+      </Typography>
+      <Container className={classes.container}>
+        <LoginForm 
+          location={props.location}
+          onNewLogin={props.onNewLogin}
+        />
+      </Container>
+    </Paper>
+  )
 }
 
-export default LoginPage;
+export default LoginPage
