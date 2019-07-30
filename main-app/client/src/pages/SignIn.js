@@ -1,11 +1,10 @@
 import React from 'react'
+import LoginForm from '../components/Authorization/LoginForm'
 
-export function SignInPage(props) {
+export const SignInPage = ({ location, onNewLogin }) => {
   return (
-    <div className="signin-page-container">
-      <h1 className="signin-page">Intake Page</h1>
+    <div>
+      <LoginForm location={location} onNewLogin={onNewLogin} />
     </div>
   )
 }
-
-export default SignInPage

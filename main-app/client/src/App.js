@@ -4,14 +4,13 @@ import jwtDecode from 'jwt-decode'
 import { withStyles } from '@material-ui/core/styles'
 import ParticipantProfile from './components/Participant/Profile'
 import NavBar from './components/NavBar'
-import LoginPage from './components/Authorization/loginPage'
 import { UserAuth } from './utilities/auth'
 import Intake from './components/Form/Intake'
 import { NoMatch } from './routes/NoMatch'
 // Higher Order Component (HOC) to prevent the users from accessing a route if they are not logged in
 import { PrivateRoute } from '../src/routes/privateRoute'
 import withRoot from './withRoot'
-import { HomePage } from './pages/'
+import { HomePage, SignInPage } from './pages/'
 
 import { PATHS } from './routes'
 
@@ -19,6 +18,7 @@ const UserContext = React.createContext({
   user: null,
   onLogout: () => true,
 })
+
 export const UserConsumer = UserContext.Consumer
 const UserProvider = UserContext.Provider
 
@@ -105,7 +105,7 @@ class App extends Component {
                   <Route
                     path={PATHS.LOGIN}
                     render={({ location }) => (
-                      <LoginPage
+                      <SignInPage
                         location={location}
                         onNewLogin={this.handleNewLogin}
                       />
