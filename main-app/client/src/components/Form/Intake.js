@@ -10,7 +10,8 @@ import GeneralInfoFormGroup from './IntakeForm/components/GeneralInfoFormGroup'
 import FamilyAndIncomeFormGroup from './IntakeForm/components/FamilyAndIncomeFormGroup'
 import ProgramInfoFormGroup from './IntakeForm/components/ProgramInfoFormGroup'
 import OnsiteObligationsFormGroup from './IntakeForm/components/OnsiteObligationsFormGroup'
-import { Typography, Grid } from '@material-ui/core'
+import AgreementsFormGroup from './IntakeForm/components/AgreementsFormGroup'
+import { Grid } from '@material-ui/core'
 
 const Intake = () => {
   return (
@@ -95,8 +96,39 @@ const Intake = () => {
               ),
             },
             {
-              label: 'Agreement',
-              Form: () => <Typography variant="h1">Agreement Form </Typography>,
+              label: 'Agreements',
+              Form: () => (
+                <Formik onSubmit={values => console.log(values)}>
+                  {props => (
+                    <Form>
+                      <AgreementsFormGroup {...props} />
+                      {/*The rest of the form groups could go here */}
+                      <br />
+                      <br />
+                      <Grid container justify="center" spacing={4}>
+                        <Grid item xs={6}>
+                          <Button
+                            variant="contained"
+                            size="large"
+                            color="default"
+                          >
+                            Save For Later
+                          </Button>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Button
+                            variant="contained"
+                            size="large"
+                            color="primary"
+                          >
+                            Continue to Agreement
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Form>
+                  )}
+                </Formik>
+              ),
             },
           ]}
         />

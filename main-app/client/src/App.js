@@ -3,15 +3,14 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
 import { withStyles } from '@material-ui/core/styles'
 import ParticipantProfile from './components/Participant/Profile'
-import NavBar from './components/Navbar/index'
-import LoginPage from './components/Authorization/loginPage'
+import NavBar from './components/NavBar'
 import { UserAuth } from './utilities/auth'
 import Intake from './components/Form/Intake'
 import { NoMatch } from './routes/NoMatch'
 // Higher Order Component (HOC) to prevent the users from accessing a route if they are not logged in
 import { PrivateRoute } from '../src/routes/privateRoute'
 import withRoot from './withRoot'
-import ParticipantsList from './components/ParticipantsList/ParticipantsList'
+import { HomePage, SignInPage } from './pages/'
 
 import { PATHS } from './routes'
 
@@ -19,10 +18,11 @@ const UserContext = React.createContext({
   user: null,
   onLogout: () => true,
 })
+
 export const UserConsumer = UserContext.Consumer
 const UserProvider = UserContext.Provider
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     flexBasis: 1,
   },
@@ -105,7 +105,7 @@ class App extends Component {
                   <Route
                     path={PATHS.LOGIN}
                     render={({ location }) => (
-                      <LoginPage
+                      <SignInPage
                         location={location}
                         onNewLogin={this.handleNewLogin}
                       />
@@ -113,8 +113,8 @@ class App extends Component {
                   />
                   <PrivateRoute
                     exact={true}
-                    path={PATHS.PARTICIPANTS}
-                    component={ParticipantsList}
+                    path={PATHS.HOME}
+                    component={HomePage}
                   />
                   <PrivateRoute
                     exact={true}
