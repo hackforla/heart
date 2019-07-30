@@ -4,3 +4,4 @@ node_modules
 /main-app/api/server/.env
 /.vscode
 /main-app/client/.env
+/.idea/workspace.xml
