@@ -1,11 +1,9 @@
 import React from 'react'
 
-export function IntakePage(props) {
+export const IntakePage = () => {
   return (
     <div className="intake-page-container">
       <h1 className="intake-page">Intake Page</h1>
     </div>
   )
 }
-
-export default IntakePage
