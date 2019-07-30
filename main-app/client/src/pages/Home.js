@@ -1,11 +1,12 @@
 import React from 'react'
+import { Container } from '@material-ui/core'
+import ParticipantList from '../components/ParticipantsList/ParticipantsList'
 
-export function HomePage(props) {
+export const HomePage = () => {
   return (
-    <div className="home-page-container">
+    <Container>
       <h1 className="home-page">Home Page</h1>
-    </div>
+      <ParticipantList />
+    </Container>
   )
 }
-
-export default HomePage
