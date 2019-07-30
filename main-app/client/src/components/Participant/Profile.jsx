@@ -7,6 +7,7 @@ import Error from '../UI/Error'
 import Citations from './components/Citations'
 import Notes from './components/Notes'
 import Status from './components/Status'
+import { Link as RouterLink } from 'react-router-dom'
 import { useFetch } from '../../hooks/useFetch'
 
 const useStyles = makeStyles(theme => ({
@@ -22,11 +23,11 @@ const useStyles = makeStyles(theme => ({
       textDecoration: 'none'
     },
   },
-    arrowLeft: {
-      display: 'inline-block',
-      marginBottom: theme.spacing(1),
-      marginLeft: theme.spacing(1)
-    },
+  arrowLeft: {
+    display: 'inline-block',
+    marginBottom: theme.spacing(1),
+    marginLeft: theme.spacing(1)
+  },
 
 }))
 
@@ -46,28 +47,28 @@ const ParticipantProfile = props => {
       {state.isLoading ? (
         <Loader />
       ) : (
-        <Container>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Link to="/participants" className={classes.link}>
-                {state.isError && <Error error={state.isError} />}
-                <i className="fas fa-arrow-left"></i>
-                <span className={classes.arrowLeft}>Back to Index</span>
-              </Link>
+          <Container>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Link component={RouterLink} to="/participants" className={classes.link}>
+                  {state.isError && <Error error={state.isError} />}
+                  <i className="fas fa-arrow-left"></i>
+                  <span className={classes.arrowLeft}>Back to Index</span>
+                </Link>
+              </Grid>
+              <Grid item xs={12}>
+                <Card user={state.data[0]} />
+              </Grid>
+              <Grid item xs={8}>
+                <Notes user={state.data[0]} />
+                <Citations user={state.data[0]} />
+              </Grid>
+              <Grid item xs={4}>
+                <Status user={state.data[0]} />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <Card user={state.data[0]} />
-            </Grid>
-            <Grid item xs={8}>
-              <Notes user={state.data[0]} />
-              <Citations user={state.data[0]} />
-            </Grid>
-            <Grid item xs={4}>
-              <Status user={state.data[0]} />
-            </Grid>
-          </Grid>
-        </Container>
-      )}
+          </Container>
+        )}
     </div>
   )
 }

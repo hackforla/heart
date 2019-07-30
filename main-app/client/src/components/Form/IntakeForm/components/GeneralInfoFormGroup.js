@@ -3,6 +3,10 @@ import { Field } from 'formik'
 import '../style/FormGroup.scss'
 import RadioButton from '../../shared/RadioButton'
 
+const starStyle = {
+  color: '#f44336',
+}
+
 const form = [
   {
     component: RadioButton,
@@ -53,7 +57,7 @@ const form = [
     component: RadioButton,
     label: 'Housing Status',
     inputs: [
-      { name: 'housing_status', value: 'Currently homless' },
+      { name: 'housing_status', value: 'Currently homeless' },
       { name: 'housing_status', value: 'At risk of experiencing homelessness' },
       { name: 'housing_status', value: 'Other' },
     ],
@@ -92,11 +96,15 @@ const GeneralInfoFormGroup = props => {
 const renderInput = (form_input, handleChange, values) => {
   return (
     <div key={form_input.label} className="form-inputs">
-      <label className="label">{form_input.label}</label>
+      <label className="label">
+        {form_input.label}
+        <span style={starStyle}>*</span>
+      </label>
       <div className="comment">{form_input.comment}</div>
       {form_input.inputs.map(input => {
         return (
           <Field
+            required
             key={input.value}
             component={form_input.component}
             name={input.name}
