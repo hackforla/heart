@@ -52,9 +52,13 @@ class Participants extends Component {
 
   componentDidMount() {
     getParticipants().then(res => {
-      this.setState(prevState => ({
-        records: res.data,
-      }))
+      if (Array.isArray(res.data)) {
+        this.setState(prevState => ({
+          records: res.data,
+        }))
+      } else {
+        //Error homie!
+      }
     })
   }
 
@@ -89,24 +93,23 @@ class Participants extends Component {
 
   render() {
     let { curPage, qtyPerPage, records, header_fields } = this.state
+    let totalRecords = Array.isArray(records) ? records.length : 0
     let startingRecord = 1 + curPage * qtyPerPage - qtyPerPage
     let endingRecord =
-      records.length < curPage * qtyPerPage
-        ? records.length
-        : curPage * qtyPerPage
+      totalRecords < curPage * qtyPerPage ? totalRecords : curPage * qtyPerPage
 
     return (
       <div className="participants-table">
         <table>
           <caption>
-            Cases {startingRecord} - {endingRecord} of {records.length}
+            Cases {startingRecord} - {endingRecord} of {totalRecords}
           </caption>
           <TableHead headings={header_fields} />
 
           <tbody>{this.renderRecords()}</tbody>
         </table>
         <Pagination
-          totalRecords={records.length}
+          totalRecords={totalRecords}
           recordsPerPage={qtyPerPage}
           activeIndex={curPage}
           visibleTabQty={4}
