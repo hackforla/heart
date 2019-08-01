@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
 import { withStyles } from '@material-ui/core/styles'
 import ParticipantProfile from './components/Participant/Profile'
-import NavBar from './components/NavBar'
+import NavBar from './components/Navbar'
 import { UserAuth } from './utilities/auth'
 import Intake from './components/Form/Intake'
 import { NoMatch } from './routes/NoMatch'
@@ -121,7 +121,7 @@ class App extends Component {
                     path={PATHS.PARTICIPANT}
                     component={ParticipantProfile}
                   />
-                  {/* hold off on making this route privat */}
+                  {/* hold off on making this route private */}
                   <Route exact={true} path={PATHS.INTAKE} component={Intake} />
                   <Redirect from="/" to="/login" />
                   <Route component={NoMatch} />
