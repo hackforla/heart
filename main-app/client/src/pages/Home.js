@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from '@material-ui/core'
-import Participants from '../components/ParticipantsList/Participants/Participants'
+import { Participants } from '../components/Participants'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 const useStyles = makeStyles({
