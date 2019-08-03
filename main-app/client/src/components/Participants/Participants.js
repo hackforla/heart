@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import _ from 'lodash'
-import { useFetch } from '../../../hooks/useFetch'
-import fieldFormatter from '../../../utilities/fieldFormatter'
+import { useFetch } from '../../hooks/useFetch'
+import fieldFormatter from '../../utilities/fieldFormatter'
 import { headers } from './tableHeadersApi'
 import ParticipantsTable from './ParticipantsTable'
 
-const Participants = () => {
+export const Participants = () => {
   const [{ isLoading, isError, data }, setParticipants] = useFetch(
     'participants'
   )
