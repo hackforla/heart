@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {
   tableDateFormatter,
   tableCombinedDateFormatter,
-} from '../../../utilities/dateFormatter'
+} from '../../utilities/dateFormatter'
 
 /*
 Keeping for possible future use

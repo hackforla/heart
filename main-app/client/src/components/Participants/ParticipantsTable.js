@@ -14,7 +14,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 import TableHeader from './TableHeader'
 import Pagination from './Pagination'
-import { stableSort, getSorting } from '../../../utilities/sortingUtils'
+import { stableSort, getSorting } from '../../utilities/sortingUtils'
 import TableRecord from './TableRecord'
 
 const useStyles = makeStyles(theme => ({
