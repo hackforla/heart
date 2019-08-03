@@ -69,7 +69,11 @@ const ParticipantsTable = ({ headers, records, initOrderBy }) => {
             {stableSort(records, getSorting(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map(record => (
-                <TableRecord key={uuid()} values={_.map(_.values(record))} />
+                <TableRecord
+                  key={uuid()}
+                  values={_.map(_.values(record))}
+                  x={record}
+                />
               ))}
             {emptyRows > 0 && (
               <TableRow style={{ height: 48 * emptyRows }}>
@@ -78,7 +82,7 @@ const ParticipantsTable = ({ headers, records, initOrderBy }) => {
             )}
           </TableBody>
           <Pagination
-            colCount={headers.length}
+            colCount={_.map(headers).length}
             recordCount={records.length}
             page={page}
             rowsPerPage={rowsPerPage}
