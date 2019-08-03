@@ -3,7 +3,12 @@ import PropTypes from 'prop-types'
 import {
   tableDateFormatter,
   tableCombinedDateFormatter,
-} from '../../utilities/dateFormatter'
+} from '../../../utilities/dateFormatter'
+
+/*
+Keeping for possible future use
+ */
+
 const TableField = ({ record, formatter }) => {
   //So... Dear reader, I've passed us some sort of formatting voodoo
   //  through the formatter field ^^. each object passed has
