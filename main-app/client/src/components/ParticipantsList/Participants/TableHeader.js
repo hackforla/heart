@@ -1,73 +1,36 @@
-import React, { useState } from 'react'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import TableCell from '@material-ui/core/TableCell'
-import TableSortLabel from '@material-ui/core/TableSortLabel'
-import { makeStyles } from '@material-ui/core'
+import React from 'react'
+import PropTypes from 'prop-types'
+import {
+  TableHead,
+  TableRow,
+  TableCell,
+  TableSortLabel,
+} from '@material-ui/core'
 import uuid from 'uuid'
+import _ from 'lodash'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: '#95a5a6',
-  },
-  fieldLabel: {
-    color: theme.palette.common.black,
-  },
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: 1,
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    top: 20,
-    width: 1,
-  },
-}))
-
-const TableHeader = ({ initOrderBy, headers }) => {
-  const classes = useStyles()
-  const [order, setOrder] = useState('asc')
-  const [orderBy, setOrderBy] = useState(initOrderBy)
-
-  const createSortHandler = property => event => {
-    handleRequestSort(event, property)
-  }
-
-  function handleRequestSort(event, property) {
-    const isDesc = orderBy === property && order === 'desc'
-    setOrder(isDesc ? 'asc' : 'desc')
-    setOrderBy(property)
-  }
+const TableHeader = ({ order, orderBy, headers, onRequestSort }) => {
+  const createSortHandler = property => e => onRequestSort(e, property)
 
   return (
-    <TableHead className={classes.root}>
+    <TableHead>
       <TableRow>
-        {headers.map(row => (
+        {_.keys(headers).map(row => (
           <TableCell
             key={uuid()}
             align="left"
-            sortDirection={orderBy === row.as ? order : false}
+            sortDirection={orderBy === headers[row]['as'] ? order : false}
           >
-            {row.sortable ? (
+            {headers[row]['sortable'] ? (
               <TableSortLabel
-                className={classes.fieldLabel}
-                active={orderBy === row.as}
+                active={orderBy === headers[row]['as']}
                 direction={order}
-                onClick={createSortHandler(row.as)}
+                onClick={createSortHandler(headers[row]['as'])}
               >
-                {row.as}
-                {orderBy === row.as ? (
-                  <span className={classes.visuallyHidden}>
-                    {order === 'desc'
-                      ? 'sorted descending'
-                      : 'sorted ascending'}
-                  </span>
-                ) : null}
+                {headers[row]['as']}
               </TableSortLabel>
             ) : (
-              row.as
+              headers[row]['as']
             )}
           </TableCell>
         ))}
@@ -76,4 +39,10 @@ const TableHeader = ({ initOrderBy, headers }) => {
   )
 }
 
+TableHeader.propTypes = {
+  order: PropTypes.string,
+  orderBy: PropTypes.string,
+  headers: PropTypes.object,
+  onRequestSort: PropTypes.func,
+}
 export default TableHeader
