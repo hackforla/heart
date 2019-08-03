@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
 import { withStyles } from '@material-ui/core/styles'
+import { Paper } from '@material-ui/core'
 import ParticipantProfile from './components/Participant/Profile'
 import NavBar from './components/NavBar'
 import { UserAuth } from './utilities/auth'
@@ -96,7 +97,7 @@ class App extends Component {
           }}
         >
           <BrowserRouter>
-            <div>
+            <Paper>
               <header>
                 <NavBar onLogout={this.handleLogout} />
               </header>
@@ -127,7 +128,7 @@ class App extends Component {
                   <Route component={NoMatch} />
                 </Switch>
               </main>
-            </div>
+            </Paper>
           </BrowserRouter>
         </UserProvider>
       </React.Fragment>
