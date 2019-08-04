@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'formik'
-import '../style/FormGroup.scss'
+import '../Form/IntakeForm/style/FormGroup.scss'
 
 const starStyle = {
   color: '#f44336',
