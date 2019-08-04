@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     width: '60%',
     minWidth: 600,
     minHeight: 600,
-    marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(3),
   },
   title: {
     background: '#3122d6',
