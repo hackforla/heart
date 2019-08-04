@@ -1,8 +1,7 @@
 import React from 'react'
 import { Field } from 'formik'
-import '../style/FormGroup.scss'
-import RadioButton from '../../shared/RadioButton'
-import BasicField from '../../shared/BasicField'
+import '../Form/IntakeForm/style/FormGroup.scss'
+import { RadioButton, BasicField } from '../Form/shared'
 
 const form = [
   {
