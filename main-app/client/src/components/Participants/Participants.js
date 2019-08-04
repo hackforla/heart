@@ -4,6 +4,11 @@ import { useFetch } from '../../hooks/useFetch'
 import fieldFormatter from '../../utilities/fieldFormatter'
 import { headers } from './tableHeadersApi'
 import ParticipantsTable from './ParticipantsTable'
+import makeStyles from '@material-ui/core/styles/makeStyles'
+
+const useStyles = makeStyles(theme => ({
+  root: { flexGrow: 1, height: '100%', paddingTop: theme.spacing(6) },
+}))
 
 export const Participants = () => {
   const [{ isLoading, isError, data }, setParticipants] = useFetch(
@@ -12,6 +17,7 @@ export const Participants = () => {
 
   const [theaders, settheaders] = useState(headers)
   const [tableData, setTableData] = useState('')
+  const classes = useStyles()
 
   useEffect(() => {
     const getSelectedDataFields = record => {
@@ -50,13 +56,13 @@ export const Participants = () => {
       {isLoading ? (
         'Loading...'
       ) : (
-        <>
+        <div className={classes.root}>
           <ParticipantsTable
             initOrderBy="Name"
             headers={theaders}
             records={tableData}
           />
-        </>
+        </div>
       )}
     </>
   )
