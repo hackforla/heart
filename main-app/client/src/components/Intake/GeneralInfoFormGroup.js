@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'formik'
-import '../style/FormGroup.scss'
-import RadioButton from '../../shared/RadioButton'
+import '../Form/IntakeForm/style/FormGroup.scss'
+import { RadioButton } from '../Form/shared'
 
 const starStyle = {
   color: '#f44336',

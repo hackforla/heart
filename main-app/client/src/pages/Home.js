@@ -1,17 +1,23 @@
 import React from 'react'
-import { Container } from '@material-ui/core'
 import { Participants } from '../components/Participants'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import Layout from './Layout'
 
-const useStyles = makeStyles({
-  root: { height: 'calc(100vh - 64px)' },
-})
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    height: '100vh',
+    backgroundColor: theme.palette.background.paper,
+  },
+}))
 
-export const HomePage = () => {
+export const HomePage = ({ onLogout }) => {
   const classes = useStyles()
   return (
-    <Container className={classes.root}>
-      <Participants />
-    </Container>
+    <div className={classes.root}>
+      <Layout onLogout={onLogout}>
+        <Participants />
+      </Layout>
+    </div>
   )
 }

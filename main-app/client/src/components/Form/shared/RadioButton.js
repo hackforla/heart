@@ -1,6 +1,12 @@
 import React from 'react'
 
-const RadioButton = ({ field: { name }, value, onChange, label, values }) => {
+export const RadioButton = ({
+  field: { name },
+  value,
+  onChange,
+  label,
+  values,
+}) => {
   return (
     <div>
       <label>
