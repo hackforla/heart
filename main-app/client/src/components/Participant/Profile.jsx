@@ -36,8 +36,8 @@ to each form.
 Also removed sass requirement and using material-ui grid
  */
 
-const ParticipantProfile = props => {
-  const [state] = useFetch(`participants/${props.match.params.id}`)
+const ParticipantProfile = ({ match }) => {
+  const [state] = useFetch(`participants/${match.params.id}`)
   const classes = useStyles()
   return (
     <div className={classes.root}>
