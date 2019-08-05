@@ -9,7 +9,7 @@ const renderValue = value => {
   }
 }
 
-const FormSummary = ({ values, title }) => {
+export const FormSummary = ({ values, title }) => {
   return (
     <div className="form-summary">
       <div className="title">{title}</div>

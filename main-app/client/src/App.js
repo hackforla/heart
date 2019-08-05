@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
-import { withStyles } from '@material-ui/core/styles'
-import ParticipantProfile from './components/Participant/Profile'
-import NavBar from './components/Navbar'
 import { UserAuth } from './utilities/auth'
-import Intake from './components/Form/Intake'
 import { NoMatch } from './routes/NoMatch'
-// Higher Order Component (HOC) to prevent the users from accessing a route if they are not logged in
 import { PrivateRoute } from '../src/routes/privateRoute'
 import withRoot from './withRoot'
-import { HomePage, SignInPage } from './pages/'
+import { HomePage, SignInPage, IntakePage, ParticipantPage } from './pages/'
 
 import { PATHS } from './routes'
 
@@ -21,12 +16,6 @@ const UserContext = React.createContext({
 
 export const UserConsumer = UserContext.Consumer
 const UserProvider = UserContext.Provider
-
-const styles = () => ({
-  root: {
-    flexBasis: 1,
-  },
-})
 
 class App extends Component {
   state = {
@@ -96,38 +85,36 @@ class App extends Component {
           }}
         >
           <BrowserRouter>
-            <div>
-              <header>
-                <NavBar onLogout={this.handleLogout} />
-              </header>
-              <main>
-                <Switch>
-                  <Route
-                    path={PATHS.LOGIN}
-                    render={({ location }) => (
-                      <SignInPage
-                        location={location}
-                        onNewLogin={this.handleNewLogin}
-                      />
-                    )}
+            <Switch>
+              <Route
+                path={PATHS.LOGIN}
+                render={({ location }) => (
+                  <SignInPage
+                    location={location}
+                    onNewLogin={this.handleNewLogin}
                   />
-                  <PrivateRoute
-                    exact={true}
-                    path={PATHS.HOME}
-                    component={HomePage}
-                  />
-                  <PrivateRoute
-                    exact={true}
-                    path={PATHS.PARTICIPANT}
-                    component={ParticipantProfile}
-                  />
-                  {/* hold off on making this route private */}
-                  <Route exact={true} path={PATHS.INTAKE} component={Intake} />
-                  <Redirect from="/" to="/login" />
-                  <Route component={NoMatch} />
-                </Switch>
-              </main>
-            </div>
+                )}
+              />
+              <PrivateRoute
+                exact={true}
+                path={PATHS.HOME}
+                render={() => <HomePage onLogout={this.handleLogout} />}
+              />
+              <PrivateRoute
+                exact={true}
+                path={PATHS.PARTICIPANT}
+                render={({ match }) => (
+                  <ParticipantPage match={match} onLogout={this.handleLogout} />
+                )}
+              />
+              <PrivateRoute
+                exact={true}
+                path={PATHS.INTAKE}
+                render={() => <IntakePage onLogout={this.handleLogout} />}
+              />
+              <Redirect from="/" to="/login" />
+              <Route component={NoMatch} />
+            </Switch>
           </BrowserRouter>
         </UserProvider>
       </React.Fragment>
@@ -135,4 +122,4 @@ class App extends Component {
   }
 }
 
-export default withRoot(withStyles(styles)(App))
+export default withRoot(App)

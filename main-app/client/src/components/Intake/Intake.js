@@ -1,22 +1,21 @@
 import React from 'react'
-import IntakeForm from './IntakeForm/components/IntakeForm'
+import IntakeForm from './IntakeForm'
 import { Formik, Form } from 'formik'
 import { Button } from '@material-ui/core'
-import './Intake.scss'
-import FormTabs from '../FormTabs'
-import ClinicFormGroup from './IntakeForm/components/ClinicFormGroup'
-import ContactInfoFormGroup from './IntakeForm/components/ContactInfoFormGroup'
-import GeneralInfoFormGroup from './IntakeForm/components/GeneralInfoFormGroup'
-import FamilyAndIncomeFormGroup from './IntakeForm/components/FamilyAndIncomeFormGroup'
-import ProgramInfoFormGroup from './IntakeForm/components/ProgramInfoFormGroup'
-import OnsiteObligationsFormGroup from './IntakeForm/components/OnsiteObligationsFormGroup'
-import AgreementsFormGroup from './IntakeForm/components/AgreementsFormGroup'
+import FormTabs from '../Form/FormTabs'
+import ClinicFormGroup from './ClinicFormGroup'
+import ContactInfoFormGroup from './ContactInfoFormGroup'
+import GeneralInfoFormGroup from './GeneralInfoFormGroup'
+import FamilyAndIncomeFormGroup from './FamilyAndIncomeFormGroup'
+import ProgramInfoFormGroup from './ProgramInfoFormGroup'
+import OnsiteObligationsFormGroup from './OnsiteObligationsFormGroup'
+import AgreementsFormGroup from './AgreementsFormGroup'
 import { Grid } from '@material-ui/core'
 
-const Intake = () => {
+export const Intake = () => {
   return (
     <div className="intake">
-      <div className="top-header" />
+      {/*<div className="top-header" />*/}
 
       <IntakeForm>
         <FormTabs

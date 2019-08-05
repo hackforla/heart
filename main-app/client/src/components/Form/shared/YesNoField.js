@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from '@material-ui/core'
 import PropTypes from 'prop-types'
 
-const YesNoField = ({ index, box_input, values, setFieldValue }) => {
+export const YesNoField = ({ index, box_input, values, setFieldValue }) => {
   return (
     <div className="outer-box" key={index}>
       <div className="name">{box_input.name}</div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BasicField = ({
+export const BasicField = ({
   field: { name },
   type,
   value,
