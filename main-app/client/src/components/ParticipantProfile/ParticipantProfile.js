@@ -8,7 +8,7 @@ import _ from 'lodash'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import { useFetch } from '../../hooks/useFetch'
 import { Contact } from './Contact'
-// import { Citations } from './Citation'
+import { Citations } from './Citation'
 import { Note } from './Note'
 import fieldFormatter from '../../utilities/fieldFormatter'
 import { StatusX } from './Status'
@@ -147,6 +147,9 @@ export const ParticipantProfile = ({ match }) => {
           <Grid container spacing={4}>
             <Grid item xs={12} md={8}>
               <Note />
+              <br />
+              <br />
+              <Citations />
             </Grid>
             <Grid item xs={12} md={4}>
               <StatusX />
