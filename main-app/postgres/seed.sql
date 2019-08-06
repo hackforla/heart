@@ -1818,33 +1818,6 @@ VALUES (
   '',
   ARRAY['']);
 
-INSERT INTO citations (
-  citation_number,
-  court_code,
-  violations,
-  citation_status,
-  participant_id
-) VALUES (
-  '1123-351',
-  'CC 1264',
-  ARRAY['VN 1264'],
-  'warrant',
-  30
-);
-
-INSERT INTO citations (
-  citation_number,
-  court_code,
-  violations,
-  citation_status,
-  participant_id
-) VALUES (
-  '1123-352',
-  'CC 1265',
-  ARRAY['VN 1265'],
-  'warrant',
-  31
-);
 
 INSERT INTO participants (
   first_name,
