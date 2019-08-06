@@ -30,6 +30,7 @@ export const Intake = () => {
                       <ContactInfoFormGroup {...props} />
                       <GeneralInfoFormGroup {...props} />
                       <FamilyAndIncomeFormGroup {...props} />
+                      <AgreementsFormGroup {...props} />
                       {/*The rest of the form groups could go here */}
                       <br />
                       <br />
@@ -66,41 +67,6 @@ export const Intake = () => {
                     <Form>
                       <ProgramInfoFormGroup {...props} />
                       <OnsiteObligationsFormGroup {...props} />
-                      {/*The rest of the form groups could go here */}
-                      <br />
-                      <br />
-                      <Grid container justify="center" spacing={4}>
-                        <Grid item xs={6}>
-                          <Button
-                            variant="contained"
-                            size="large"
-                            color="default"
-                          >
-                            Save For Later
-                          </Button>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Button
-                            variant="contained"
-                            size="large"
-                            color="primary"
-                          >
-                            Continue to Agreement
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </Form>
-                  )}
-                </Formik>
-              ),
-            },
-            {
-              label: 'Agreements',
-              Form: () => (
-                <Formik onSubmit={values => console.log(values)}>
-                  {props => (
-                    <Form>
-                      <AgreementsFormGroup {...props} />
                       {/*The rest of the form groups could go here */}
                       <br />
                       <br />
