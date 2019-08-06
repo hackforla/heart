@@ -53,13 +53,15 @@ let generateData = async (callback) => {
       chronic_homeless,
       veteran_status,
       urgent,
-      services)
+      services,
+      notes,
+      background_check)
     VALUES (
       '${firstName}',
       'W',
       '${formatLastName}',
       ARRAY['${firstName.slice(0, 5)}'],
-      'status',
+      'new case',
       DATE('${formatDate}'),
       '${phoneNumber}',
       '${faker.internet.email()}',
@@ -75,7 +77,9 @@ let generateData = async (callback) => {
       ${bool[Math.round(Math.random())]},
       'not veteran',
       ${bool[Math.round(Math.random())]},
-      ARRAY['service1', 'service2']);
+      ARRAY['service1', 'service2']),
+      "",
+      ARRAY[];
     `,
     (err) => {if (err) {console.log(err)}}
     )
