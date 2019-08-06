@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'formik'
-import '../Form/IntakeForm/style/FormGroup.scss'
+import '../Form/IntakeForm/style/FormGroup.css'
 import { YesField, CheckBoxField } from '../Form/shared'
 
 const agreement_groups = [

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../Form/IntakeForm/style/FormGroup.scss'
+import '../Form/IntakeForm/style/FormGroup.css'
 import { YesNoField, FormSummary } from '../Form/shared'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
