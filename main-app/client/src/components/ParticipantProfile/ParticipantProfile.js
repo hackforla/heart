@@ -3,14 +3,14 @@ import { Grid, Link } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Loader from '../UI/Loader'
 import Error from '../UI/Error'
-import Status from './components/Status'
 import { Link as RouterLink } from 'react-router-dom'
+import _ from 'lodash'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import { useFetch } from '../../hooks/useFetch'
 import { Contact } from './Contact'
+// import { Citations } from './Citation'
 import { Note } from './Note'
-import _ from 'lodash'
 import fieldFormatter from '../../utilities/fieldFormatter'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import { StatusX } from './Status'
 
 const useStyles = makeStyles(theme => ({
@@ -152,6 +152,8 @@ export const ParticipantProfile = ({ match }) => {
               <StatusX />
             </Grid>
           </Grid>
+          <br />
+          <br />
           {JSON.stringify(data)}
         </div>
       )}
