@@ -32,21 +32,23 @@ CREATE TABLE participants(
   veteran_status VARCHAR(20),
   urgent BOOLEAN,
   services VARCHAR(20) [],
+  notes VARCHAR(250),
+  background_check VARCHAR(250) [],
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
- );
+);
 
- CREATE TABLE citations(
-   id SERIAL PRIMARY KEY,
-   citation_number VARCHAR(50),
-   court_code VARCHAR(50),
-   violations VARCHAR(50) [],
-   citation_status VARCHAR(20),
-   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-   participant_id INTEGER,
-   FOREIGN KEY (participant_id) REFERENCES participants (id)
- );
+CREATE TABLE citations(
+  id SERIAL PRIMARY KEY,
+  citation_number VARCHAR(50),
+  court_code VARCHAR(50),
+  violations VARCHAR(50) [],
+  citation_status VARCHAR(20),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  participant_id INTEGER,
+  FOREIGN KEY (participant_id) REFERENCES participants (id)
+);
 
 -- Trigger function to update updated_at timestamp
 CREATE OR REPLACE FUNCTION trigger_set_timestamp()
@@ -68,3 +70,4 @@ CREATE TRIGGER set_timestamp
 BEFORE UPDATE ON citations
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
+
