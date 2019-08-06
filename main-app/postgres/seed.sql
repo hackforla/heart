@@ -89,6 +89,7 @@ INSERT INTO users (
 ) VALUES (
   'Ronson',
   'ronson@la.gov'
+<<<<<<< HEAD
 );
 
 INSERT INTO participants (
@@ -1874,3 +1875,6 @@ INSERT INTO citations (
   'warrant',
   31
 );
+=======
+);
+>>>>>>> e5079d385ebcf06e22f9c97170fdefd520a509b0

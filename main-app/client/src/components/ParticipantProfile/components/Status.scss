@@ -1,0 +1,19 @@
+@import 'styles/shared.scss';
+
+.status-container {
+  grid-area: status;
+}
+
+.status-title {
+  @include section-title;
+}
+
+.status-form-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 30px;
+}
+
+.status-form {
+  @include form-box;
+}

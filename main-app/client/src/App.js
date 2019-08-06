@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
+<<<<<<< HEAD
 import { withStyles } from '@material-ui/core/styles'
 import NavBar from './components/Navbar/'
 import ParticipantProfile from './components/Participant/Profile'
@@ -12,6 +13,13 @@ import { NoMatch } from './routes/NoMatch'
 import { PrivateRoute } from '../src/routes/privateRoute'
 import withRoot from './withRoot'
 import ParticipantsList from './components/ParticipantsList/ParticipantsList'
+=======
+import { UserAuth } from './utilities/auth'
+import { NoMatch } from './routes/NoMatch'
+import { PrivateRoute } from '../src/routes/privateRoute'
+import withRoot from './withRoot'
+import { HomePage, SignInPage, IntakePage, ParticipantPage } from './pages/'
+>>>>>>> e5079d385ebcf06e22f9c97170fdefd520a509b0
 
 import { PATHS } from './routes'
 
@@ -19,6 +27,7 @@ const UserContext = React.createContext({
   user: null,
   onLogout: () => true,
 })
+<<<<<<< HEAD
 export const UserConsumer = UserContext.Consumer
 const UserProvider = UserContext.Provider
 
@@ -27,6 +36,11 @@ const styles = theme => ({
     flexBasis: 1,
   },
 })
+=======
+
+export const UserConsumer = UserContext.Consumer
+const UserProvider = UserContext.Provider
+>>>>>>> e5079d385ebcf06e22f9c97170fdefd520a509b0
 
 class App extends Component {
   state = {
@@ -96,6 +110,7 @@ class App extends Component {
           }}
         >
           <BrowserRouter>
+<<<<<<< HEAD
             <div>
               <header>
                 <NavBar onLogout={this.handleLogout} />
@@ -128,6 +143,38 @@ class App extends Component {
                 </Switch>
               </main>
             </div>
+=======
+            <Switch>
+              <Route
+                path={PATHS.LOGIN}
+                render={({ location }) => (
+                  <SignInPage
+                    location={location}
+                    onNewLogin={this.handleNewLogin}
+                  />
+                )}
+              />
+              <PrivateRoute
+                exact={true}
+                path={PATHS.HOME}
+                render={() => <HomePage onLogout={this.handleLogout} />}
+              />
+              <PrivateRoute
+                exact={true}
+                path={PATHS.PARTICIPANT}
+                render={({ match }) => (
+                  <ParticipantPage match={match} onLogout={this.handleLogout} />
+                )}
+              />
+              <PrivateRoute
+                exact={true}
+                path={PATHS.INTAKE}
+                render={() => <IntakePage onLogout={this.handleLogout} />}
+              />
+              <Redirect from="/" to="/login" />
+              <Route component={NoMatch} />
+            </Switch>
+>>>>>>> e5079d385ebcf06e22f9c97170fdefd520a509b0
           </BrowserRouter>
         </UserProvider>
       </React.Fragment>
@@ -135,4 +182,8 @@ class App extends Component {
   }
 }
 
+<<<<<<< HEAD
 export default withRoot(withStyles(styles)(App))
+=======
+export default withRoot(App)
+>>>>>>> e5079d385ebcf06e22f9c97170fdefd520a509b0

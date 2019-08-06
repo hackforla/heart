@@ -11,7 +11,7 @@ module.exports = (app) => {
   });
 
   app.post('/participants', jwtAuth, (req, res) => {
-    knex('participants').insert(req.body)
+    knex('participants').insert(req.body.data)
       .then(() => res.status(200).send())
       .catch(err => res.status(500).send(err));
   });

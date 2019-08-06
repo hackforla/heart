@@ -1,0 +1,63 @@
+@import 'styles/shared.scss';
+
+.citations-container {
+  grid-area: citation;
+}
+
+.citations-title {
+  @include section-title;
+}
+
+.citations-form-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 30px;
+}
+
+.citations-form {
+  @include form-box;
+
+  // form styling changes
+  .form-question {
+    color: $dark-grey;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: capitalize;
+  }
+  .form-answer,
+  .form-input {
+    font-size: 18px;
+    color: $darker-grey;
+  }
+  .form-input {
+    @include heart-input-box;
+  }
+  .form-QA--row {
+    grid-gap: 20px;
+    background-color: $palest-grey;
+    padding: 15px 20px;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    margin-top: -15px;
+    margin-bottom: 20px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/*
+==========================
+MEDIA QUERIES
+==========================
+*/
+
+@media (max-width: 600px) {
+  .citations-form {
+    .form-QA--row {
+      grid-template-columns: 1fr;
+      grid-gap: 10px;
+    }
+    .form-QA {
+      margin-bottom: 0px;
+    }
+  }
+}

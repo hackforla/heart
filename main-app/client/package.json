@@ -8,7 +8,12 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.1.3",
+<<<<<<< HEAD
     "axios": "^0.18.0",
+=======
+    "@material-ui/icons": "^4.0.1",
+    "axios": "^0.19.0",
+>>>>>>> e5079d385ebcf06e22f9c97170fdefd520a509b0
     "dotenv": "^7.0.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.8.0",
@@ -17,7 +22,11 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "lint-staged": "^8.2.1",
+<<<<<<< HEAD
     "lodash": "^4.17.11",
+=======
+    "lodash": "^4.17.15",
+>>>>>>> e5079d385ebcf06e22f9c97170fdefd520a509b0
     "node-sass": "^4.12.0",
     "prettier": "^1.18.1",
     "prop-types": "^15.7.2",

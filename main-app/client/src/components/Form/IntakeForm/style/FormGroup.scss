@@ -34,3 +34,82 @@
 .form-field {
   margin-bottom: 20px;
 }
+<<<<<<< HEAD
+=======
+
+.outer-box {
+  border: 1px solid gray;
+  display: flex;
+  .name {
+    width: 2000px;
+    flex-grow: 1000;
+    padding: 10px;
+  }
+  .yes {
+    width: 400px;
+    flex-grow: 0;
+    text-align: center;
+    border-left: 1px solid gray;
+    padding: 10px;
+    height: 100%;
+  }
+  .no {
+    width: 400px;
+    flex-grow: 0;
+    text-align: center;
+    border-left: 1px solid gray;
+    padding: 10px;
+    height: 100%;
+  }
+  .active {
+    background-color: #b5b3b3;
+    &.green {
+      border-bottom: 2px solid #339900;
+    }
+    &.red {
+      border-bottom: 2px solid red;
+    }
+  }
+}
+
+.agreements {
+  padding: 20px 0 10px 0;
+  max-width: 700px;
+}
+
+.agreements-wrapper {
+  border-bottom: 1px solid black;
+}
+
+.agreement-group {
+  display: flex;
+  margin: 10px 0px 10px 0px;
+  align-items: center;
+  &.list {
+    margin-left: 50px;
+  }
+  .agreement-content{
+    width: 2000px;
+    flex-grow: 1000;
+    margin-right: 30px;
+  }
+  .yes-button {
+    width: 500px;
+    flex-grow: 0;
+    background-color: #b5b3b3;
+    height: 60px;
+    min-width:150px;
+    &:hover {
+      background-color: #b5b3b3;
+    }
+  }
+  .selected {
+    background: #339900;
+    color: white;
+    &:hover {
+      background-color: #339900;
+      color: white;
+    }
+  }
+}
+>>>>>>> e5079d385ebcf06e22f9c97170fdefd520a509b0
