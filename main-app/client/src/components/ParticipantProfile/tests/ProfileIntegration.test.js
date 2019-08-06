@@ -1,5 +1,5 @@
 import React from 'react';
-import Profile from '../Profile';
+import Profile from '../ParticipantProfile';
 import { shallow } from 'enzyme';
 
 import axios from 'axios';
