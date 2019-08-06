@@ -8,7 +8,7 @@ let gender = ['male', 'female']
 let bool = ['true', 'false']
 
 let generateData = async (callback) => {
-  for(let i = 1; i < 31; i += 1){
+  for(let i = 0; i < 31; i += 1){
     let raceIndex = Math.floor(Math.random()* (race.length-1))
     let date = faker.date.past(100)
     let formatDate = moment(date).format('MM-DD-YYYY')
