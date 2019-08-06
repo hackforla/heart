@@ -1,0 +1,36 @@
+@import 'styles/shared.scss';
+
+.notes-container {
+  grid-area: notes;
+}
+
+.notes-title {
+  @include section-title;
+}
+
+.notes-form-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 30px;
+}
+
+.notes-form {
+  @include form-box;
+
+  .form-question {
+    display: none;
+  }
+  .form-text-area {
+    margin-top: 0px;
+    min-height: 100px;
+  }
+
+  .user-card--edit-btn {
+    width: 50px;
+    float: right;
+  }
+  .notes-form--text {
+    color: $darker-grey;
+    margin-top: 10px;
+  }
+}
