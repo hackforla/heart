@@ -32,6 +32,8 @@ CREATE TABLE participants(
   veteran_status VARCHAR(20),
   urgent BOOLEAN,
   services VARCHAR(20) [],
+  notes VARCHAR(250),
+  background_check VARCHAR(250) [],
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
