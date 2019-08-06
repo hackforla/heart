@@ -13,6 +13,14 @@ import AgreementsFormGroup from './AgreementsFormGroup'
 import { Grid } from '@material-ui/core'
 
 export const Intake = () => {
+  const localStorageClick = data => {
+    console.log(data)
+    localStorage.setItem('data', JSON.stringify(data))
+  }
+  const localStorageDeleteClick = data => {
+    console.log(data)
+    localStorage.removeItem('data')
+  }
   return (
     <div className="intake">
       {/*<div className="top-header" />*/}
@@ -62,8 +70,12 @@ export const Intake = () => {
             {
               label: 'Obligations',
               Form: () => (
-                <Formik onSubmit={values => console.log(values)}>
-                  {props => (
+                <Formik
+                  enableReinitialize={true}
+                  initialValues={JSON.parse(localStorage.getItem('data'))}
+                  onSubmit={values => console.log(values)}
+                >
+                  {({ handleReset, ...props }) => (
                     <Form>
                       <ProgramInfoFormGroup {...props} />
                       <OnsiteObligationsFormGroup {...props} />
@@ -76,8 +88,21 @@ export const Intake = () => {
                             variant="contained"
                             size="large"
                             color="default"
+                            onClick={() => {
+                              localStorageClick(props.values)
+                            }}
                           >
                             Save For Later
+                          </Button>
+                          <Button
+                            variant="contained"
+                            size="large"
+                            color="default"
+                            onClick={() => {
+                              localStorageDeleteClick()
+                            }}
+                          >
+                            Delete
                           </Button>
                         </Grid>
                         <Grid item xs={6}>
@@ -101,5 +126,3 @@ export const Intake = () => {
     </div>
   )
 }
-
-export default Intake
