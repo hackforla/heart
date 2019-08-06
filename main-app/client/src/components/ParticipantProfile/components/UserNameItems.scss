@@ -9,7 +9,7 @@ NAME ROW
   grid-area: name;
   display: grid;
   grid-template-columns: 50px fit-content(650px) fit-content(250px) 1fr 50px;
-  grid-template-areas: "avatar name aka nickname edit";
+  grid-template-areas: 'avatar name aka nickname edit';
   align-items: end;
   justify-items: start;
   grid-gap: 15px;
@@ -23,7 +23,7 @@ NAME ROW
   text-transform: capitalize;
   @include editableInput;
 }
-.name--aka, 
+.name--aka,
 .aka {
   grid-area: aka;
   border: none;
@@ -75,7 +75,7 @@ MEDIA QUERIES
   .user-card-name--container {
     width: 100%;
     grid-template-columns: 1fr;
-    grid-template-areas: "edit" "name";
+    grid-template-areas: 'edit' 'name';
     justify-items: stretch;
     grid-gap: 3px;
   }
@@ -83,7 +83,7 @@ MEDIA QUERIES
   .name--aka,
   .aka {
     display: none;
-  } 
+  }
   .user-card--edit-btn {
     width: 50px;
     justify-self: start;

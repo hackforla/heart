@@ -1,4 +1,4 @@
-@import "styles/shared.scss";
+@import 'styles/shared.scss';
 
 /*
 ==========================
@@ -20,8 +20,8 @@ USER CARD
   grid-template-columns: 1fr;
   grid-gap: 20px;
   grid-template-areas:
-    "name"
-    "info";
+    'name'
+    'info';
   justify-items: stretch;
   align-items: center;
 
@@ -37,7 +37,7 @@ MEDIA QUERIES
 @media (max-width: 600px) {
   .user-card--container {
     grid-template-columns: 1fr;
-    grid-template-areas: "name" "info";
+    grid-template-areas: 'name' 'info';
     justify-items: start;
   }
 }

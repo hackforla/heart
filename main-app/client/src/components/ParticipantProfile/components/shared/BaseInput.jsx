@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const BaseInput = ({ field,...props }) => {
+const BaseInput = ({ field, ...props }) => {
   const classes = useStyles()
   return (
     <InputBase
