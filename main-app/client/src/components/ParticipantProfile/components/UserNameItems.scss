@@ -1,0 +1,91 @@
+@import 'styles/shared.scss';
+
+/*
+==========================
+NAME ROW
+==========================
+*/
+.user-card-name--container {
+  grid-area: name;
+  display: grid;
+  grid-template-columns: 50px fit-content(650px) fit-content(250px) 1fr 50px;
+  grid-template-areas: 'avatar name aka nickname edit';
+  align-items: end;
+  justify-items: start;
+  grid-gap: 15px;
+}
+.user-card-name {
+  font-size: 30px;
+  width: 100%;
+}
+.user-card-name,
+.user-card-aka {
+  text-transform: capitalize;
+  @include editableInput;
+}
+.name--aka,
+.aka {
+  grid-area: aka;
+  border: none;
+  box-shadow: none;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 600;
+}
+.aka {
+  grid-area: nickname;
+}
+.name-finalized {
+  border: none;
+  box-shadow: none;
+  width: 100%;
+}
+.user-card-aka {
+  grid-area: aka;
+  font-size: 22px;
+  margin-left: 8px;
+}
+.user-card--edit-btn {
+  grid-area: edit;
+  justify-self: end;
+  align-self: center;
+  @include system-button--sub($blue, $blue-hover);
+  padding: 10px;
+  margin-top: 7px;
+}
+/*
+==========================
+AVATAR
+==========================
+*/
+.user-card--avatar {
+  object-fit: contain;
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: $box-shadow;
+}
+/*
+==========================
+MEDIA QUERIES
+==========================
+*/
+
+@media (max-width: 600px) {
+  .user-card-name--container {
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'edit' 'name';
+    justify-items: stretch;
+    grid-gap: 3px;
+  }
+  .user-card--avatar,
+  .name--aka,
+  .aka {
+    display: none;
+  }
+  .user-card--edit-btn {
+    width: 50px;
+    justify-self: start;
+  }
+}

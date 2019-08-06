@@ -1,11 +1,15 @@
 import React from 'react'
-import ParticipantProfile from '../components/Participant/Profile'
+import { ParticipantProfile } from '../components/ParticipantProfile'
 import Layout from './Layout'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
-const useStyles = makeStyles({
-  root: { height: 'calc(100vh - 64px)' },
-})
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    height: '100vh',
+    backgroundColor: theme.palette.background.paper,
+  },
+}))
 
 export const ParticipantPage = ({ onLogout, match }) => {
   const classes = useStyles()
@@ -17,5 +21,3 @@ export const ParticipantPage = ({ onLogout, match }) => {
     </div>
   )
 }
-
-export default ParticipantPage

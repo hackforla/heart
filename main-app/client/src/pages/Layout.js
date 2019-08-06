@@ -4,12 +4,11 @@ import NavBar from '../components/NavBar'
 import { Container } from '@material-ui/core'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
-    height: `calc(100vh - ${theme.spacing(8)}px)`,
-    backgroundColor: 'transparent',
+    flexGrow: 1,
   },
-}))
+})
 
 const Layout = ({ onLogout, children }) => {
   const classes = useStyles()

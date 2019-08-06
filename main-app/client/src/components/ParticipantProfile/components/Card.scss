@@ -1,0 +1,43 @@
+@import 'styles/shared.scss';
+
+/*
+==========================
+USER CARD
+==========================
+*/
+.user-card--container {
+  grid-area: card;
+  // width: 85%;
+  box-sizing: border-box;
+  border: 1px solid $light-grey;
+  border-top: 6px solid $theme-color;
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: $box-shadow;
+  background-color: white;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+  grid-template-areas:
+    'name'
+    'info';
+  justify-items: stretch;
+  align-items: center;
+
+  color: $darker-grey;
+}
+
+/*
+==========================
+MEDIA QUERIES
+==========================
+*/
+
+@media (max-width: 600px) {
+  .user-card--container {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'name' 'info';
+    justify-items: start;
+  }
+}
