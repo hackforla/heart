@@ -2,21 +2,17 @@ import React from 'react'
 import { Field } from 'formik'
 import '../Form/IntakeForm/style/FormGroup.css'
 
-const starStyle = {
-  color: '#f44336',
-}
-
 const ClinicFormGroup = props => {
   return (
     <div className="clinic-form-group">
-      <div className="title" style={starStyle}>
+      <div className="title" className="redStar">
         * = Required
       </div>
       <div className="title">Clinic Attended</div>
 
       <div className="form-inputs">
         <label className="label">
-          Date<span style={starStyle}>*</span>
+          Date<span className="redStar">*</span>
         </label>
         <Field
           required
@@ -30,7 +26,7 @@ const ClinicFormGroup = props => {
       <div className="form-inputs">
         <label className="label">
           Referral Source
-          <span style={starStyle}>*</span>
+          <span className="redStar">*</span>
         </label>
         <Field
           required

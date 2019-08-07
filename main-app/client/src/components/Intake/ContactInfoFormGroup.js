@@ -3,10 +3,6 @@ import { Field } from 'formik'
 import '../Form/IntakeForm/style/FormGroup.css'
 import { BasicField } from '../Form/shared'
 
-const starStyle = {
-  color: '#f44336',
-}
-
 const form = [
   {
     component: BasicField,
@@ -134,7 +130,7 @@ const renderInput = (form_input, handleChange, values) => {
     <div key={form_input.label} className="form-inputs">
       <label className="label">
         {form_input.label}
-        <span style={starStyle}>{!form_input.optional && '*'}</span>
+        <span className="redStar">{!form_input.optional && '*'}</span>
       </label>
       {form_input.inputs.map(input => {
         return (

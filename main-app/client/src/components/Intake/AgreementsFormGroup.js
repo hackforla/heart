@@ -3,10 +3,6 @@ import { Field } from 'formik'
 import '../Form/IntakeForm/style/FormGroup.css'
 import { YesField, CheckBoxField } from '../Form/shared'
 
-const starStyle = {
-  color: '#f44336',
-}
-
 const agreement_groups = [
   {
     component: YesField,
@@ -107,7 +103,7 @@ const renderAgreementFields = (index, agreements, props) => {
       <div className="agreements">
         <div className="disclaimer">
           {agreements.disclaimer}
-          <span style={starStyle}>{agreements.star && '*'}</span>
+          <span className="redStar">{agreements.star && '*'}</span>
         </div>
         {agreements.agreement_inputs.map((agreement_input, index) => (
           <Field
