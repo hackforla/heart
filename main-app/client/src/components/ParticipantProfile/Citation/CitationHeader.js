@@ -43,10 +43,7 @@ const NoteHeader = ({ heading, subHeading, handleClick, disabled }) => {
                 <AssignmentLateIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText
-              primary="Citations"
-              secondary="With related violations"
-            />
+            <ListItemText primary={heading} secondary={subHeading} />
             <ListItemSecondaryAction>
               <EditButton
                 disabled={disabled}

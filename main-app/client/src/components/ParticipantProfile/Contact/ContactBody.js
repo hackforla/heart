@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Typography, Container } from '@material-ui/core'
+import { Grid, Container } from '@material-ui/core'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import { formatPhoneNumber } from '../../../utilities/phoneFormatter'
+import { InfoItem } from '../shared'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -12,20 +13,6 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(3),
   },
 }))
-
-const InfoItem = props => {
-  const classes = useStyles()
-  return (
-    <Grid item {...props}>
-      <Typography component="h3" variant="overline" color="textSecondary">
-        {props.title}
-      </Typography>
-      <Typography variant="caption" color="textPrimary">
-        {props.desc || 'N/A'}
-      </Typography>
-    </Grid>
-  )
-}
 
 const ContactBody = ({ contactInfo }) => {
   const classes = useStyles()
