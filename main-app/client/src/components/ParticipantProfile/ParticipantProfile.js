@@ -46,7 +46,7 @@ export const ParticipantProfile = ({ match }) => {
   const [contactInfo, setContactInfo] = useState({})
   const [noteInfo, setNoteInfo] = useState({})
   const [statusInfo, setStatusInfo] = useState({})
-  const [citationInfo, setCitationInfo] = useState([{}])
+
   const classes = useStyles()
 
   useEffect(() => {
@@ -149,7 +149,7 @@ export const ParticipantProfile = ({ match }) => {
               <Note />
               <br />
               <br />
-              <Citations />
+              <Citations userId={match.params.id} />
             </Grid>
             <Grid item xs={12} md={4}>
               <StatusX />
