@@ -1,0 +1,1 @@
+export { InfoItem } from './InfoItem'
