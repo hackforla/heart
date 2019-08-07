@@ -39,36 +39,42 @@ const CitationForm = ({
       render={({ handleSubmit, isSubmitting, values, resetForm, ...props }) => (
         <Form>
           <Grid container className={classes.root}>
-            <Field
-              disabled={!isEditing}
-              name="citation_no"
-              id="citation_no"
-              type="text"
-              label="Citation No."
-              variant="outlined"
-              inputProps={{ 'aria-label': 'Citation Number' }}
-              component={FormGroupInput}
-            />
-            <Field
-              disabled={!isEditing}
-              name="court_code"
-              id="court_code"
-              type="text"
-              label="Court Code"
-              variant="outlined"
-              inputProps={{ 'aria-label': 'Court Code' }}
-              component={FormGroupInput}
-            />
-            <Field
-              disabled={!isEditing}
-              name="Status"
-              id="status"
-              type="text"
-              label="Status"
-              variant="outlined"
-              inputProps={{ 'aria-label': 'Status' }}
-              component={FormGroupInput}
-            />
+            <Grid item xs={12} sm={4}>
+              <Field
+                disabled={!isEditing}
+                name="citation_no"
+                id="citation_no"
+                type="text"
+                label="Citation No."
+                variant="outlined"
+                inputProps={{ 'aria-label': 'Citation Number' }}
+                component={FormGroupInput}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Field
+                disabled={!isEditing}
+                name="court_code"
+                id="court_code"
+                type="text"
+                label="Court Code"
+                variant="outlined"
+                inputProps={{ 'aria-label': 'Court Code' }}
+                component={FormGroupInput}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Field
+                disabled={!isEditing}
+                name="Status"
+                id="status"
+                type="text"
+                label="Status"
+                variant="outlined"
+                inputProps={{ 'aria-label': 'Status' }}
+                component={FormGroupInput}
+              />
+            </Grid>
           </Grid>
           <Divider />
           <FormActionBar>
