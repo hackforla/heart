@@ -1,5 +1,40 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+  agreementGroup: {
+    display: 'flex',
+    margin: '10px 0px 10px 0px',
+    alignItems: 'center',
+  },
+  list: {
+    marginLeft: '50px',
+  },
+  agreementContent: {
+    width: '2000px',
+    flexGrow: '1000',
+    marginRight: '30px',
+  },
+  button: {
+    width: '500px',
+    flexGrow: '0',
+    backgroundColor: '#b5b3b3',
+    height: '60px',
+    minWidth: '150px',
+    '&:hover': {
+       backgroundColor: '#b5b3b3'
+    },
+  },
+  selected: {
+    background: '#339900',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: '#339900',
+      color: 'white',
+    },
+  },
+}))
 
 export const YesField = ({
   index,
@@ -9,11 +44,12 @@ export const YesField = ({
   onChange,
   className,
 }) => {
+  const classes = useStyles()
   return (
-    <div key={index} className={`agreement-group ${className}`}>
-      <div className="agreement-content">{name}</div>
+    <div key={index} className={`${classes.agreementGroup} ${className ? classes.list : ''}`}>
+      <div className={classes.agreementContent}>{name}</div>
       <Button
-        className={`yes-button ${values[value] ? 'selected' : ''}`}
+        className={`${classes.button} ${values[value] ? classes.selected : ''}`}
         onClick={() => onChange(value, !values[value])}
         size="large"
       >

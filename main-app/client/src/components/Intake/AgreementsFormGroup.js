@@ -1,7 +1,29 @@
 import React from 'react'
 import { Field } from 'formik'
-import '../Form/IntakeForm/style/FormGroup.css'
 import { YesField, CheckBoxField } from '../Form/shared'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+  formGroupTitle: {
+    fontSize: '16px',
+    color: '#adadad',
+    fontWeight: '600',
+    margin: '18px auto',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+  },
+  agreementsWrapper: {
+    borderBottom: '1px solid black',
+  },
+  agreements: {
+    padding: '20px 0 10px 0',
+    maxWidth: '700px',
+    fontSize: '16px',
+  },
+  redStar: {
+    color: 'red',
+  },
+}))
 
 const agreement_groups = [
   {
@@ -87,23 +109,24 @@ const agreement_groups = [
 ]
 
 const AgreementsFormGroup = props => {
+  const classes = useStyles()
   return (
     <div className="agreements-form-group">
-      <div className="title">Agreements</div>
+      <div className={classes.formGroupTitle}>Agreements</div>
       {agreement_groups.map((agreements, index) =>
-        renderAgreementFields(index, agreements, props)
+        renderAgreementFields(index, agreements, props, classes)
       )}
     </div>
   )
 }
 
-const renderAgreementFields = (index, agreements, props) => {
+const renderAgreementFields = (index, agreements, props, classes) => {
   return (
-    <div key={index} className="agreements-wrapper">
-      <div className="agreements">
+    <div key={index} className={classes.agreementsWrapper}>
+      <div className={classes.agreements}>
         <div className="disclaimer">
           {agreements.disclaimer}
-          <span className="redStar">{agreements.star && '*'}</span>
+          <span className={classes.redStar}>{agreements.star && '*'}</span>
         </div>
         {agreements.agreement_inputs.map((agreement_input, index) => (
           <Field

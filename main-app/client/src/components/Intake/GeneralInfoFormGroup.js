@@ -1,7 +1,32 @@
 import React from 'react'
 import { Field } from 'formik'
-import '../Form/IntakeForm/style/FormGroup.css'
+import { makeStyles } from '@material-ui/core/styles'
 import { RadioButton } from '../Form/shared'
+
+const useStyles = makeStyles(theme => ({
+  formGroupTitle: {
+    fontSize: '16px',
+    color: '#adadad',
+    fontWeight: '600',
+    margin: '18px auto',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+  },
+  label: {
+    fontSize: '16px',
+    color: '#4f4f4f',
+    display: 'block',
+    paddingBottom: '4px',
+    textAlign: 'left',
+    width: '50%',
+  },
+  formInput: {
+    padding: '12px 0',
+  },
+  starStyle: {
+    color: 'red'
+  }
+}))
 
 const form = [
   {
@@ -79,24 +104,25 @@ const form = [
 ]
 
 const GeneralInfoFormGroup = props => {
+  const classes = useStyles()
   return (
     <div className="general-info-form-group">
-      <div className="title">General Information</div>
+      <div className={classes.formGroupTitle}>General Information</div>
 
       {form.map(form_input =>
-        renderInput(form_input, props.handleChange, props.values)
+        renderInput(form_input, props.handleChange, props.values, classes)
       )}
     </div>
   )
 }
-const renderInput = (form_input, handleChange, values) => {
+const renderInput = (form_input, handleChange, values, classes) => {
   return (
-    <div key={form_input.label} className="form-inputs">
-      <label className="label">
+    <div key={form_input.label} className={classes.formInput}>
+      <label className={classes.label}>
         {form_input.label}
-        <span className="redStar">*</span>
+        <span className={classes.starStyle}>*</span>
       </label>
-      <div className="comment">{form_input.comment}</div>
+      <div className={classes.label}>{form_input.comment}</div>
       {form_input.inputs.map(input => {
         return (
           <Field
