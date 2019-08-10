@@ -1,5 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+  formGroupTitle: {
+    fontSize: '16px',
+    color: '#adadad',
+    fontWeight: '600',
+    margin: '18px auto',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+  }
+}))
+
 
 const renderValue = (value, index) => {
   if (value === 'Is there an urgent rush?') {
@@ -15,9 +28,10 @@ const renderValue = (value, index) => {
 }
 
 export const FormSummary = ({ values, title }) => {
+  const classes = useStyles()
   return (
     <div className="form-summary">
-      <div className="title">{title}</div>
+      <div className={classes.formGroupTitle}>{title}</div>
       {values.map((value, index) => renderValue(value, index))}
     </div>
   )

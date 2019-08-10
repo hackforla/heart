@@ -1,4 +1,16 @@
 import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+  inputField: {
+    width: '50%',
+    fontSize: '14px',
+    color: '#4f4f4f',
+    padding: '10px',
+    marginTop: '5px',
+  }
+}))
+
 
 export const BasicField = ({
   field: { name },
@@ -9,6 +21,7 @@ export const BasicField = ({
   values,
   placeholder,
 }) => {
+  const classes = useStyles()
   return (
     <input
       type={type}
@@ -16,7 +29,7 @@ export const BasicField = ({
       id={name}
       onChange={onChange}
       placeholder={placeholder}
-      className="input-field"
+      className={classes.inputField}
     />
   )
 }
