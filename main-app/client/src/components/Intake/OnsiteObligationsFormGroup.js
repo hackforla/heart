@@ -71,7 +71,7 @@ const form_group_boxes = [
   },
   {
     box_name: 'Employment Training',
-    box_inputs: [{ name: 'Job Training(EDD, DPSS, LACC, AMerica Works, etc)' }],
+    box_inputs: [{ name: 'Job Training(EDD, DPSS, LACC, America Works, etc)' }],
   },
   {
     box_name: 'Family Services',

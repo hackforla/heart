@@ -90,14 +90,23 @@
   margin: 10px 0px 10px 0px;
   align-items: center;
 }
+
 .agreement-group.list {
   margin-left: 50px;
 }
+
+.agreement-content::after {
+  color: #f44336;
+  content: "*";
+}
+
 .agreement-group .agreement-content {
   width: 2000px;
   flex-grow: 1000;
   margin-right: 30px;
+
 }
+
 .agreement-group .yes-button {
   width: 500px;
   flex-grow: 0;
@@ -105,14 +114,21 @@
   height: 60px;
   min-width: 150px;
 }
+
 .agreement-group .yes-button:hover {
   background-color: #b5b3b3;
 }
+
 .agreement-group .selected {
   background: #339900;
   color: white;
 }
+
 .agreement-group .selected:hover {
   background-color: #339900;
   color: white;
+}
+
+.redStar {
+  color: #f44336
 }

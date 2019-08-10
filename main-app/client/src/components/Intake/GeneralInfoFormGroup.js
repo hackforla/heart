@@ -3,10 +3,6 @@ import { Field } from 'formik'
 import '../Form/IntakeForm/style/FormGroup.css'
 import { RadioButton } from '../Form/shared'
 
-const starStyle = {
-  color: '#f44336',
-}
-
 const form = [
   {
     component: RadioButton,
@@ -98,7 +94,7 @@ const renderInput = (form_input, handleChange, values) => {
     <div key={form_input.label} className="form-inputs">
       <label className="label">
         {form_input.label}
-        <span style={starStyle}>*</span>
+        <span className="redStar">*</span>
       </label>
       <div className="comment">{form_input.comment}</div>
       {form_input.inputs.map(input => {

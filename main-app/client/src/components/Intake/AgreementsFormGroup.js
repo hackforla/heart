@@ -70,6 +70,7 @@ const agreement_groups = [
   },
   {
     component: CheckBoxField,
+    star: true,
     disclaimer:
       "I give the HEART team permission to follow up with me on my application's progress, the best way to contact me is",
     agreement_inputs: [
@@ -100,7 +101,10 @@ const renderAgreementFields = (index, agreements, props) => {
   return (
     <div key={index} className="agreements-wrapper">
       <div className="agreements">
-        <div className="disclaimer">{agreements.disclaimer}</div>
+        <div className="disclaimer">
+          {agreements.disclaimer}
+          <span className="redStar">{agreements.star && '*'}</span>
+        </div>
         {agreements.agreement_inputs.map((agreement_input, index) => (
           <Field
             key={index}
