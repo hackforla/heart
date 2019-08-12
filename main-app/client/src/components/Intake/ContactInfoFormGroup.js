@@ -58,7 +58,7 @@ const form = [
     inputs: [
       {
         type: 'text',
-        name: 'also_known_as',
+        name: 'aka',
         placeholder: 'Also Known As - AKA (Optional)',
         value: '',
       },
@@ -70,7 +70,7 @@ const form = [
     inputs: [
       {
         type: 'text',
-        name: 'id_number',
+        name: 'dl',
         placeholder: "Driver's License / ID Number",
         value: '',
       },
@@ -82,7 +82,7 @@ const form = [
     inputs: [
       {
         type: 'date',
-        name: 'date_of_birth',
+        name: 'dob',
         placeholder: 'Date of Birth',
         value: '',
       },
@@ -95,7 +95,7 @@ const form = [
     inputs: [
       {
         type: 'tel',
-        name: 'phone_number',
+        name: 'phone',
         placeholder: 'Phone Number (optional)',
         value: '',
       },
@@ -108,7 +108,7 @@ const form = [
     inputs: [
       {
         type: 'email',
-        name: 'email_address',
+        name: 'email',
         placeholder: 'Email Address (optional)',
         value: '',
       },
@@ -121,7 +121,7 @@ const form = [
     inputs: [
       {
         type: 'text',
-        name: 'mailing_address',
+        name: 'address',
         placeholder: 'Mailing Address (optional)',
         value: '',
       },
