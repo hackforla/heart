@@ -37,4 +37,20 @@ export const updateParticipant = (id, data) => {
     .catch(err => err)
 }
 
+export const createParticipant = (data) => {
+  const authToken = UserAuth.getAuthToken()
+  let config = {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  }
+  return axios
+    .post(`${API_BASE_URL}/participants`, { data, timeout: 5000 }, config)
+    .then(res => {
+      console.log(res)
+      return res.data
+    })
+    .catch(err => err)
+}
+
 export default updateParticipant
