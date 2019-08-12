@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import {
   FormActionBar,
   CancelButton,
-  DeleteButton,
   SaveButton,
   BaseTextArea,
 } from '../FormElements'
@@ -27,7 +26,6 @@ const NotForm = ({
 }) => {
   const classes = useStyles()
   const handleReset = (cb, initVals) => {
-    console.log(initVals)
     handleCancel()
     cb(initVals)
   }
@@ -41,7 +39,7 @@ const NotForm = ({
           <Grid container className={classes.root}>
             <Field
               disabled={!isEditing}
-              name="note"
+              name="notes"
               id="note"
               type="text"
               multiline
@@ -53,7 +51,6 @@ const NotForm = ({
           </Grid>
           <Divider />
           <FormActionBar>
-            <DeleteButton handleClick={() => {}} />
             <CancelButton
               handleClick={() => handleReset(resetForm, initialValues)}
             />

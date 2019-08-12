@@ -21,7 +21,7 @@ const NoteBody = ({ note }) => {
     <Box component="div">
       <Container className={classes.root}>
         <Typography variant="body2" component="pre">
-          {note}
+          {note && note.length > 0 ? note : 'There are no notes'}
         </Typography>
       </Container>
     </Box>

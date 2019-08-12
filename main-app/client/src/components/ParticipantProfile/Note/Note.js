@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Grow, Paper, Divider } from '@material-ui/core'
+import { Grow, Paper, Divider, makeStyles } from '@material-ui/core'
 import NoteForm from './NoteForm'
 import NoteHeader from './NoteHeader'
 import NoteBody from './NoteBody'
-import makeStyles from '@material-ui/core/styles/makeStyles'
 
 const useStyles = makeStyles(theme => ({
   root: {
     borderTopColor: theme.palette.primary.main,
     borderTopWidth: 6,
     borderTopStyle: 'solid',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
   paper: {
     zIndex: 1,
@@ -21,26 +22,13 @@ const useStyles = makeStyles(theme => ({
   container: {},
 }))
 
-const noteComment = {
-  note: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur deserunt
- doloribus illo iste laboriosam molestiae nisi nulla placeat. Ab aspernatur autem 
- consequuntur laudantium, nobis perspiciatis rem similique voluptate! Impedit, magni. 
- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur deserunt doloribus 
- illo iste laboriosam molestiae nisi nulla placeat. Ab aspernatur autem consequuntur 
- laudantium, nobis perspiciatis rem similique voluptate! Impedit, magni. Lorem ipsum 
- dolor sit amet, consectetur adipisicing elit. Aspernatur deserunt doloribus illo 
- iste laboriosam molestiae nisi nulla placeat. Ab aspernatur autem consequuntur 
- laudantium, nobis perspiciatis rem similique voluptate! Impedit, magni.`,
-}
-
-export const Note = props => {
+export const Note = ({ note, updateNote }) => {
   const classes = useStyles()
   const [isEditing, setEdit] = useState(false)
-  const [note, setNote] = useState(noteComment)
   const toggleEdit = () => setEdit(prev => !prev)
   const handleCancel = () => toggleEdit()
   const handleFormSubmit = values => {
-    setNote(values)
+    updateNote(values)
     toggleEdit()
   }
   return (
@@ -52,7 +40,7 @@ export const Note = props => {
       />
       <Divider />
       <div className={classes.container}>
-        {!isEditing && <NoteBody note={note.note} />}
+        {!isEditing ? <NoteBody note={note.notes} /> : null}
       </div>
       {isEditing && (
         <Grow in={isEditing}>
@@ -70,6 +58,13 @@ export const Note = props => {
   )
 }
 
-Note.propTypes = {}
+Note.propTypes = {
+  note: PropTypes.object,
+  updateNote: PropTypes.func,
+}
+
+Note.defaultProps = {
+  note: '',
+}
 
 export default Note
