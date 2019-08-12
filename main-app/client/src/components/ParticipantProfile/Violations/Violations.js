@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Chip, Typography } from '@material-ui/core'
 import uuid from 'uuid'
 import { makeStyles } from '@material-ui/core/styles'
+import _ from 'lodash'
+import { violationCodes } from './violationCodes'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,34 +18,42 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export const Violations = ({ isEditing = true, violations }) => {
-  const [tempViolations, setTempViolations] = useState([])
+export const Violations = ({
+  isEditing = true,
+  violations,
+  handleViolationRemoval,
+}) => {
+  const [uncommonViolations, setUncommonViolations] = useState([])
   const classes = useStyles()
 
-  const handleRemove = (event, violation) => {
-    setTempViolations(tempViolations.filter(x => x !== violation))
-  }
+  // const handleRemove = (event, violation) => {
+  //   setTempViolations(tempViolations.filter(x => x !== violation))
+  // }
 
   useEffect(() => {
-    setTempViolations(violations)
+    const findUncommonViolations = () => {
+      let codes = _.map(violationCodes, 'text')
+      return _.map(violations, x => codes.indexOf(x) < 0 && x)
+    }
+    setUncommonViolations(findUncommonViolations())
   }, [violations])
 
+  console.log('Violations Rendered')
   return (
     <div className={classes.root}>
-      <Typography variant="caption" gutterBottom>
-        Violations
+      <Typography variant="caption" component="p" gutterBottom>
+        Violations (Max 5 violations)
       </Typography>
-      <div>
-        {violations.map(v => (
-          <Chip
-            key={uuid()}
-            label={v}
-            onDelete={isEditing ? e => handleRemove(e, v) : null}
-            // color={isCommon(violation)}
-            className={classes.chip}
-          />
-        ))}
-      </div>
+      {violations.map(v => (
+        <Chip
+          key={uuid()}
+          label={v}
+          variant="outlined"
+          onDelete={isEditing ? () => handleViolationRemoval(v) : null}
+          color={uncommonViolations.indexOf(v) < 0 ? 'primary' : 'secondary'}
+          className={classes.chip}
+        />
+      ))}
     </div>
   )
 }
@@ -54,4 +64,4 @@ Violations.propTypes = {
   handleRemove: PropTypes.func,
 }
 
-export default Violations
+export default React.memo(Violations)

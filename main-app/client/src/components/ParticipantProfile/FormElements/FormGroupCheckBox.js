@@ -1,15 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-  FormControl,
-  FormControlLabel,
-  Checkbox,
-  FormGroup,
-  FormLabel,
-} from '@material-ui/core'
-import _ from 'lodash'
-import uuid from 'uuid'
+import { FormControl, FormGroup, FormLabel } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,62 +15,46 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export const FormGroupCheckbox = ({
+export const FormGroupCheckBox = ({
   id,
+  value,
+  onChange,
+  onBlur,
   label,
-  field,
-  form: { touched, errors, setFieldValue },
-  optionsList,
-  handleChange,
-  ...props
+  children,
 }) => {
   const classes = useStyles()
-  const errmsg = touched[field.name] && errors[field.name]
-  const updateChecked = () => {
-    if (field.value.includes(props.value)) {
-      const nextValue = field.value.filter(value => value !== props.value)
-      setFieldValue(props.name, nextValue)
-      handleChange(nextValue)
+  const handleChange = event => {
+    const target = event.currentTarget
+    let valueArray = [...value] || []
+
+    if (target.checked) {
+      valueArray.push(target.id)
     } else {
-      const nextValue = field.value.concat(props.value)
-      setFieldValue(props.name, nextValue)
+      valueArray.splice(valueArray.indexOf(target.id), 1)
     }
+
+    onChange(id, valueArray)
   }
+
+  const handleBlur = () => onBlur(id, true)
 
   return (
     <FormControl component="fieldset" className={classes.root} fullWidth={true}>
       <FormLabel component="legend">{label}</FormLabel>
       <FormGroup>
-        {_.map(optionsList, (val, idx) => (
-          <FormControlLabel
-            key={uuid()}
-            control={
-              <Checkbox
-                checked={val}
-                onChange={updateChecked}
-                value={idx}
-                {...field}
-                {...props}
-              />
-            }
-            label={idx}
-          />
-        ))}
+        {React.Children.map(children, child => {
+          return React.cloneElement(child, {
+            field: {
+              value: value.includes(child.props.id),
+              onChange: handleChange,
+              onBlur: handleBlur,
+            },
+          })
+        })}
       </FormGroup>
     </FormControl>
   )
 }
 
-FormGroupCheckbox.propTypes = {
-  id: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  optionsList: PropTypes.object.isRequired,
-}
-
-FormGroupCheckbox.defaultProps = {
-  id: '', // needed for screen readers
-  label: 'Label',
-  optionsList: {},
-}
-
-export default FormGroupCheckbox
+export default FormGroupCheckBox

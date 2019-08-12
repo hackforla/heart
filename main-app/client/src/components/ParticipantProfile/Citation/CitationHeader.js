@@ -32,7 +32,6 @@ const useStyles = makeStyles(theme => ({
 
 const NoteHeader = ({ heading, subHeading, handleClick, disabled }) => {
   const classes = useStyles()
-  console.log('ContactHeading Rendered')
   return (
     <AppBar position="static" classes={{ root: classes.appBar }}>
       <Toolbar>
@@ -45,11 +44,11 @@ const NoteHeader = ({ heading, subHeading, handleClick, disabled }) => {
             </ListItemAvatar>
             <ListItemText primary={heading} secondary={subHeading} />
             <ListItemSecondaryAction>
-              <EditButton
-                disabled={disabled}
-                tipTitle="Edit Note"
-                handleClick={handleClick}
-              />
+              {/*<EditButton*/}
+              {/*  disabled={disabled}*/}
+              {/*  tipTitle="Edit Citation"*/}
+              {/*  handleClick={handleClick}*/}
+              {/*/>*/}
             </ListItemSecondaryAction>
           </ListItem>
         </List>

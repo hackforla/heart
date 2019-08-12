@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { CardActionArea, CardContent, Divider, Paper } from '@material-ui/core'
-
+import { Divider, Paper } from '@material-ui/core'
+import _ from 'lodash'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import StatusForm from './StatusForm'
 import StatusHeader from './StatusHeader'
+import StatusBody from './StatusBody'
 
 const useStyles = makeStyles(theme => ({
   root: {
     borderTopColor: theme.palette.primary.main,
     borderTopWidth: 6,
     borderTopStyle: 'solid',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
   paper: {
     zIndex: 1,
@@ -20,35 +23,42 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export const StatusX = ({}) => {
+export const Status = ({ statusInfo, updateStatus }) => {
   const classes = useStyles()
   const [isEditing, setEdit] = useState(false)
   const toggleEdit = () => setEdit(prev => !prev)
   const handleCancel = () => toggleEdit()
   const handleFormSubmit = values => {
-    console.log(values)
+    updateStatus(values)
+    toggleEdit()
   }
   return (
     <Paper className={classes.root}>
       <StatusHeader
         heading="Case Status"
+        subHeading={_.startCase(statusInfo.status)}
         handleClick={toggleEdit}
         disabled={isEditing}
       />
       <Divider />
+      {!isEditing ? <StatusBody bgCheck={statusInfo.background_check} /> : null}
       <div className={classes.container}>
-        <StatusForm
-          handleFormSubmit={handleFormSubmit}
-          isEditing={isEditing}
-          initialValues={{ status: 'None', backgroundCheck: [] }}
-          handleCancel={handleCancel}
-        />
+        {isEditing && (
+          <StatusForm
+            handleFormSubmit={handleFormSubmit}
+            isEditing={isEditing}
+            initialValues={Object.assign({}, statusInfo, {
+              status: _.startCase(statusInfo.status),
+            })}
+            handleCancel={handleCancel}
+          />
+        )}
       </div>
     </Paper>
   )
 }
-StatusX.defaultProps = {}
+Status.defaultProps = {}
 
-StatusX.propTypes = {}
+Status.propTypes = {}
 
-export default StatusX
+export default Status

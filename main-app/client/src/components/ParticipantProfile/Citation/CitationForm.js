@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
   FormActionBar,
@@ -6,10 +6,16 @@ import {
   DeleteButton,
   SaveButton,
   FormGroupInput,
+  FormGroupSelect,
 } from '../FormElements'
 import { Field, Form, Formik } from 'formik'
 import { Divider, Grid } from '@material-ui/core'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import { Violations } from '../Violations'
+import { courtList } from './courtList'
+import { Search } from '../Search'
+import { violationCodes } from '../Violations/violationCodes'
+import _ from 'lodash'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,17 +30,41 @@ const CitationForm = ({
   handleFormSubmit,
   handleCancel,
   isEditing,
+  setAlert,
 }) => {
   const classes = useStyles()
+  const [tempViolations, setTempViolations] = useState([])
+
   const handleReset = (cb, initVals) => {
-    console.log(initVals)
     handleCancel()
     cb(initVals)
   }
+
+  useEffect(() => {
+    setTempViolations(initialValues.violations)
+  }, [initialValues.violations])
+
+  const handleFormvalues = formVals => {
+    let x = Object.assign({}, formVals, { violations: tempViolations })
+    handleFormSubmit(x)
+  }
+
+  const handleViolationSelection = val => {
+    if (tempViolations.length < 5)
+      setTempViolations(prevState => prevState.concat([val]))
+    if (tempViolations.length === 4) {
+      setAlert('warning')
+      setTimeout(() => setAlert(''), 4000)
+    }
+  }
+
+  const handleViolationRemoval = val =>
+    setTempViolations(prevState => _.filter(prevState, x => x !== val))
+
   return (
     <Formik
       enableReinitialize
-      onSubmit={(values, action) => handleFormSubmit(values)}
+      onSubmit={(values, action) => handleFormvalues(values)}
       initialValues={initialValues}
       render={({ handleSubmit, isSubmitting, values, resetForm, ...props }) => (
         <Form>
@@ -42,7 +72,7 @@ const CitationForm = ({
             <Grid item xs={12} sm={4}>
               <Field
                 disabled={!isEditing}
-                name="citation_no"
+                name="citation_number"
                 id="citation_no"
                 type="text"
                 label="Citation No."
@@ -54,29 +84,42 @@ const CitationForm = ({
             <Grid item xs={12} sm={4}>
               <Field
                 disabled={!isEditing}
+                id="courtCode"
                 name="court_code"
-                id="court_code"
-                type="text"
                 label="Court Code"
-                variant="outlined"
-                inputProps={{ 'aria-label': 'Court Code' }}
-                component={FormGroupInput}
+                component={FormGroupSelect}
+                optionsList={courtList}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
               <Field
                 disabled={!isEditing}
-                name="Status"
+                name="citation_status"
                 id="status"
-                type="text"
                 label="Status"
-                variant="outlined"
-                inputProps={{ 'aria-label': 'Status' }}
-                component={FormGroupInput}
+                component={FormGroupSelect}
+                optionsList={['sent', 'not sent', 'warrant']}
               />
             </Grid>
           </Grid>
           <Divider />
+          <Violations
+            violations={tempViolations}
+            isEditing={isEditing}
+            handleViolationRemoval={handleViolationRemoval}
+          />
+          <Search
+            handleSelection={handleViolationSelection}
+            searchList={violationCodes}
+            exceptionList={tempViolations}
+            disabled={!isEditing}
+            placeholder={
+              tempViolations.length === 5
+                ? 'Max violations reached'
+                : 'Search Violations'
+            }
+          />
+
           <FormActionBar>
             <DeleteButton handleClick={() => {}} />
             <CancelButton
