@@ -23,7 +23,7 @@ export const FormGroupSelect = ({
   label,
   field,
   form: { touched, errors },
-  otionsList,
+  optionsList,
   ...props
 }) => {
   const classes = useStyles()
@@ -41,7 +41,7 @@ export const FormGroupSelect = ({
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
-        {_.map(otionsList, x => (
+        {_.map(optionsList, x => (
           <MenuItem key={uuid()} value={x}>
             {x}
           </MenuItem>
