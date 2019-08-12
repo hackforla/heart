@@ -16,8 +16,8 @@ export const InfoItem = ({ ...props }) => {
 }
 
 InfoItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  desc: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  desc: PropTypes.string,
 }
 
 InfoItem.defaultProps = {
