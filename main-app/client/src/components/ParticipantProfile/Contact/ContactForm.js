@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, Form, Formik } from 'formik'
-import { Container, Grid, Divider } from '@material-ui/core'
-import { FormGroupInput } from '../FormElements'
-import { FormActionBar } from '../FormElements'
-import CancelButton from '../FormElements/CancelButton'
-import SaveButton from '../FormElements/SaveButton'
-import makeStyles from '@material-ui/core/styles/makeStyles'
+import { Grid, Divider, makeStyles } from '@material-ui/core'
+import {
+  FormGroupInput,
+  FormActionBar,
+  CancelButton,
+  SaveButton,
+} from '../FormElements'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,12 +25,10 @@ export const ContactForm = ({
 }) => {
   const classes = useStyles()
   const handleReset = (cb, initVals) => {
-    console.log(initVals)
     handleCancel()
     cb(initVals)
   }
 
-  console.log('ContactForm Rendered')
   return (
     <Formik
       enableReinitialize
@@ -83,7 +82,7 @@ export const ContactForm = ({
                 disabled={!isEditing}
                 name="dob"
                 id="dob"
-                type="text"
+                type="date"
                 label="dob"
                 component={FormGroupInput}
               />
