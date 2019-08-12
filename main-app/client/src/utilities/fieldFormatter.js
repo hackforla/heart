@@ -1,4 +1,8 @@
-import { tableCombinedDateFormatter, tableDateFormatter } from './dateFormatter'
+import {
+  inputFieldDate,
+  tableCombinedDateFormatter,
+  tableDateFormatter,
+} from './dateFormatter'
 import _ from 'lodash'
 
 const fieldFormatter = (type, data) => {
@@ -10,6 +14,8 @@ const fieldFormatter = (type, data) => {
       return tableDateFormatter(tempData)
     case 'dateTime':
       return tableCombinedDateFormatter(tempData)
+    case 'formDate':
+      return inputFieldDate(tempData)
     default:
       return tempData
   }

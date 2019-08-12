@@ -1,22 +1,35 @@
 export function dateFormatter(timestamp) {
-  const newDate = new Date(timestamp).toDateString().split(' ')
-  newDate.shift()
-  return newDate.join(' ')
+  const date = new Date(timestamp)
+  let day = date.getUTCDate()
+  let month = date.getUTCMonth() + 1
+  let year = date.getUTCFullYear()
+  if (day < 10) day = `0${day}`
+  if (month < 10) month = `0${month}`
+
+  const [, monthString, , , militaryTime] = date.toString().split(' ')
+  return [day, month, year, monthString, militaryTime]
+}
+
+export function inputFieldDate(timestamp) {
+  const [day, month, year] = dateFormatter(timestamp)
+  return `${year}-${month}-${day}`
+}
+
+export function databaseDateFormat(timestamp) {
+  const [day, month, year] = dateFormatter(timestamp)
+  return `${month}-${day}-${year}`
 }
 
 export function tableDateFormatter(timestamp) {
-  const [, month, day, year] = new Date(timestamp).toString().split(' ')
-  const currentDate = [`${month} ${day}, ${year}`].join(' ')
-  return currentDate
+  const [day, , year, monthString] = dateFormatter(timestamp)
+  return `${monthString} ${day}, ${year}`
 }
 
 export function tableCombinedDateFormatter(timestamp) {
-  const [, month, day, year, militaryTime] = new Date(timestamp)
-    .toString()
-    .split(' ')
-  const currentDate = [
-    `${month} ${day}, ${year} — ${localTime(militaryTime)}`,
-  ].join(' ')
+  const [day, , year, monthString, militaryTime] = dateFormatter(timestamp)
+  const currentDate = `${monthString} ${day}, ${year} — ${localTime(
+    militaryTime
+  )}`
   return currentDate
 }
 
