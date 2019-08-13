@@ -29,7 +29,7 @@ export const Intake = () => {
         <FormTabs
           forms={[
             {
-              label: 'Personal Information',
+              label: '1. Personal Information',
               Form: () => (
                 <Formik onSubmit={values => console.log(values)}>
                   {props => (
@@ -68,7 +68,7 @@ export const Intake = () => {
               ),
             },
             {
-              label: 'Obligations',
+              label: '2. Obligations',
               Form: () => (
                 <Formik
                   enableReinitialize={true}
