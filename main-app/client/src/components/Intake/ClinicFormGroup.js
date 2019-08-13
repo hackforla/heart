@@ -2,15 +2,7 @@ import React from 'react'
 import { Field } from 'formik'
 import { makeStyles } from '@material-ui/core/styles'
 
-const useStyles = makeStyles(theme => ({
-  formGroupTitle: {
-    fontSize: '16px',
-    color: '#adadad',
-    fontWeight: '600',
-    margin: '18px auto',
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-  },
+const useStyles = makeStyles(() => ({
   label: {
     fontSize: '16px',
     color: '#4f4f4f',
@@ -22,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     padding: '12px 0',
   },
   starStyle: {
-    color: 'red'
+    color: 'red',
   },
   inputField: {
     width: '50%',
@@ -30,17 +22,15 @@ const useStyles = makeStyles(theme => ({
     color: '#4f4f4f',
     padding: '10px',
     marginTop: '5px',
-  }
+  },
 }))
 
 const ClinicFormGroup = props => {
   const classes = useStyles()
   return (
     <div className="clinic-form-group">
-      <div className={classes.starStyle}>
-        * = Required
-      </div>
-      <div className={classes.formGroupTitle}>Clinic Attended</div>
+      <div className={classes.starStyle}>* = Required</div>
+      <h4>Clinic Attended</h4>
 
       <div className={classes.formInput}>
         <label className={classes.label}>

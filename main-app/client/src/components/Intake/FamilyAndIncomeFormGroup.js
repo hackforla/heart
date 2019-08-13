@@ -3,15 +3,7 @@ import { Field } from 'formik'
 import { RadioButton } from '../Form/shared'
 import { makeStyles } from '@material-ui/core/styles'
 
-const useStyles = makeStyles(theme => ({
-  formGroupTitle: {
-    fontSize: '16px',
-    color: '#adadad',
-    fontWeight: '600',
-    margin: '18px auto',
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-  },
+const useStyles = makeStyles(() => ({
   label: {
     fontSize: '16px',
     color: '#4f4f4f',
@@ -23,8 +15,8 @@ const useStyles = makeStyles(theme => ({
     padding: '12px 0',
   },
   starStyle: {
-    color: 'red'
-  }
+    color: 'red',
+  },
 }))
 
 const form = [
@@ -66,7 +58,7 @@ const FamilyAndIncomeFormGroup = props => {
   const classes = useStyles()
   return (
     <div className="family-and-income-form-group">
-      <div className={classes.formGroupTitle}>Family And Income</div>
+      <h4>Family And Income</h4>
 
       {form.map(form_input =>
         renderInput(form_input, props.handleChange, props.values, classes)
