@@ -111,7 +111,7 @@ export const Intake = () => {
                             size="large"
                             color="primary"
                           >
-                            Continue to Agreement
+                            Continue to Obligations
                           </Button>
                         </Grid>
                       </Grid>
