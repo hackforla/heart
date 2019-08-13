@@ -1,18 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Paper, Divider, Grow } from '@material-ui/core'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import _ from 'lodash'
 import ContactForm from './ContactForm'
 import ContactHeadingBar from './ContactHeadingBar'
 import ContactBody from './ContactBody'
-import updateParticipant from '../../../api/updateParticipant.api'
-import _ from 'lodash'
+import { fieldSelector } from '../../../utilities/fieldSelector'
+import { contactFormSchema } from './contactFormSchema'
+import { databaseDateFormat } from '../../../utilities/dateFormatter'
 
 const useStyles = makeStyles(theme => ({
   root: {
     borderTopColor: theme.palette.primary.main,
     borderTopWidth: 6,
     borderTopStyle: 'solid',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
   paper: {
     zIndex: 1,
@@ -22,20 +26,28 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export const Contact = ({ contactInfo }) => {
+export const Contact = ({ contactInfo, updateContactInfo }) => {
   const classes = useStyles()
   const [isEditing, setEdit] = useState(false)
+  const [formValues, setFormValues] = useState()
   const toggleEdit = () => setEdit(prev => !prev)
   const handleCancel = () => toggleEdit()
+
+  useEffect(() => {
+    setFormValues(fieldSelector(contactInfo, contactFormSchema))
+  }, [contactInfo])
+
   const handleFormSubmit = values => {
-    // database has 'aka' as an array reassigning back on this line
     const b = Object.assign({}, values, {
       aka: _.map(_.split(values.aka, ','), _.trim),
+      dob: databaseDateFormat(values.dob),
     })
-    let x = updateParticipant({ id: 1, data: b })
-    x.then(res => console.log(res))
+    const c = Object.assign({}, contactInfo, b)
+
+    updateContactInfo(c)
+    toggleEdit()
   }
-  console.log('Contact Rendered')
+
   return (
     <Paper className={classes.root}>
       {!isEditing && (
@@ -45,19 +57,18 @@ export const Contact = ({ contactInfo }) => {
             subHeading={`AKA: ${contactInfo.aka}`}
             handleClick={toggleEdit}
           />
-
           <Divider />
-          <ContactBody contactInfo={contactInfo} />
+          <ContactBody contactInfo={formValues} />
         </>
       )}
       {isEditing && (
         <Grow in={isEditing}>
           <Paper className={classes.paper}>
             <ContactForm
-              handleFormSubmit={handleFormSubmit}
               isEditing={isEditing}
-              initialValues={contactInfo}
+              initialValues={formValues}
               handleCancel={handleCancel}
+              handleFormSubmit={handleFormSubmit}
             />
           </Paper>
         </Grow>
@@ -68,6 +79,7 @@ export const Contact = ({ contactInfo }) => {
 
 Contact.propTypes = {
   contactInfo: PropTypes.object,
+  updateContactInfo: PropTypes.func,
 }
 
 Contact.defaultProps = {

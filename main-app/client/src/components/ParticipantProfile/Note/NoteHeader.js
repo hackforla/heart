@@ -32,7 +32,6 @@ const useStyles = makeStyles(theme => ({
 
 const NoteHeader = ({ heading, subHeading, handleClick, disabled }) => {
   const classes = useStyles()
-  console.log('ContactHeading Rendered')
   return (
     <AppBar position="static" classes={{ root: classes.appBar }}>
       <Toolbar>

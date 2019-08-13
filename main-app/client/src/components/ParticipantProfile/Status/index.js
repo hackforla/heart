@@ -1,1 +1,1 @@
-export { StatusX } from './Status'
+export { Status } from './Status'

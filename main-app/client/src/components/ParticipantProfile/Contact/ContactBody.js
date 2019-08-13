@@ -16,7 +16,6 @@ const useStyles = makeStyles(theme => ({
 
 const ContactBody = ({ contactInfo }) => {
   const classes = useStyles()
-  console.log('ContactBody Rendered')
   return (
     <Container className={classes.root}>
       <Grid container spacing={1}>
@@ -41,11 +40,11 @@ const ContactBody = ({ contactInfo }) => {
         />
         <InfoItem
           xs={12}
-          sm={3}
+          sm={4}
           title="Email Address"
           desc={contactInfo.email}
         />
-        <InfoItem xs={12} sm={3} title="Address" desc={contactInfo.address} />
+        <InfoItem xs={12} sm={6} title="Address" desc={contactInfo.address} />
       </Grid>
     </Container>
   )
