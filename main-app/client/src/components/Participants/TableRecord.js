@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core'
 import _ from 'lodash'
 import EditIcon from '@material-ui/icons/Edit'
-import PriorityHighIcon from '@material-ui/icons/PriorityHigh'
+import Whatshot from '@material-ui/icons/Whatshot'
 
 const useStyles = makeStyles({
   cell: { fontSize: 14 },
@@ -21,7 +21,7 @@ const TableRecord = ({ values }) => {
   const classes = useStyles()
   return (
     <TableRow hover key={uuid()}>
-      <TableCell>{values[0] === 'true' && <PriorityHighIcon />}</TableCell>
+      <TableCell>{values[0] === 'true' && <Whatshot />}</TableCell>
       {_.slice(values, 1, values.length - 1).map(x => (
         <TableCell key={uuid()} className={classes.cell}>
           {' '}

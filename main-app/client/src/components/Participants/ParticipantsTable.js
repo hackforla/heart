@@ -34,7 +34,7 @@ const ParticipantsTable = ({ headers, records, initOrderBy }) => {
   const [order, setOrder] = useState('desc')
   const [orderBy, setOrderBy] = useState(initOrderBy)
   const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(5)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
   const classes = useStyles()
 
   const emptyRows =

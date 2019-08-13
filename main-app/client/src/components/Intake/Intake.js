@@ -25,13 +25,13 @@ export const Intake = () => {
         <FormTabs
           forms={[
             {
-              label: 'Personal Information',
+              label: '1. Personal Information',
               Form: () => (
                 <PersonalInfoForm />
               ),
             },
             {
-              label: 'Obligations',
+              label: '2. Obligations',
               Form: () => (
                 <Formik
                   enableReinitialize={true}
@@ -74,7 +74,7 @@ export const Intake = () => {
                             size="large"
                             color="primary"
                           >
-                            Continue to Agreement
+                            Continue to Obligations
                           </Button>
                         </Grid>
                       </Grid>

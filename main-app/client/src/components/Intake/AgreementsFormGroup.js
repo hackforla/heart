@@ -3,15 +3,7 @@ import { Field } from 'formik'
 import { YesField, CheckBoxField } from '../Form/shared'
 import { makeStyles } from '@material-ui/core/styles'
 
-const useStyles = makeStyles(theme => ({
-  formGroupTitle: {
-    fontSize: '16px',
-    color: '#adadad',
-    fontWeight: '600',
-    margin: '18px auto',
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-  },
+const useStyles = makeStyles(() => ({
   agreementsWrapper: {
     borderBottom: '1px solid black',
   },
@@ -112,7 +104,7 @@ const AgreementsFormGroup = props => {
   const classes = useStyles()
   return (
     <div className="agreements-form-group">
-      <div className={classes.formGroupTitle}>Agreements</div>
+      <h4>Agreements</h4>
       {agreement_groups.map((agreements, index) =>
         renderAgreementFields(index, agreements, props, classes)
       )}

@@ -68,7 +68,7 @@ const StatusForm = ({
               'Attorney Review',
               'Sent to Court',
               'Received From Court',
-              'Sent to ParticipantProfile',
+              'Sent to Participant Profile',
               'Closed',
             ]}
             name="status"
