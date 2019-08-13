@@ -15,7 +15,7 @@ CREATE TABLE participants(
   aka VARCHAR(20) ARRAY,
   dl VARCHAR(20),
   clinic VARCHAR(50),
-  status VARCHAR(20),
+  status VARCHAR(50),
   dob DATE,
   phone VARCHAR(10),
   email VARCHAR(50),
