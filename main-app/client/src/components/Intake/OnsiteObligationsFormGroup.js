@@ -1,8 +1,9 @@
 import React from 'react'
-import { YesNoField, CheckBoxField, FormSummary } from '../Form/shared'
-import PropTypes from 'prop-types'
-import _ from 'lodash'
+import { Field } from 'formik'
 import { makeStyles } from '@material-ui/core/styles'
+// import PropTypes from 'prop-types'
+import _ from 'lodash'
+import { CheckBoxField, FormSummary } from '../Form/shared'
 
 const useStyles = makeStyles(() => ({
   label: {
@@ -17,10 +18,11 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const form_group_boxes = [
+const obligationGroups = [
   {
-    box_name: 'Health Resources',
-    box_inputs: [
+    component: CheckBoxField,
+    obligationGroupTitle: 'Health Resources',
+    obligation: [
       { name: 'Mental Health Provider (DMH, etc)' },
       { name: 'Physical Health Provider' },
       { name: 'Dental Health Provider' },
@@ -31,8 +33,9 @@ const form_group_boxes = [
     ],
   },
   {
-    box_name: 'Housing',
-    box_inputs: [
+    component: CheckBoxField,
+    obligationGroupTitle: 'Housing',
+    obligation: [
       { name: 'Housing Case Management' },
       { name: 'Emergency Housing' },
       { name: 'Safe Park LA' },
@@ -41,8 +44,9 @@ const form_group_boxes = [
     ],
   },
   {
-    box_name: 'Government Resources',
-    box_inputs: [
+    component: CheckBoxField,
+    obligationGroupTitle: 'Government Resources',
+    obligation: [
       { name: 'Financial Assistance (TANF, FR, SSI/SSDI)' },
       { name: 'CalFresh' },
       { name: 'Medi-Cal Insurance' },
@@ -56,23 +60,26 @@ const form_group_boxes = [
     ],
   },
   {
-    box_name: 'Hygiene & Wellness',
-    box_inputs: [
+    component: CheckBoxField,
+    obligationGroupTitle: 'Hygiene & Wellness',
+    obligation: [
       { name: 'Haircut' },
       { name: 'Shower or Hygiene Kit' },
       { name: 'Health Screening' },
     ],
   },
   {
-    box_name: 'Communication Resources',
-    box_inputs: [
+    component: CheckBoxField,
+    obligationGroupTitle: 'Communication Resources',
+    obligation: [
       { name: 'Got a Cell Phone' },
       { name: 'Opened an Email Account' },
     ],
   },
   {
-    box_name: 'Legal Resources',
-    box_inputs: [
+    component: CheckBoxField,
+    obligationGroupTitle: 'Legal Resources',
+    obligation: [
       { name: 'Public Defender' },
       { name: 'Legal Aid' },
       { name: 'Medication' },
@@ -83,28 +90,31 @@ const form_group_boxes = [
     ],
   },
   {
-    box_name: 'Employment Training',
-    box_inputs: [{ name: 'Job Training(EDD, DPSS, LACC, America Works, etc)' }],
+    component: CheckBoxField,
+    obligationGroupTitle: 'Employment Training',
+    obligation: [{ name: 'Job Training(EDD, DPSS, LACC, America Works, etc)' }],
   },
   {
-    box_name: 'Family Services',
-    box_inputs: [{ name: 'Family Source Center Services' }],
+    component: CheckBoxField,
+    obligationGroupTitle: 'Family Services',
+    obligation: [{ name: 'Family Source Center Services' }],
   },
   {
-    box_name: '🔥🔥🔥 Urgency',
-    box_inputs: [{ name: 'Is there an urgent rush?' }],
+    component: CheckBoxField,
+    obligationGroupTitle: '🔥🔥🔥 Urgency',
+    obligation: [{ name: 'Is there an urgent rush?' }],
   },
 ]
 
 const OnsiteObligationsFormGroup = props => {
   const classes = useStyles()
   return (
-    <div className={classes.formInputs}>
+    <div className={classes.formInput}>
       <label className={classes.label}>
         Which onsite obligations did the individual complete?
       </label>
-      {form_group_boxes.map((boxes, index) =>
-        renderBoxes(index, boxes, props, classes)
+      {obligationGroups.map((boxes, index) =>
+        renderObligations(index, boxes, props, classes)
       )}
       <FormSummary
         values={confirmedPrograms(props.values)}
@@ -114,12 +124,20 @@ const OnsiteObligationsFormGroup = props => {
   )
 }
 
-const renderBoxes = (index, boxes, props, classes) => {
+const renderObligations = (index, obligationGroups, props, classes) => {
   return (
     <div key={index} className="box-form">
-      <h4>{boxes.box_name}</h4>
-      {boxes.box_inputs.map((box_input, index) => (
-        <YesNoField key={index} box_input={box_input} {...props} />
+      <h4>{obligationGroups.obligationGroupTitle}</h4>
+      {obligationGroups.obligation.map((obligation, index) => (
+        <Field
+          key={index}
+          component={obligationGroups.component}
+          name={obligation.name}
+          value={obligation.value}
+          onChange={props.setFieldValue}
+          values={props.values}
+          className={classes.style}
+        />
       ))}
     </div>
   )
@@ -131,10 +149,6 @@ const confirmedPrograms = values => {
       return value === true
     })
   )
-}
-
-YesNoField.propTypes = {
-  props: PropTypes.object,
 }
 
 export default OnsiteObligationsFormGroup
