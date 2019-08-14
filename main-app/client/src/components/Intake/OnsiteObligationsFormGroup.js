@@ -1,5 +1,5 @@
 import React from 'react'
-import { YesNoField, FormSummary } from '../Form/shared'
+import { YesNoField, CheckBoxField, FormSummary } from '../Form/shared'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import { makeStyles } from '@material-ui/core/styles'

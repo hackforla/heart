@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
 
 const agreement_groups = [
   {
-    component: YesField,
+    component: CheckBoxField,
     disclaimer: '',
     agreement_inputs: [
       {
@@ -29,7 +29,7 @@ const agreement_groups = [
     ],
   },
   {
-    component: YesField,
+    component: CheckBoxField,
     disclaimer: '',
     agreement_inputs: [
       {
@@ -39,7 +39,7 @@ const agreement_groups = [
     ],
   },
   {
-    component: YesField,
+    component: CheckBoxField,
     disclaimer: 'I understand that',
     style: 'list',
     agreement_inputs: [
@@ -61,7 +61,7 @@ const agreement_groups = [
     ],
   },
   {
-    component: YesField,
+    component: CheckBoxField,
     disclaimer: 'I also understand that',
     style: 'list',
     agreement_inputs: [
@@ -104,7 +104,9 @@ const AgreementsFormGroup = props => {
   const classes = useStyles()
   return (
     <div className="agreements-form-group">
-      <h4>Agreements</h4>
+      <h4>
+        Agreements<span className={classes.redStar}>*</span>
+      </h4>
       {agreement_groups.map((agreements, index) =>
         renderAgreementFields(index, agreements, props, classes)
       )}
