@@ -39,7 +39,7 @@ const ClinicFormGroup = props => {
         <Field
           required
           type="date"
-          name="clinic_attended"
+          name="clinic_date"
           placeholder="location"
           className={classes.inputField}
           onChange={props.handleChange}
@@ -53,7 +53,7 @@ const ClinicFormGroup = props => {
         <Field
           required
           type="text"
-          name="referral_sourced"
+          name="referral_source"
           placeholder="Referral Source"
           className={classes.inputField}
           onChange={props.handleChange}
