@@ -75,11 +75,6 @@ const agreement_groups = [
           "This program can take up to 3 or 4 months to take effect, and that I can check up on my cases's progress at anytime by contacting xxxxxxxxx",
         value: 'program_can_take_3_months',
       },
-      {
-        name:
-          'Any active warrants in my name will block any expungement that I could have obtained through the program',
-        value: 'active_warrants_2',
-      },
     ],
   },
   {
