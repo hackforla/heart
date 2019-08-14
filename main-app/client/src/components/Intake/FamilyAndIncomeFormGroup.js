@@ -44,12 +44,12 @@ const form = [
     component: RadioButton,
     label: 'Income per Month',
     inputs: [
-      { name: 'income_per_month', value: '$0' },
-      { name: 'income_per_month', value: '$100-250' },
-      { name: 'income_per_month', value: '$251-500' },
-      { name: 'income_per_month', value: '$501-1000' },
-      { name: 'income_per_month', value: '$1000-1500' },
-      { name: 'income_per_month', value: '$1500 and up' },
+      { name: 'income_range', value: '$0' },
+      { name: 'income_range', value: '$100-250' },
+      { name: 'income_range', value: '$251-500' },
+      { name: 'income_range', value: '$501-1000' },
+      { name: 'income_range', value: '$1000-1500' },
+      { name: 'income_range', value: '$1500 and up' },
     ],
   },
 ]
