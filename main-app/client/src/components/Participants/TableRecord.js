@@ -1,48 +1,51 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link as RouterLink } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import uuid from 'uuid'
-import {
-  IconButton,
-  Link,
-  TableCell,
-  TableRow,
-  makeStyles,
-} from '@material-ui/core'
+import { TableCell, TableRow, makeStyles } from '@material-ui/core'
 import _ from 'lodash'
-import EditIcon from '@material-ui/icons/Edit'
 import Whatshot from '@material-ui/icons/Whatshot'
 
-const useStyles = makeStyles({
-  cell: { fontSize: 14 },
-})
+const useStyles = makeStyles(theme => ({
+  row: {
+    cursor: 'pointer',
+    '&:hover > td:last-child': {
+      opacity: 1,
+    },
+  },
+  view: {
+    color: theme.palette.secondary.main,
+    opacity: 0,
+  },
+  urgent: {
+    textAlign: 'center',
+    color: theme.palette.secondary.dark,
+  },
+}))
 
-const TableRecord = ({ values }) => {
+const TableRecord = ({ values, history }) => {
   const classes = useStyles()
+
   return (
-    <TableRow hover key={uuid()}>
-      <TableCell>{values[0] === 'true' && <Whatshot />}</TableCell>
+    <TableRow
+      hover
+      className={classes.row}
+      onClick={e => history.push(`/participants/${values[values.length - 1]}`)}
+    >
+      <TableCell>
+        {values[0] === 'true' && <Whatshot className={classes.urgent} />}
+      </TableCell>
       {_.slice(values, 1, values.length - 1).map(data => (
         <TableCell key={uuid()} className={classes.cell}>
-          {' '}
-          {data}{' '}
+          {data}
         </TableCell>
       ))}
-      <TableCell>
-        <Link
-          component={RouterLink}
-          to={`/participants/${values[values.length - 1]}`}
-        >
-          <IconButton size="small">
-            <EditIcon />
-          </IconButton>
-        </Link>
-      </TableCell>
+      <TableCell className={classes.view}>view</TableCell>
     </TableRow>
   )
 }
 TableRecord.propTypes = {
-  records: PropTypes.object,
+  values: PropTypes.array,
 }
 
-export default TableRecord
+export default withRouter(TableRecord)
