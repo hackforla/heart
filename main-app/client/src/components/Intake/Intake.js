@@ -26,9 +26,7 @@ export const Intake = () => {
           forms={[
             {
               label: '1. Personal Information',
-              Form: () => (
-                <PersonalInfoForm />
-              ),
+              Form: () => <PersonalInfoForm />,
             },
             {
               label: '2. Obligations',
@@ -74,7 +72,7 @@ export const Intake = () => {
                             size="large"
                             color="primary"
                           >
-                            Continue to Obligations
+                            Save and Exit
                           </Button>
                         </Grid>
                       </Grid>

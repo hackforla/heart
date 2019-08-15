@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
 
 const agreement_groups = [
   {
-    component: YesField,
+    component: CheckBoxField,
     disclaimer: '',
     agreement_inputs: [
       {
@@ -29,7 +29,7 @@ const agreement_groups = [
     ],
   },
   {
-    component: YesField,
+    component: CheckBoxField,
     disclaimer: '',
     agreement_inputs: [
       {
@@ -39,7 +39,7 @@ const agreement_groups = [
     ],
   },
   {
-    component: YesField,
+    component: CheckBoxField,
     disclaimer: 'I understand that',
     style: 'list',
     agreement_inputs: [
@@ -61,7 +61,7 @@ const agreement_groups = [
     ],
   },
   {
-    component: YesField,
+    component: CheckBoxField,
     disclaimer: 'I also understand that',
     style: 'list',
     agreement_inputs: [
@@ -74,11 +74,6 @@ const agreement_groups = [
         name:
           "This program can take up to 3 or 4 months to take effect, and that I can check up on my cases's progress at anytime by contacting xxxxxxxxx",
         value: 'program_can_take_3_months',
-      },
-      {
-        name:
-          'Any active warrants in my name will block any expungement that I could have obtained through the program',
-        value: 'active_warrants_2',
       },
     ],
   },
@@ -100,13 +95,20 @@ const agreement_groups = [
       },
     ],
   },
+  {
+    component: CheckBoxField,
+    disclaimer: '🔥🔥🔥 Urgency',
+    agreement_inputs: [{ name: 'Is there an urgent rush?' }],
+  },
 ]
 
 const AgreementsFormGroup = props => {
   const classes = useStyles()
   return (
     <div className="agreements-form-group">
-      <h4>Agreements</h4>
+      <h4>
+        Agreements<span className={classes.redStar}>*</span>
+      </h4>
       {agreement_groups.map((agreements, index) =>
         renderAgreementFields(index, agreements, props, classes)
       )}

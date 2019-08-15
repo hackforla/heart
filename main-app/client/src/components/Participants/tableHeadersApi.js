@@ -36,7 +36,7 @@ export const headers = {
     sortable: true,
   },
   id: {
-    as: '',
+    as: 'Edit',
     fields: ['id'],
     format: 'string',
     sortable: false,
