@@ -11,7 +11,7 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core'
-import Grid from '@material-ui/core/Grid'
+// import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 import TableHeader from './TableHeader'
 import Pagination from './Pagination'
@@ -57,11 +57,7 @@ const ParticipantsTable = ({ headers, records, initOrderBy }) => {
     <Paper className={classes.root}>
       <div className={classes.tableWrapper}>
         <Toolbar style={{ backgroundColor: '#1C76D2' }}>
-          <Grid container spacing justify="space-between">
-            <Grid item>
-              <Typography variant="h2">{_.toUpper('Participants')}</Typography>
-            </Grid>
-          </Grid>
+          <Typography variant="h2">{_.toUpper('Participants')}</Typography>
         </Toolbar>
         <Table size="small">
           <TableHeader

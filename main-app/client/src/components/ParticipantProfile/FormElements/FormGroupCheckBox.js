@@ -57,6 +57,13 @@ export const FormGroupCheckBox = ({
   )
 }
 
-FormGroupCheckBox.propTypes
+FormGroupCheckBox.propTypes = {
+  id: PropTypes.number,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  label: PropTypes.string,
+  children: PropTypes.element,
+}
 
 export default FormGroupCheckBox

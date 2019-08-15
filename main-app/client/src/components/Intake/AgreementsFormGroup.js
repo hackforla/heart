@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'formik'
-import { YesField, CheckBoxField } from '../Form/shared'
+import { CheckBoxField } from '../Form/shared'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(() => ({
