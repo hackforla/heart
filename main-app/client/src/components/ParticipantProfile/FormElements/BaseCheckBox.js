@@ -29,13 +29,13 @@ export const BaseCheckBox = ({
 }
 
 BaseCheckBox.propTypes = {
-  field: (PropTypes.shape = {
+  field: PropTypes.shape({
     name: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.any,
     onChange: PropTypes.func,
     onBlur: PropTypes.func,
   }),
-  id: PropTypes.number,
+  id: PropTypes.string,
   label: PropTypes.string,
   className: PropTypes.string,
 }

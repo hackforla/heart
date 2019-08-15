@@ -48,9 +48,9 @@ export const BaseTextArea = ({ disabled, id, field, ...props }) => {
 }
 
 BaseTextArea.propTypes = {
-  disabled: PropTypes.any,
-  id: PropTypes.number,
-  field: PropTypes.element,
+  disabled: PropTypes.bool,
+  id: PropTypes.string,
+  field: PropTypes.object,
 }
 
 export default BaseTextArea

@@ -42,9 +42,9 @@ export const BaseInput = ({ disabled, id, field, ...props }) => {
 }
 
 BaseInput.propTypes = {
-  disabled: PropTypes.any,
-  id: PropTypes.number,
-  field: PropTypes.element,
+  disabled: PropTypes.bool,
+  id: PropTypes.string,
+  field: PropTypes.object,
 }
 
 export default BaseInput
