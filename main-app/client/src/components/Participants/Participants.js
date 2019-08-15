@@ -58,7 +58,7 @@ export const Participants = () => {
       ) : (
         <div className={classes.root}>
           <ParticipantsTable
-            initOrderBy="Name"
+            initOrderBy="Rush"
             headers={theaders}
             records={tableData}
           />
