@@ -6,23 +6,20 @@ import {
   FormActionBar,
   SaveButton,
 } from '../FormElements'
-// import makeStyles from '@material-ui/core/styles/makeStyles'
+import makeStyles from '@material-ui/core/styles/makeStyles'
 import { Field, Form, Formik } from 'formik'
 import { Divider } from '@material-ui/core'
-import {
-  FormGroupSelect,
-  BaseCheckBox,
-  FormGroupCheckBox,
-} from '../FormElements'
-import uuid from 'uuid'
+import { FormGroupSelect } from '../FormElements'
+import BackgroundCheckForm from './BackgroundCheckForm'
+import CaseClosedForm from './CaseClosedForm'
 
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     paddingLeft: theme.spacing(2),
-//     paddingRight: theme.spacing(2),
-//     paddingBottom: theme.spacing(2),
-//   },
-// }))
+const useStyles = makeStyles(theme => ({
+  root: {
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+  },
+}))
 
 const StatusForm = ({
   initialValues,
@@ -30,14 +27,9 @@ const StatusForm = ({
   handleCancel,
   isEditing,
 }) => {
-  // const classes = useStyles()
+  const classes = useStyles()
 
-  // const handleChange = name => event => {
-  //   console.log(name)
-  //   console.log(event)
-  // }
   const handleReset = (cb, initVals) => {
-    console.log(initVals)
     handleCancel()
     cb(initVals)
   }
@@ -57,7 +49,7 @@ const StatusForm = ({
         resetForm,
         ...props
       }) => (
-        <Form>
+        <Form style={{ width: 'auto' }}>
           <Field
             disabled={!isEditing}
             component={FormGroupSelect}
@@ -76,26 +68,22 @@ const StatusForm = ({
           />
           <br />
           <br />
-          <FormGroupCheckBox
-            id="background_check"
-            label="Background Checks"
-            value={values.background_check}
-            touched={touched.background_check}
-            onChange={setFieldValue}
-            onBlur={setFieldTouched}
-          >
-            {['CCHRS', 'W&W', 'DMV', 'TCIS', 'Odyssey', 'JPP'].map(x => (
-              <Field
-                key={uuid()}
-                component={BaseCheckBox}
-                name="background_check"
-                id={x}
-                label={x}
-                disabled={!isEditing}
-              />
-            ))}
-          </FormGroupCheckBox>
-
+          {values.status !== 'Closed' && (
+            <BackgroundCheckForm
+              value={values.background_check}
+              touched={touched.background_check}
+              onChange={setFieldValue}
+              onBlur={setFieldTouched}
+            />
+          )}
+          {values.status === 'Closed' && (
+            <CaseClosedForm
+              value={values.background_check}
+              touched={touched.background_check}
+              onChange={setFieldValue}
+              onBlur={setFieldTouched}
+            />
+          )}
           <Divider />
           {isEditing && (
             <FormActionBar>

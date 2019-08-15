@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     'label + &': {
       marginTop: theme.spacing(3),
-      width: '100%',
+      width: '90%',
     },
   },
   input: {
