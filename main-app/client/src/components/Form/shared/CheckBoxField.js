@@ -27,6 +27,8 @@ export const CheckBoxField = ({
   field: { name, onChange },
   value,
   values,
+  className,
+  label,
 }) => {
   const classes = useStyles()
   return (
@@ -40,7 +42,7 @@ export const CheckBoxField = ({
             value={value}
           />
         }
-        label={name}
+        label={label || name}
       />
     </div>
   )

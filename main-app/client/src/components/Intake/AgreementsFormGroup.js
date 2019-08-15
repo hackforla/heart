@@ -84,11 +84,13 @@ const agreement_groups = [
       "I give the HEART team permission to follow up with me on my application's progress, the best way to contact me is",
     agreement_inputs: [
       {
-        name: 'phone',
+        name: 'contact_by_phone',
+        label: 'phone',
         value: false,
       },
       {
-        name: 'email',
+        name: 'contact_by_email',
+        label: 'email',
         value: false,
       },
     ],
@@ -126,6 +128,7 @@ const renderAgreementFields = (index, agreements, props, classes) => {
             onChange={props.setFieldValue}
             values={props.values}
             className={agreements.style}
+            label={agreement_input.label}
           />
         ))}
       </div>

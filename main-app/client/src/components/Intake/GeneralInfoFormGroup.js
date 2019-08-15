@@ -81,16 +81,16 @@ const form = [
     comment:
       '(more than 4 time in 3 years or disabled and homeless more than 1 year)',
     inputs: [
-      { name: 'homelessness-status', value: 'Yes' },
-      { name: 'homelessness-status', value: 'No' },
+      { name: 'chronic_homeless', value: 'Yes' },
+      { name: 'chronic_homeless', value: 'No' },
     ],
   },
   {
     component: RadioButton,
     label: 'Are they a veteran?',
     inputs: [
-      { name: 'veteran-status', value: 'Yes' },
-      { name: 'veteran-status', value: 'No' },
+      { name: 'veteran_status', value: 'Yes' },
+      { name: 'veteran_status', value: 'No' },
     ],
   },
 ]
