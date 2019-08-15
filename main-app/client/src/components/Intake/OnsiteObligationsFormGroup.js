@@ -99,11 +99,6 @@ const obligationGroups = [
     obligationGroupTitle: 'Family Services',
     obligation: [{ name: 'Family Source Center Services' }],
   },
-  {
-    component: CheckBoxField,
-    obligationGroupTitle: '🔥🔥🔥 Urgency',
-    obligation: [{ name: 'Is there an urgent rush?' }],
-  },
 ]
 
 const OnsiteObligationsFormGroup = props => {

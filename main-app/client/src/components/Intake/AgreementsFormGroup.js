@@ -95,6 +95,11 @@ const agreement_groups = [
       },
     ],
   },
+  {
+    component: CheckBoxField,
+    disclaimer: '🔥🔥🔥 Urgency',
+    agreement_inputs: [{ name: 'Is there an urgent rush?' }],
+  },
 ]
 
 const AgreementsFormGroup = props => {
