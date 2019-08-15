@@ -22,10 +22,10 @@ const TableRecord = ({ values }) => {
   return (
     <TableRow hover key={uuid()}>
       <TableCell>{values[0] === 'true' && <Whatshot />}</TableCell>
-      {_.slice(values, 1, values.length - 1).map(x => (
+      {_.slice(values, 1, values.length - 1).map(data => (
         <TableCell key={uuid()} className={classes.cell}>
           {' '}
-          {x}{' '}
+          {data}{' '}
         </TableCell>
       ))}
       <TableCell>
