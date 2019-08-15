@@ -22,12 +22,12 @@ export const FormGroupSelect = ({
   id,
   label,
   field,
-  form: { touched, errors },
+  // form: { touched, errors },
   optionsList,
   ...props
 }) => {
   const classes = useStyles()
-  const errmsg = touched[field.name] && errors[field.name]
+  // const errmsg = touched[field.name] && errors[field.name]
   return (
     <FormControl className={classes.root} component="div" fullWidth={true}>
       <InputLabel htmlFor={id}>{label}</InputLabel>

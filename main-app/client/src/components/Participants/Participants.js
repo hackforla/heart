@@ -11,11 +11,11 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export const Participants = () => {
-  const [{ isLoading, isError, data }, setParticipants] = useFetch(
-    'participants'
-  )
-
-  const [theaders, settheaders] = useState(headers)
+  // const [{ isLoading, isError, data }, setParticipants] = useFetch(
+  //   'participants'
+  // )
+  const [{ isLoading, data }] = useFetch('participants')
+  const [theaders] = useState(headers)
   const [tableData, setTableData] = useState('')
   const classes = useStyles()
 

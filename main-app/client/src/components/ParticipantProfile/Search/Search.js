@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
 import _ from 'lodash'
-import { Collapse, Divider, makeStyles } from '@material-ui/core'
+import { Collapse, makeStyles } from '@material-ui/core'
 import SearchBar from './SearchBar'
 import SearchResults from '../shared/SearchResults'
 
