@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { Divider, Paper } from '@material-ui/core'
 import _ from 'lodash'
 import makeStyles from '@material-ui/core/styles/makeStyles'
@@ -58,7 +58,5 @@ export const Status = ({ statusInfo, updateStatus }) => {
   )
 }
 Status.defaultProps = {}
-
-Status.propTypes = {}
 
 export default Status

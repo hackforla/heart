@@ -28,6 +28,16 @@ export const BaseCheckBox = ({
   )
 }
 
-BaseCheckBox.propTypes = {}
+BaseCheckBox.propTypes = {
+  field: (PropTypes.shape = {
+    name: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+    onBlur: PropTypes.func,
+  }),
+  id: PropTypes.number,
+  label: PropTypes.string,
+  className: PropTypes.string,
+}
 
 export default BaseCheckBox

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {
   CancelButton,
@@ -6,7 +6,7 @@ import {
   FormActionBar,
   SaveButton,
 } from '../FormElements'
-import makeStyles from '@material-ui/core/styles/makeStyles'
+// import makeStyles from '@material-ui/core/styles/makeStyles'
 import { Field, Form, Formik } from 'formik'
 import { Divider } from '@material-ui/core'
 import {
@@ -16,13 +16,13 @@ import {
 } from '../FormElements'
 import uuid from 'uuid'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-  },
-}))
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//     paddingLeft: theme.spacing(2),
+//     paddingRight: theme.spacing(2),
+//     paddingBottom: theme.spacing(2),
+//   },
+// }))
 
 const StatusForm = ({
   initialValues,
@@ -30,12 +30,12 @@ const StatusForm = ({
   handleCancel,
   isEditing,
 }) => {
-  const classes = useStyles()
+  // const classes = useStyles()
 
-  const handleChange = name => event => {
-    console.log(name)
-    console.log(event)
-  }
+  // const handleChange = name => event => {
+  //   console.log(name)
+  //   console.log(event)
+  // }
   const handleReset = (cb, initVals) => {
     console.log(initVals)
     handleCancel()

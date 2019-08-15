@@ -25,7 +25,6 @@ const useStyles = makeStyles(theme => ({
 const SearchResults = ({ searchResults, handleSelection }) => {
   const classes = useStyles()
   console.log('SearchResults Rendered')
-  const handleClick = () => {}
   return (
     <Paper>
       <List

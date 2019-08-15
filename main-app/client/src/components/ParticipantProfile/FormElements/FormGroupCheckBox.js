@@ -57,4 +57,6 @@ export const FormGroupCheckBox = ({
   )
 }
 
+FormGroupCheckBox.propTypes
+
 export default FormGroupCheckBox
