@@ -27,7 +27,6 @@ export const CheckBoxField = ({
   field: { name, onChange },
   value,
   values,
-  className,
   label,
 }) => {
   const classes = useStyles()
