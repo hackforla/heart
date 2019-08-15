@@ -11,7 +11,6 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core'
-import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 import TableHeader from './TableHeader'
 import Pagination from './Pagination'
@@ -28,6 +27,10 @@ const useStyles = makeStyles(theme => ({
   },
   tableWrapper: {
     overflowX: 'auto',
+  },
+  toolbar: {
+    backgroundColor: theme.palette.primary.main,
+    color: 'white',
   },
 }))
 
@@ -56,12 +59,8 @@ const ParticipantsTable = ({ headers, records, initOrderBy }) => {
   return (
     <Paper className={classes.root}>
       <div className={classes.tableWrapper}>
-        <Toolbar style={{ backgroundColor: '#1C76D2' }}>
-          <Grid container spacing justify="space-between">
-            <Grid item>
-              <Typography variant="h2">{_.toUpper('Participants')}</Typography>
-            </Grid>
-          </Grid>
+        <Toolbar className={classes.toolbar}>
+          <Typography variant="h2">{_.toUpper('Participants')}</Typography>
         </Toolbar>
         <Table size="small">
           <TableHeader
@@ -74,11 +73,7 @@ const ParticipantsTable = ({ headers, records, initOrderBy }) => {
             {stableSort(records, getSorting(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map(record => (
-                <TableRecord
-                  key={uuid()}
-                  values={_.map(_.values(record))}
-                  x={record}
-                />
+                <TableRecord key={uuid()} values={_.map(_.values(record))} />
               ))}
             {emptyRows > 0 && (
               <TableRow style={{ height: 48 * emptyRows }}>
