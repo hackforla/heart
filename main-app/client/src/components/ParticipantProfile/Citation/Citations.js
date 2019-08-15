@@ -1,23 +1,14 @@
 import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import {
-  Fab,
-  Paper,
-  Divider,
-  Typography,
-  AppBar,
-  Toolbar,
-} from '@material-ui/core'
+import uuid from 'uuid'
+import { Fab, Paper, Divider, Typography } from '@material-ui/core'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import CitationHeader from './CitationHeader'
 import { useAxios } from '../../../hooks'
-import uuid from 'uuid'
 import AddIcon from '@material-ui/icons/Add'
-
 import { updateCitation } from '../../../actions/citations'
 import { SuccessAlert, DangerAlert, WarningAlert } from '../../Alerts'
 import Citation from './Citation'
-import Tooltip from '@material-ui/core/Tooltip'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,23 +20,14 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(3),
     backgroundColor: '#e4e9ed',
   },
-  paper: {
-    zIndex: 1,
-    position: 'relative',
-    marginTop: theme.spacing(1),
-    boxShadow: 'none',
-  },
-  appBar: {
-    top: 'auto',
-    bottom: 0,
-  },
   fabButton: {
-    position: 'absolute',
-    zIndex: 1,
-    top: -30,
-    left: 0,
-    right: 0,
     margin: '0 auto',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  extendedIcon: {
+    margin: theme.spacing(1),
   },
 }))
 
@@ -58,7 +40,6 @@ export const Citations = ({ userId }) => {
   const [isEditing, setEdit] = useState(false)
   const [alert, setAlert] = useState('')
   const toggleEdit = () => setEdit(prev => !prev)
-  // const handleCancel = () => toggleEdit()
 
   const updateProfile = useCallback(
     values => {
@@ -112,19 +93,16 @@ export const Citations = ({ userId }) => {
           />
         </>
       )}
-      <AppBar position="fixed" color="primary" className={classes.appBar}>
-        <Toolbar>
-          <Tooltip title="Add New Citation">
-            <Fab
-              color="secondary"
-              aria-label="add"
-              className={classes.fabButton}
-            >
-              <AddIcon />
-            </Fab>
-          </Tooltip>
-        </Toolbar>
-      </AppBar>
+      <Fab
+        variant="extended"
+        color="primary"
+        aria-label="add citation"
+        className={classes.fabButton}
+      >
+        <AddIcon className={classes.extendedIcon} />
+        Add New Citation
+      </Fab>
+
       <SuccessAlert
         status={alert === 'success'}
         message="Citation successfully updated"
