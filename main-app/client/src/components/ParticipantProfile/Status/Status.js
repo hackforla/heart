@@ -59,6 +59,9 @@ export const Status = ({ statusInfo, updateStatus }) => {
 }
 Status.defaultProps = {}
 
-Status.propTypes = {}
+Status.propTypes = {
+  statusInfo: PropTypes.object,
+  updateStatus: PropTypes.func,
+}
 
 export default Status

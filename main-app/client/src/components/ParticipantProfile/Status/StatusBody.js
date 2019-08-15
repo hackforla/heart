@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import {
@@ -51,6 +51,8 @@ export const StatusBody = ({ bgCheck }) => {
 }
 StatusBody.defaultProps = {}
 
-StatusBody.propTypes = {}
+StatusBody.propTypes = {
+  bgCheck: PropTypes.array,
+}
 
 export default React.memo(StatusBody)

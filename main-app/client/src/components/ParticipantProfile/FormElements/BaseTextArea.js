@@ -1,7 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { InputBase, TextField } from '@material-ui/core'
+import { InputBase } from '@material-ui/core'
 import clxs from 'clsx'
+import PropTypes from 'prop-types'
 
 /*
 This base input sets the base style for all inputs and
@@ -44,6 +45,12 @@ export const BaseTextArea = ({ disabled, id, field, ...props }) => {
       {...props}
     />
   )
+}
+
+BaseTextArea.propTypes = {
+  disabled: PropTypes.bool,
+  id: PropTypes.string,
+  field: PropTypes.object,
 }
 
 export default BaseTextArea

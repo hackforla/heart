@@ -58,7 +58,7 @@ export const Citations = ({ userId }) => {
   const [isEditing, setEdit] = useState(false)
   const [alert, setAlert] = useState('')
   const toggleEdit = () => setEdit(prev => !prev)
-  const handleCancel = () => toggleEdit()
+  // const handleCancel = () => toggleEdit()
 
   const updateProfile = useCallback(
     values => {

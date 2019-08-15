@@ -22,7 +22,6 @@ const useStyles = makeStyles(theme => ({
     padding: '10px',
     height: '100%',
     borderRadius: 'unset',
-    height: '2px solid gray',
   },
   active_yes: {
     backgroundColor: '#b5b3b3',
@@ -31,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   active_no: {
     backgroundColor: '#b5b3b3',
     borderBottom: '2px solid red',
-  }
+  },
 }))
 
 export const YesNoField = ({ index, box_input, values, setFieldValue }) => {
@@ -40,13 +39,17 @@ export const YesNoField = ({ index, box_input, values, setFieldValue }) => {
     <div className={classes.outerBox} key={index}>
       <div className={classes.boxName}>{box_input.name}</div>
       <Button
-        className={`${classes.button} ${values[box_input.name] ? classes.active_yes : ''}`}
+        className={`${classes.button} ${
+          values[box_input.name] ? classes.active_yes : ''
+        }`}
         onClick={() => setFieldValue(box_input.name, true)}
       >
         Yes
       </Button>
       <Button
-        className={`${classes.button} ${!values[box_input.name] ? classes.active_no : ''}`}
+        className={`${classes.button} ${
+          !values[box_input.name] ? classes.active_no : ''
+        }`}
         onClick={() => setFieldValue(box_input.name, false)}
       >
         No

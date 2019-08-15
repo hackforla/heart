@@ -11,7 +11,7 @@ import { useAxios } from '../../hooks'
 import { updateParticipant } from '../../actions/participant'
 import Typography from '@material-ui/core/Typography'
 import { Status } from './Status'
-import _ from 'lodash'
+// import _ from 'lodash'
 
 const useStyles = makeStyles(theme => ({
   root: {
