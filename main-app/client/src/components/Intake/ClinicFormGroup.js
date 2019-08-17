@@ -30,11 +30,11 @@ const ClinicFormGroup = props => {
   return (
     <div className="clinic-form-group">
       <div className={classes.starStyle}>* = Required</div>
-      <h4>Clinic Attended</h4>
+      <h4>Clinic/Referral Attended</h4>
 
       <div className={classes.formInput}>
         <label className={classes.label}>
-          Date<span className={classes.starStyle}>*</span>
+          Clinic/Referral Date<span className={classes.starStyle}>*</span>
         </label>
         <Field
           required
@@ -47,14 +47,14 @@ const ClinicFormGroup = props => {
       </div>
       <div className={classes.formInput}>
         <label className={classes.label}>
-          Referral Source
+          Clinic/Referral Source
           <span className={classes.starStyle}>*</span>
         </label>
         <Field
           required
           type="text"
           name="referral_source"
-          placeholder="Referral Source"
+          placeholder="Source"
           className={classes.inputField}
           onChange={props.handleChange}
         />
