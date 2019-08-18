@@ -35,6 +35,8 @@ CREATE TABLE participants(
   services VARCHAR(20) [],
   notes VARCHAR(250),
   background_check VARCHAR(250) [],
+  case_closed_reason VARCHAR(50) [],
+  case_closed_other VARCHAR(250),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
