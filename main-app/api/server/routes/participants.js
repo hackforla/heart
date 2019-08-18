@@ -53,4 +53,20 @@ module.exports = (app) => {
       .then(citations => res.status(200).send(citations))
       .catch(err => res.status(500).send(err));
   });
+
+  app.get('/participants/:id/agreements_obligations', jwtAuth, (req, res) => {
+    knex('agreements_obligations')
+      .where('participant_id', req.params.id)
+      .then(agreements_obligations => res.status(200).send(agreements_obligations))
+      .catch(err => res.status(500).send(err));
+  });
+
+  app.post('/participants/:id/agreements_obligations', jwtAuth, (req, res) => {
+    knex('agreements_obligations')
+      .insert('participant_id', req.params.id)
+      .insert(req.body.data, Object.keys(req.body.data)) // possibly overwriting id, not saving
+      .then(agreements_obligations => res.status(200).send(agreements_obligations))
+      .catch(err => res.status(500).send(err));
+  });
+
 };

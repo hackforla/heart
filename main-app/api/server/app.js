@@ -33,6 +33,7 @@ app.get('/protected', jwtAuth, (req, res) => {
 app.get('/', (req, res) => res.status(200).render('index'));
 require('./routes/participants')(app);
 require('./routes/citations')(app);
+require('./routes/agreements_obligations')(app);
 require('./routes/users')(app);
 require('./auth/router')(app);
 
