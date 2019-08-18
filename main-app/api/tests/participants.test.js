@@ -36,7 +36,29 @@ const newParticipant = {
     'service1',
     'service2',
   ],
+  clinic: 'LAHSA',
+  clinic_date: '2019-08-06T00:00:00.000Z'
 };
+
+const newCitation = {
+  citation_number: '1123-337',
+  court_code: 'CC 1250',
+  violations: ['VN 1250'],
+  citation_status: 'warrant'
+}
+
+const newAgreementsObligations = {
+  agreement_voluntary: true,
+  obligations_complete: true,
+  health_mental: false,
+  housing_case_management: true,
+  government_fin_assistance: true,
+  hygiene_haircut: true,
+  communication_cell: false,
+  legal_public_defender: true,
+  employment_training: true,
+  family_source_center: false
+}
 
 beforeAll(() => request(app)
   .post('/login')
@@ -119,3 +141,67 @@ describe('DELETE /participants', () => {
   // TODO: write test for record that doesn't exist
   // TODO: write more tests once we have auth
 });
+
+  // CITATIONS
+
+describe('GET /participants/1/citations', () => {
+  test('It should respond with a 200', (done) => {
+    request(app)
+      .get('/participants/1/citations')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${daToken}`)
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        done();
+      });
+  });
+});
+
+describe('POST /participants/1/citations', () => {
+  test('It should respond with a 200', (done) => {
+    request(app)
+      .get('/participants/1/citations')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${daToken}`)
+      .send(JSON.stringify(newCitation))
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        done();
+      });
+  });
+});
+
+// AGREEMENTS_OBLIGATIONS
+
+describe('GET /participants/1/agreements_obligations', () => {
+  test('It should respond with a 200', (done) => {
+    request(app)
+      .get('/participants/1/agreements_obligations')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${daToken}`)
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        done();
+      });
+  });
+});
+
+describe('POST /participants/1/agreements_obligations', () => {
+  test('It should respond with a 200', (done) => {
+    request(app)
+      .get('/participants/1/agreements_obligations')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${daToken}`)
+      .send(JSON.stringify(newAgreementsObligations))
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        done();
+      });
+  });
+});
+
+
