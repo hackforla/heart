@@ -1,23 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
+  BaseTextArea,
   CancelButton,
   DeleteButton,
   FormActionBar,
   SaveButton,
 } from '../FormElements'
-import makeStyles from '@material-ui/core/styles/makeStyles'
 import { Field, Form, Formik } from 'formik'
-import { Divider } from '@material-ui/core'
+import { Divider, makeStyles } from '@material-ui/core'
 import { FormGroupSelect } from '../FormElements'
 import BackgroundCheckForm from './BackgroundCheckForm'
 import CaseClosedForm from './CaseClosedForm'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
+    margin: theme.spacing(1),
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
   },
 }))
 
@@ -28,7 +28,6 @@ const StatusForm = ({
   isEditing,
 }) => {
   const classes = useStyles()
-
   const handleReset = (cb, initVals) => {
     handleCancel()
     cb(initVals)
@@ -77,12 +76,26 @@ const StatusForm = ({
             />
           )}
           {values.status === 'Closed' && (
-            <CaseClosedForm
-              value={values.background_check}
-              touched={touched.background_check}
-              onChange={setFieldValue}
-              onBlur={setFieldTouched}
-            />
+            <>
+              <CaseClosedForm
+                value={values.case_closed_reason}
+                touched={touched.case_closed_reason}
+                onChange={setFieldValue}
+                onBlur={setFieldTouched}
+              />
+              <div className={classes.root}>
+                <Field
+                  name="case_closed_other"
+                  id="case_closed_other"
+                  type="text"
+                  multiline
+                  label="Reason"
+                  variant="outlined"
+                  inputProps={{ 'aria-label': 'reason-comments' }}
+                  component={BaseTextArea}
+                />
+              </div>
+            </>
           )}
           <Divider />
           {isEditing && (
