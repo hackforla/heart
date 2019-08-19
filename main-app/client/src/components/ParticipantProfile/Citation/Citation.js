@@ -7,6 +7,7 @@ import { Violations } from '../Violations'
 import CitationInfo from './CitationInfo'
 import { EditButton } from '../FormElements'
 import { SuccessAlert, DangerAlert, WarningAlert } from '../../Alerts'
+import useIsFormEditing from '../../../hooks/useIsFormEditing'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,42 +24,51 @@ const useStyles = makeStyles(theme => ({
 
 export const Citation = ({ citation, updateProfile }) => {
   const classes = useStyles()
-  const [isEditing, setEdit] = useState(false)
+  const { toggleEdit, isEditing, formBeingEdited } = useIsFormEditing()
   const [alert, setAlert] = useState('')
-  const toggleEdit = () => setEdit(prev => !prev)
   const handleCancel = () => toggleEdit()
+  const handleFormSubmit = values => {
+    updateProfile(values)
+    toggleEdit()
+  }
 
   return (
     <Paper className={classes.root}>
       <>
-        {!isEditing && (
+        {formBeingEdited !== `citation: ${citation.citation_number}` && (
           <>
             <CitationInfo citation={citation} />
             <Violations
               violations={citation.violations}
-              isEditing={isEditing}
+              isEditing={
+                isEditing &&
+                formBeingEdited === `citation: ${citation.citation_number}`
+              }
             />
             <Divider />
           </>
         )}
 
-        {isEditing && (
-          <Grow in={isEditing}>
-            <Paper className={classes.paper}>
-              <CitationForm
-                handleFormSubmit={updateProfile}
-                isEditing={isEditing}
-                initialValues={citation}
-                handleCancel={handleCancel}
-                setAlert={setAlert}
-              />
-            </Paper>
-          </Grow>
-        )}
+        {isEditing &&
+          formBeingEdited === `citation: ${citation.citation_number}` && (
+            <Grow in={isEditing}>
+              <Paper className={classes.paper}>
+                <CitationForm
+                  handleFormSubmit={handleFormSubmit}
+                  isEditing={isEditing}
+                  initialValues={citation}
+                  handleCancel={handleCancel}
+                  setAlert={setAlert}
+                />
+              </Paper>
+            </Grow>
+          )}
         {!isEditing && (
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <EditButton
-              handleClick={toggleEdit}
+              handleClick={() =>
+                toggleEdit(`citation: ${citation.citation_number}`)
+              }
               disabled={isEditing}
               tipTitle="Edit Citation"
             />
