@@ -37,4 +37,22 @@ export const updateCitation = (id, data) => {
     .catch(err => err)
 }
 
-export default updateCitation
+export const addCitation = (id, data) => {
+  const authToken = UserAuth.getAuthToken()
+  let config = {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  }
+  return axios
+    .post(
+      `${API_BASE_URL}/participants/${id}/citations`,
+      { data, timeout: 5000 },
+      config
+    )
+    .then(res => {
+      console.log(res)
+      return res.data
+    })
+    .catch(err => err)
+}

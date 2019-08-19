@@ -6,9 +6,10 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 import CitationHeader from './CitationHeader'
 import { useAxios } from '../../../hooks'
 import AddIcon from '@material-ui/icons/Add'
-import { updateCitation } from '../../../actions/citations'
+import { updateCitation, addCitation } from '../../../actions/citations'
 import { SuccessAlert, DangerAlert, WarningAlert } from '../../Alerts'
 import Citation from './Citation'
+import useIsFormEditing from '../../../hooks/useIsFormEditing'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,20 +32,30 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export const Citations = ({ userId }) => {
+export const Citations = ({ participantId }) => {
   const { isLoading, isError, errMsg, data, updateDataRecord } = useAxios(
-    `citations/${userId}`
+    `citations/${participantId}`
   )
-
+  const { toggleEdit, isEditing, formBeingEdited } = useIsFormEditing()
   const classes = useStyles()
-  const [isEditing, setEdit] = useState(false)
   const [alert, setAlert] = useState('')
-  const toggleEdit = () => setEdit(prev => !prev)
+  const [newCitation] = useState({
+    citation_number: '',
+    court_code: '',
+    violations: [],
+    citation_status: '',
+    participant_id: parseInt(participantId),
+  })
 
-  const updateProfile = useCallback(
+  const startNewCitation = () => {
+    toggleEdit('citation: ')
+  }
+
+  const putCitation = useCallback(
     values => {
       updateCitation(values.id, values)
         .then(res => {
+          console.log('res', res)
           if (res.citations) {
             updateDataRecord(values)
             setAlert('success')
@@ -55,9 +66,25 @@ export const Citations = ({ userId }) => {
           }
         })
         .catch(err => console.log(err))
-      toggleEdit()
     },
     [updateDataRecord]
+  )
+  const postCitation = useCallback(
+    values => {
+      addCitation(participantId, values)
+        .then(res => {
+          if (res.citations) {
+            updateDataRecord(res.citations, 'post')
+            setAlert('success')
+            setTimeout(() => setAlert(''), 2000)
+          } else {
+            setAlert('error')
+            setTimeout(() => setAlert(''), 3000)
+          }
+        })
+        .catch(err => console.log(err))
+    },
+    [participantId, updateDataRecord]
   )
 
   return (
@@ -78,26 +105,21 @@ export const Citations = ({ userId }) => {
             <Citation
               key={uuid()}
               citation={citation}
-              updateProfile={updateProfile}
+              updateProfile={putCitation}
             />
           ))}
-          <Citation
-            key={uuid()}
-            citation={data[0]}
-            updateProfile={updateProfile}
-          />
-          <Citation
-            key={uuid()}
-            citation={data[0]}
-            updateProfile={updateProfile}
-          />
+          {isEditing && formBeingEdited === 'citation: ' && (
+            <Citation citation={newCitation} updateProfile={postCitation} />
+          )}
         </>
       )}
       <Fab
+        disabled={isEditing}
         variant="extended"
         color="primary"
         aria-label="add citation"
         className={classes.fabButton}
+        onClick={startNewCitation}
       >
         <AddIcon className={classes.extendedIcon} />
         Add New Citation

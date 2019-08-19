@@ -33,6 +33,13 @@ const dataFetchReducer = (state, action) => {
         isError: false,
         data: newData,
       }
+    case 'POST_DATA':
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        data: state.data.concat(action.payload),
+      }
     default:
       throw new Error()
   }
@@ -69,8 +76,12 @@ const useAxios = (initUrl, initData) => {
     return () => (didCancel = true) // clean up when component un-mounts
   }, [url])
 
-  const updateDataRecord = record => {
-    dispatch({ type: 'UPDATE_DATA', replaceRecord: record })
+  const updateDataRecord = (record, method) => {
+    if (method === 'post') {
+      dispatch({ type: 'POST_DATA', payload: record })
+    } else {
+      dispatch({ type: 'UPDATE_DATA', replaceRecord: record })
+    }
   }
   return { ...state, updateDataRecord }
 }
