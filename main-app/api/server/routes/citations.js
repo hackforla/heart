@@ -22,7 +22,7 @@ module.exports = (app) => {
 
   app.get('/citations/:id', jwtAuth, (req, res) => {
     knex('citations')
-      .where('id', req.params.id)
+      .where('participant_id', req.params.id)
       .then(citations => res.status(200).send(citations))
       .catch(err => res.status(500).send(err));
   });

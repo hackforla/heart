@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Grow, Paper, Divider, makeStyles } from '@material-ui/core'
 import NoteForm from './NoteForm'
 import NoteHeader from './NoteHeader'
 import NoteBody from './NoteBody'
+import useIsFormEditing from '../../../hooks/useIsFormEditing'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,8 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 export const Note = ({ note, updateNote }) => {
   const classes = useStyles()
-  const [isEditing, setEdit] = useState(false)
-  const toggleEdit = () => setEdit(prev => !prev)
+  const { toggleEdit, isEditing, formBeingEdited } = useIsFormEditing()
   const handleCancel = () => toggleEdit()
   const handleFormSubmit = values => {
     updateNote(values)
@@ -35,14 +35,14 @@ export const Note = ({ note, updateNote }) => {
     <Paper className={classes.root}>
       <NoteHeader
         heading="Comments & Notes"
-        handleClick={toggleEdit}
+        handleClick={() => toggleEdit('note')}
         disabled={isEditing}
       />
       <Divider />
       <div className={classes.container}>
-        {!isEditing ? <NoteBody note={note.notes} /> : null}
+        {formBeingEdited !== 'note' ? <NoteBody note={note.notes} /> : null}
       </div>
-      {isEditing && (
+      {isEditing && formBeingEdited === 'note' && (
         <Grow in={isEditing}>
           <Paper className={classes.paper}>
             <NoteForm
