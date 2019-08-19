@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Divider, Paper } from '@material-ui/core'
 import _ from 'lodash'
@@ -6,6 +6,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 import StatusForm from './StatusForm'
 import StatusHeader from './StatusHeader'
 import StatusBody from './StatusBody'
+import useIsFormEditing from '../../../hooks/useIsFormEditing'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,8 +26,7 @@ const useStyles = makeStyles(theme => ({
 
 export const Status = ({ statusInfo, updateStatus }) => {
   const classes = useStyles()
-  const [isEditing, setEdit] = useState(false)
-  const toggleEdit = () => setEdit(prev => !prev)
+  const { toggleEdit, isEditing, formBeingEdited } = useIsFormEditing()
   const handleCancel = () => toggleEdit()
   const handleFormSubmit = values => {
     updateStatus(values)
@@ -37,18 +37,21 @@ export const Status = ({ statusInfo, updateStatus }) => {
       <StatusHeader
         heading="Case Status"
         subHeading={_.startCase(statusInfo.status)}
-        handleClick={toggleEdit}
+        handleClick={() => toggleEdit('status')}
         disabled={isEditing}
       />
       <Divider />
-      {!isEditing ? <StatusBody bgCheck={statusInfo.background_check} /> : null}
+      {formBeingEdited !== 'status' ? (
+        <StatusBody bgCheck={statusInfo.background_check} />
+      ) : null}
       <div className={classes.container}>
-        {isEditing && (
+        {isEditing && formBeingEdited === 'status' && (
           <StatusForm
             handleFormSubmit={handleFormSubmit}
             isEditing={isEditing}
             initialValues={Object.assign({}, statusInfo, {
               status: _.startCase(statusInfo.status),
+              case_closed_reason: [],
             })}
             handleCancel={handleCancel}
           />

@@ -77,7 +77,7 @@ const useAxios = (initUrl, initData) => {
   }, [url])
 
   const updateDataRecord = (record, method) => {
-    if (method == 'post') {
+    if (method === 'post') {
       dispatch({ type: 'POST_DATA', payload: record })
     } else {
       dispatch({ type: 'UPDATE_DATA', replaceRecord: record })

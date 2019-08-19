@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const ContactHeadingBar = ({ heading, subHeading, handleClick }) => {
+const ContactHeadingBar = ({ disabled, heading, subHeading, handleClick }) => {
   const classes = useStyles()
   return (
     <AppBar position="static" classes={{ root: classes.appBar }}>
@@ -47,6 +47,7 @@ const ContactHeadingBar = ({ heading, subHeading, handleClick }) => {
               <EditButton
                 tipTitle="Edit Contact Info"
                 handleClick={handleClick}
+                disabled={disabled}
               />
             </ListItemSecondaryAction>
           </ListItem>
