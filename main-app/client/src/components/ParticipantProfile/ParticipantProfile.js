@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import { Grid, Link, Button } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { useTheme, makeStyles } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Loader from '../UI/Loader'
 import { Link as RouterLink } from 'react-router-dom'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
@@ -11,7 +12,8 @@ import { useAxios } from '../../hooks'
 import { updateParticipant } from '../../actions/participant'
 import Typography from '@material-ui/core/Typography'
 import { Status } from './Status'
-// import _ from 'lodash'
+
+import { FormEditingProvider } from '../../contexts/FormEditingContext'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,11 +29,13 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export const ParticipantProfile = ({ match }) => {
-  const classes = useStyles()
   const { isLoading, isError, errMsg, data, updateDataRecord } = useAxios(
     `participants/${match.params.id}`,
     []
   )
+  const classes = useStyles()
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.down('sm'))
   const updateProfile = useCallback(
     values => {
       updateParticipant(values.id, values)
@@ -42,7 +46,7 @@ export const ParticipantProfile = ({ match }) => {
   )
 
   return (
-    <>
+    <FormEditingProvider>
       {isLoading && <Loader />}
       {isError && <Typography variant="h1">{errMsg}</Typography>}
       {!isLoading && !isError && (
@@ -57,25 +61,23 @@ export const ParticipantProfile = ({ match }) => {
               Back to Index
             </Button>
           </Link>
-          {JSON.stringify(data)}
           <Contact contactInfo={data[0]} updateContactInfo={updateProfile} />
-          <Grid container spacing={4}>
+          <Grid
+            container
+            spacing={4}
+            direction={matches ? 'column-reverse' : 'row'}
+          >
             <Grid item xs={12} md={8}>
               <Note note={data[0]} updateNote={updateProfile} />
-              <Citations userId={match.params.id} />
+              <Citations participantId={match.params.id} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <Status
-                statusInfo={data[0]}
-                // status={_.map(data, 'status')[0]}
-                // backgroundCheck={_.map(data, 'background_check')[0]}
-                updateStatus={updateProfile}
-              />
+              <Status statusInfo={data[0]} updateStatus={updateProfile} />
             </Grid>
           </Grid>
         </div>
       )}
-    </>
+    </FormEditingProvider>
   )
 }
 

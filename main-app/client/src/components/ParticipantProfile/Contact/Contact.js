@@ -9,6 +9,7 @@ import ContactBody from './ContactBody'
 import { fieldSelector } from '../../../utilities/fieldSelector'
 import { contactFormSchema } from './contactFormSchema'
 import { databaseDateFormat } from '../../../utilities/dateFormatter'
+import useIsFormEditing from '../../../hooks/useIsFormEditing'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,9 +29,8 @@ const useStyles = makeStyles(theme => ({
 
 export const Contact = ({ contactInfo, updateContactInfo }) => {
   const classes = useStyles()
-  const [isEditing, setEdit] = useState(false)
+  const { toggleEdit, isEditing, formBeingEdited } = useIsFormEditing()
   const [formValues, setFormValues] = useState()
-  const toggleEdit = () => setEdit(prev => !prev)
   const handleCancel = () => toggleEdit()
 
   useEffect(() => {
@@ -43,25 +43,25 @@ export const Contact = ({ contactInfo, updateContactInfo }) => {
       dob: databaseDateFormat(values.dob),
     })
     const c = Object.assign({}, contactInfo, b)
-
     updateContactInfo(c)
     toggleEdit()
   }
 
   return (
     <Paper className={classes.root}>
-      {!isEditing && (
+      {formBeingEdited !== 'contact' && (
         <>
           <ContactHeadingBar
             heading={`${contactInfo.first_name} ${contactInfo.last_name}`}
             subHeading={`AKA: ${contactInfo.aka}`}
-            handleClick={toggleEdit}
+            handleClick={() => toggleEdit('contact')}
+            disabled={isEditing}
           />
           <Divider />
           <ContactBody contactInfo={formValues} />
         </>
       )}
-      {isEditing && (
+      {isEditing && formBeingEdited === 'contact' && (
         <Grow in={isEditing}>
           <Paper className={classes.paper}>
             <ContactForm
