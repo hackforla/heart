@@ -23,8 +23,9 @@ const agreement_groups = [
     disclaimer: '',
     agreement_inputs: [
       {
-        name: 'I am taking part of this program voluntarily',
-        value: 'voluntarily',
+        name: 'agreement_voluntary',
+        label: 'I am taking part of this program voluntarily',
+        value: false,
       },
     ],
   },
@@ -33,8 +34,9 @@ const agreement_groups = [
     disclaimer: '',
     agreement_inputs: [
       {
-        name: 'I am currently homeless or at risk of homelessness',
-        value: 'homeless',
+        name: 'agreement_at_risk',
+        label: 'I am currently homeless or at risk of homelessness',
+        value: false,
       },
     ],
   },
@@ -44,19 +46,24 @@ const agreement_groups = [
     style: 'list',
     agreement_inputs: [
       {
-        name:
+        name: 'agreement_obligations',
+        label:
           'in order to take part of this program, I will need to complete X obligations',
-        value: 'complete_obligations',
+        value: false,
       },
       {
-        name:
+        name: 'agreement_infractions',
+        label:
           'Only infractions are eligible to be expunged and that misdemeanors and felonies are not eligible to be expunged through this program ',
-        value: 'infractions_1',
+
+        value: false,
       },
       {
-        name:
+        name: 'agreement_warrants',
+        label:
           'Any active warrants in my name will block any expungement that I could have obtained through the program',
-        value: 'active_warrants_1',
+
+        value: false,
       },
     ],
   },
@@ -66,14 +73,16 @@ const agreement_groups = [
     style: 'list',
     agreement_inputs: [
       {
-        name:
+        name: 'agreement_court_form',
+        label:
           'This is not a court form, and that I cannot bring this form to court for any proceedings I have been asked to appear to',
-        value: 'not_court_form',
+        value: false,
       },
       {
-        name:
+        name: 'agreement_progress',
+        label:
           "This program can take up to 3 or 4 months to take effect, and that I can check up on my cases's progress at anytime by contacting xxxxxxxxx",
-        value: 'program_can_take_3_months',
+        value: false,
       },
     ],
   },
@@ -84,12 +93,12 @@ const agreement_groups = [
       "I give the HEART team permission to follow up with me on my application's progress, the best way to contact me is",
     agreement_inputs: [
       {
-        name: 'contact_by_phone',
+        name: 'phone',
         label: 'phone',
         value: false,
       },
       {
-        name: 'contact_by_email',
+        name: 'email',
         label: 'email',
         value: false,
       },
@@ -98,7 +107,13 @@ const agreement_groups = [
   {
     component: CheckBoxField,
     disclaimer: '🔥🔥🔥 Urgency',
-    agreement_inputs: [{ name: 'Is there an urgent rush?' }],
+    agreement_inputs: [
+      {
+        name: 'urgent',
+        label: 'Is there an urgent rush?',
+        value: false,
+      },
+    ],
   },
 ]
 
