@@ -29,30 +29,6 @@ const useStyles = makeStyles(() => ({
 const form = [
   {
     component: RadioButton,
-    label: 'Referral Source',
-    inputs: [
-      { name: 'referral_source', value: 'LACC' },
-      { name: 'referral_source', value: 'LA Door' },
-      { name: 'referral_source', value: 'Safe Park LA' },
-      { name: 'referral_source', value: 'Other' },
-    ],
-  },
-  {
-    component: RadioButton,
-    label:
-      'Did this individual complete community obligations by completing service hours?',
-    inputs: [
-      { name: 'completed_service_hours?', value: 'Yes' },
-      { name: 'completed_service_hours?', value: 'No' },
-    ],
-  },
-  {
-    component: BasicField,
-    label: 'If so, how many hours did this individual complete?',
-    inputs: [{ name: 'service_hours', value: '' }],
-  },
-  {
-    component: RadioButton,
     label: 'Did this individual complete community obligations?',
     inputs: [
       { name: 'completed_community_obligations?', value: 'Yes' },
