@@ -106,7 +106,7 @@ const OnsiteObligationsFormGroup = props => {
   return (
     <div className={classes.formInput}>
       <label className={classes.label}>
-        Which onsite obligations did the individual complete?
+        Which onsite obligations did the individual complete? Check all that apply.
       </label>
       {obligationGroups.map((boxes, index) =>
         renderObligations(index, boxes, props, classes)
