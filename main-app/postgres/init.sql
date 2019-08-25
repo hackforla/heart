@@ -21,7 +21,7 @@ CREATE TABLE participants(
   phone VARCHAR(15),
   email VARCHAR(50),
   address VARCHAR(50),
-  age VARCHAR(3),
+  age VARCHAR(20),
   ethnicity VARCHAR(20),
   race VARCHAR(20),
   gender VARCHAR(20),
