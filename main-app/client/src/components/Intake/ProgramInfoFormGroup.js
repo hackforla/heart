@@ -31,8 +31,8 @@ const form = [
     component: RadioButton,
     label: 'Did this individual complete community obligations?',
     inputs: [
-      { name: 'completed_community_obligations?', value: 'Yes' },
-      { name: 'completed_community_obligations?', value: 'No' },
+      { name: 'obligations_complete', value: 'true', label: 'Yes' },
+      { name: 'obligations_complete', value: 'false', label: 'No' },
     ],
   },
 ]
@@ -60,7 +60,7 @@ const renderInput = (form_input, handleChange, values, classes) => {
             key={input.value}
             component={form_input.component}
             name={input.name}
-            label={input.value}
+            label={input.label !== undefined ? input.label : input.value}
             value={input.value}
             onChange={handleChange}
             values={values}

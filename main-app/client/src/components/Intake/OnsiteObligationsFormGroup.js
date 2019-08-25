@@ -23,81 +23,165 @@ const obligationGroups = [
     component: CheckBoxField,
     obligationGroupTitle: 'Health Resources',
     obligation: [
-      { name: 'Mental Health Provider (DMH, etc)' },
-      { name: 'Physical Health Provider' },
-      { name: 'Dental Health Provider' },
-      { name: 'Substance Abuse Resources' },
-      { name: 'Vaccination (HEP A or FLU)' },
-      { name: 'STI/STD Testing' },
-      { name: 'First Aid Training (CPR)' },
+      {
+        label: 'Mental Health Provider (DMH, etc)',
+        name: 'health_mental',
+        value: false,
+      },
+      {
+        label: 'Physical Health Provider',
+        name: 'health_physical',
+        value: false,
+      },
+      { label: 'Dental Health Provider', name: 'health_dental', value: false },
+      {
+        label: 'Substance Abuse Resources',
+        name: 'health_substance_abuse',
+        value: false,
+      },
+      {
+        label: 'Vaccination (HEP A or FLU)',
+        name: 'health_vaccination',
+        value: false,
+      },
+      { label: 'STI/STD Testing', name: 'health_sti_std', value: false },
+      {
+        label: 'First Aid Training (CPR)',
+        name: 'health_first_aid',
+        value: false,
+      },
     ],
   },
   {
     component: CheckBoxField,
     obligationGroupTitle: 'Housing',
     obligation: [
-      { name: 'Housing Case Management' },
-      { name: 'Emergency Housing' },
-      { name: 'Safe Park LA' },
-      { name: "Veteran's Housing Resources" },
-      { name: 'Housing Survey (Vi-SPDAT)' },
+      {
+        label: 'Housing Case Management',
+        name: 'housing_care_management',
+        value: false,
+      },
+      { label: 'Emergency Housing', name: 'housing_emergency', value: false },
+      { label: 'Safe Park LA', name: 'housing_safeparkla', value: false },
+      {
+        label: "Veteran's Housing Resources",
+        name: 'housing_veterans',
+        value: false,
+      },
+      {
+        label: 'Housing Survey (Vi-SPDAT)',
+        name: 'housing_survey',
+        value: false,
+      },
     ],
   },
   {
     component: CheckBoxField,
     obligationGroupTitle: 'Government Resources',
     obligation: [
-      { name: 'Financial Assistance (TANF, FR, SSI/SSDI)' },
-      { name: 'CalFresh' },
-      { name: 'Medi-Cal Insurance' },
-      { name: 'Department of Consumer & Business Affairs' },
-      { name: 'Voter Registration' },
-      { name: 'Birth Certificate' },
-      { name: "Veteran's Services (Dept of VA)" },
-      { name: 'Library Card' },
-      { name: 'DMV (ID Cards)' },
-      { name: 'CAPP (Parking Ticket Assistance)' },
+      {
+        label: 'Financial Assistance (TANF, FR, SSI/SSDI)',
+        name: 'government_fin_assistance',
+        value: false,
+      },
+      { label: 'CalFresh', name: 'government_calfresh', value: false },
+      {
+        label: 'Medi-Cal Insurance',
+        name: 'government_medi_cal',
+        value: false,
+      },
+      {
+        label: 'Department of Consumer & Business Affairs',
+        name: 'government_debt_consumer',
+        value: false,
+      },
+      { label: 'Voter Registration', name: 'government_voter', value: false },
+      { label: 'Birth Certificate', name: 'government_birth', value: false },
+      {
+        label: "Veteran's Services (Dept of VA)",
+        name: 'government_vet_services',
+        value: false,
+      },
+      { label: 'Library Card', name: 'government_library', value: false },
+      { label: 'DMV (ID Cards)', name: 'government_dmv', value: false },
+      {
+        label: 'CAPP (Parking Ticket Assistance)',
+        name: 'government_capp',
+        value: false,
+      },
     ],
   },
   {
     component: CheckBoxField,
     obligationGroupTitle: 'Hygiene & Wellness',
     obligation: [
-      { name: 'Haircut' },
-      { name: 'Shower or Hygiene Kit' },
-      { name: 'Health Screening' },
+      { label: 'Haircut', name: 'hygiene_haircut', value: false },
+      {
+        label: 'Shower or Hygiene Kit',
+        name: 'hygiene_shower_kit',
+        value: false,
+      },
+      { label: 'Health Screening', name: 'hygiene_screening', value: false },
     ],
   },
   {
     component: CheckBoxField,
     obligationGroupTitle: 'Communication Resources',
     obligation: [
-      { name: 'Got a Cell Phone' },
-      { name: 'Opened an Email Account' },
+      { label: 'Got a Cell Phone', name: 'communication_cell', value: false },
+      {
+        label: 'Opened an Email Account',
+        name: 'communication_email',
+        value: false,
+      },
     ],
   },
   {
     component: CheckBoxField,
     obligationGroupTitle: 'Legal Resources',
     obligation: [
-      { name: 'Public Defender' },
-      { name: 'Legal Aid' },
-      { name: 'Medication' },
-      { name: 'Domestic Violence Resources' },
-      { name: 'Child Support Resources' },
-      { name: "Victim's Assistance Program" },
-      { name: 'Probation Resources' },
+      { label: 'Public Defender', name: 'legal_public_defender', value: false },
+      { label: 'Legal Aid', name: 'legal_legal_aid', value: false },
+      { label: 'Medication', name: 'legal_medication', value: false },
+      {
+        label: 'Domestic Violence Resources',
+        name: 'legal_domestic',
+        value: false,
+      },
+      {
+        label: 'Child Support Resources',
+        name: 'legal_child_support',
+        value: false,
+      },
+      {
+        label: "Victim's Assistance Program",
+        name: 'legal_victim',
+        value: false,
+      },
+      { label: 'Probation Resources', name: 'legal_probation', value: false },
     ],
   },
   {
     component: CheckBoxField,
     obligationGroupTitle: 'Employment Training',
-    obligation: [{ name: 'Job Training(EDD, DPSS, LACC, America Works, etc)' }],
+    obligation: [
+      {
+        label: 'Job Training(EDD, DPSS, LACC, America Works, etc)',
+        name: 'employment_training',
+        value: false,
+      },
+    ],
   },
   {
     component: CheckBoxField,
     obligationGroupTitle: 'Family Services',
-    obligation: [{ name: 'Family Source Center Services' }],
+    obligation: [
+      {
+        label: 'Family Source Center Services',
+        name: 'family_source_center',
+        value: false,
+      },
+    ],
   },
 ]
 
@@ -106,10 +190,11 @@ const OnsiteObligationsFormGroup = props => {
   return (
     <div className={classes.formInput}>
       <label className={classes.label}>
-        Which onsite obligations did the individual complete? Check all that apply.
+        Which onsite obligations did the individual complete? Check all that
+        apply.
       </label>
-      {obligationGroups.map((boxes, index) =>
-        renderObligations(index, boxes, props, classes)
+      {obligationGroups.map((obligationGroups, index) =>
+        renderObligations(index, obligationGroups, props, classes)
       )}
       <FormSummary
         values={confirmedPrograms(props.values)}
@@ -127,6 +212,7 @@ const renderObligations = (index, obligationGroups, props, classes) => {
         <Field
           key={index}
           component={obligationGroups.component}
+          label={obligation.label}
           name={obligation.name}
           value={obligation.value}
           onChange={props.setFieldValue}
@@ -139,6 +225,7 @@ const renderObligations = (index, obligationGroups, props, classes) => {
 }
 
 const confirmedPrograms = values => {
+  console.log(values)
   return _.keys(
     _.pickBy(values, (value, key) => {
       return value === true

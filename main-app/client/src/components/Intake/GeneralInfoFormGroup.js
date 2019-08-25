@@ -81,16 +81,16 @@ const form = [
     comment:
       '(more than 4 time in 3 years or disabled and homeless more than 1 year)',
     inputs: [
-      { name: 'chronic_homeless', value: 'Yes' },
-      { name: 'chronic_homeless', value: 'No' },
+      { name: 'chronic_homeless', value: 'true', label: 'Yes' },
+      { name: 'chronic_homeless', value: 'false', label: 'No' },
     ],
   },
   {
     component: RadioButton,
     label: 'Are they a veteran?',
     inputs: [
-      { name: 'veteran_status', value: 'Yes' },
-      { name: 'veteran_status', value: 'No' },
+      { name: 'veteran_status', value: 'true', label: 'Yes' },
+      { name: 'veteran_status', value: 'false', label: 'No' },
     ],
   },
 ]
@@ -122,7 +122,7 @@ const renderInput = (form_input, handleChange, values, classes) => {
             key={input.value}
             component={form_input.component}
             name={input.name}
-            label={input.value}
+            label={input.label !== undefined ? input.label : input.value}
             type={input.type}
             placeholder={input.placeholder}
             value={input.value}
