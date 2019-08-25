@@ -197,6 +197,7 @@ const OnsiteObligationsFormGroup = props => {
         renderObligations(index, obligationGroups, props, classes)
       )}
       <FormSummary
+        obligationGroups={obligationGroups}
         values={confirmedPrograms(props.values)}
         title="Programs Participated In:"
       />
