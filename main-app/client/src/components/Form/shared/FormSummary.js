@@ -22,15 +22,40 @@ const renderValue = (value, index, obligationGroups) => {
       </div>
     )
   } else {
+<<<<<<< HEAD
     return (
       <div key={index}>
         {' '}
         {findLabel(value, switchObligation(value), obligationGroups)} ✅
       </div>
     )
+=======
+    return <div key={index}> {findLabel(value, obligationGroups)} ✅</div>
   }
 }
 
+const findLabel = (value, obligationGroups) => {
+  const categoryFinder = categoryName => {
+    const valueNameSplit = value.split('_')
+    const resourceGroup = valueNameSplit[0]
+    const categoryTitleSplit = categoryName.obligationGroupTitle
+      .toLowerCase()
+      .split(' ')
+    const categoryTitle = categoryTitleSplit[0]
+    const obligationCategory = categoryTitle === resourceGroup
+    return obligationCategory
+  }
+  const obligationFinder = obligation => {
+    return obligation.name === value
+>>>>>>> harryt
+  }
+  const obligation = obligationGroups
+    .find(categoryFinder)
+    .obligation.find(obligationFinder)
+  return obligation.label
+}
+
+<<<<<<< HEAD
 const switchObligation = valueString => {
   const valueStringSplit = valueString.split('_')
   const resourceGroup = valueStringSplit[0]
@@ -65,6 +90,8 @@ const findLabel = (value, groupNumber, obligationGroups) => {
   return obligation.label
 }
 
+=======
+>>>>>>> harryt
 export const FormSummary = ({ values, title, obligationGroups }) => {
   const classes = useStyles()
   return (
