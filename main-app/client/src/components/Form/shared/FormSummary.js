@@ -22,46 +22,27 @@ const renderValue = (value, index, obligationGroups) => {
       </div>
     )
   } else {
-    return (
-      <div key={index}>
-        {' '}
-        {findLabel(value, switchObligation(value), obligationGroups)} ✅
-      </div>
-    )
+    return <div key={index}> {findLabel(value, obligationGroups)} ✅</div>
   }
 }
 
-const switchObligation = valueString => {
-  const valueStringSplit = valueString.split('_')
-  const resourceGroup = valueStringSplit[0]
-  switch (resourceGroup) {
-    case 'health':
-      return 0
-    case 'housing':
-      return 1
-    case 'government':
-      return 2
-    case 'hygiene':
-      return 3
-    case 'communication':
-      return 4
-    case 'legal':
-      return 5
-    case 'employment':
-      return 6
-    case 'family':
-      return 7
-    default:
-      console.log('no such resource group')
+const findLabel = (value, obligationGroups) => {
+  const categoryFinder = categoryName => {
+    const valueNameSplit = value.split('_')
+    const resourceGroup = valueNameSplit[0]
+    const categoryTitleSplit = categoryName.obligationGroupTitle
+      .toLowerCase()
+      .split(' ')
+    const categoryTitle = categoryTitleSplit[0]
+    const obligationCategory = categoryTitle === resourceGroup
+    return obligationCategory
   }
-}
-
-const findLabel = (value, groupNumber, obligationGroups) => {
-  const obligation = obligationGroups[groupNumber].obligation.find(
-    obligation => {
-      return obligation.name === value
-    }
-  )
+  const obligationFinder = obligation => {
+    return obligation.name === value
+  }
+  const obligation = obligationGroups
+    .find(categoryFinder)
+    .obligation.find(obligationFinder)
   return obligation.label
 }
 
