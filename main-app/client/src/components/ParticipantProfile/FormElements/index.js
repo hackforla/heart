@@ -8,6 +8,8 @@ export { FormActionBar } from './FormActionBar'
 export { SaveButton } from './SaveButton'
 export { FormGroupSelect } from './FormGroupSelect'
 export { FormGroupCheckBox } from './FormGroupCheckBox'
+export { FormGroupRadio } from './FormGroupRadio'
+
 // BUTTONS
 export { EditButton } from './EditButton'
 export { CancelButton } from './CancelButton'

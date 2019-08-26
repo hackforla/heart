@@ -28,6 +28,7 @@ export const FormGroupInput = ({
   return (
     <FormControl className={classes.root} component="div" fullWidth={true}>
       <InputLabel
+        required = {props.required ? true : null}
         shrink
         htmlFor={id}
         className={classes.label}

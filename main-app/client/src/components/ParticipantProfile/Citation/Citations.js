@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   fabButton: {
     margin: '0 auto',
+    marginTop: theme.spacing(2),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
