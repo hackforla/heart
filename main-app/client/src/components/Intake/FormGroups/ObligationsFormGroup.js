@@ -215,7 +215,7 @@ export const ObligationsFormGroup = ({ values, ...props }) => {
       ...obligations.familyServices,
       ...obligations.employmentTraining,
     ]
-    let results = arr.map(x => {
+    return arr.map(x => {
       if (key.indexOf(x.name.slice(23)) >= 0) {
         return (
           <Typography key={uuid()} gutterBottom variant="body1">
@@ -224,7 +224,6 @@ export const ObligationsFormGroup = ({ values, ...props }) => {
         )
       }
     })
-    return results
   }
   return (
     <FormSection heading="Program Information">

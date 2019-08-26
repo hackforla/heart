@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 import _ from 'lodash'
@@ -19,11 +19,11 @@ import {
 } from './FormGroups'
 
 import { dbTables } from './databaseSchema'
-import { SuccessAlert, DangerAlert, WarningAlert } from '../Alerts'
+import { SuccessAlert } from '../Alerts'
 
 export const Intake = ({ history }) => {
   const [setCoords] = useWindowScroll()
-  const { isLoading, isError, data, updateDataRecord } = useAxios(
+  const { isLoading, isError } = useAxios(
     `participants/0`, //should not return anything
     []
   )
@@ -33,23 +33,20 @@ export const Intake = ({ history }) => {
   const [newIntake] = useState(dbTables)
   const [requiredMet, setRequiredMet] = useState(false)
 
-  const createParticipant = useCallback(
-    (values1, values2) => {
-      addParticipant(values1)
-        .then(res => {
-          const newRecord = Object.assign({}, values2, {
-            participant_id: parseInt(res),
-          })
-          addAgreementsObligations(res, newRecord)
+  const createParticipant = useCallback((values1, values2) => {
+    addParticipant(values1)
+      .then(res => {
+        const newRecord = Object.assign({}, values2, {
+          participant_id: parseInt(res),
         })
-        .then(res => {
-          console.log(res)
-          setAlert('success')
-        })
-        .catch(err => console.log(err))
-    },
-    [updateDataRecord]
-  )
+        addAgreementsObligations(res, newRecord)
+      })
+      .then(res => {
+        console.log(res)
+        setAlert('success')
+      })
+      .catch(err => console.log(err))
+  }, [])
 
   useEffect(() => {
     if (alert === 'success') {

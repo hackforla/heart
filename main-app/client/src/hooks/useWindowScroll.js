@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const useWindowScroll = () => {
   const [coords, setCoords] = useState({ x: 0, y: 0 })
