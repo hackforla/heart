@@ -1,89 +1,220 @@
-import React from 'react'
-import IntakeForm from './IntakeForm'
+import React, { useState, useCallback, useRef, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 import { Formik, Form } from 'formik'
-import { Button } from '@material-ui/core'
-import FormTabs from '../Form/FormTabs'
-import ProgramInfoFormGroup from './ProgramInfoFormGroup'
-import OnsiteObligationsFormGroup from './OnsiteObligationsFormGroup'
-import PersonalInfoForm from './PersonalInfoForm'
-import { Grid } from '@material-ui/core'
+import _ from 'lodash'
+import { Link as RouterLink } from 'react-router-dom'
+import { Divider, Button, Link } from '@material-ui/core'
+import { TabPanel } from '../Form/FormTabs/TabPanel'
+import IntakeForm from './IntakeForm'
+import { addParticipant, addAgreementsObligations } from '../../actions/intake'
+import { useAxios, useWindowScroll } from '../../hooks'
+import { databaseDateFormat } from '../../utilities/dateFormatter'
+import {
+  ClinicFormGroup,
+  ContactInfoFormGroup,
+  GeneralInfoFormGroup,
+  FamilyAndIncomeFormGroup,
+  AgreementsFormGroup,
+  ObligationsFormGroup,
+} from './FormGroups'
 
-export const Intake = () => {
-  const localStorageClick = data => {
-    console.log(data)
-    localStorage.setItem('data', JSON.stringify(data))
+import { dbTables } from './databaseSchema'
+import { SuccessAlert, DangerAlert, WarningAlert } from '../Alerts'
+
+export const Intake = ({ history }) => {
+  const [setCoords] = useWindowScroll()
+  const { isLoading, isError, data, updateDataRecord } = useAxios(
+    `participants/0`, //should not return anything
+    []
+  )
+  const [alert, setAlert] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+  const [tabIndex, setTabIndex] = useState(0)
+  const [newIntake] = useState(dbTables)
+  const [requiredMet, setRequiredMet] = useState(false)
+
+  const createParticipant = useCallback(
+    (values1, values2) => {
+      addParticipant(values1)
+        .then(res => {
+          const newRecord = Object.assign({}, values2, {
+            participant_id: parseInt(res),
+          })
+          addAgreementsObligations(res, newRecord)
+        })
+        .then(res => {
+          console.log(res)
+          setAlert('success')
+        })
+        .catch(err => console.log(err))
+    },
+    [updateDataRecord]
+  )
+
+  useEffect(() => {
+    if (alert === 'success') {
+      setTimeout(() => setSubmitted(true), 2000)
+    }
+  }, [alert])
+
+  const handleReset = (cb, resetVals) => {
+    cb(resetVals)
   }
-  const localStorageDeleteClick = data => {
-    console.log(data)
-    localStorage.removeItem('data')
+
+  const handleTabTransition = () => {
+    setCoords({ x: 0, y: 0 })
+    setTabIndex(1)
   }
+
+  const handleFormSubmit = (values, cb) => {
+    const { participants, agreements_obligations } = values
+    const obligationsTable = Object.assign({}, agreements_obligations, {})
+    const participantsTable = Object.assign({}, participants, {
+      aka: _.map(_.split(participants.aka, ','), _.trim),
+      dob: databaseDateFormat(participants.dob),
+      services: _.map(_.split(participants.services, ','), _.trim),
+      clinic_date: databaseDateFormat(participants.clinic_date),
+      background_check: _.map(
+        _.split(participants.background_check, ','),
+        _.trim
+      ),
+      case_closed_reason: _.map(
+        _.split(participants.case_closed_reason, ','),
+        _.trim
+      ),
+    })
+    console.log(participantsTable)
+    console.log(obligationsTable)
+    createParticipant(participantsTable, obligationsTable)
+  }
+
+  const handleTabChange = (event, val) => {
+    setTabIndex(val)
+  }
+
+  const checkRequired = fields => {
+    // this function is a temporary fix.
+    // it is currently inefficient
+    // only handles first tab.
+    // will replace with yup validations
+    const requiredFields = [
+      'first_name',
+      'last_name',
+      'clinic',
+      'clinic_date',
+      'dl',
+      'age',
+      'gender',
+      'race',
+      'ethnicity',
+      'housing_status',
+      'chronic_homeless',
+      'veteran_status',
+      'family_status',
+      'income_source',
+      'income_range',
+    ]
+    const participantsCheck = requiredFields.map(x => {
+      return fields.participants[x].length > 0
+    })
+    if (participantsCheck.indexOf(false) < 0) {
+      setRequiredMet(true)
+      return false
+    } else {
+      return true
+    }
+  }
+
   return (
-    <div className="intake">
-      {/*<div className="top-header" />*/}
+    <>
+      {submitted && !isLoading && !isError && <Redirect to={'/'} />}
 
-      <IntakeForm>
-        <FormTabs
-          forms={[
-            {
-              label: '1. Personal Information',
-              Form: () => <PersonalInfoForm />,
-            },
-            {
-              label: '2. Obligations',
-              Form: () => (
-                <Formik
-                  enableReinitialize={true}
-                  initialValues={JSON.parse(localStorage.getItem('data'))}
-                  onSubmit={values => console.log(values)}
-                >
-                  {({ handleReset, ...props }) => (
-                    <Form>
-                      <ProgramInfoFormGroup {...props} />
-                      <OnsiteObligationsFormGroup {...props} />
-                      {/*The rest of the form groups could go here */}
-                      <br />
-                      <br />
-                      <Grid container justify="center" spacing={4}>
-                        <Grid item xs={6}>
-                          <Button
-                            variant="contained"
-                            size="large"
-                            color="default"
-                            onClick={() => {
-                              localStorageClick(props.values)
-                            }}
-                          >
-                            Save For Later
-                          </Button>
-                          <Button
-                            variant="contained"
-                            size="large"
-                            color="default"
-                            onClick={() => {
-                              localStorageDeleteClick()
-                            }}
-                          >
-                            Delete
-                          </Button>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Button
-                            variant="contained"
-                            size="large"
-                            color="primary"
-                          >
-                            Save and Exit
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </Form>
+      <IntakeForm
+        tabIndex={tabIndex}
+        handleTabChange={handleTabChange}
+        showObligations={requiredMet}
+      >
+        {!isLoading && !isError && (
+          <>
+            <Formik
+              enableReinitialize
+              onSubmit={(values, action) => handleFormSubmit(values, newIntake)}
+              initialValues={newIntake}
+              render={({
+                handleSubmit,
+                isSubmitting,
+                values,
+                resetForm,
+                setFieldValue,
+                ...props
+              }) => (
+                <Form>
+                  <TabPanel value={tabIndex} index={0} id="#tabpanel">
+                    <ClinicFormGroup {...props} />
+                    <ContactInfoFormGroup {...props} />
+                    <GeneralInfoFormGroup values={values} {...props} />
+                    <FamilyAndIncomeFormGroup values={values} {...props} />
+
+                    <Divider />
+                    <br />
+
+                    <AgreementsFormGroup {...props} />
+                  </TabPanel>
+                  {tabIndex === 1 && (
+                    <TabPanel value={tabIndex} index={1}>
+                      <ObligationsFormGroup values={values} {...props} />
+                    </TabPanel>
                   )}
-                </Formik>
-              ),
-            },
-          ]}
+                  <div
+                    style={{ display: 'flex', justifyContent: 'space-around' }}
+                  >
+                    {tabIndex === 0 && (
+                      <>
+                        <Link component={RouterLink} to="/participants">
+                          <Button
+                            size="large"
+                            type="submit"
+                            variant="contained"
+                            color="default"
+                          >
+                            Cancel
+                          </Button>
+                        </Link>
+                        <Button
+                          disabled={checkRequired(values)}
+                          size="large"
+                          type="button"
+                          variant="contained"
+                          color="primary"
+                          onClick={handleTabTransition}
+                        >
+                          Save and Continue to Obligations
+                        </Button>
+                      </>
+                    )}
+
+                    {tabIndex === 1 && (
+                      <Button
+                        disabled={alert === 'success'}
+                        size="large"
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                      >
+                        Save and Exit
+                      </Button>
+                    )}
+                  </div>
+                </Form>
+              )}
+            />
+          </>
+        )}
+        <SuccessAlert
+          status={alert === 'success'}
+          message="Citation successfully updated"
         />
       </IntakeForm>
-    </div>
+    </>
   )
 }
