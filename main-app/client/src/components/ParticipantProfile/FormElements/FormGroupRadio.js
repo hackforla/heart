@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(3),
+    marginLeft: 0,
   },
   label: {
     fontSize: 16,
@@ -48,6 +49,7 @@ export const FormGroupRadio = ({
       <br />
       {list.map(x => (
         <Field
+          required={props.required ? true : null}
           key={uuid()}
           component={BaseRadio}
           name={id}
