@@ -22,14 +22,6 @@ const renderValue = (value, index, obligationGroups) => {
       </div>
     )
   } else {
-<<<<<<< HEAD
-    return (
-      <div key={index}>
-        {' '}
-        {findLabel(value, switchObligation(value), obligationGroups)} ✅
-      </div>
-    )
-=======
     return <div key={index}> {findLabel(value, obligationGroups)} ✅</div>
   }
 }
@@ -47,7 +39,6 @@ const findLabel = (value, obligationGroups) => {
   }
   const obligationFinder = obligation => {
     return obligation.name === value
->>>>>>> harryt
   }
   const obligation = obligationGroups
     .find(categoryFinder)
@@ -55,43 +46,6 @@ const findLabel = (value, obligationGroups) => {
   return obligation.label
 }
 
-<<<<<<< HEAD
-const switchObligation = valueString => {
-  const valueStringSplit = valueString.split('_')
-  const resourceGroup = valueStringSplit[0]
-  switch (resourceGroup) {
-    case 'health':
-      return 0
-    case 'housing':
-      return 1
-    case 'government':
-      return 2
-    case 'hygiene':
-      return 3
-    case 'communication':
-      return 4
-    case 'legal':
-      return 5
-    case 'employment':
-      return 6
-    case 'family':
-      return 7
-    default:
-      console.log('no such resource group')
-  }
-}
-
-const findLabel = (value, groupNumber, obligationGroups) => {
-  const obligation = obligationGroups[groupNumber].obligation.find(
-    obligation => {
-      return obligation.name === value
-    }
-  )
-  return obligation.label
-}
-
-=======
->>>>>>> harryt
 export const FormSummary = ({ values, title, obligationGroups }) => {
   const classes = useStyles()
   return (
