@@ -1,9 +1,16 @@
 # HEART Project
 
+:triangular_flag_on_post::triangular_flag_on_post::triangular_flag_on_post:ALERT! ALERT! ALERT!:triangular_flag_on_post::triangular_flag_on_post::triangular_flag_on_post:
+develop is now the default branch to work against for all development (edited) 
+
+Tien or Roland will merge develop into master periodically when it’s time to update the demo! 
+
+(more info here on how to work with master, develop and feature branches: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+
 ## Project Leaders
 
 - Marie-Aimee Brajeux (Project Lead)
-- Tien Yuan (Tech Lead)
+- Tien Yuan and Roland Abregorivas (joint Tech Lead)
 
 ## Table of Contents
 
