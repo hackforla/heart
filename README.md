@@ -10,7 +10,7 @@ Tien or Roland will merge develop into master periodically when it’s time to u
 
 ## Project Leaders
 
-- Marie-Aimee Brajeux (Project Lead)
+- Marie-Aimée Brajeux (Project Lead)
 - Tien Yuan and Roland Abregorivas (joint Tech Lead)
 
 ## Table of Contents
@@ -24,7 +24,9 @@ Tien or Roland will merge develop into master periodically when it’s time to u
 
 ## About the Project
 
-This project meets on Monday at the westside hacknight. We are working with a program of the City of LA's Attorney's Office which supports the Criminal Record Clearing Project by administering the Los Angeles County Homeless Court Program. HEART (Homeless Engagement and Response Team) deploys its staff to homeless connect days in the community where adults who are experiencing homelessness or are at risk of experiencing homelessness may enroll in the program. The program helps participants resolve eligible traffic and pedestrian infraction citations by engaging in services instead of paying fines and fees they cannot afford. HEART files a motion with the Los Angeles Superior Court, requesting a dismissal and/or suspension of fines, and a recall of associated warrants.
+This project meets on Monday at the westside hacknight. We are working with a program of the City of LA's Attorney's Office which supports the Criminal Record Clearing Project by administering the Los Angeles County Homeless Court Program. HEART (Homeless Engagement and Response Team) works with adults who are experiencing homelessness or are at risk of experiencing homelessness to help them resolve eligible traffic and pedestrian infraction citations by engaging in services instead of paying fines and fees they cannot afford. 
+
+HEART staff connects with potential program participants in person at events providing access to a variety of social, medical and human services. Provided they engage with a certain number of service providers, the HEART team will collect relevant personal information to research and investigate any outstanding eligible citations participants may have. Staff will then file motions with the relevant courts to request a dismissal and/or suspension of fines, and a recall of associated warrants.
 
 Hack for LA has been working with the program's staff to design and build a better processing system, helping to streamline in-person client intake, data processing and the filing of motions.
 
