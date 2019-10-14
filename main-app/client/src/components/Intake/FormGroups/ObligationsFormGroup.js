@@ -207,6 +207,7 @@ export const ObligationsFormGroup = ({ values, ...props }) => {
   const classes = useStyles()
   const getSelectedServices = key => {
     let arr = [
+	  ...obligations.healthResources,
       ...obligations.housingResources,
       ...obligations.governmentResources,
       ...obligations.hygieneWellness,
